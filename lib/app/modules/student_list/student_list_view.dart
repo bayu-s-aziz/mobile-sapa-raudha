@@ -23,15 +23,22 @@ class StudentListView extends GetView<StudentListController> {
               decoration: InputDecoration(
                 hintText: 'Cari nama atau kelas siswa...',
                 prefixIcon: const Icon(Icons.search),
-                suffixIcon: Obx(
-                  () => (controller.searchController.text.isNotEmpty)
-                      ? IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            controller.searchController.clear();
-                          },
-                        )
-                      : const SizedBox.shrink(),
+                // Use ValueListenableBuilder instead of Obx because TextEditingController
+                // is not an Rx variable. Obx without reactive dependencies triggers
+                // 'improper use' warning. TextEditingController already notifies listeners
+                // on text changes.
+                suffixIcon: ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: controller.searchController,
+                  builder: (context, value, _) {
+                    return (value.text.isNotEmpty)
+                        ? IconButton(
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              controller.searchController.clear();
+                            },
+                          )
+                        : const SizedBox.shrink();
+                  },
                 ),
               ),
             ),
