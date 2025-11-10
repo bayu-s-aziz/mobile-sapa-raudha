@@ -1,0 +1,6 @@
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    unnecessary_overrides: ignore
+    unused_import: ignore
+    TODO: ignore
