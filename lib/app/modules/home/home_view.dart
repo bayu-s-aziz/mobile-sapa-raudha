@@ -102,42 +102,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // [MODERNISASI] AppBar sekarang ringan (dari theme)
-        leading: Obx(() {
-          if (controller.currentActionView.value != null) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back),
-              tooltip: 'Kembali',
-              onPressed: controller.clearActionView,
-            );
-          }
-          return const SizedBox.shrink();
-        }),
-        automaticallyImplyLeading: false,
-        title: Obx(
-          () => Text(
-            _getAppBarTitle(
-              controller.selectedIndex.value,
-              controller.currentActionView.value,
-            ),
-          ),
-        ),
-        actions: [
-          Obx(() {
-            if (controller.selectedIndex.value == 3 &&
-                controller.currentActionView.value == null) {
-              return IconButton(
-                icon: const Icon(Icons.edit_outlined),
-                tooltip: 'Edit Profil',
-                onPressed: () =>
-                    Get.find<ProfileController>().goToEditProfile(),
-              );
-            }
-            return const SizedBox.shrink();
-          }),
-        ],
-      ),
+      // [MODERNISASI] Hapus AppBar dari Scaffold, pindahkan ke dalam body
       body: Obx(() {
         if (controller.currentActionView.value != null) {
           return controller.currentActionView.value!;
@@ -219,7 +184,7 @@ class HomeView extends GetView<HomeController> {
     } else {
       switch (index) {
         case 0:
-          return 'Beranda Orang Tua';
+          return 'Beranda';
         case 1:
           return 'Pengumuman';
         case 2:
@@ -234,33 +199,136 @@ class HomeView extends GetView<HomeController> {
 
   Widget _buildHomeDashboardContent(BuildContext context) {
     return SafeArea(
-      // [MODERNISASI] Hapus safe area atas karena appbar sudah ringan
-      // [MODERNISASI] Tambahkan safe area bawah agar tidak tertutup nav bar floating
-      top: false,
-      bottom: false, // Di-handle oleh padding di SingleChildScrollView
-      child: RefreshIndicator(
-        onRefresh: () async {
-          controller.refreshAnnouncements();
-        },
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          // [MODERNISASI] Tambahkan padding bawah agar item terakhir tidak tertutup
-          padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 100.0),
-          child: Obx(
-            () => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildWelcomeHeader(context),
-                const SizedBox(height: 30),
-                controller.userRole.value == 'guru'
-                    ? _buildGuruDashboardGrid(context)
-                    : _buildParentDashboardGrid(context),
-                const SizedBox(height: 30),
-                _buildRecentInfoSection(context),
-              ],
+      // [MODERNISASI] AppBar dan konten dalam satu container mengapung
+      top: true,
+      bottom: false,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned.fill(
+            top: 16.0,
+            left: 16.0,
+            right: 16.0,
+            bottom: -20.0, // efek seolah padding bawah -20 agar tertutup navbar
+            child: Container(
+              // [MODERNISASI] Container mengapung dengan rounded border
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.alternate.withAlpha((0.15 * 255).round()),
+                    blurRadius: 20,
+                    offset: const Offset(0, 4),
+                    spreadRadius: 0,
+                  ),
+                ],
+                border: Border.all(
+                  color: AppColors.alternate.withAlpha((0.1 * 255).round()),
+                  width: 1,
+                ),
+              ),
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  controller.refreshAnnouncements();
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  // [MODERNISASI] Padding bawah diperpanjang agar tidak tertutup bottom navbar
+                  padding: EdgeInsets.only(
+                    bottom:
+                        MediaQuery.of(context).padding.bottom +
+                        kBottomNavigationBarHeight +
+                        24.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // [MODERNISASI] AppBar custom yang ikut scroll
+                      _buildCustomAppBar(context),
+                      // [MODERNISASI] Padding dalam untuk konten
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Obx(
+                          () => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _buildWelcomeHeader(context),
+                              const SizedBox(height: 30),
+                              controller.userRole.value == 'guru'
+                                  ? _buildGuruDashboardGrid(context)
+                                  : _buildParentDashboardGrid(context),
+                              const SizedBox(height: 30),
+                              _buildRecentInfoSection(context),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCustomAppBar(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: AppColors.alternate.withAlpha((0.1 * 255).round()),
+            width: 1,
+          ),
         ),
+      ),
+      child: Row(
+        children: [
+          Obx(() {
+            if (controller.currentActionView.value != null) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back),
+                tooltip: 'Kembali',
+                onPressed: controller.clearActionView,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
+          Expanded(
+            child: Obx(
+              () => Text(
+                _getAppBarTitle(
+                  controller.selectedIndex.value,
+                  controller.currentActionView.value,
+                ),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryText,
+                ),
+              ),
+            ),
+          ),
+          Obx(() {
+            if (controller.selectedIndex.value == 3 &&
+                controller.currentActionView.value == null) {
+              return IconButton(
+                icon: const Icon(Icons.edit_outlined),
+                tooltip: 'Edit Profil',
+                onPressed: () =>
+                    Get.find<ProfileController>().goToEditProfile(),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
+        ],
       ),
     );
   }

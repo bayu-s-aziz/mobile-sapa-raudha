@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -12,20 +13,17 @@ class ProfileView extends GetView<ProfileController> {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      // --- APPBAR DIHAPUS DARI SINI ---
-      // appBar: AppBar(
-      //   title: const Text('Profil Saya'),
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.edit_outlined),
-      //       tooltip: 'Edit Profil',
-      //       onPressed: controller.goToEditProfile,
-      //     ),
-      //   ],
-      // ),
-      // --- AKHIR PENGHAPUSAN ---
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+      body: FloatingPage(
+        title: 'Profil Saya',
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit_outlined),
+            tooltip: 'Edit Profil',
+            onPressed: controller.goToEditProfile,
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+          ),
+        ],
         child: Center(
           child: Column(
             children: [

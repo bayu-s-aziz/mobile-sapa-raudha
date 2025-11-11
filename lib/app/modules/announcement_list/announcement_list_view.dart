@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 
 import 'announcement_list_controller.dart';
 
@@ -11,40 +12,36 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // --- HAPUS APPBAR DARI SINI ---
-      // appBar: AppBar(
-      //   title: const Text('Semua Pengumuman'),
-      // ),
-      // --- AKHIR PENGHAPUSAN ---
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            controller.fetchAnnouncements();
-          },
-          child: Obx(() {
-            if (controller.isLoading.value &&
-                controller.announcements.isEmpty) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (controller.announcements.isEmpty) {
-              return const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                    'Belum ada pengumuman yang dipublikasikan.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.secondaryText),
-                  ),
+      body: FloatingPage(
+        title: 'Pengumuman',
+        scrollable: false,
+        contentPadding: EdgeInsets.zero,
+        child: Obx(() {
+          if (controller.isLoading.value && controller.announcements.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (controller.announcements.isEmpty) {
+            return const Center(
+              child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text(
+                  'Belum ada pengumuman yang dipublikasikan.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.secondaryText),
                 ),
-              );
-            }
-            return ListView.separated(
+              ),
+            );
+          }
+          return RefreshIndicator(
+            onRefresh: () async {
+              controller.fetchAnnouncements();
+            },
+            child: ListView.separated(
               padding: const EdgeInsets.all(20.0),
               itemCount: controller.announcements.length,
               itemBuilder: (context, index) {
                 final announcement = controller.announcements[index];
                 return Card(
-                  // margin: const EdgeInsets.only(bottom: 0),
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -72,7 +69,7 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: AppColors.secondaryText,
                       ),
-                      maxLines: 2, // Boleh 2 baris di sini
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     trailing: const Icon(
@@ -85,9 +82,9 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 12),
-            );
-          }),
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

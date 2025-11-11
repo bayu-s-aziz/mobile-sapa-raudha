@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'edit_profile_controller.dart';
 
 class EditProfileView extends GetView<EditProfileController> {
@@ -10,9 +11,9 @@ class EditProfileView extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profil')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
+      body: FloatingPage(
+        title: 'Edit Profil',
+        onBack: () => Get.back(),
         child: Form(
           key: controller.formKey,
           child: Column(

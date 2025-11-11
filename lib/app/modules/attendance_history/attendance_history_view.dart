@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sapa_raudha/app/data/models/attendance_model.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'attendance_history_controller.dart';
 
@@ -15,8 +16,10 @@ class AttendanceHistoryView extends GetView<AttendanceHistoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Hapus AppBar agar menggunakan AppBar dari HomeView
-      body: SingleChildScrollView(
+      body: FloatingPage(
+        title: 'Riwayat Absensi',
+        onBack: () => Get.back(),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
           children: [
             // --- WIDGET KALENDER UTAMA ---
@@ -154,7 +157,7 @@ class AttendanceHistoryView extends GetView<AttendanceHistoryController> {
               }),
             ),
             const SizedBox(
-              height: 80,
+              height: 40,
             ), // Padding bawah agar tidak tertutup nav bar
           ],
         ),

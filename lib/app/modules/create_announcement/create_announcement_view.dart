@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'create_announcement_controller.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart'; // Impor AppColors
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 
 class CreateAnnouncementView extends GetView<CreateAnnouncementController> {
   const CreateAnnouncementView({super.key});
@@ -10,10 +11,11 @@ class CreateAnnouncementView extends GetView<CreateAnnouncementController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Buat Pengumuman Baru')),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: FloatingPage(
+          title: 'Buat Pengumuman',
+          onBack: () => Get.back(),
           child: Form(
             key: controller.formKey,
             child: Column(

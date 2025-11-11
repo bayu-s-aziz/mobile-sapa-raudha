@@ -4,6 +4,7 @@ import 'dart:io'; // <-- Tambahkan import ini
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart'; // <-- Tambahkan import ini
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'request_leave_controller.dart';
 
 class RequestLeaveView extends GetView<RequestLeaveController> {
@@ -16,9 +17,8 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
       // saat user tap di luar text field
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: SingleChildScrollView(
-          // Gunakan padding modern
-          padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 80.0),
+        child: FloatingPage(
+          title: 'Ajukan Izin',
           child: Form(
             key: controller.formKey,
             child: Column(
@@ -39,8 +39,18 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
                     prefixIcon: Icon(Icons.calendar_today_outlined),
                   ),
                   readOnly: true,
-                  onTap: () {
-                    // TODO: Tampilkan Date Picker untuk startDateController
+                  onTap: () async {
+                    FocusScope.of(context).unfocus();
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      controller.startDateController.text =
+                          '${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}';
+                    }
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -58,8 +68,18 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
                     prefixIcon: Icon(Icons.calendar_today_outlined),
                   ),
                   readOnly: true,
-                  onTap: () {
-                    // TODO: Tampilkan Date Picker untuk endDateController
+                  onTap: () async {
+                    FocusScope.of(context).unfocus();
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      controller.endDateController.text =
+                          '${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}';
+                    }
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {

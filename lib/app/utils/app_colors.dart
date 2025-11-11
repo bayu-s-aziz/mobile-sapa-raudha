@@ -14,9 +14,8 @@ abstract class AppColors {
   static const Color primaryText = Color(0xFF0B191E);
   static const Color secondaryText = Color(0xFF384E58);
   // [MODERNISASI] Mengganti latar belakang utama menjadi lebih hangat (soft white)
-  static const Color primaryBackground = Color(
-    0xFFF9F9F7,
-  ); // Sebelumnya 0xFFF1F4F8
+  static const Color primaryBackground = Color(0xFFF1F4F8);
+  // Sebelumnya 0xFFF1F4F8
   static const Color secondaryBackground = Color(0xFFFFFFFF);
 
   // Accent Colors

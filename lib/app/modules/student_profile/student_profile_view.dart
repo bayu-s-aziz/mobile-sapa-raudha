@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'student_profile_controller.dart';
 
 class StudentProfileView extends GetView<StudentProfileController> {
@@ -12,16 +13,18 @@ class StudentProfileView extends GetView<StudentProfileController> {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      // appBar: AppBar(title: const Text('Profil Ananda')),
-      body: Obx(() {
-        if (controller.student.value == null) {
-          return const Center(child: Text('Data ananda tidak ditemukan.'));
-        }
+      body: FloatingPage(
+        title: 'Profil Ananda',
+        onBack: () => Get.back(),
+        contentPadding: EdgeInsets.zero,
+        child: Obx(() {
+          if (controller.student.value == null) {
+            return const Center(child: Text('Data ananda tidak ditemukan.'));
+          }
 
-        final student = controller.student.value!;
+          final student = controller.student.value!;
 
-        return SingleChildScrollView(
-          child: Column(
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Header Info Siswa
@@ -96,9 +99,9 @@ class StudentProfileView extends GetView<StudentProfileController> {
                 ),
               ),
             ],
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 

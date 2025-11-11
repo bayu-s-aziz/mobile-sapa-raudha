@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart'; // Sesuaikan impor
+import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:sapa_raudha/app/modules/announcement_detail/announcement_detail_controller.dart';
 
 // --- MODIFIKASI BAGIAN INI ---
@@ -28,53 +29,48 @@ class AnnouncementDetailView extends StatelessWidget {
     // panggil 'controller' yang sudah kita buat di atas.
 
     return Scaffold(
-      // Hapus AppBar dari sini jika sudah diatur oleh HomeView
-      // AppBar(
-      //   title: const Text('Detail Pengumuman'),
-      // ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
-          child: Obx(() {
-            if (controller.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
-            }
+      body: FloatingPage(
+        title: 'Detail Pengumuman',
+        onBack: () => Get.back(),
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            if (controller.announcement.value == null) {
-              return const Center(child: Text("Pengumuman tidak ditemukan."));
-            }
+          if (controller.announcement.value == null) {
+            return const Center(child: Text("Pengumuman tidak ditemukan."));
+          }
 
-            final announcement = controller.announcement.value!;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  announcement.title,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryText,
-                  ),
+          final announcement = controller.announcement.value!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                announcement.title,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryText,
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  "Diterbitkan pada: ${announcement.formattedDate}",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.secondaryText,
-                    fontStyle: FontStyle.italic,
-                  ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "Diterbitkan pada: ${announcement.formattedDate}",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.secondaryText,
+                  fontStyle: FontStyle.italic,
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  announcement.content,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.primaryText,
-                    height: 1.5,
-                  ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                announcement.content,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppColors.primaryText,
+                  height: 1.5,
                 ),
-              ],
-            );
-          }),
-        ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
