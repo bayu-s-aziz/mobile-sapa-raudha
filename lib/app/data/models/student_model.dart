@@ -6,16 +6,23 @@ enum StudentDailyStatus { hadir, sakit, izin, alpa, belumHadir }
 class Student {
   final String id;
   final String name;
-  final String studentClass; // Misal: "Kelas A"
+  final String studentClass;
   final String parentName;
   final String? photoUrl;
-  final StudentDailyStatus dailyStatus; // Status hari ini
+  final StudentDailyStatus dailyStatus;
   final String? nisn;
   final String? nis;
   final String? gender;
   final String? birthPlace;
+  final DateTime? birthDate; // <--- tambah
   final String? religion;
   final String? address;
+  final String? fatherName; // <--- tambah
+  final String? motherName; // <--- tambah
+  final String? fatherJob; // <--- tambah
+  final String? motherJob; // <--- tambah
+  final String? guardianName; // <--- tambah
+  final String? guardianJob; // <--- tambah
 
   Student({
     required this.id,
@@ -28,7 +35,14 @@ class Student {
     this.nis,
     this.gender,
     this.birthPlace,
+    this.birthDate, // <--- tambah
     this.religion,
     this.address,
+    this.fatherName, // <--- tambah
+    this.motherName, // <--- tambah
+    this.fatherJob, // <--- tambah
+    this.motherJob, // <--- tambah
+    this.guardianName, // <--- tambah
+    this.guardianJob, // <--- tambah
   });
 }

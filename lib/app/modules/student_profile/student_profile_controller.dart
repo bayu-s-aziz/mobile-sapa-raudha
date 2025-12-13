@@ -16,16 +16,25 @@ class StudentProfileController extends GetxController {
   }
 
   void loadStudentData() {
-    // Ini adalah data dummy berdasarkan apa yang ada di HomeController
-    // Di aplikasi nyata, data ini akan diambil dari server berdasarkan ID ortu
     if (homeController.userRole.value == 'orangtua') {
       student.value = Student(
-        id: 'S001', // Dummy ID
-        name: 'Budi Santoso', // Dummy name (dari homeController.childStatus)
-        studentClass: 'Kelas A', // Dummy class
-        parentName: homeController.userName.value, // "Bapak Ortu Keren"
-        dailyStatus:
-            StudentDailyStatus.hadir, // (dari homeController.childStatus)
+        id: 'S001',
+        name: 'Budi Santoso',
+        studentClass: 'Kelas A',
+        parentName: 'Bapak Ortu Keren',
+        dailyStatus: StudentDailyStatus.hadir,
+        nisn: '1234567890',
+        gender: 'Laki-laki',
+        birthPlace: 'Surabaya',
+        birthDate: DateTime(2019, 5, 12),
+        religion: 'Islam',
+        address: 'Jl. Mawar No. 10, Surabaya',
+        fatherName: 'Bapak Ortu Keren',
+        motherName: 'Ibu Ortu Hebat',
+        fatherJob: 'Pegawai Swasta',
+        motherJob: 'Ibu Rumah Tangga',
+        guardianName: 'Paman Baik',
+        guardianJob: 'Wiraswasta',
       );
     }
   }
