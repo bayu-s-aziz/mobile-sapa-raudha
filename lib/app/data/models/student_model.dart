@@ -10,6 +10,12 @@ class Student {
   final String parentName;
   final String? photoUrl;
   final StudentDailyStatus dailyStatus; // Status hari ini
+  final String? nisn;
+  final String? nis;
+  final String? gender;
+  final String? birthPlace;
+  final String? religion;
+  final String? address;
 
   Student({
     required this.id,
@@ -18,5 +24,11 @@ class Student {
     required this.parentName,
     this.photoUrl,
     this.dailyStatus = StudentDailyStatus.belumHadir,
+    this.nisn,
+    this.nis,
+    this.gender,
+    this.birthPlace,
+    this.religion,
+    this.address,
   });
 }

@@ -25,6 +25,68 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
+                  'Keterangan Tidak Hadir',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                FormField<String>(
+                  validator: (_) {
+                    if (controller.leaveType.value.isEmpty) {
+                      return 'Pilih salah satu opsi';
+                    }
+                    return null;
+                  },
+                  builder: (state) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Obx(
+                          () => Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              _buildLeaveTypeChip(
+                                label: 'Sakit',
+                                value: 'sakit',
+                                selected: controller.leaveType.value == 'sakit',
+                                onSelected: (selected) {
+                                  if (selected) {
+                                    controller.leaveType.value = 'sakit';
+                                    state.didChange('sakit');
+                                  }
+                                },
+                              ),
+                              _buildLeaveTypeChip(
+                                label: 'Izin',
+                                value: 'izin',
+                                selected: controller.leaveType.value == 'izin',
+                                onSelected: (selected) {
+                                  if (selected) {
+                                    controller.leaveType.value = 'izin';
+                                    state.didChange('izin');
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (state.hasError)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Text(
+                              state.errorText ?? '',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: AppColors.error),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                Text(
                   'Pilih Tanggal Izin',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
@@ -92,8 +154,8 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
                 TextFormField(
                   controller: controller.reasonController,
                   decoration: const InputDecoration(
-                    labelText: 'Alasan Tidak Hadir',
-                    hintText: 'Contoh: Sakit, acara keluarga, dll.',
+                    labelText: 'Keterangan',
+                    hintText: 'Tuliskan rincian ketidakhadiran.',
                     alignLabelWithHint: true, // Agar label sejajar hint
                     prefixIcon: Icon(Icons.notes_outlined),
                   ),
@@ -194,6 +256,31 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
             tooltip: 'Hapus file',
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildLeaveTypeChip({
+    required String label,
+    required String value,
+    required bool selected,
+    required ValueChanged<bool> onSelected,
+  }) {
+    return ChoiceChip(
+      label: Text(label),
+      selected: selected,
+      onSelected: onSelected,
+      labelStyle: TextStyle(
+        color: selected ? Colors.white : AppColors.primaryText,
+        fontWeight: FontWeight.w600,
+      ),
+      selectedColor: AppColors.primary,
+      backgroundColor: AppColors.secondaryBackground,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: selected ? AppColors.primary : AppColors.alternate,
+        ),
       ),
     );
   }

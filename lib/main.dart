@@ -2,17 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 // [MODERNISASI] Mengaktifkan GoogleFonts untuk tipografi yang lebih baik
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'app/data/services/announcement_service.dart';
+import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('id_ID', null);
+  await GetStorage.init();
   Get.put(AnnouncementService());
+  Get.put(LocalStorageService()); // register storage service
   runApp(const MainApp());
 }
 

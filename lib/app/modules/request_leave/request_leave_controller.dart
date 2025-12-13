@@ -10,6 +10,7 @@ class RequestLeaveController extends GetxController {
   final reasonController = TextEditingController();
   final startDateController = TextEditingController();
   final endDateController = TextEditingController();
+  final RxString leaveType = ''.obs; // sakit | izin
 
   // --- TAMBAHAN UNTUK FILE UPLOAD ---
   final ImagePicker _picker = ImagePicker();
@@ -58,6 +59,7 @@ class RequestLeaveController extends GetxController {
       // --- LOGIKA SUBMIT ANDA ---
       // Anda bisa tambahkan 'selectedFile.value' ke data yang dikirim ke server
       // Contoh:
+      // final jenis = leaveType.value;
       // final file = selectedFile.value;
       // final alasan = reasonController.text;
       // ...
@@ -75,6 +77,7 @@ class RequestLeaveController extends GetxController {
       reasonController.clear();
       startDateController.clear();
       endDateController.clear();
+      leaveType.value = '';
       formKey.currentState?.reset();
     }
   }
