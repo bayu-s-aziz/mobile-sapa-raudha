@@ -24,10 +24,12 @@ abstract class Routes {
   // Profil
   static const profile = _Paths.profile;
   static const editProfile = _Paths.editProfile;
+  static const changePassword = _Paths.changePassword;
   // Fitur Guru
   static const confirmLeave = _Paths.confirmLeave;
   static const studentList = _Paths.studentList;
   static const studentDetail = _Paths.studentDetail;
+  static const leaveList = _Paths.leaveList;
 
   // --- TAMBAHKAN INI ---
   static const studentProfile = _Paths.studentProfile; // Untuk Ortu
@@ -56,10 +58,12 @@ abstract class _Paths {
   // Path Profil
   static const profile = '/profile';
   static const editProfile = '/edit-profile';
+  static const changePassword = '/change-password';
   // Path Guru
   static const confirmLeave = '/confirm-leave';
   static const studentList = '/students';
   static const studentDetail = '/students/detail';
+  static const leaveList = '/leave-list';
 
   // --- TAMBAHKAN INI ---
   static const studentProfile = '/student-profile';

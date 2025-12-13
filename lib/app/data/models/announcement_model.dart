@@ -8,6 +8,7 @@ class Announcement {
   final DateTime timestamp;
   final String author;
   final String? attachmentName;
+  final bool isRead;
 
   Announcement({
     required this.id,
@@ -16,6 +17,7 @@ class Announcement {
     required this.timestamp,
     required this.author,
     this.attachmentName,
+    this.isRead = false,
   });
 
   // --- TAMBAHKAN GETTER INI ---

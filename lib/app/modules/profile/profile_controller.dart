@@ -1,40 +1,116 @@
 // lib/app/modules/profile/profile_controller.dart
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
-import 'package:sapa_raudha/app/modules/home/home_controller.dart'; // Untuk ambil data user
+import 'package:sapa_raudha/app/data/services/profile_service.dart';
+import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 
 class ProfileController extends GetxController {
-  // Mengambil HomeController untuk mendapatkan data user yang sedang login
-  final HomeController homeController = Get.find<HomeController>();
+  final RxMap<String, dynamic> profile = <String, dynamic>{}.obs;
+  final RxBool isLoading = true.obs;
 
-  late RxString userName;
-  late RxString userRole;
-  late RxString userEmail; // Tambahan dummy
-  late RxString userPhotoUrl; // Tambahan dummy
+  late final ProfileService _profileService = Get.find<ProfileService>();
+  late final HomeController _homeController = Get.find<HomeController>();
 
   @override
   void onInit() {
     super.onInit();
-    // Inisialisasi data dari HomeController
-    userName = homeController.userName;
-    userRole = homeController.userRole;
+    // Try to sync from HomeController first (already fetched during login)
+    if (_homeController.userName.value.isNotEmpty) {
+      _syncFromHome();
+    }
+    loadProfile();
+  }
 
-    // Data dummy tambahan
-    userEmail =
-        (userRole.value == 'guru'
-                ? 'guru.hebat@sekolah.id'
-                : 'ortu.keren@email.com')
-            .obs;
-    userPhotoUrl = ''.obs; // Awalnya kosong, bisa diisi URL
+  void _syncFromHome() {
+    // If HomeController already has profile data, use it
+    final homeProfile = _profileService.getStoredProfile();
+    if (homeProfile != null && homeProfile.isNotEmpty) {
+      profile.value = homeProfile;
+      if (kDebugMode) {
+        print('DEBUG Profile: Synced from home=$homeProfile');
+      }
+    }
+  }
+
+  Future<void> loadProfile() async {
+    isLoading(true);
+    try {
+      final cached = _profileService.getStoredProfile();
+      if (cached != null && cached.isNotEmpty) {
+        profile.assignAll(cached);
+        profile.refresh(); // Force reactive update
+      }
+
+      final fresh = await _profileService.fetchProfile();
+      if (fresh.isNotEmpty) {
+        profile.assignAll(fresh);
+        profile.refresh(); // Force reactive update
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal memuat profil: ${e.toString()}');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  String get userName {
+    // For parents, derive name from father/mother/guardian fields
+    final role = (profile['role'] as String?)?.toLowerCase() ?? '';
+    if (kDebugMode) {
+      print(
+        'DEBUG userName: role=$role, profile_keys=${profile.keys.toList()}',
+      );
+    }
+    if (role == 'orangtua') {
+      final father = profile['father_name'] as String?;
+      final mother = profile['mother_name'] as String?;
+      final guardian = profile['guardian_name'] as String?;
+      if (kDebugMode) {
+        print(
+          'DEBUG userName parent: father=$father, mother=$mother, guardian=$guardian',
+        );
+      }
+      return father?.isNotEmpty == true
+          ? father!
+          : (mother?.isNotEmpty == true
+                ? mother!
+                : (guardian?.isNotEmpty == true ? guardian! : 'Orang Tua'));
+    }
+    return (profile['name'] as String?) ?? 'Pengguna';
+  }
+
+  String get userRole => (profile['role'] as String?) ?? '-';
+  String get userEmail => (profile['email'] as String?) ?? '-';
+  String? get userPhotoUrl => profile['photo_url'] as String?;
+  String? get userPhone => profile['phone'] as String?;
+
+  // Additional getters for parents
+  String get studentName {
+    final name = (profile['student_name'] as String?) ?? '-';
+    if (kDebugMode) {
+      print('DEBUG studentName: $name');
+    }
+    return name;
+  }
+
+  String get studentClass {
+    final kls = (profile['class_name'] as String?) ?? '-';
+    if (kDebugMode) {
+      print('DEBUG studentClass: $kls');
+    }
+    return kls;
   }
 
   void goToEditProfile() {
-    // Navigasi ke halaman edit profil (yang akan kita buat selanjutnya)
     Get.toNamed(Routes.editProfile);
   }
 
+  void goToChangePassword() {
+    Get.toNamed(Routes.changePassword);
+  }
+
   void logout() {
-    // Memanggil fungsi logout yang sudah ada di HomeController
-    homeController.confirmLogout();
+    _homeController.confirmLogout();
   }
 }

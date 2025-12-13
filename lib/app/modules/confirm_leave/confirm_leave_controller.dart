@@ -2,63 +2,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/leave_request_model.dart';
+import 'package:sapa_raudha/app/data/services/leave_service.dart';
+import '../home/home_controller.dart';
 
 class ConfirmLeaveController extends GetxController {
   final RxBool isLoading = true.obs;
   final RxList<LeaveRequest> leaveRequests = <LeaveRequest>[].obs;
+  late final LeaveService _leaveService;
 
   @override
   void onInit() {
     super.onInit();
+    _leaveService = Get.find<LeaveService>();
     fetchLeaveRequests();
   }
 
-  void fetchLeaveRequests() {
+  Future<void> fetchLeaveRequests() async {
     isLoading(true);
-    // Simulasi pengambilan data
-    Future.delayed(const Duration(milliseconds: 800), () {
-      final dummyData = [
-        LeaveRequest(
-          id: 'LR001',
-          studentName: 'Budi Santoso',
-          parentName: 'Bapak Keren',
-          leaveType: 'Sakit',
-          dateRange: DateTimeRange(
-            start: DateTime.now().add(const Duration(days: 1)),
-            end: DateTime.now().add(const Duration(days: 2)),
-          ),
-          reason: 'Demam dan batuk, surat dokter menyusul.',
-          status: LeaveStatus.pending,
-        ),
-        LeaveRequest(
-          id: 'LR002',
-          studentName: 'Siti Aminah',
-          parentName: 'Ibu Keren',
-          leaveType: 'Izin',
-          dateRange: DateTimeRange(
-            start: DateTime.now().add(const Duration(days: 1)),
-            end: DateTime.now().add(const Duration(days: 1)),
-          ),
-          reason: 'Ada keperluan keluarga mendadak di luar kota.',
-          status: LeaveStatus.pending,
-        ),
-        LeaveRequest(
-          id: 'LR003',
-          studentName: 'Ahmad Zaini',
-          parentName: 'Bapak Keren',
-          leaveType: 'Sakit',
-          dateRange: DateTimeRange(
-            start: DateTime.now().subtract(const Duration(days: 1)),
-            end: DateTime.now().subtract(const Duration(days: 1)),
-          ),
-          reason: 'Diare.',
-          status: LeaveStatus.approved, // Contoh yang sudah di-approve
-        ),
-      ];
-
-      leaveRequests.assignAll(dummyData);
+    try {
+      final data = await _leaveService.getLeaveRequests();
+      final mapped = data.map((item) {
+        final start = DateTime.parse(item['request_date']);
+        return LeaveRequest(
+          id: item['id'].toString(),
+          studentName: item['student_name'] ?? '',
+          parentName: item['parent_name'] ?? '',
+          leaveType: item['status'] == 'sakit' ? 'Sakit' : 'Izin',
+          dateRange: DateTimeRange(start: start, end: start),
+          reason: item['reason'] ?? '',
+          status: _mapStatus(item['status'] as String?),
+        );
+      }).toList();
+      leaveRequests.assignAll(mapped);
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal memuat pengajuan izin: ${e.toString()}');
+    } finally {
       isLoading(false);
-    });
+    }
   }
 
   void processRequest(LeaveRequest request, LeaveStatus newStatus) {
@@ -88,22 +68,45 @@ class ConfirmLeaveController extends GetxController {
   }
 
   void _updateRequestStatus(LeaveRequest request, LeaveStatus newStatus) {
-    // Simulasi update ke server
     isLoading(true);
-    Future.delayed(const Duration(milliseconds: 500), () {
-      // Cari index request
-      final index = leaveRequests.indexWhere((r) => r.id == request.id);
-      if (index != -1) {
-        // Update data di list lokal
-        leaveRequests[index] = request.copyWith(status: newStatus);
-        leaveRequests.refresh(); // Update UI
-      }
-      isLoading(false);
-      Get.snackbar(
-        'Berhasil',
-        'Pengajuan izin ${request.studentName} telah di-${newStatus == LeaveStatus.approved ? 'setujui' : 'tolak'}.',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    });
+    final Future<void> action = newStatus == LeaveStatus.approved
+        ? _leaveService.approve(request.id)
+        : _leaveService.reject(request.id);
+
+    action
+        .then((_) {
+          final index = leaveRequests.indexWhere((r) => r.id == request.id);
+          if (index != -1) {
+            leaveRequests[index] = request.copyWith(status: newStatus);
+            leaveRequests.refresh();
+          }
+          // Segarkan badge pending dan daftar dari sumber API
+          Get.find<HomeController>().fetchPendingLeaveCount();
+          fetchLeaveRequests();
+          Get.snackbar(
+            'Berhasil',
+            'Pengajuan izin ${request.studentName} telah di-${newStatus == LeaveStatus.approved ? 'setujui' : 'tolak'}.',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        })
+        .catchError((e) {
+          Get.snackbar(
+            'Gagal',
+            'Tidak dapat memperbarui status: ${e.toString()}',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        })
+        .whenComplete(() => isLoading(false));
+  }
+
+  LeaveStatus _mapStatus(String? status) {
+    switch ((status ?? '').toLowerCase()) {
+      case 'approved':
+        return LeaveStatus.approved;
+      case 'rejected':
+        return LeaveStatus.rejected;
+      default:
+        return LeaveStatus.pending;
+    }
   }
 }

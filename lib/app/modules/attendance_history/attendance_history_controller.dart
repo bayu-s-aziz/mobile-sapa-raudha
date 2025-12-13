@@ -3,6 +3,8 @@
 import 'package:get/get.dart';
 // Import model baru
 import 'package:sapa_raudha/app/data/models/attendance_model.dart';
+import 'package:sapa_raudha/app/data/services/attendance_service.dart';
+import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 // Import package kalender
 import 'package:table_calendar/table_calendar.dart';
 
@@ -20,56 +22,54 @@ class AttendanceHistoryController extends GetxController {
   final RxBool isLoading = true.obs;
   // ----------------------------
 
+  late final AttendanceService _attendanceService;
+  late final LocalStorageService _storage;
+
+  String? _studentNisn; // untuk role orangtua
+
   @override
   void onInit() {
     super.onInit();
+    _attendanceService = Get.find<AttendanceService>();
+    _storage = Get.find<LocalStorageService>();
+    _studentNisn = _attendanceService.getStoredChildNisn();
     fetchAbsenceData();
   }
 
   Future<void> fetchAbsenceData() async {
     isLoading.value = true;
-    // --- Simulasi Fetch Data (delay 1 detik) ---
-    await Future.delayed(const Duration(seconds: 1));
-
-    // Normalisasi tanggal HARI INI ke UTC (tanpa jam)
-    final today = DateTime.now();
-    final utcToday = DateTime.utc(today.year, today.month, today.day);
-
-    // Ganti ini dengan logika API call Anda
-    final dummyData = {
-      // 2 hari lalu
-      utcToday.subtract(const Duration(days: 2)): [
-        AttendanceModel(
-          date: utcToday.subtract(const Duration(days: 2)),
-          status: 'Sakit',
-        ),
-      ],
-      // 7 hari lalu
-      utcToday.subtract(const Duration(days: 7)): [
-        AttendanceModel(
-          date: utcToday.subtract(const Duration(days: 7)),
-          status: 'Izin',
-        ),
-      ],
-      // 10 hari lalu
-      utcToday.subtract(const Duration(days: 10)): [
-        AttendanceModel(
-          date: utcToday.subtract(const Duration(days: 10)),
-          status: 'Alpha',
-        ),
-      ],
-      // 11 hari lalu
-      utcToday.subtract(const Duration(days: 11)): [
-        AttendanceModel(
-          date: utcToday.subtract(const Duration(days: 11)),
-          status: 'Alpha',
-        ),
-      ],
-    };
-
-    absenceEvents.value = dummyData;
-    isLoading.value = false;
-    // ----------------------------
+    try {
+      final nisn = _studentNisn ?? _storage.read<String>('nisn');
+      if (nisn == null) {
+        throw Exception('NISN tidak ditemukan');
+      }
+      final data = await _attendanceService.getStudentHistory(nisn);
+      final map = <DateTime, List<AttendanceModel>>{};
+      for (final item in data) {
+        final dateStr = item['date'] as String?;
+        if (dateStr == null) continue;
+        final dt = DateTime.parse(dateStr);
+        final dayKey = DateTime.utc(dt.year, dt.month, dt.day);
+        map.putIfAbsent(dayKey, () => []);
+        map[dayKey]!.add(
+          AttendanceModel(
+            date: dt,
+            status: _humanStatus(item['status']),
+            checkIn: item['check_in'],
+            checkOut: item['check_out'],
+          ),
+        );
+      }
+      absenceEvents.value = map;
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Gagal memuat riwayat absensi: ${e.toString()}',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   // --- FUNGSI HELPER UNTUK KALENDER ---
@@ -100,6 +100,21 @@ class AttendanceHistoryController extends GetxController {
   // Dipanggil saat halaman/bulan di kalender diganti
   void onPageChanged(DateTime focused) {
     focusedDay.value = focused;
+  }
+
+  String _humanStatus(dynamic status) {
+    switch ((status ?? '').toString().toLowerCase()) {
+      case 'hadir':
+        return 'Hadir';
+      case 'sakit':
+        return 'Sakit';
+      case 'izin':
+        return 'Izin';
+      case 'alpa':
+        return 'Alpha';
+      default:
+        return 'Hadir';
+    }
   }
 
   // ---------------------------------

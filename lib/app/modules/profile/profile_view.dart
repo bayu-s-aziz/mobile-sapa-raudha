@@ -24,81 +24,83 @@ class ProfileView extends GetView<ProfileController> {
             constraints: const BoxConstraints(),
           ),
         ],
-        child: Center(
-          child: Column(
-            children: [
-              // Foto Profil
-              Obx(
-                () => CircleAvatar(
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(strokeWidth: 2),
+            );
+          }
+
+          final photoUrl = controller.userPhotoUrl;
+          final email = controller.userEmail;
+          final role = controller.userRole;
+
+          return Center(
+            child: Column(
+              children: [
+                CircleAvatar(
                   radius: 60,
                   backgroundColor: AppColors.primary,
-                  backgroundImage: controller.userPhotoUrl.value.isNotEmpty
-                      ? NetworkImage(controller.userPhotoUrl.value)
+                  backgroundImage: photoUrl != null && photoUrl.isNotEmpty
+                      ? NetworkImage(photoUrl)
                       : null,
-                  child: controller.userPhotoUrl.value.isEmpty
+                  child: (photoUrl == null || photoUrl.isEmpty)
                       ? const Icon(
                           Icons.person_outline,
                           size: 60,
-                          // --- MODIFIKASI WARNA IKON ---
-                          color: Colors.white, // Diubah dari AppColors.primary
-                          // --- AKHIR MODIFIKASI ---
+                          color: Colors.white,
                         )
                       : null,
                 ),
-              ),
-              const SizedBox(height: 16),
-
-              // Nama Pengguna
-              Obx(
-                () => Text(
-                  controller.userName.value,
+                const SizedBox(height: 16),
+                Text(
+                  controller.userName,
                   style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: 4),
-
-              // Email Pengguna
-              Obx(
-                () => Text(
-                  controller.userEmail.value,
-                  style: textTheme.bodyLarge?.copyWith(
-                    color: AppColors.secondaryText,
+                const SizedBox(height: 4),
+                // Show parent subtitle under name
+                if (role.toLowerCase() == 'orangtua') ...[
+                  Text(
+                    'Orang Tua Ananda ${controller.studentName}',
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: AppColors.secondaryText,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ),
-              const SizedBox(height: 32),
-              const Divider(thickness: 0.5),
+                ] else ...[
+                  Text(
+                    email,
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: AppColors.secondaryText,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
 
-              // Daftar Menu
-              _buildProfileMenu(
-                context,
-                icon: Icons.lock_outline,
-                title: 'Ubah Password',
-                onTap: () {
-                  Get.snackbar("Info", "Fitur 'Ubah Password' belum tersedia.");
-                },
-              ),
-              _buildProfileMenu(
-                context,
-                icon: Icons.help_outline,
-                title: 'Pusat Bantuan',
-                onTap: () {
-                  Get.snackbar("Info", "Fitur 'Pusat Bantuan' belum tersedia.");
-                },
-              ),
-              _buildProfileMenu(
-                context,
-                icon: Icons.logout,
-                title: 'Logout',
-                color: AppColors.error,
-                onTap: controller.logout, // Panggil fungsi logout
-              ),
-            ],
-          ),
-        ),
+                const SizedBox(height: 32),
+                const Divider(thickness: 0.5),
+
+                // Daftar Menu
+                _buildProfileMenu(
+                  context,
+                  icon: Icons.lock_outline,
+                  title: 'Ubah Password',
+                  onTap: controller.goToChangePassword,
+                ),
+                _buildProfileMenu(
+                  context,
+                  icon: Icons.logout,
+                  title: 'Logout',
+                  color: AppColors.error,
+                  onTap: controller.logout,
+                ),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }

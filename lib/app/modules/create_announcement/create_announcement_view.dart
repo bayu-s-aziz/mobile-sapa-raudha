@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'create_announcement_controller.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart'; // Impor AppColors
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
+import '../home/home_controller.dart';
 
 class CreateAnnouncementView extends GetView<CreateAnnouncementController> {
   const CreateAnnouncementView({super.key});
@@ -15,7 +16,8 @@ class CreateAnnouncementView extends GetView<CreateAnnouncementController> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: FloatingPage(
           title: 'Buat Pengumuman',
-          onBack: () => Get.back(),
+          // Kembali ke dashboard utama dengan menutup action view
+          onBack: () => Get.find<HomeController>().clearActionView(),
           child: Form(
             key: controller.formKey,
             child: Column(

@@ -1,82 +1,93 @@
 // lib/app/data/services/announcement_service.dart
+import 'dart:io';
 import 'package:get/get.dart';
+import 'package:sapa_raudha/app/data/services/api_client.dart';
 import '../models/announcement_model.dart';
 
 class AnnouncementService extends GetxService {
-  final RxList<Announcement> _dummyAnnouncements = <Announcement>[
-    Announcement(
-      id: 'A001',
-      title: 'Rapat Wali Murid Kelas 1',
-      content:
-          'Diberitahukan kepada seluruh wali murid kelas 1 bahwa akan diadakan rapat pada hari Sabtu, 2 November 2025 pukul 09:00 WIB di Aula Sekolah. Kehadiran sangat diharapkan.\n\nTerima kasih.',
-      timestamp: DateTime(2025, 10, 28, 10, 0),
-      author: 'Ibu Guru Hebat',
-      attachmentName: 'Surat_Undangan_Rapat.pdf', // <-- CONTOH LAMPIRAN
-    ),
-    Announcement(
-      id: 'A002',
-      title: 'Informasi Kegiatan Outing Class',
-      content:
-          'Anak-anak kelas 2 akan mengikuti kegiatan outing class ke Taman Mini Indonesia Indah pada hari Rabu, 6 November 2025. Mohon mempersiapkan bekal dan pakaian ganti. Biaya partisipasi sebesar Rp 50.000,- dapat dititipkan melalui wali kelas.',
-      timestamp: DateTime(2025, 10, 29, 14, 30),
-      author: 'Admin Sekolah',
-      attachmentName: null, // <-- Tidak ada lampiran
-    ),
-    Announcement(
-      id: 'A003',
-      title: 'Libur Maulid Nabi Muhammad SAW',
-      content:
-          'Dalam rangka memperingati Maulid Nabi Muhammad SAW, kegiatan belajar mengajar akan diliburkan pada hari Senin, 4 November 2025. Kegiatan belajar akan dimulai kembali pada hari Selasa, 5 November 2025.',
-      timestamp: DateTime(2025, 10, 29, 8, 15),
-      author: 'Admin Sekolah',
-      attachmentName: null,
-    ),
-    Announcement(
-      id: 'A004',
-      title: 'Pengambilan Rapor Semester Ganjil',
-      content:
-          'Pengambilan rapor semester ganjil akan dilaksanakan pada hari Jumat, 20 Desember 2025. Jadwal pengambilan per kelas akan diinformasikan lebih lanjut oleh wali kelas masing-masing.',
-      timestamp: DateTime(2025, 12, 15, 11, 00),
-      author: 'Admin Sekolah',
-      attachmentName: 'Jadwal_Pengambilan_Rapor.png', // <-- CONTOH LAMPIRAN
-    ),
-  ].obs;
+  late final ApiClient _api;
 
-  List<Announcement> getAllAnnouncements() {
-    final sortedList = List<Announcement>.from(_dummyAnnouncements);
-    sortedList.sort((a, b) => b.timestamp.compareTo(a.timestamp));
-    return sortedList;
+  @override
+  void onInit() {
+    super.onInit();
+    _api = Get.find<ApiClient>();
   }
 
-  Announcement? getAnnouncementById(String id) {
-    try {
-      return _dummyAnnouncements.firstWhere((ann) => ann.id == id);
-    } catch (e) {
-      return null;
+  // Ambil semua pengumuman
+  Future<List<Announcement>> getAllAnnouncements({int limit = 50}) async {
+    final res = await _api.get('/announcements?limit=$limit');
+    final list = res['announcements'] as List<dynamic>? ?? [];
+    return list.map((item) => _mapToAnnouncement(item)).toList();
+  }
+
+  // Ambil pengumuman terbaru
+  Future<List<Announcement>> getRecentAnnouncements({int count = 3}) async {
+    return getAllAnnouncements(limit: count);
+  }
+
+  // Detail pengumuman
+  Future<Announcement?> getAnnouncementById(String id) async {
+    final res = await _api.get('/announcements/$id');
+    if (res['announcement'] == null) return null;
+    return _mapToAnnouncement(res['announcement']);
+  }
+
+  // Buat pengumuman baru
+  Future<void> addAnnouncement({
+    required String title,
+    required String content,
+    String targetAudience = 'all',
+    int? targetClassId,
+    File? attachment,
+  }) async {
+    if (attachment != null) {
+      await _api.postMultipart(
+        '/announcements',
+        {
+          'title': title,
+          'content': content,
+          'target_audience': targetAudience,
+          if (targetClassId != null) 'target_class_id': '$targetClassId',
+        },
+        'attachment',
+        attachment.path,
+      );
+    } else {
+      await _api.post('/announcements', {
+        'title': title,
+        'content': content,
+        'target_audience': targetAudience,
+        'target_class_id': targetClassId,
+      }, needsAuth: true);
     }
   }
 
-  // Perbarui signature method ini
-  void addAnnouncement(
-    String title,
-    String content,
-    String author, {
-    String? attachmentName,
-  }) {
-    final newId =
-        'A${(_dummyAnnouncements.length + 1).toString().padLeft(3, '0')}';
-    final newAnnouncement = Announcement(
-      id: newId,
-      title: title,
-      content: content,
-      timestamp: DateTime.now(),
-      author: author,
-      attachmentName: attachmentName, // <-- SIMPAN NAMA LAMPIRAN
-    );
-    _dummyAnnouncements.add(newAnnouncement);
+  // Hapus pengumuman
+  Future<void> deleteAnnouncement(String id) async {
+    await _api.delete('/announcements/$id');
   }
 
-  List<Announcement> getRecentAnnouncements({int count = 3}) {
-    return getAllAnnouncements().take(count).toList();
+  Announcement _mapToAnnouncement(Map<String, dynamic> item) {
+    return Announcement(
+      id: item['id'].toString(),
+      title: item['title'] ?? '',
+      content: item['content'] ?? '',
+      timestamp: item['created_at'] != null
+          ? DateTime.parse(item['created_at'])
+          : DateTime.now(),
+      author: item['author_name'] ?? 'Sekolah',
+      attachmentName: _extractAttachmentName(item['attachments']),
+      isRead: item['is_read'] == true || item['is_read'] == 1 ? true : false,
+    );
+  }
+
+  String? _extractAttachmentName(dynamic attachments) {
+    if (attachments is List && attachments.isNotEmpty) {
+      final first = attachments.first;
+      if (first is Map && first['filename'] != null) {
+        return first['filename'] as String;
+      }
+    }
+    return null;
   }
 }

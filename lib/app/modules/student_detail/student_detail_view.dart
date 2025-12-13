@@ -21,6 +21,27 @@ class StudentDetailView extends GetView<StudentDetailController> {
           }
           final student = controller.student.value!;
           final textTheme = Theme.of(context).textTheme;
+          String formatValue(String? value) {
+            final trimmed = value?.trim();
+            if (trimmed != null && trimmed.isNotEmpty) {
+              return trimmed;
+            }
+            return '-';
+          }
+
+          String formatPhone() {
+            final candidates = [
+              student.fatherPhone,
+              student.motherPhone,
+              student.guardianPhone,
+            ];
+            for (final phone in candidates) {
+              final trimmed = phone?.trim();
+              if (trimmed != null && trimmed.isNotEmpty) return trimmed;
+            }
+            return 'Tidak tersedia';
+          }
+
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,20 +87,30 @@ class StudentDetailView extends GetView<StudentDetailController> {
                   ),
                 ),
                 const Divider(height: 1, thickness: 1),
-                // Info Tambahan (Wali)
+                // Info Tambahan (Orang Tua)
                 _buildInfoSection(
                   context,
-                  title: 'Informasi Wali',
+                  title: 'Informasi Orang Tua',
                   children: [
                     _buildInfoTile(
-                      icon: Icons.person_outline,
-                      label: 'Nama Wali',
-                      value: student.parentName,
+                      icon: Icons.man_outlined,
+                      label: 'Nama Ayah',
+                      value: formatValue(student.fatherName),
+                    ),
+                    _buildInfoTile(
+                      icon: Icons.woman_outlined,
+                      label: 'Nama Ibu',
+                      value: formatValue(student.motherName),
+                    ),
+                    _buildInfoTile(
+                      icon: Icons.home_outlined,
+                      label: 'Alamat',
+                      value: formatValue(student.address),
                     ),
                     _buildInfoTile(
                       icon: Icons.phone_outlined,
-                      label: 'Nomor Telepon',
-                      value: '0812-3456-7890 (Dummy)',
+                      label: 'Nomor Telepon Orang Tua',
+                      value: formatPhone(),
                     ),
                   ],
                 ),
@@ -96,7 +127,7 @@ class StudentDetailView extends GetView<StudentDetailController> {
                     ),
                     ListTile(
                       leading: const Icon(Icons.message_outlined),
-                      title: const Text('Hubungi Wali (WA)'),
+                      title: const Text('Hubungi Orang Tua (WA)'),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: controller.callParent,
                     ),

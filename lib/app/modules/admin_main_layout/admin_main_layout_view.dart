@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/routes/app_pages.dart';
+import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 
 import 'admin_main_layout_controller.dart';
 
@@ -9,6 +11,16 @@ class AdminMainLayoutView extends GetView<AdminMainLayoutController> {
 
   @override
   Widget build(BuildContext context) {
+    if (!GetPlatform.isWeb) {
+      Future.microtask(() => Get.offAllNamed(Routes.login));
+      return const SizedBox.shrink();
+    }
+    final role = Get.find<LocalStorageService>().read<String>('role');
+    if (role != 'admin') {
+      Future.microtask(() => Get.offAllNamed(Routes.login));
+      return const SizedBox.shrink();
+    }
+
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
       body: SafeArea(

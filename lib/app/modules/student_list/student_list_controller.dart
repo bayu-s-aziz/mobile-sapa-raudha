@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
+import 'package:sapa_raudha/app/data/services/student_service.dart';
 
 class StudentListController extends GetxController {
   final RxBool isLoading = true.obs;
@@ -10,10 +11,12 @@ class StudentListController extends GetxController {
   final RxList<Student> filteredStudents = <Student>[].obs;
 
   final TextEditingController searchController = TextEditingController();
+  late final StudentService _studentService;
 
   @override
   void onInit() {
     super.onInit();
+    _studentService = Get.find<StudentService>();
     fetchStudents();
     // Listener untuk search
     searchController.addListener(() {
@@ -21,112 +24,66 @@ class StudentListController extends GetxController {
     });
   }
 
-  void fetchStudents() {
+  Future<void> fetchStudents() async {
     isLoading(true);
-    // Simulasi pengambilan data
-    Future.delayed(const Duration(milliseconds: 800), () {
-      final dummyData = [
-        Student(
-          id: 'S001',
-          name: 'Budi Santoso',
-          studentClass: 'Kelas A',
-          parentName: 'Bapak Keren',
-          dailyStatus: StudentDailyStatus.hadir,
-          nisn: '1234567890',
-          gender: 'Laki-laki',
-          birthPlace: 'Surabaya',
-          birthDate: DateTime(2019, 5, 12),
-          religion: 'Islam',
-          address: 'Jl. Mawar No. 10',
-          fatherName: 'Bapak Keren',
-          motherName: 'Ibu Hebat',
-          fatherJob: 'Pegawai Swasta',
-          motherJob: 'Ibu Rumah Tangga',
-          guardianName: 'Paman Baik',
-          guardianJob: 'Wiraswasta',
-        ),
-        Student(
-          id: 'S002',
-          name: 'Siti Aminah',
-          studentClass: 'Kelas A',
-          parentName: 'Ibu Keren',
-          dailyStatus: StudentDailyStatus.sakit,
-          nisn: '0987654321',
-          gender: 'Perempuan',
-          birthPlace: 'Jakarta',
-          birthDate: DateTime(2019, 6, 15),
-          religion: 'Islam',
-          address: 'Jl. Melati No. 20',
-          fatherName: 'Bapak Keren',
-          motherName: 'Ibu Keren',
-          fatherJob: 'Dokter',
-          motherJob: 'Pengacara',
-          guardianName: 'Nenek Baik',
-          guardianJob: 'Pensiuun',
-        ),
-        Student(
-          id: 'S003',
-          name: 'Ahmad Zaini',
-          studentClass: 'Kelas B',
-          parentName: 'Bapak Keren',
-          dailyStatus: StudentDailyStatus.izin,
-          nisn: '1122334455',
-          gender: 'Laki-laki',
-          birthPlace: 'Bandung',
-          birthDate: DateTime(2019, 7, 20),
-          religion: 'Kristen',
-          address: 'Jl. Kenanga No. 30',
-          fatherName: 'Bapak Keren',
-          motherName: 'Ibu Keren',
-          fatherJob: 'Insinyur',
-          motherJob: 'Dokter',
-          guardianName: 'Paman Baik',
-          guardianJob: 'Wiraswasta',
-        ),
-        Student(
-          id: 'S004',
-          name: 'Dewi Lestari',
-          studentClass: 'Kelas B',
-          parentName: 'Ibu Keren',
-          dailyStatus: StudentDailyStatus.alpa,
-          nisn: '2233445566',
-          gender: 'Perempuan',
-          birthPlace: 'Semarang',
-          birthDate: DateTime(2019, 8, 25),
-          religion: 'Buddha',
-          address: 'Jl. Cempaka No. 40',
-          fatherName: 'Bapak Keren',
-          motherName: 'Ibu Keren',
-          fatherJob: 'Pengusaha',
-          motherJob: 'Ibu Rumah Tangga',
-          guardianName: 'Nenek Baik',
-          guardianJob: 'Pensiuun',
-        ),
-        Student(
-          id: 'S005',
-          name: 'Eko Prasetyo',
-          studentClass: 'Kelas A',
-          parentName: 'Bapak Keren',
-          dailyStatus: StudentDailyStatus.belumHadir,
-          nisn: '3344556677',
-          gender: 'Laki-laki',
-          birthPlace: 'Medan',
-          birthDate: DateTime(2019, 9, 30),
-          religion: 'Hindu',
-          address: 'Jl. Anggrek No. 50',
-          fatherName: 'Bapak Keren',
-          motherName: 'Ibu Keren',
-          fatherJob: 'Arsitek',
-          motherJob: 'Dokter',
-          guardianName: 'Paman Baik',
-          guardianJob: 'Wiraswasta',
-        ),
-      ];
+    try {
+      final studentsData = await _studentService.getStudents();
 
-      allStudents.assignAll(dummyData);
-      filteredStudents.assignAll(dummyData); // Awalnya tampilkan semua
+      final students = studentsData.map((data) {
+        return Student(
+          id: data['id'].toString(),
+          name: data['name'] ?? '',
+          studentClass: data['class_name'] ?? 'Belum ada kelas',
+          parentName: data['father_name'] ?? data['mother_name'] ?? 'N/A',
+          dailyStatus: _parseStatus(data['daily_status']),
+          nisn: data['nisn'] ?? '',
+          nis: data['nis'],
+          gender: data['gender'] == 'L' ? 'Laki-laki' : 'Perempuan',
+          birthPlace: data['birth_place'],
+          birthDate: data['birth_date'] != null
+              ? DateTime.tryParse(data['birth_date'])
+              : null,
+          religion: data['religion'],
+          address: data['address'],
+          fatherName: data['father_name'],
+          motherName: data['mother_name'],
+          fatherJob: data['father_job'],
+          motherJob: data['mother_job'],
+          guardianName: data['guardian_name'],
+          fatherPhone: data['father_phone'],
+          motherPhone: data['mother_phone'],
+          guardianPhone: data['guardian_phone'],
+          photoUrl: data['photo_url'],
+        );
+      }).toList();
+
+      allStudents.assignAll(students);
+      filteredStudents.assignAll(students);
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Gagal memuat data siswa: ${e.toString()}',
+        backgroundColor: Colors.red.shade600,
+        colorText: Colors.white,
+      );
+    } finally {
       isLoading(false);
-    });
+    }
+  }
+
+  StudentDailyStatus _parseStatus(String? status) {
+    switch (status?.toLowerCase()) {
+      case 'hadir':
+        return StudentDailyStatus.hadir;
+      case 'sakit':
+        return StudentDailyStatus.sakit;
+      case 'izin':
+        return StudentDailyStatus.izin;
+      case 'alpa':
+        return StudentDailyStatus.alpa;
+      default:
+        return StudentDailyStatus.belumHadir;
+    }
   }
 
   void filterStudents(String query) {
@@ -140,7 +97,9 @@ class StudentListController extends GetxController {
                   student.name.toLowerCase().contains(query.toLowerCase()) ||
                   student.studentClass.toLowerCase().contains(
                     query.toLowerCase(),
-                  ),
+                  ) ||
+                  (student.nisn?.toLowerCase().contains(query.toLowerCase()) ??
+                      false),
             )
             .toList(),
       );

@@ -7,6 +7,57 @@ import 'package:flutter_svg/flutter_svg.dart'; // Tambahkan import untuk SVG
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
 
+  // Role selector removed: backend auto-detects by NIK/NISN
+
+  Widget _buildIdentifierField(BuildContext context) {
+    return TextField(
+      controller: controller.idController,
+      decoration: const InputDecoration(
+        labelText: 'NIK atau NISN',
+        prefixIcon: Icon(Icons.badge_outlined),
+      ),
+      keyboardType: TextInputType.number,
+      textInputAction: TextInputAction.next,
+    );
+  }
+
+  Widget _buildPasswordField(BuildContext context) {
+    return Obx(
+      () => TextField(
+        controller: controller.passwordController,
+        obscureText: controller.isPasswordHidden.value,
+        decoration: InputDecoration(
+          labelText: 'Password',
+          prefixIcon: const Icon(Icons.lock_outline),
+          suffixIcon: IconButton(
+            tooltip: controller.isPasswordHidden.value
+                ? 'Tampilkan password'
+                : 'Sembunyikan password',
+            icon: Icon(
+              controller.isPasswordHidden.value
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+            ),
+            onPressed: controller.togglePasswordVisibility,
+          ),
+        ),
+        textInputAction: TextInputAction.done,
+        onSubmitted: (_) => controller.login(),
+      ),
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return Obx(
+      () => controller.isLoading.value
+          ? const Center(child: CircularProgressIndicator())
+          : ElevatedButton(
+              onPressed: controller.isLoading.value ? null : controller.login,
+              child: const Text('MASUK'),
+            ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +92,8 @@ class LoginView extends GetView<LoginController> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 40),
-
-                _buildEmailField(context),
+                // Role selector removed
+                _buildIdentifierField(context),
                 const SizedBox(height: 20),
                 _buildPasswordField(context),
                 const SizedBox(height: 40),
@@ -61,56 +112,6 @@ class LoginView extends GetView<LoginController> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildEmailField(BuildContext context) {
-    return TextField(
-      controller: controller.emailController,
-      decoration: const InputDecoration(
-        labelText: 'Email',
-        prefixIcon: Icon(Icons.alternate_email),
-      ),
-      keyboardType: TextInputType.emailAddress,
-      textInputAction: TextInputAction.next,
-    );
-  }
-
-  Widget _buildPasswordField(BuildContext context) {
-    return Obx(
-      () => TextField(
-        controller: controller.passwordController,
-        obscureText: controller.isPasswordHidden.value,
-        decoration: InputDecoration(
-          labelText: 'Password',
-          prefixIcon: const Icon(Icons.lock_outline),
-          // Styling diambil dari theme
-          suffixIcon: IconButton(
-            tooltip: controller.isPasswordHidden.value
-                ? 'Tampilkan password'
-                : 'Sembunyikan password',
-            icon: Icon(
-              controller.isPasswordHidden.value
-                  ? Icons.visibility_off_outlined
-                  : Icons.visibility_outlined,
-            ),
-            onPressed: controller.togglePasswordVisibility,
-          ),
-        ),
-        textInputAction: TextInputAction.done,
-        onSubmitted: (_) => controller.login(),
-      ),
-    );
-  }
-
-  Widget _buildLoginButton() {
-    return Obx(
-      () => controller.isLoading.value
-          ? const Center(child: CircularProgressIndicator())
-          : ElevatedButton(
-              onPressed: controller.isLoading.value ? null : controller.login,
-              child: const Text('MASUK'),
-            ),
     );
   }
 }

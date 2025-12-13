@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
+import '../home/home_controller.dart';
 
 import 'announcement_list_controller.dart';
 
@@ -11,7 +12,23 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
   const AnnouncementListView({super.key});
   @override
   Widget build(BuildContext context) {
+    final home = Get.find<HomeController>();
     return Scaffold(
+      floatingActionButton: Obx(() {
+        final isGuru = home.userRole.value == 'guru';
+        if (!isGuru) return const SizedBox.shrink();
+        return FloatingActionButton(
+          onPressed: home.goToCreateAnnouncement,
+          tooltip: 'Buat Pengumuman',
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
+          elevation: 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: const Icon(Icons.add),
+        );
+      }),
       body: FloatingPage(
         title: 'Pengumuman',
         scrollable: false,
@@ -64,19 +81,34 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    subtitle: Text(
-                      announcement.content.replaceAll('\n', ' '),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.secondaryText,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          announcement.content.replaceAll('\n', ' '),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: AppColors.secondaryText),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          announcement.formattedDate,
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.secondaryText.withAlpha(
+                                  (0.6 * 255).round(),
+                                ),
+                              ),
+                        ),
+                      ],
                     ),
                     trailing: const Icon(
                       Icons.chevron_right,
                       color: AppColors.secondaryText,
                       size: 20,
                     ),
+                    isThreeLine: true,
                     onTap: () => controller.goToDetail(announcement.id),
                   ),
                 );

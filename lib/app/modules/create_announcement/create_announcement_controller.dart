@@ -1,6 +1,7 @@
 // lib/app/modules/create_announcement/create_announcement_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/modules/announcement_list/announcement_list_controller.dart';
@@ -67,55 +68,50 @@ class CreateAnnouncementController extends GetxController {
   void submitAnnouncement() {
     if (formKey.currentState?.validate() ?? false) {
       isLoading(true);
-      final authorName = _homeController.userName.value.isNotEmpty
-          ? _homeController.userName.value
-          : 'Guru';
+      final attachmentPath = pickedFile.value?.path;
 
-      // Simulasi proses
-      Future.delayed(const Duration(seconds: 1), () {
-        try {
-          _announcementService.addAnnouncement(
-            titleController.text.trim(),
-            contentController.text.trim(),
-            authorName,
-            // Kirim nama file jika ada
-            attachmentName: pickedFile.value?.name, // <-- KIRIM NAMA FILE
-          );
+      _announcementService
+          .addAnnouncement(
+            title: titleController.text.trim(),
+            content: contentController.text.trim(),
+            attachment: attachmentPath != null ? File(attachmentPath) : null,
+          )
+          .then((_) {
+            Get.back();
+            Get.snackbar(
+              'Berhasil',
+              'Pengumuman berhasil dipublikasikan.',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green.shade600,
+              colorText: Colors.white,
+              margin: const EdgeInsets.all(12),
+              borderRadius: 8,
+              icon: const Icon(Icons.check_circle_outline, color: Colors.white),
+            );
 
-          Get.back();
-          Get.snackbar(
-            'Berhasil',
-            'Pengumuman berhasil dipublikasikan.',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green.shade600,
-            colorText: Colors.white,
-            margin: const EdgeInsets.all(12),
-            borderRadius: 8,
-            icon: const Icon(Icons.check_circle_outline, color: Colors.white),
-          );
+            _homeController.refreshAnnouncements();
 
-          _homeController.refreshAnnouncements();
-
-          if (Get.isRegistered<AnnouncementListController>() &&
-              Get.currentRoute == Routes.announcementList) {
-            final listController = Get.find<AnnouncementListController>();
-            listController.fetchAnnouncements();
-          }
-        } catch (e) {
-          Get.snackbar(
-            'Gagal',
-            'Terjadi kesalahan: ${e.toString()}',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.red.shade600,
-            colorText: Colors.white,
-            margin: const EdgeInsets.all(12),
-            borderRadius: 8,
-            icon: const Icon(Icons.error_outline, color: Colors.white),
-          );
-        } finally {
-          isLoading(false);
-        }
-      });
+            if (Get.isRegistered<AnnouncementListController>() &&
+                Get.currentRoute == Routes.announcementList) {
+              final listController = Get.find<AnnouncementListController>();
+              listController.fetchAnnouncements();
+            }
+          })
+          .catchError((e) {
+            Get.snackbar(
+              'Gagal',
+              'Terjadi kesalahan: ${e.toString()}',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red.shade600,
+              colorText: Colors.white,
+              margin: const EdgeInsets.all(12),
+              borderRadius: 8,
+              icon: const Icon(Icons.error_outline, color: Colors.white),
+            );
+          })
+          .whenComplete(() {
+            isLoading(false);
+          });
     }
   }
 

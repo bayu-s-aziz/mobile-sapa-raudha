@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 
 class ScanPresenceController extends GetxController {
   // final GlobalKey qrKey = GlobalKey(debugLabel: 'QR'); // Tidak diperlukan lagi
@@ -15,6 +16,13 @@ class ScanPresenceController extends GetxController {
   final RxString scannedData = ''.obs;
   final RxBool isFlashOn = false.obs;
   bool _isProcessing = false;
+  late final AttendanceService _attendanceService;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _attendanceService = Get.find<AttendanceService>();
+  }
 
   @override
   void onClose() {
@@ -32,13 +40,7 @@ class ScanPresenceController extends GetxController {
       if (code != null && code.isNotEmpty) {
         _isProcessing = true;
         scannedData.value = code;
-
-        _showPresenceConfirmation(scannedData.value);
-
-        Future.delayed(const Duration(seconds: 2), () {
-          scannedData.value = '';
-          _isProcessing = false;
-        });
+        _submitAttendance(scannedData.value);
       }
     }
   }
@@ -57,5 +59,25 @@ class ScanPresenceController extends GetxController {
       colorText: Colors.white,
       duration: const Duration(seconds: 2),
     );
+  }
+
+  Future<void> _submitAttendance(String nisn) async {
+    try {
+      final res = await _attendanceService.scanAttendance(nisn);
+      _showPresenceConfirmation(res['student']?['name'] ?? nisn);
+    } catch (e) {
+      Get.snackbar(
+        "Gagal",
+        "Tidak dapat merekam presensi: ${e.toString()}",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } finally {
+      Future.delayed(const Duration(seconds: 2), () {
+        scannedData.value = '';
+        _isProcessing = false;
+      });
+    }
   }
 }

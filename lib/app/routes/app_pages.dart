@@ -18,14 +18,18 @@ import '../modules/login/login_view.dart';
 import '../modules/scan_presence/scan_presence_binding.dart';
 import '../modules/scan_presence/scan_presence_view.dart';
 import '../modules/request_leave/request_leave_binding.dart';
+import '../modules/request_leave/request_leave_view.dart';
 import '../modules/attendance_history/attendance_history_binding.dart'; // Import
 import '../modules/profile/profile_binding.dart';
 import '../modules/edit_profile/edit_profile_binding.dart';
 import '../modules/edit_profile/edit_profile_view.dart';
+import '../modules/change_password/change_password_binding.dart';
+import '../modules/change_password/change_password_view.dart';
 import '../modules/confirm_leave/confirm_leave_binding.dart';
 import '../modules/student_list/student_list_binding.dart';
 import '../modules/student_detail/student_detail_view.dart';
 import '../modules/student_profile/student_profile_binding.dart';
+import '../modules/leave_list/leave_list_binding.dart';
 
 part 'app_routes.dart';
 
@@ -51,6 +55,7 @@ class AppPages {
         AnnouncementListBinding().dependencies();
         StudentListBinding().dependencies();
         RequestLeaveBinding().dependencies();
+        LeaveListBinding().dependencies();
         ProfileBinding().dependencies();
 
         // Binding untuk action pages
@@ -70,11 +75,21 @@ class AppPages {
       page: () => const ScanPresenceView(),
       binding: ScanPresenceBinding(),
     ),
+    GetPage(
+      name: _Paths.requestLeave,
+      page: () => const RequestLeaveView(),
+      binding: RequestLeaveBinding(),
+    ),
     // Rute Profil
     GetPage(
       name: _Paths.editProfile,
       page: () => const EditProfileView(),
       binding: EditProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.changePassword,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
     ),
     // Rute Data Siswa
     GetPage(

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sapa_raudha/app/data/models/attendance_model.dart';
+import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -15,10 +16,21 @@ class AttendanceHistoryView extends GetView<AttendanceHistoryController> {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.isRegistered<HomeController>()
+        ? Get.find<HomeController>()
+        : null;
+
     return Scaffold(
       body: FloatingPage(
         title: 'Riwayat Absensi',
-        onBack: () => Get.back(),
+        onBack: () {
+          // Jika dibuka sebagai action view dalam Home, bersihkan action view.
+          if (homeController != null) {
+            homeController.clearActionView();
+          } else {
+            Get.back();
+          }
+        },
         contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
           children: [

@@ -3,6 +3,7 @@
 import 'dart:io'; // <-- Tambahkan import ini
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart'; // <-- Tambahkan import ini
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'request_leave_controller.dart';
@@ -12,13 +13,21 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.isRegistered<HomeController>()
+        ? Get.find<HomeController>()
+        : null;
+
     return Scaffold(
+      bottomNavigationBar: homeController != null
+          ? _BottomNav(homeController: homeController)
+          : null,
       // Body di-wrap dengan GestureDetector untuk menutup keyboard
       // saat user tap di luar text field
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: FloatingPage(
           title: 'Ajukan Izin',
+          onBack: Get.back,
           child: Form(
             key: controller.formKey,
             child: Column(
@@ -286,4 +295,96 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
   }
 
   // -------------------------------------
+}
+
+class _BottomNav extends StatelessWidget {
+  final HomeController homeController;
+
+  const _BottomNav({required this.homeController});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.alternate.withAlpha((0.5 * 255).round()),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).padding.bottom,
+          left: 16,
+          right: 16,
+        ),
+        child: BottomNavigationBar(
+          currentIndex: homeController.selectedIndex.value,
+          onTap: (index) {
+            homeController.changeTabIndex(index);
+            Get.back();
+          },
+          items: homeController.userRole.value == 'guru'
+              ? _buildGuruNavItems()
+              : _buildParentNavItems(),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      ),
+    );
+  }
+
+  List<BottomNavigationBarItem> _buildGuruNavItems() {
+    return const [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.dashboard_outlined),
+        activeIcon: Icon(Icons.dashboard),
+        label: 'Dashboard',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.campaign_outlined),
+        activeIcon: Icon(Icons.campaign),
+        label: 'Pengumuman',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.group_outlined),
+        activeIcon: Icon(Icons.group),
+        label: 'Data Siswa',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.person_outline),
+        activeIcon: Icon(Icons.person),
+        label: 'Profil',
+      ),
+    ];
+  }
+
+  List<BottomNavigationBarItem> _buildParentNavItems() {
+    return const [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home_outlined),
+        activeIcon: Icon(Icons.home),
+        label: 'Beranda',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.campaign_outlined),
+        activeIcon: Icon(Icons.campaign),
+        label: 'Pengumuman',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.mail_outline),
+        activeIcon: Icon(Icons.mail),
+        label: 'Izin',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.person_outline),
+        activeIcon: Icon(Icons.person),
+        label: 'Profil',
+      ),
+    ];
+  }
 }

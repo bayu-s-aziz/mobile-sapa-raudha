@@ -70,10 +70,6 @@ class StudentListTile extends StatelessWidget {
           student.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Text(
-          'Wali: ${student.parentName}',
-          style: const TextStyle(color: AppColors.secondaryText, fontSize: 12),
-        ),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,

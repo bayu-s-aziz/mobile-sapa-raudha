@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
+import 'package:sapa_raudha/app/data/services/auth_service.dart';
 
 class LoginController extends GetxController {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  // Ganti email -> id (NIK/NISN)
+  final TextEditingController idController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   final RxBool isLoading = false.obs;
   final RxBool isPasswordHidden = true.obs;
+  // No role selection; backend determines role by identifier
 
   Future<void> login() async {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      _showErrorSnackbar("Email dan password tidak boleh kosong");
+    if (idController.text.isEmpty || passwordController.text.isEmpty) {
+      _showErrorSnackbar("Identitas dan password tidak boleh kosong");
       return;
     }
-    if (!GetUtils.isEmail(emailController.text)) {
-      _showErrorSnackbar("Format email tidak valid");
+    if (!RegExp(r'^\d+$').hasMatch(idController.text.trim())) {
+      _showErrorSnackbar("NIK/NISN harus berupa angka");
       return;
     }
-
     isLoading(true);
     try {
-      await Future.delayed(const Duration(seconds: 1)); // Persingkat delay
-
-      final String? role = _performDummyLoginWithRole(
-        emailController.text,
-        passwordController.text,
+      final auth = Get.find<AuthService>();
+      final res = await auth.login(
+        identifier: idController.text.trim(),
+        password: passwordController.text,
       );
-
-      if (role != null) {
-        Get.offAllNamed(Routes.home, arguments: role);
+      if (res != null) {
+        final role = (res['profile']?['role'] ?? '') as String;
+        if (role == 'admin') {
+          Get.offAllNamed(Routes.adminMain);
+        } else {
+          Get.offAllNamed(Routes.home, arguments: role);
+        }
       } else {
-        _showErrorSnackbar("Email atau password salah");
+        _showErrorSnackbar("Identitas atau password salah");
       }
     } catch (e) {
       _showErrorSnackbar("Terjadi kesalahan: ${e.toString()}");
@@ -44,23 +49,8 @@ class LoginController extends GetxController {
     isPasswordHidden.value = !isPasswordHidden.value;
   }
 
-  String? _performDummyLoginWithRole(String email, String password) {
-    const String dummyPassword = "12345678";
-
-    if (email.toLowerCase() == "guru@gmail.com" && password == dummyPassword) {
-      return "guru";
-    } else if (email.toLowerCase() == "ortu@gmail.com" &&
-        password == dummyPassword) {
-      return "orangtua";
-    } else {
-      return null;
-    }
-  }
-
   void _showErrorSnackbar(String message) {
-    if (Get.isSnackbarOpen) {
-      Get.closeCurrentSnackbar();
-    }
+    if (Get.isSnackbarOpen) Get.closeCurrentSnackbar();
     Get.snackbar(
       "Login Gagal",
       message,
@@ -76,7 +66,7 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
-    emailController.dispose();
+    idController.dispose();
     passwordController.dispose();
     super.onClose();
   }

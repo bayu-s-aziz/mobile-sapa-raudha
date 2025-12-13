@@ -23,6 +23,9 @@ class Student {
   final String? motherJob; // <--- tambah
   final String? guardianName; // <--- tambah
   final String? guardianJob; // <--- tambah
+  final String? fatherPhone; // <--- tambah
+  final String? motherPhone; // <--- tambah
+  final String? guardianPhone; // <--- tambah
 
   Student({
     required this.id,
@@ -44,5 +47,8 @@ class Student {
     this.motherJob, // <--- tambah
     this.guardianName, // <--- tambah
     this.guardianJob, // <--- tambah
+    this.fatherPhone, // <--- tambah
+    this.motherPhone, // <--- tambah
+    this.guardianPhone, // <--- tambah
   });
 }

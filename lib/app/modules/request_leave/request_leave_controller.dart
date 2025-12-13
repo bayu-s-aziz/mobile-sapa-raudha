@@ -1,9 +1,13 @@
 // [KODE LENGKAP]
 
-import 'dart:io'; // <-- Tambahkan import ini
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart'; // <-- Tambahkan import ini
+import 'package:image_picker/image_picker.dart';
+import 'package:sapa_raudha/app/data/services/leave_service.dart';
+import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
+import 'package:sapa_raudha/app/modules/home/home_controller.dart';
+import 'package:sapa_raudha/app/modules/leave_list/leave_list_controller.dart';
 
 class RequestLeaveController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -16,6 +20,19 @@ class RequestLeaveController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   final Rx<File?> selectedFile = Rx<File?>(null);
   // ---------------------------------
+
+  late final LeaveService _leaveService;
+  late final LocalStorageService _storage;
+  String? _studentNisn;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _leaveService = Get.find<LeaveService>();
+    _storage = Get.find<LocalStorageService>();
+    final profile = _storage.read<Map<String, dynamic>>('profile');
+    _studentNisn = profile?['nisn'] as String?;
+  }
 
   @override
   void onClose() {
@@ -54,15 +71,23 @@ class RequestLeaveController extends GetxController {
   }
   // -------------------------------------
 
-  void submitLeaveRequest() {
-    if (formKey.currentState!.validate()) {
-      // --- LOGIKA SUBMIT ANDA ---
-      // Anda bisa tambahkan 'selectedFile.value' ke data yang dikirim ke server
-      // Contoh:
-      // final jenis = leaveType.value;
-      // final file = selectedFile.value;
-      // final alasan = reasonController.text;
-      // ...
+  void submitLeaveRequest() async {
+    if (!formKey.currentState!.validate()) return;
+    if (_studentNisn == null) {
+      Get.snackbar('Error', 'NISN anak tidak ditemukan');
+      return;
+    }
+
+    final requestDate = startDateController.text.trim();
+    final reason = reasonController.text.trim();
+
+    try {
+      await _leaveService.submitLeave(
+        studentNisn: _studentNisn!,
+        requestDate: requestDate,
+        reason: reason,
+        attachment: selectedFile.value,
+      );
 
       Get.snackbar(
         "Berhasil",
@@ -72,13 +97,32 @@ class RequestLeaveController extends GetxController {
         colorText: Colors.white,
       );
 
-      // Reset form
       clearImage();
       reasonController.clear();
       startDateController.clear();
       endDateController.clear();
       leaveType.value = '';
       formKey.currentState?.reset();
+
+      // Kembalikan ke daftar izin dan segarkan datanya
+      final home = Get.isRegistered<HomeController>()
+          ? Get.find<HomeController>()
+          : null;
+      final leaveList = Get.isRegistered<LeaveListController>()
+          ? Get.find<LeaveListController>()
+          : null;
+
+      home?.changeTabIndex(2); // Tab Izin untuk orang tua
+      await leaveList?.fetchLeaves();
+      Get.back();
+    } catch (e) {
+      Get.snackbar(
+        'Gagal',
+        'Pengajuan izin gagal: ${e.toString()}',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     }
   }
 }

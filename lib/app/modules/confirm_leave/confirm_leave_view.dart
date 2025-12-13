@@ -6,6 +6,7 @@ import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'confirm_leave_controller.dart';
 import 'widgets/leave_request_card.dart'; // Widget kustom (dibuat di bawah)
+import '../home/home_controller.dart';
 
 class ConfirmLeaveView extends GetView<ConfirmLeaveController> {
   const ConfirmLeaveView({super.key});
@@ -15,7 +16,8 @@ class ConfirmLeaveView extends GetView<ConfirmLeaveController> {
     return Scaffold(
       body: FloatingPage(
         title: 'Konfirmasi Izin',
-        onBack: () => Get.back(),
+        // Tutup action view alih-alih pop route
+        onBack: () => Get.find<HomeController>().clearActionView(),
         scrollable: false,
         contentPadding: EdgeInsets.zero,
         child: Obx(() {

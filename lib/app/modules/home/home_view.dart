@@ -6,7 +6,7 @@ import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 
 import '../announcement_list/announcement_list_view.dart';
 import '../student_list/student_list_view.dart';
-import '../request_leave/request_leave_view.dart';
+import '../leave_list/leave_list_view.dart';
 import '../profile/profile_view.dart';
 import '../create_announcement/create_announcement_view.dart';
 import '../confirm_leave/confirm_leave_view.dart';
@@ -19,13 +19,12 @@ class _DashboardCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
-  final int? badgeCount;
+  final int? badgeCount = null;
 
   const _DashboardCard({
     required this.icon,
     required this.title,
     required this.onTap,
-    this.badgeCount,
   });
 
   @override
@@ -113,7 +112,7 @@ class HomeView extends GetView<HomeController> {
           const AnnouncementListView(),
           controller.userRole.value == 'guru'
               ? const StudentListView()
-              : const RequestLeaveView(),
+              : const LeaveListView(),
           const ProfileView(),
         ];
 
@@ -122,9 +121,6 @@ class HomeView extends GetView<HomeController> {
           children: tabPages,
         );
       }),
-      // [MODERNISASI] Membuat BottomNavBar "Floating"
-      // 1. Bungkus dengan Padding
-      // 2. Bungkus dengan Container untuk shadow dan shape
       bottomNavigationBar: Obx(
         () => Container(
           decoration: BoxDecoration(
@@ -254,12 +250,14 @@ class HomeView extends GetView<HomeController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               _buildWelcomeHeader(context),
-                              const SizedBox(height: 30),
+                              const SizedBox(height: 16),
+                              controller.userRole.value == 'guru'
+                                  ? const SizedBox.shrink()
+                                  : _buildChildTodayCard(context),
+                              const SizedBox(height: 20),
                               controller.userRole.value == 'guru'
                                   ? _buildGuruDashboardGrid(context)
                                   : _buildParentDashboardGrid(context),
-                              const SizedBox(height: 30),
-                              _buildRecentInfoSection(context),
                             ],
                           ),
                         ),
@@ -425,20 +423,6 @@ class HomeView extends GetView<HomeController> {
                   maxLines: 1,
                 ),
               ),
-              if (controller.userRole.value == 'orangtua' &&
-                  controller.childStatus.isNotEmpty) ...[
-                const SizedBox(height: 4),
-                Obx(
-                  () => Text(
-                    controller.childStatus.value,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.secondaryText,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                ),
-              ],
             ],
           ),
         ),
@@ -446,8 +430,62 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
+  Widget _buildChildTodayCard(BuildContext context) {
+    return Obx(() {
+      if (controller.userRole.value != 'orangtua') {
+        return const SizedBox.shrink();
+      }
+
+      final statusText = controller.childTodayStatus.value.isNotEmpty
+          ? controller.childTodayStatus.value
+          : 'Belum ada data';
+
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withAlpha((0.12 * 255).toInt()),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.event_available,
+                  color: AppColors.primary,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Status Kehadiran',
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: AppColors.secondaryText,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      statusText,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryText,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
   Widget _buildGuruDashboardGrid(BuildContext context) {
-    int pendingLeaveBadge = 2;
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
@@ -469,7 +507,6 @@ class HomeView extends GetView<HomeController> {
         _DashboardCard(
           icon: Icons.checklist_rtl_outlined,
           title: "Konfirmasi Izin",
-          badgeCount: pendingLeaveBadge,
           onTap: controller.goToConfirmLeave,
         ),
         _DashboardCard(
@@ -482,7 +519,6 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget _buildParentDashboardGrid(BuildContext context) {
-    int announcementBadge = 1;
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
@@ -504,7 +540,6 @@ class HomeView extends GetView<HomeController> {
         _DashboardCard(
           icon: Icons.campaign_outlined,
           title: "Lihat Pengumuman",
-          badgeCount: announcementBadge,
           onTap: controller.goToViewAnnouncements,
         ),
         _DashboardCard(
@@ -512,120 +547,6 @@ class HomeView extends GetView<HomeController> {
           title: "Profil Anak",
           onTap: controller.goToStudentProfile,
         ),
-      ],
-    );
-  }
-
-  Widget _buildRecentInfoSection(BuildContext context) {
-    final announcementService = Get.find<AnnouncementService>();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Pengumuman Terbaru",
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 16),
-        Obx(() {
-          if (controller.isLoadingAnnouncements.value) {
-            return const Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 30.0),
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-            );
-          }
-          if (controller.recentAnnouncements.isEmpty) {
-            return const Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 30.0),
-                child: Text(
-                  "Belum ada pengumuman.",
-                  style: TextStyle(color: AppColors.secondaryText),
-                ),
-              ),
-            );
-          }
-
-          final announcementsToShow = controller.recentAnnouncements;
-          return ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: announcementsToShow.length,
-            itemBuilder: (context, index) {
-              final announcement = announcementsToShow[index];
-              return Card(
-                // [MODERNISASI] Hapus margin agar menggunakan CardTheme
-                // margin: const EdgeInsets.only(bottom: 0),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 10,
-                  ),
-                  leading: CircleAvatar(
-                    backgroundColor: AppColors.primary.withAlpha(
-                      (255 * 0.1).round(),
-                    ),
-                    child: const Icon(
-                      Icons.campaign_outlined,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  title: Text(
-                    announcement.title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    announcement.content.replaceAll('\n', ' ').length > 60
-                        ? '${announcement.content.replaceAll('\n', ' ').substring(0, 60)}...'
-                        : announcement.content.replaceAll('\n', ' '),
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.secondaryText,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right,
-                    color: AppColors.secondaryText,
-                    size: 20,
-                  ),
-                  onTap: () =>
-                      controller.goToAnnouncementDetail(announcement.id),
-                ),
-              );
-            },
-            // [MODERNISASI] Beri jarak antar card sedikit lebih banyak
-            separatorBuilder: (context, index) => const SizedBox(height: 12),
-          );
-        }),
-        Obx(() {
-          bool shouldShowButton =
-              !controller.isLoadingAnnouncements.value &&
-              controller.recentAnnouncements.isNotEmpty &&
-              announcementService.getAllAnnouncements().length >
-                  controller.recentAnnouncements.length;
-
-          return shouldShowButton
-              ? Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: TextButton(
-                      onPressed: controller.goToViewAnnouncements,
-                      child: const Text("Lihat Semua"),
-                    ),
-                  ),
-                )
-              : const SizedBox.shrink();
-        }),
       ],
     );
   }
