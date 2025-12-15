@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/modules/admin_dashboard/admin_dashboard_view.dart';
 import 'package:sapa_raudha/app/modules/admin_user_management/admin_user_management_view.dart';
-// Import view stub lainnya di sini
-// import 'package:sapa_raudha/app/modules/admin_attendance/admin_attendance_view.dart';
-// import 'package:sapa_raudha/app/modules/admin_announcements/admin_announcements_view.dart';
+import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_management_view.dart';
+import 'package:sapa_raudha/app/modules/admin_attendance_management/admin_attendance_management_view.dart';
+import 'package:sapa_raudha/app/modules/admin_class_management/admin_class_management_view.dart';
+import 'package:sapa_raudha/app/modules/admin_announcement_management/admin_announcement_management_view.dart';
+import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 
 class AdminMainLayoutController extends GetxController {
   // Menyimpan indeks halaman yang sedang aktif
@@ -12,20 +14,44 @@ class AdminMainLayoutController extends GetxController {
 
   // Daftar halaman/view untuk ditampilkan
   final List<Widget> pages = [
-    AdminDashboardView(),
-    AdminUserManagementView(),
-    // Placeholder untuk halaman lain
-    Scaffold(body: Center(child: Text("Halaman Absensi"))),
-    Scaffold(body: Center(child: Text("Halaman Pengumuman"))),
+    const AdminDashboardView(),
+    const AdminUserManagementView(),
+    const AdminStudentManagementView(),
+    const AdminClassManagementView(),
+    const AdminAttendanceManagementView(),
+    const AdminAnnouncementManagementView(),
   ];
 
   void changePage(int index) {
-    if (index == 4) {
-      // Index 4 adalah Logout
-      // Tambahkan logika logout, misal kembali ke halaman login
-      Get.offAllNamed('/login');
+    if (index == 6) {
+      // Index 6 adalah Logout (setelah menambah Pengumuman)
+      _logout();
     } else {
       selectedIndex.value = index;
     }
+  }
+
+  void _logout() {
+    Get.dialog(
+      AlertDialog(
+        title: const Text('Konfirmasi Logout'),
+        content: const Text('Apakah Anda yakin ingin keluar?'),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text('Batal')),
+          ElevatedButton(
+            onPressed: () {
+              Get.back();
+              final storage = Get.find<LocalStorageService>();
+              storage.remove('token');
+              storage.remove('role');
+              storage.remove('profile');
+              Get.offAllNamed('/login');
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Logout'),
+          ),
+        ],
+      ),
+    );
   }
 }

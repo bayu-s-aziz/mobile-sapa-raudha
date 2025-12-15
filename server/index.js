@@ -239,11 +239,159 @@ app.get('/students/nisn/:nisn', authMiddleware, async (req, res) => {
   }
 });
 
+// POST /students - Create new student
+app.post('/students', authMiddleware, async (req, res) => {
+  try {
+    const {
+      nisn, name, gender, birth_place, birth_date, address, class_id,
+      father_name, mother_name, guardian_name,
+      father_job, mother_job, guardian_job,
+      father_phone, mother_phone, guardian_phone,
+      password
+    } = req.body;
+    
+    // Check if NISN already exists
+    const [existing] = await pool.query('SELECT id FROM students WHERE nisn = ?', [nisn]);
+    if (existing.length > 0) {
+      return res.status(400).json({ message: 'NISN already exists' });
+    }
+    
+    // Convert birth_date from ISO string to MySQL DATE format (YYYY-MM-DD)
+    const formattedBirthDate = birth_date ? new Date(birth_date).toISOString().split('T')[0] : null;
+    
+    // Insert student
+    const [studentResult] = await pool.query(
+      `INSERT INTO students (nisn, name, gender, birth_place, birth_date, address, class_id) 
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [nisn, name, gender, birth_place, formattedBirthDate, address, class_id]
+    );
+    
+    const studentId = studentResult.insertId;
+    
+    // Insert parent data
+    await pool.query(
+      `INSERT INTO parents (student_id, father_name, mother_name, guardian_name,
+                            father_job, mother_job, guardian_job,
+                            father_phone, mother_phone, guardian_phone, password_hash)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [studentId, father_name, mother_name, guardian_name,
+       father_job, mother_job, guardian_job,
+       father_phone, mother_phone, guardian_phone, password || '123456']
+    );
+    
+    return res.json({ 
+      id: studentId,
+      message: 'Student created successfully' 
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error: ' + e.message });
+  }
+});
+
+// PUT /students/:id - Update student
+app.put('/students/:id', authMiddleware, async (req, res) => {
+  try {
+    const {
+      nisn, name, gender, birth_place, birth_date, address, class_id,
+      father_name, mother_name, guardian_name,
+      father_job, mother_job, guardian_job,
+      father_phone, mother_phone, guardian_phone
+    } = req.body;
+    
+    // Convert birth_date from ISO string to MySQL DATE format (YYYY-MM-DD)
+    const formattedBirthDate = birth_date ? new Date(birth_date).toISOString().split('T')[0] : null;
+    
+    // Update student
+    await pool.query(
+      `UPDATE students 
+       SET nisn = ?, name = ?, gender = ?, birth_place = ?, birth_date = ?, 
+           address = ?, class_id = ?
+       WHERE id = ?`,
+      [nisn, name, gender, birth_place, formattedBirthDate, address, class_id, req.params.id]
+    );
+    
+    // Update or insert parent data
+    const [parentExists] = await pool.query(
+      'SELECT id FROM parents WHERE student_id = ?',
+      [req.params.id]
+    );
+    
+    if (parentExists.length > 0) {
+      await pool.query(
+        `UPDATE parents 
+         SET father_name = ?, mother_name = ?, guardian_name = ?,
+             father_job = ?, mother_job = ?, guardian_job = ?,
+             father_phone = ?, mother_phone = ?, guardian_phone = ?
+         WHERE student_id = ?`,
+        [father_name, mother_name, guardian_name,
+         father_job, mother_job, guardian_job,
+         father_phone, mother_phone, guardian_phone, req.params.id]
+      );
+    } else {
+      await pool.query(
+        `INSERT INTO parents (student_id, father_name, mother_name, guardian_name,
+                              father_job, mother_job, guardian_job,
+                              father_phone, mother_phone, guardian_phone, password_hash)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [req.params.id, father_name, mother_name, guardian_name,
+         father_job, mother_job, guardian_job,
+         father_phone, mother_phone, guardian_phone, '123456']
+      );
+    }
+    
+    return res.json({ message: 'Student updated successfully' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error: ' + e.message });
+  }
+});
+
+// DELETE /students/:id - Delete student
+app.delete('/students/:id', authMiddleware, async (req, res) => {
+  try {
+    // Delete parent data first (foreign key)
+    await pool.query('DELETE FROM parents WHERE student_id = ?', [req.params.id]);
+    
+    // Delete student
+    await pool.query('DELETE FROM students WHERE id = ?', [req.params.id]);
+    
+    return res.json({ message: 'Student deleted successfully' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error: ' + e.message });
+  }
+});
+
+// POST /students/:id/photo - Upload student photo
+app.post('/students/:id/photo', authMiddleware, upload.single('photo'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+    
+    const photoUrl = `/uploads/${req.file.filename}`;
+    
+    await pool.query(
+      'UPDATE students SET photo_url = ? WHERE id = ?',
+      [photoUrl, req.params.id]
+    );
+    
+    return res.json({ 
+      photo_url: photoUrl,
+      message: 'Photo uploaded successfully' 
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error: ' + e.message });
+  }
+});
+
 // GET /classes - List all classes
 app.get('/classes', authMiddleware, async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT c.*, g.name as homeroom_teacher_name,
+      SELECT c.*, g.name as homeroom_teacher_name, g.nik as homeroom_teacher_nik,
              COUNT(s.id) as student_count
       FROM classes c
       LEFT JOIN gurus g ON c.homeroom_teacher_id = g.id
@@ -252,6 +400,81 @@ app.get('/classes', authMiddleware, async (req, res) => {
       ORDER BY c.grade, c.name
     `);
     return res.json({ classes: rows });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST /classes - Create new class
+app.post('/classes', authMiddleware, async (req, res) => {
+  try {
+    const { name, academic_year, homeroom_teacher_id } = req.body;
+    
+    if (!name || !academic_year) {
+      return res.status(400).json({ message: 'Name and academic year are required' });
+    }
+
+    const [result] = await pool.query(
+      'INSERT INTO classes (name, academic_year, homeroom_teacher_id) VALUES (?, ?, ?)',
+      [name, academic_year, homeroom_teacher_id || null]
+    );
+
+    return res.status(201).json({ 
+      id: result.insertId, 
+      message: 'Class created successfully' 
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT /classes/:id - Update class
+app.put('/classes/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, academic_year, homeroom_teacher_id } = req.body;
+
+    if (!name || !academic_year) {
+      return res.status(400).json({ message: 'Name and academic year are required' });
+    }
+
+    const [result] = await pool.query(
+      'UPDATE classes SET name = ?, academic_year = ?, homeroom_teacher_id = ? WHERE id = ?',
+      [name, academic_year, homeroom_teacher_id || null, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Class not found' });
+    }
+
+    return res.json({ message: 'Class updated successfully' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// DELETE /classes/:id - Delete class
+app.delete('/classes/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if class has students
+    const [students] = await pool.query('SELECT COUNT(*) as count FROM students WHERE class_id = ?', [id]);
+    if (students[0].count > 0) {
+      // Set students' class_id to NULL instead of blocking deletion
+      await pool.query('UPDATE students SET class_id = NULL WHERE class_id = ?', [id]);
+    }
+
+    const [result] = await pool.query('DELETE FROM classes WHERE id = ?', [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Class not found' });
+    }
+
+    return res.json({ message: 'Class deleted successfully' });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: 'Server error' });
@@ -362,6 +585,68 @@ app.post('/announcements', authMiddleware, upload.single('attachment'), async (r
       message: 'Announcement created',
       id: announcementId
     });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT /announcements/:id - Update announcement
+app.put('/announcements/:id', authMiddleware, async (req, res) => {
+  try {
+    const { title, content, category, is_pinned } = req.body;
+    
+    // Check if announcement exists
+    const [announcements] = await pool.query(
+      'SELECT * FROM announcements WHERE id = ?',
+      [req.params.id]
+    );
+    
+    if (!announcements[0]) {
+      return res.status(404).json({ message: 'Announcement not found' });
+    }
+    
+    const announcement = announcements[0];
+    const isAuthor = announcement.author_id === req.user.id && 
+                     announcement.author_type === req.user.role;
+    const isAdmin = req.user.role === 'admin';
+    
+    if (!isAuthor && !isAdmin) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    
+    // Build update query dynamically
+    const updates = [];
+    const values = [];
+    
+    if (title !== undefined) {
+      updates.push('title = ?');
+      values.push(title);
+    }
+    if (content !== undefined) {
+      updates.push('content = ?');
+      values.push(content);
+    }
+    if (category !== undefined) {
+      updates.push('category = ?');
+      values.push(category);
+    }
+    if (is_pinned !== undefined) {
+      updates.push('is_pinned = ?');
+      values.push(is_pinned ? 1 : 0);
+    }
+    
+    if (updates.length === 0) {
+      return res.status(400).json({ message: 'No fields to update' });
+    }
+    
+    values.push(req.params.id);
+    await pool.query(
+      `UPDATE announcements SET ${updates.join(', ')} WHERE id = ?`,
+      values
+    );
+    
+    return res.json({ message: 'Announcement updated successfully' });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: 'Server error' });
@@ -565,6 +850,230 @@ app.get('/attendance/stats', authMiddleware, async (req, res) => {
         absent: totalStudents[0].count - todayPresent[0].count - todaySick[0].count - todayPermit[0].count
       }
     });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /attendance/recap - Get attendance recap with filters
+app.get('/attendance/recap', authMiddleware, async (req, res) => {
+  try {
+    const { class_id, start_date, end_date, nisn } = req.query;
+    
+    // Use LEFT JOIN to show all students, even without attendance records
+    let query = `
+      SELECT 
+        s.id as student_id,
+        s.nisn, 
+        s.name as student_name, 
+        c.name as class_name, 
+        s.class_id,
+        a.id,
+        a.date,
+        a.check_in as time,
+        a.status,
+        a.notes
+      FROM students s
+      LEFT JOIN classes c ON s.class_id = c.id
+      LEFT JOIN attendance a ON s.id = a.student_id 
+        ${start_date && end_date && start_date === end_date ? 'AND a.date = ?' : ''}
+        ${start_date && end_date && start_date !== end_date && start_date ? 'AND a.date >= ?' : ''}
+        ${start_date && end_date && start_date !== end_date && end_date ? 'AND a.date <= ?' : ''}
+    `;
+    const params = [];
+    const conditions = [];
+
+    // Add date parameters to LEFT JOIN
+    if (start_date && end_date && start_date === end_date) {
+      params.push(start_date);
+    } else if (start_date && end_date && start_date !== end_date) {
+      if (start_date) params.push(start_date);
+      if (end_date) params.push(end_date);
+    }
+
+    // Only filter students table (not attendance)
+    if (class_id) {
+      conditions.push('s.class_id = ?');
+      params.push(class_id);
+    }
+
+    if (nisn) {
+      conditions.push('s.nisn = ?');
+      params.push(nisn);
+    }
+
+    // For date ranges, only show students with attendance records
+    if (start_date && end_date && start_date !== end_date) {
+      conditions.push('a.id IS NOT NULL');
+    }
+
+    if (conditions.length > 0) {
+      query += ' WHERE ' + conditions.join(' AND ');
+    }
+
+    query += ' ORDER BY c.name ASC, s.name ASC';
+
+    const [rows] = await pool.query(query, params);
+    return res.json({ data: rows });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /attendance/summary - Get attendance summary statistics
+app.get('/attendance/summary', authMiddleware, async (req, res) => {
+  try {
+    const { class_id, start_date, end_date } = req.query;
+    
+    let query = `
+      SELECT 
+        COUNT(*) as total,
+        SUM(CASE WHEN a.status = 'hadir' THEN 1 ELSE 0 END) as hadir,
+        SUM(CASE WHEN a.status = 'sakit' THEN 1 ELSE 0 END) as sakit,
+        SUM(CASE WHEN a.status = 'izin' THEN 1 ELSE 0 END) as izin,
+        SUM(CASE WHEN a.status = 'alpa' THEN 1 ELSE 0 END) as alpa
+      FROM attendance a
+      JOIN students s ON a.student_id = s.id
+      WHERE 1=1
+    `;
+    const params = [];
+
+    if (class_id) {
+      query += ' AND s.class_id = ?';
+      params.push(class_id);
+    }
+
+    if (start_date) {
+      query += ' AND a.date >= ?';
+      params.push(start_date);
+    }
+
+    if (end_date) {
+      query += ' AND a.date <= ?';
+      params.push(end_date);
+    }
+
+    const [rows] = await pool.query(query, params);
+    return res.json(rows[0] || { total: 0, hadir: 0, sakit: 0, izin: 0, alpa: 0 });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /attendance/aggregate - Get aggregated attendance per student (for week/month view)
+app.get('/attendance/aggregate', authMiddleware, async (req, res) => {
+  try {
+    const { class_id, start_date, end_date } = req.query;
+    
+    let query = `
+      SELECT 
+        s.nisn,
+        s.name as student_name,
+        c.name as class_name,
+        s.class_id,
+        SUM(CASE WHEN a.status = 'hadir' THEN 1 ELSE 0 END) as jumlah_hadir,
+        SUM(CASE WHEN a.status = 'sakit' THEN 1 ELSE 0 END) as jumlah_sakit,
+        SUM(CASE WHEN a.status = 'izin' THEN 1 ELSE 0 END) as jumlah_izin,
+        SUM(CASE WHEN a.status = 'alpa' THEN 1 ELSE 0 END) as jumlah_alpa
+      FROM students s
+      LEFT JOIN attendance a ON s.id = a.student_id 
+        ${start_date ? 'AND a.date >= ?' : ''}
+        ${end_date ? 'AND a.date <= ?' : ''}
+      LEFT JOIN classes c ON s.class_id = c.id
+      WHERE 1=1
+    `;
+    const params = [];
+
+    if (start_date) {
+      params.push(start_date);
+    }
+
+    if (end_date) {
+      params.push(end_date);
+    }
+
+    if (class_id) {
+      query += ' AND s.class_id = ?';
+      params.push(class_id);
+    }
+
+    query += ' GROUP BY s.id, s.nisn, s.name, c.name, s.class_id ORDER BY c.name ASC, s.name ASC';
+
+    const [rows] = await pool.query(query, params);
+    return res.json({ data: rows });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST /attendance - Create new attendance record
+app.post('/attendance', authMiddleware, async (req, res) => {
+  try {
+    const { student_id, date, status, notes } = req.body;
+
+    if (!student_id || !date || !status) {
+      return res.status(400).json({ message: 'student_id, date, and status are required' });
+    }
+
+    const validStatuses = ['hadir', 'sakit', 'izin', 'alpa'];
+    if (!validStatuses.includes(status.toLowerCase())) {
+      return res.status(400).json({ message: 'Invalid status' });
+    }
+
+    // Check if attendance already exists
+    const [existing] = await pool.query(
+      'SELECT id FROM attendance WHERE student_id = ? AND date = ?',
+      [student_id, date]
+    );
+
+    if (existing.length > 0) {
+      return res.status(400).json({ message: 'Attendance record already exists for this date' });
+    }
+
+    const [result] = await pool.query(
+      'INSERT INTO attendance (student_id, date, status, notes, scanned_by) VALUES (?, ?, ?, ?, ?)',
+      [student_id, date, status.toLowerCase(), notes || null, req.user.id]
+    );
+
+    return res.json({ 
+      message: 'Attendance created successfully',
+      id: result.insertId
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT /attendance/:id - Update attendance
+app.put('/attendance/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status, notes } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ message: 'Status is required' });
+    }
+
+    const validStatuses = ['hadir', 'sakit', 'izin', 'alpa'];
+    if (!validStatuses.includes(status.toLowerCase())) {
+      return res.status(400).json({ message: 'Invalid status' });
+    }
+
+    const [result] = await pool.query(
+      'UPDATE attendance SET status = ?, notes = ? WHERE id = ?',
+      [status.toLowerCase(), notes || null, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Attendance record not found' });
+    }
+
+    return res.json({ message: 'Attendance updated successfully' });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: 'Server error' });
@@ -779,6 +1288,284 @@ app.put('/profile/photo', authMiddleware, upload.single('photo'), async (req, re
     return res.json({ 
       message: 'Photo updated successfully',
       photo_url 
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ============= TEACHERS API =============
+// GET /api/teachers - Get all teachers
+app.get('/api/teachers', authMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, nik, name, email, phone, role, subject, photo_url, password_hash, created_at FROM gurus ORDER BY name'
+    );
+    return res.json(rows);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /api/teachers/:id - Get teacher by ID
+app.get('/api/teachers/:id', authMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, nik, name, email, phone, role, subject, photo_url, created_at FROM gurus WHERE id = ?',
+      [req.params.id]
+    );
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Teacher not found' });
+    }
+    return res.json(rows[0]);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST /api/teachers - Create new teacher
+app.post('/api/teachers', authMiddleware, async (req, res) => {
+  try {
+    const { nik, name, email, phone, role, subject, password } = req.body;
+    
+    // Check if NIK already exists
+    const [existing] = await pool.query('SELECT id FROM gurus WHERE nik = ?', [nik]);
+    if (existing.length > 0) {
+      return res.status(400).json({ message: 'NIK already exists' });
+    }
+    
+    const [result] = await pool.query(
+      'INSERT INTO gurus (nik, name, email, phone, role, subject, password_hash) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [nik, name, email, phone, role || 'guru', subject, password || '123456']
+    );
+    
+    return res.json({ 
+      id: result.insertId,
+      message: 'Teacher created successfully' 
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT /api/teachers/:id - Update teacher
+app.put('/api/teachers/:id', authMiddleware, async (req, res) => {
+  try {
+    const { nik, name, email, phone, role, subject } = req.body;
+    
+    await pool.query(
+      'UPDATE gurus SET nik = ?, name = ?, email = ?, phone = ?, role = ?, subject = ? WHERE id = ?',
+      [nik, name, email, phone, role, subject, req.params.id]
+    );
+    
+    return res.json({ message: 'Teacher updated successfully' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// DELETE /api/teachers/:id - Delete teacher
+app.delete('/api/teachers/:id', authMiddleware, async (req, res) => {
+  try {
+    await pool.query('DELETE FROM gurus WHERE id = ?', [req.params.id]);
+    return res.json({ message: 'Teacher deleted successfully' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ============= PARENTS API =============
+// GET /api/parents - Get all parents
+app.get('/api/parents', authMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT p.id, p.student_id, p.father_name, p.father_job, p.father_phone,
+              p.mother_name, p.mother_job, p.mother_phone,
+              p.guardian_name, p.guardian_job, p.guardian_phone,
+              p.photo_url, p.password_hash, p.created_at,
+              s.name as student_name, s.nisn as student_nisn
+       FROM parents p
+       LEFT JOIN students s ON p.student_id = s.id
+       ORDER BY p.id`
+    );
+    return res.json(rows);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /api/parents/:id - Get parent by ID
+app.get('/api/parents/:id', authMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT p.*, s.name as student_name, s.nisn as student_nisn
+       FROM parents p
+       LEFT JOIN students s ON p.student_id = s.id
+       WHERE p.id = ?`,
+      [req.params.id]
+    );
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Parent not found' });
+    }
+    return res.json(rows[0]);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST /api/parents - Create new parent
+app.post('/api/parents', authMiddleware, async (req, res) => {
+  try {
+    const { 
+      student_id, father_name, father_job, father_phone,
+      mother_name, mother_job, mother_phone,
+      guardian_name, guardian_job, guardian_phone,
+      password 
+    } = req.body;
+    
+    const [result] = await pool.query(
+      `INSERT INTO parents (student_id, father_name, father_job, father_phone,
+                           mother_name, mother_job, mother_phone,
+                           guardian_name, guardian_job, guardian_phone, password_hash)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [student_id, father_name, father_job, father_phone,
+       mother_name, mother_job, mother_phone,
+       guardian_name, guardian_job, guardian_phone, password || '123456']
+    );
+    
+    return res.json({ 
+      id: result.insertId,
+      message: 'Parent created successfully' 
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT /api/parents/:id - Update parent
+app.put('/api/parents/:id', authMiddleware, async (req, res) => {
+  try {
+    const { 
+      student_id, father_name, father_job, father_phone,
+      mother_name, mother_job, mother_phone,
+      guardian_name, guardian_job, guardian_phone
+    } = req.body;
+    
+    // Build update query dynamically to only update provided fields
+    const updates = [];
+    const values = [];
+    
+    if (student_id !== undefined) {
+      updates.push('student_id = ?');
+      values.push(student_id);
+    }
+    if (father_name !== undefined) {
+      updates.push('father_name = ?');
+      values.push(father_name);
+    }
+    if (father_job !== undefined) {
+      updates.push('father_job = ?');
+      values.push(father_job);
+    }
+    if (father_phone !== undefined) {
+      updates.push('father_phone = ?');
+      values.push(father_phone);
+    }
+    if (mother_name !== undefined) {
+      updates.push('mother_name = ?');
+      values.push(mother_name);
+    }
+    if (mother_job !== undefined) {
+      updates.push('mother_job = ?');
+      values.push(mother_job);
+    }
+    if (mother_phone !== undefined) {
+      updates.push('mother_phone = ?');
+      values.push(mother_phone);
+    }
+    if (guardian_name !== undefined) {
+      updates.push('guardian_name = ?');
+      values.push(guardian_name);
+    }
+    if (guardian_job !== undefined) {
+      updates.push('guardian_job = ?');
+      values.push(guardian_job);
+    }
+    if (guardian_phone !== undefined) {
+      updates.push('guardian_phone = ?');
+      values.push(guardian_phone);
+    }
+    
+    if (updates.length === 0) {
+      return res.status(400).json({ message: 'No fields to update' });
+    }
+    
+    values.push(req.params.id);
+    await pool.query(
+      `UPDATE parents SET ${updates.join(', ')} WHERE id = ?`,
+      values
+    );
+    
+    return res.json({ message: 'Parent updated successfully' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// DELETE /api/parents/:id - Delete parent
+app.delete('/api/parents/:id', authMiddleware, async (req, res) => {
+  try {
+    await pool.query('DELETE FROM parents WHERE id = ?', [req.params.id]);
+    return res.json({ message: 'Parent deleted successfully' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST /api/teachers/:id/photo - Upload teacher photo
+app.post('/api/teachers/:id/photo', authMiddleware, upload.single('photo'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const photoUrl = `/uploads/${req.file.filename}`;
+    await pool.query('UPDATE gurus SET photo_url = ? WHERE id = ?', [photoUrl, req.params.id]);
+
+    return res.json({ 
+      message: 'Photo uploaded successfully',
+      photoUrl 
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST /api/parents/:id/photo - Upload parent photo
+app.post('/api/parents/:id/photo', authMiddleware, upload.single('photo'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const photoUrl = `/uploads/${req.file.filename}`;
+    await pool.query('UPDATE parents SET photo_url = ? WHERE id = ?', [photoUrl, req.params.id]);
+
+    return res.json({ 
+      message: 'Photo uploaded successfully',
+      photoUrl 
     });
   } catch (e) {
     console.error(e);

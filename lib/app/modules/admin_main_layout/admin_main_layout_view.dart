@@ -64,13 +64,23 @@ class AdminMainLayoutView extends GetView<AdminMainLayoutController> {
                           label: Text('Pengguna'),
                         ),
                         NavigationRailDestination(
-                          icon: Icon(Icons.calendar_today_outlined),
-                          selectedIcon: Icon(Icons.calendar_today),
-                          label: Text('Absensi'),
+                          icon: Icon(Icons.school_outlined),
+                          selectedIcon: Icon(Icons.school),
+                          label: Text('Siswa'),
                         ),
                         NavigationRailDestination(
-                          icon: Icon(Icons.article_outlined),
-                          selectedIcon: Icon(Icons.article),
+                          icon: Icon(Icons.class_outlined),
+                          selectedIcon: Icon(Icons.class_),
+                          label: Text('Kelas'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.calendar_today_outlined),
+                          selectedIcon: Icon(Icons.calendar_today),
+                          label: Text('Presensi'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.campaign_outlined),
+                          selectedIcon: Icon(Icons.campaign),
                           label: Text('Pengumuman'),
                         ),
                         NavigationRailDestination(

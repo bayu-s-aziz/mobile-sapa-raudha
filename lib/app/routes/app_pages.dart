@@ -7,6 +7,18 @@ import 'package:sapa_raudha/app/modules/admin_main_layout/admin_main_layout_bind
 import 'package:sapa_raudha/app/modules/admin_main_layout/admin_main_layout_view.dart';
 import 'package:sapa_raudha/app/modules/admin_user_management/admin_user_management_binding.dart';
 import 'package:sapa_raudha/app/modules/admin_user_management/admin_user_management_view.dart';
+import 'package:sapa_raudha/app/modules/admin_announcement_management/admin_announcement_management_binding.dart';
+import 'package:sapa_raudha/app/modules/admin_announcement_management/admin_announcement_management_view.dart';
+import 'package:sapa_raudha/app/modules/admin_announcement_form/admin_announcement_form_binding.dart';
+import 'package:sapa_raudha/app/modules/admin_announcement_form/admin_announcement_form_view.dart';
+import 'package:sapa_raudha/app/modules/admin_teacher_form/admin_teacher_form_binding.dart';
+import 'package:sapa_raudha/app/modules/admin_teacher_form/admin_teacher_form_view.dart';
+import 'package:sapa_raudha/app/modules/admin_parent_form/admin_parent_form_binding.dart';
+import 'package:sapa_raudha/app/modules/admin_parent_form/admin_parent_form_view.dart';
+import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_management_binding.dart';
+import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_management_view.dart';
+import 'package:sapa_raudha/app/modules/admin_student_form/admin_student_form_binding.dart';
+import 'package:sapa_raudha/app/modules/admin_student_form/admin_student_form_view.dart';
 import 'package:sapa_raudha/app/modules/student_detail/student_detail_binding.dart';
 import '../modules/announcement_detail/announcement_detail_binding.dart'; // Import
 import '../modules/announcement_list/announcement_list_binding.dart';
@@ -118,6 +130,41 @@ class AppPages {
       name: _Paths.adminUserManagement,
       page: () => AdminUserManagementView(),
       binding: AdminUserManagementBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminAnnouncementManagement,
+      page: () => const AdminAnnouncementManagementView(),
+      binding: AdminAnnouncementManagementBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminAnnouncementAdd,
+      page: () => const AdminAnnouncementFormView(),
+      binding: AdminAnnouncementFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminAnnouncementEdit,
+      page: () => const AdminAnnouncementFormView(),
+      binding: AdminAnnouncementFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminTeacherForm,
+      page: () => const AdminTeacherFormView(),
+      binding: AdminTeacherFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminParentForm,
+      page: () => const AdminParentFormView(),
+      binding: AdminParentFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminStudentManagement,
+      page: () => const AdminStudentManagementView(),
+      binding: AdminStudentManagementBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminStudentForm,
+      page: () => const AdminStudentFormView(),
+      binding: AdminStudentFormBinding(),
     ),
 
     // --- RUTE-RUTE INI DIHAPUS DARI TOP-LEVEL ---

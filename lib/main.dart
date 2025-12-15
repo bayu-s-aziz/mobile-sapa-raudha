@@ -1,6 +1,7 @@
 // [MODERNISASI & FIX] lib/main.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 // [MODERNISASI] Mengaktifkan GoogleFonts untuk tipografi yang lebih baik
@@ -16,6 +17,8 @@ import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
+import 'package:sapa_raudha/app/data/services/class_service.dart';
+import 'package:sapa_raudha/app/data/services/teacher_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +38,8 @@ void main() async {
   Get.put(AuthService());
   Get.put(ProfileService());
   Get.put(StudentService());
+  Get.put(ClassService());
+  Get.put(TeacherService());
   Get.put(AttendanceService());
   Get.put(LeaveService());
   Get.put(AnnouncementService());
@@ -52,6 +57,16 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.login,
       getPages: AppPages.routes,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('id', 'ID'), // Indonesian
+        Locale('en', 'US'), // English
+      ],
+      locale: const Locale('id', 'ID'),
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(

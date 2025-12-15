@@ -67,6 +67,20 @@ class AnnouncementService extends GetxService {
     await _api.delete('/announcements/$id');
   }
 
+  // Update pengumuman
+  Future<void> updateAnnouncement(
+    String id, {
+    required String title,
+    required String content,
+  }) async {
+    await _api.put('/announcements/$id', {'title': title, 'content': content});
+  }
+
+  // Toggle pin
+  Future<void> togglePin(String id) async {
+    await _api.post('/announcements/$id/toggle-pin', {});
+  }
+
   Announcement _mapToAnnouncement(Map<String, dynamic> item) {
     return Announcement(
       id: item['id'].toString(),
@@ -78,6 +92,11 @@ class AnnouncementService extends GetxService {
       author: item['author_name'] ?? 'Sekolah',
       attachmentName: _extractAttachmentName(item['attachments']),
       isRead: item['is_read'] == true || item['is_read'] == 1 ? true : false,
+      isPinned: item['is_pinned'] == true || item['is_pinned'] == 1
+          ? true
+          : false,
+      category: item['category'],
+      imageUrl: item['image_url'],
     );
   }
 

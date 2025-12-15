@@ -57,4 +57,82 @@ class AttendanceService extends GetxService {
     final profile = _storage.read<Map<String, dynamic>>('profile');
     return profile?['nisn'] as String?;
   }
+
+  /// Get attendance recap with filters
+  Future<List<Map<String, dynamic>>> getAttendanceRecap({
+    int? classId,
+    String? startDate,
+    String? endDate,
+    String? nisn,
+  }) async {
+    final query = <String, String>{};
+    if (classId != null) query['class_id'] = '$classId';
+    if (startDate != null) query['start_date'] = startDate;
+    if (endDate != null) query['end_date'] = endDate;
+    if (nisn != null) query['nisn'] = nisn;
+
+    final queryString = query.entries
+        .map((e) => '${e.key}=${e.value}')
+        .join('&');
+    final res = await _api.get(
+      '/attendance/recap${queryString.isEmpty ? '' : '?$queryString'}',
+    );
+    return List<Map<String, dynamic>>.from(res['data'] ?? []);
+  }
+
+  /// Get attendance summary statistics
+  Future<Map<String, dynamic>> getAttendanceSummary({
+    int? classId,
+    String? startDate,
+    String? endDate,
+  }) async {
+    final query = <String, String>{};
+    if (classId != null) query['class_id'] = '$classId';
+    if (startDate != null) query['start_date'] = startDate;
+    if (endDate != null) query['end_date'] = endDate;
+
+    final queryString = query.entries
+        .map((e) => '${e.key}=${e.value}')
+        .join('&');
+    final res = await _api.get(
+      '/attendance/summary${queryString.isEmpty ? '' : '?$queryString'}',
+    );
+    return res;
+  }
+
+  /// Get aggregated attendance per student (for week/month view)
+  Future<List<Map<String, dynamic>>> getAttendanceAggregate({
+    int? classId,
+    String? startDate,
+    String? endDate,
+  }) async {
+    final query = <String, String>{};
+    if (classId != null) query['class_id'] = '$classId';
+    if (startDate != null) query['start_date'] = startDate;
+    if (endDate != null) query['end_date'] = endDate;
+
+    final queryString = query.entries
+        .map((e) => '${e.key}=${e.value}')
+        .join('&');
+    final res = await _api.get(
+      '/attendance/aggregate${queryString.isEmpty ? '' : '?$queryString'}',
+    );
+    return List<Map<String, dynamic>>.from(res['data'] ?? []);
+  }
+
+  /// Update attendance status
+  Future<void> updateAttendance(
+    int attendanceId,
+    Map<String, dynamic> data,
+  ) async {
+    await _api.put('/attendance/$attendanceId', data);
+  }
+
+  /// Create new attendance record
+  Future<Map<String, dynamic>> createAttendance(
+    Map<String, dynamic> data,
+  ) async {
+    final res = await _api.post('/attendance', data, needsAuth: true);
+    return res;
+  }
 }

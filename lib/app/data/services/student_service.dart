@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'dart:io';
 import 'api_client.dart';
 
 class StudentService extends GetxService {
@@ -41,5 +42,31 @@ class StudentService extends GetxService {
   Future<List<Map<String, dynamic>>> getClasses() async {
     final res = await _api.get('/classes');
     return List<Map<String, dynamic>>.from(res['classes'] ?? []);
+  }
+
+  /// Create new student
+  Future<Map<String, dynamic>> createStudent(Map<String, dynamic> data) async {
+    final res = await _api.post('/students', data);
+    return res;
+  }
+
+  /// Update student
+  Future<void> updateStudent(int id, Map<String, dynamic> data) async {
+    await _api.put('/students/$id', data);
+  }
+
+  /// Delete student
+  Future<void> deleteStudent(int id) async {
+    await _api.delete('/students/$id');
+  }
+
+  /// Upload student photo
+  Future<void> uploadStudentPhoto(int studentId, File photo) async {
+    await _api.postMultipart(
+      '/api/students/$studentId/photo',
+      {},
+      'photo',
+      photo.path,
+    );
   }
 }

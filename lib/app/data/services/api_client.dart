@@ -35,6 +35,16 @@ class ApiClient extends GetxService {
     throw Exception('HTTP ${res.statusCode}: ${res.body}');
   }
 
+  Future<List<dynamic>> getList(String path) async {
+    final headers = await _getHeaders(needsAuth: true);
+    final res = await http.get(Uri.parse('$baseUrl$path'), headers: headers);
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      final decoded = jsonDecode(res.body);
+      return decoded is List ? decoded : [];
+    }
+    throw Exception('HTTP ${res.statusCode}: ${res.body}');
+  }
+
   Future<Map<String, dynamic>> post(
     String path,
     Map<String, dynamic> body, {
