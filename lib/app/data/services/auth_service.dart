@@ -31,4 +31,14 @@ class AuthService extends GetxService {
     }
     return null;
   }
+
+  Future<void> requestPasswordReset({
+    required String identifier,
+    required String name,
+  }) async {
+    await _api.post('/auth/forgot-password', {
+      'identifier': identifier,
+      'name': name,
+    }, needsAuth: false);
+  }
 }

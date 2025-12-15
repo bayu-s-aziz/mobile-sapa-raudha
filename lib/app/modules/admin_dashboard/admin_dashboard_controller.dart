@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
+import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
@@ -12,12 +13,14 @@ class AdminDashboardController extends GetxController {
   final AttendanceService _attendanceService = Get.find<AttendanceService>();
   final AnnouncementService _announcementService =
       Get.find<AnnouncementService>();
+  final ApiClient _apiClient = Get.find<ApiClient>();
 
   // Statistics
   final RxInt totalStudents = 0.obs;
   final RxInt totalClasses = 0.obs;
   final RxInt totalParents = 0.obs;
   final RxInt totalAnnouncements = 0.obs;
+  final RxInt pendingPasswordResets = 0.obs;
 
   // Today's attendance
   final RxInt hadirToday = 0.obs;
@@ -41,6 +44,18 @@ class AdminDashboardController extends GetxController {
   void onInit() {
     super.onInit();
     fetchDashboardStats();
+    fetchPendingPasswordResets();
+  }
+
+  Future<void> fetchPendingPasswordResets() async {
+    try {
+      final response = await _apiClient.get(
+        '/api/password-reset-requests/pending-count',
+      );
+      pendingPasswordResets.value = response['count'] ?? 0;
+    } catch (e) {
+      pendingPasswordResets.value = 0;
+    }
   }
 
   Future<void> fetchDashboardStats() async {

@@ -2,6 +2,7 @@
 -- Database: sapa_raudha
 
 -- Drop tables if exist (untuk development)
+DROP TABLE IF EXISTS password_reset_requests;
 DROP TABLE IF EXISTS attachments;
 DROP TABLE IF EXISTS attendance;
 DROP TABLE IF EXISTS leave_requests;
@@ -10,29 +11,15 @@ DROP TABLE IF EXISTS parents;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS gurus;
-DROP TABLE IF EXISTS admins;
 
--- Table: admins
-CREATE TABLE admins (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nik VARCHAR(20) UNIQUE NOT NULL,
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(100),
-  phone VARCHAR(20),
-  photo_url VARCHAR(255), -- Foto profil admin
-  password_hash VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
--- Table: gurus (teachers/staff)
+-- Table: gurus (teachers/staff/admin)
 CREATE TABLE gurus (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nik VARCHAR(20) UNIQUE NOT NULL,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100),
   phone VARCHAR(20),
-  role ENUM('guru','kepsek') DEFAULT 'guru',
+  role ENUM('guru','kepsek','admin') DEFAULT 'guru',
   subject VARCHAR(100), -- Mata pelajaran yang diampu
   password_hash VARCHAR(255) NOT NULL,
   photo_url VARCHAR(255),
@@ -95,8 +82,8 @@ CREATE TABLE announcements (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   content TEXT NOT NULL,
-  author_id INT NOT NULL, -- ID dari admins atau gurus
-  author_type ENUM('admin','guru') NOT NULL,
+  author_id INT NOT NULL, -- ID dari gurus (termasuk admin)
+  author_type ENUM('guru') NOT NULL DEFAULT 'guru', -- Semua dari tabel gurus
   target_audience ENUM('all','parents','teachers','class') DEFAULT 'all',
   target_class_id INT, -- Jika khusus untuk kelas tertentu
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -148,6 +135,21 @@ CREATE TABLE leave_requests (
   FOREIGN KEY (reviewed_by) REFERENCES gurus(id) ON DELETE SET NULL
 );
 
+-- Table: password_reset_requests (permintaan reset password)
+CREATE TABLE password_reset_requests (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  identifier VARCHAR(20) NOT NULL, -- NISN atau NIK
+  name VARCHAR(100) NOT NULL,
+  user_type ENUM('guru','parent') NOT NULL, -- Tipe user
+  phone_number VARCHAR(20), -- Nomor telepon untuk kontak
+  status ENUM('pending','completed','rejected') DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  processed_at TIMESTAMP NULL,
+  processed_by INT, -- Admin yang memproses
+  notes TEXT, -- Catatan admin
+  FOREIGN KEY (processed_by) REFERENCES gurus(id) ON DELETE SET NULL
+);
+
 -- Indexes untuk performa
 CREATE INDEX idx_students_nisn ON students(nisn);
 CREATE INDEX idx_students_class ON students(class_id);
@@ -155,3 +157,5 @@ CREATE INDEX idx_attendance_date ON attendance(date);
 CREATE INDEX idx_attendance_student ON attendance(student_id, date);
 CREATE INDEX idx_leave_status ON leave_requests(status);
 CREATE INDEX idx_announcements_date ON announcements(created_at);
+CREATE INDEX idx_password_reset_status ON password_reset_requests(status);
+CREATE INDEX idx_password_reset_identifier ON password_reset_requests(identifier);

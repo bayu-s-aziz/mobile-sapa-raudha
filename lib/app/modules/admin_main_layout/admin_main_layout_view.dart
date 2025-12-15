@@ -84,6 +84,11 @@ class AdminMainLayoutView extends GetView<AdminMainLayoutController> {
                           label: Text('Pengumuman'),
                         ),
                         NavigationRailDestination(
+                          icon: Icon(Icons.lock_reset_outlined),
+                          selectedIcon: Icon(Icons.lock_reset),
+                          label: Text('Reset Password'),
+                        ),
+                        NavigationRailDestination(
                           icon: Icon(Icons.logout),
                           label: Text('Logout'),
                         ),

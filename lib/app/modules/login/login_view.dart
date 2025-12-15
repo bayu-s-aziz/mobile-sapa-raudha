@@ -102,9 +102,7 @@ class LoginView extends GetView<LoginController> {
                 // --- Tambahan: Opsi Lupa Password atau Daftar ---
                 const SizedBox(height: 24),
                 TextButton(
-                  onPressed: () {
-                    /* Logika lupa password */
-                  },
+                  onPressed: controller.showForgotPasswordDialog,
                   child: const Text('Lupa Password?'),
                 ),
               ],

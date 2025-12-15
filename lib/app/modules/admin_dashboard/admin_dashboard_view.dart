@@ -26,10 +26,22 @@ class AdminDashboardView extends GetView<AdminDashboardController> {
             onPressed: controller.fetchDashboardStats,
             tooltip: 'Refresh',
           ),
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-            tooltip: 'Notifikasi',
+          Obx(
+            () => Badge(
+              label: Text('${controller.pendingPasswordResets.value}'),
+              isLabelVisible: controller.pendingPasswordResets.value > 0,
+              child: IconButton(
+                icon: const Icon(Icons.notifications_outlined),
+                onPressed: () {
+                  final layoutController =
+                      Get.find<AdminMainLayoutController>();
+                  layoutController.changePage(
+                    6,
+                  ); // Index of Password Reset page
+                },
+                tooltip: 'Permintaan Reset Password',
+              ),
+            ),
           ),
           const SizedBox(width: 8),
         ],

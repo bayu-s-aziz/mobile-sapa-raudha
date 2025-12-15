@@ -6,6 +6,7 @@ import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_m
 import 'package:sapa_raudha/app/modules/admin_attendance_management/admin_attendance_management_view.dart';
 import 'package:sapa_raudha/app/modules/admin_class_management/admin_class_management_view.dart';
 import 'package:sapa_raudha/app/modules/admin_announcement_management/admin_announcement_management_view.dart';
+import 'package:sapa_raudha/app/modules/admin_password_reset/admin_password_reset_view.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 
 class AdminMainLayoutController extends GetxController {
@@ -20,11 +21,12 @@ class AdminMainLayoutController extends GetxController {
     const AdminClassManagementView(),
     const AdminAttendanceManagementView(),
     const AdminAnnouncementManagementView(),
+    const AdminPasswordResetView(),
   ];
 
   void changePage(int index) {
-    if (index == 6) {
-      // Index 6 adalah Logout (setelah menambah Pengumuman)
+    if (index == 7) {
+      // Index 7 adalah Logout (setelah menambah Password Reset)
       _logout();
     } else {
       selectedIndex.value = index;

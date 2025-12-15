@@ -5,6 +5,7 @@ import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_m
 import 'package:sapa_raudha/app/modules/admin_attendance_management/admin_attendance_management_controller.dart';
 import 'package:sapa_raudha/app/modules/admin_class_management/admin_class_management_controller.dart';
 import 'package:sapa_raudha/app/modules/admin_announcement_management/admin_announcement_management_controller.dart';
+import 'package:sapa_raudha/app/modules/admin_password_reset/admin_password_reset_controller.dart';
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 import 'package:sapa_raudha/app/data/services/teacher_service.dart';
 import 'package:sapa_raudha/app/data/services/parent_service.dart';
@@ -38,6 +39,9 @@ class AdminMainLayoutBinding extends Bindings {
     );
     Get.lazyPut<AdminAnnouncementManagementController>(
       () => AdminAnnouncementManagementController(),
+    );
+    Get.lazyPut<AdminPasswordResetController>(
+      () => AdminPasswordResetController(),
     );
   }
 }

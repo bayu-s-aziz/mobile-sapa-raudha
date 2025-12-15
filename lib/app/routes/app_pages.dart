@@ -19,6 +19,8 @@ import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_m
 import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_management_view.dart';
 import 'package:sapa_raudha/app/modules/admin_student_form/admin_student_form_binding.dart';
 import 'package:sapa_raudha/app/modules/admin_student_form/admin_student_form_view.dart';
+import 'package:sapa_raudha/app/modules/admin_password_reset/admin_password_reset_binding.dart';
+import 'package:sapa_raudha/app/modules/admin_password_reset/admin_password_reset_view.dart';
 import 'package:sapa_raudha/app/modules/student_detail/student_detail_binding.dart';
 import '../modules/announcement_detail/announcement_detail_binding.dart'; // Import
 import '../modules/announcement_list/announcement_list_binding.dart';
@@ -165,6 +167,11 @@ class AppPages {
       name: _Paths.adminStudentForm,
       page: () => const AdminStudentFormView(),
       binding: AdminStudentFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.adminPasswordReset,
+      page: () => const AdminPasswordResetView(),
+      binding: AdminPasswordResetBinding(),
     ),
 
     // --- RUTE-RUTE INI DIHAPUS DARI TOP-LEVEL ---

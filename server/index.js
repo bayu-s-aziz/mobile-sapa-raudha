@@ -67,17 +67,6 @@ const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
 });
 
-app.post('/auth/admin/login', async (req, res) => {
-  const { identifier, password } = req.body; // NIK
-  const [rows] = await pool.query('SELECT * FROM admins WHERE nik=?', [identifier]);
-  const user = rows[0];
-  if (!user) return res.status(401).json({ message: 'not found' });
-  const ok = user.password_hash === password; // plaintext comparison
-  if (!ok) return res.status(401).json({ message: 'bad creds' });
-  const profile = { id: user.id, role: 'admin', name: user.name };
-  return res.json({ token: sign(profile), profile });
-});
-
 app.post('/auth/guru/login', async (req, res) => {
   const { identifier, password } = req.body; // NIK
   const [rows] = await pool.query('SELECT * FROM gurus WHERE nik=?', [identifier]);
@@ -113,19 +102,7 @@ app.post('/auth/login', async (req, res) => {
     return res.status(400).json({ message: 'identifier and password required' });
   }
 
-  // Try Admin by NIK
-  try {
-    const [admins] = await pool.query('SELECT * FROM admins WHERE nik=?', [identifier]);
-    const admin = admins[0];
-    if (admin && admin.password_hash === password) {
-      const profile = { id: admin.id, role: 'admin', name: admin.name };
-      return res.json({ token: sign(profile), profile });
-    }
-  } catch (e) {
-    // continue
-  }
-
-  // Try Guru/Kepsek by NIK
+  // Try Guru/Kepsek/Admin by NIK (all in gurus table now)
   try {
     const [gurus] = await pool.query('SELECT * FROM gurus WHERE nik=?', [identifier]);
     const guru = gurus[0];
@@ -507,14 +484,10 @@ app.get('/announcements', authMiddleware, async (req, res) => {
     
     const [rows] = await pool.query(`
       SELECT a.*, 
-             CASE 
-               WHEN a.author_type = 'admin' THEN ad.name
-               WHEN a.author_type = 'guru' THEN g.name
-             END as author_name,
+             g.name as author_name,
              (SELECT COUNT(*) FROM attachments WHERE announcement_id = a.id) as attachment_count
       FROM announcements a
-      LEFT JOIN admins ad ON a.author_type = 'admin' AND a.author_id = ad.id
-      LEFT JOIN gurus g ON a.author_type = 'guru' AND a.author_id = g.id
+      LEFT JOIN gurus g ON a.author_id = g.id
       ORDER BY a.created_at DESC
       LIMIT ? OFFSET ?
     `, [parseInt(limit), parseInt(offset)]);
@@ -531,13 +504,9 @@ app.get('/announcements/:id', authMiddleware, async (req, res) => {
   try {
     const [announcements] = await pool.query(`
       SELECT a.*, 
-             CASE 
-               WHEN a.author_type = 'admin' THEN ad.name
-               WHEN a.author_type = 'guru' THEN g.name
-             END as author_name
+             g.name as author_name
       FROM announcements a
-      LEFT JOIN admins ad ON a.author_type = 'admin' AND a.author_id = ad.id
-      LEFT JOIN gurus g ON a.author_type = 'guru' AND a.author_id = g.id
+      LEFT JOIN gurus g ON a.author_id = g.id
       WHERE a.id = ?
     `, [req.params.id]);
     
@@ -565,13 +534,13 @@ app.get('/announcements/:id', authMiddleware, async (req, res) => {
 app.post('/announcements', authMiddleware, upload.single('attachment'), async (req, res) => {
   try {
     const { title, content, target_audience = 'all', target_class_id } = req.body;
-    const { id: author_id, role } = req.user;
+    const { id: author_id } = req.user;
     
     if (!title || !content) {
       return res.status(400).json({ message: 'Title and content required' });
     }
     
-    const author_type = role === 'admin' ? 'admin' : 'guru';
+    const author_type = 'guru'; // All users are now in gurus table
     
     const [result] = await pool.query(
       `INSERT INTO announcements (title, content, author_id, author_type, target_audience, target_class_id)
@@ -622,8 +591,7 @@ app.put('/announcements/:id', authMiddleware, async (req, res) => {
     }
     
     const announcement = announcements[0];
-    const isAuthor = announcement.author_id === req.user.id && 
-                     announcement.author_type === req.user.role;
+    const isAuthor = announcement.author_id === req.user.id;
     const isAdmin = req.user.role === 'admin';
     
     if (!isAuthor && !isAdmin) {
@@ -682,8 +650,7 @@ app.delete('/announcements/:id', authMiddleware, async (req, res) => {
     }
     
     const announcement = announcements[0];
-    const isAuthor = announcement.author_id === req.user.id && 
-                     announcement.author_type === req.user.role;
+    const isAuthor = announcement.author_id === req.user.id;
     const isAdmin = req.user.role === 'admin';
     
     if (!isAuthor && !isAdmin) {
@@ -1251,12 +1218,7 @@ app.get('/profile', authMiddleware, async (req, res) => {
   try {
     const { id, role } = req.user;
     
-    if (role === 'admin') {
-      const [admins] = await pool.query('SELECT id, nik, name, email, phone FROM admins WHERE id = ?', [id]);
-      return res.json({ profile: admins[0] });
-    }
-    
-    if (role === 'guru' || role === 'kepsek') {
+    if (role === 'admin' || role === 'guru' || role === 'kepsek') {
       const [gurus] = await pool.query('SELECT id, nik, name, email, phone, role, subject, photo_url FROM gurus WHERE id = ?', [id]);
       return res.json({ profile: gurus[0] });
     }
@@ -1290,9 +1252,7 @@ app.put('/profile/photo', authMiddleware, upload.single('photo'), async (req, re
     
     const photo_url = `/uploads/${req.file.filename}`;
     
-    if (role === 'admin') {
-      await pool.query('UPDATE admins SET photo_url = ? WHERE id = ?', [photo_url, id]);
-    } else if (role === 'guru' || role === 'kepsek') {
+    if (role === 'admin' || role === 'guru' || role === 'kepsek') {
       await pool.query('UPDATE gurus SET photo_url = ? WHERE id = ?', [photo_url, id]);
     } else if (role === 'orangtua') {
       await pool.query('UPDATE parents SET photo_url = ? WHERE id = ?', [photo_url, id]);
@@ -1582,6 +1542,197 @@ app.post('/api/parents/:id/photo', authMiddleware, upload.single('photo'), async
       message: 'Photo uploaded successfully',
       photoUrl 
     });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ============================================
+// PASSWORD RESET REQUESTS ENDPOINTS
+// ============================================
+
+// POST /auth/forgot-password - Create password reset request
+app.post('/auth/forgot-password', async (req, res) => {
+  try {
+    const { identifier, name } = req.body;
+    
+    if (!identifier || !name) {
+      return res.status(400).json({ message: 'NISN/NIK dan nama harus diisi' });
+    }
+    
+    // Check if identifier exists in gurus (NIK)
+    const [gurus] = await pool.query('SELECT * FROM gurus WHERE nik = ?', [identifier]);
+    if (gurus.length > 0) {
+      const guru = gurus[0];
+      
+      // Create reset request with user-provided name
+      await pool.query(
+        `INSERT INTO password_reset_requests (identifier, name, user_type, phone_number, status)
+         VALUES (?, ?, 'guru', ?, 'pending')`,
+        [identifier, name, guru.phone || null]
+      );
+      
+      return res.json({ 
+        message: 'Permintaan reset password berhasil dikirim. Admin akan menghubungi Anda segera.',
+        user_type: 'guru'
+      });
+    }
+    
+    // Check if identifier exists in students (NISN for parents)
+    const [students] = await pool.query('SELECT * FROM students WHERE nisn = ?', [identifier]);
+    if (students.length > 0) {
+      const student = students[0];
+      
+      // Get parent data
+      const [parents] = await pool.query('SELECT * FROM parents WHERE student_id = ?', [student.id]);
+      if (parents.length === 0) {
+        return res.status(404).json({ message: 'Data orang tua tidak ditemukan' });
+      }
+      
+      const parent = parents[0];
+      
+      // Get phone number from parent
+      const phone = parent.father_phone || parent.mother_phone || parent.guardian_phone;
+      
+      // Create reset request with user-provided name
+      await pool.query(
+        `INSERT INTO password_reset_requests (identifier, name, user_type, phone_number, status)
+         VALUES (?, ?, 'parent', ?, 'pending')`,
+        [identifier, name, phone || null]
+      );
+      
+      return res.json({ 
+        message: 'Permintaan reset password berhasil dikirim. Admin akan menghubungi Anda segera.',
+        user_type: 'parent'
+      });
+    }
+    
+    return res.status(404).json({ message: 'NISN/NIK tidak ditemukan dalam sistem' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /api/password-reset-requests - Get all password reset requests (Admin only)
+app.get('/api/password-reset-requests', authMiddleware, async (req, res) => {
+  try {
+    // Only admin can access
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Akses ditolak. Hanya admin yang dapat melihat permintaan reset password.' });
+    }
+    
+    const { status } = req.query;
+    
+    let query = `
+      SELECT pr.*, 
+             g.name as processed_by_name
+      FROM password_reset_requests pr
+      LEFT JOIN gurus g ON pr.processed_by = g.id
+    `;
+    const params = [];
+    
+    if (status) {
+      query += ' WHERE pr.status = ?';
+      params.push(status);
+    }
+    
+    query += ' ORDER BY pr.created_at DESC';
+    
+    const [rows] = await pool.query(query, params);
+    return res.json({ requests: rows });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT /api/password-reset-requests/:id/process - Process password reset request (Admin only)
+app.put('/api/password-reset-requests/:id/process', authMiddleware, async (req, res) => {
+  try {
+    // Only admin can process
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Akses ditolak. Hanya admin yang dapat memproses permintaan.' });
+    }
+    
+    const { status, notes } = req.body;
+    const requestId = req.params.id;
+    
+    if (!status || !['completed', 'rejected'].includes(status)) {
+      return res.status(400).json({ message: 'Status harus "completed" atau "rejected"' });
+    }
+    
+    // Get request details
+    const [requests] = await pool.query(
+      'SELECT * FROM password_reset_requests WHERE id = ?',
+      [requestId]
+    );
+    
+    if (requests.length === 0) {
+      return res.status(404).json({ message: 'Permintaan tidak ditemukan' });
+    }
+    
+    const request = requests[0];
+    
+    // Get password based on user type
+    let password = null;
+    if (status === 'completed') {
+      if (request.user_type === 'guru') {
+        const [gurus] = await pool.query(
+          'SELECT password_hash FROM gurus WHERE nik = ?',
+          [request.identifier]
+        );
+        password = gurus[0]?.password_hash;
+      } else if (request.user_type === 'parent') {
+        const [students] = await pool.query(
+          'SELECT id FROM students WHERE nisn = ?',
+          [request.identifier]
+        );
+        if (students.length > 0) {
+          const [parents] = await pool.query(
+            'SELECT password_hash FROM parents WHERE student_id = ?',
+            [students[0].id]
+          );
+          password = parents[0]?.password_hash;
+        }
+      }
+    }
+    
+    // Update request status
+    await pool.query(
+      `UPDATE password_reset_requests 
+       SET status = ?, processed_by = ?, processed_at = NOW(), notes = ?
+       WHERE id = ?`,
+      [status, req.user.id, notes || null, requestId]
+    );
+    
+    return res.json({ 
+      message: `Permintaan berhasil ${status === 'completed' ? 'diproses' : 'ditolak'}`,
+      password: status === 'completed' ? password : undefined,
+      phone_number: request.phone_number,
+      identifier: request.identifier,
+      name: request.name
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /api/password-reset-requests/pending-count - Get count of pending requests (Admin only)
+app.get('/api/password-reset-requests/pending-count', authMiddleware, async (req, res) => {
+  try {
+    // Only admin can access
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Akses ditolak' });
+    }
+    
+    const [result] = await pool.query(
+      'SELECT COUNT(*) as count FROM password_reset_requests WHERE status = "pending"'
+    );
+    
+    return res.json({ count: result[0].count });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: 'Server error' });

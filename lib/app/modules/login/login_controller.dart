@@ -55,6 +55,112 @@ class LoginController extends GetxController {
     SnackbarHelper.showError(message);
   }
 
+  void showForgotPasswordDialog() {
+    final identifierController = TextEditingController();
+    final nameController = TextEditingController();
+    final isSubmitting = false.obs;
+
+    Get.dialog(
+      AlertDialog(
+        title: const Text('Lupa Password'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Masukkan NIK/NISN dan nama Anda. Admin akan menghubungi Anda untuk reset password.',
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: identifierController,
+                decoration: const InputDecoration(
+                  labelText: 'NIK atau NISN',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.badge_outlined),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Nama Lengkap',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.person_outline),
+                ),
+                textCapitalization: TextCapitalization.words,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              identifierController.dispose();
+              nameController.dispose();
+              Get.back();
+            },
+            child: const Text('Batal'),
+          ),
+          Obx(
+            () => ElevatedButton(
+              onPressed: isSubmitting.value
+                  ? null
+                  : () async {
+                      final identifier = identifierController.text.trim();
+                      final name = nameController.text.trim();
+
+                      if (identifier.isEmpty || name.isEmpty) {
+                        SnackbarHelper.showError(
+                          'NIK/NISN dan nama harus diisi',
+                        );
+                        return;
+                      }
+
+                      if (!RegExp(r'^\d+$').hasMatch(identifier)) {
+                        SnackbarHelper.showError('NIK/NISN harus berupa angka');
+                        return;
+                      }
+
+                      isSubmitting.value = true;
+                      try {
+                        final auth = Get.find<AuthService>();
+                        await auth.requestPasswordReset(
+                          identifier: identifier,
+                          name: name,
+                        );
+
+                        Get.back();
+                        identifierController.dispose();
+                        nameController.dispose();
+
+                        SnackbarHelper.showSuccess(
+                          'Permintaan reset password berhasil dikirim. Admin akan menghubungi Anda segera.',
+                        );
+                      } catch (e) {
+                        SnackbarHelper.showError(
+                          'Gagal mengirim permintaan: $e',
+                        );
+                      } finally {
+                        isSubmitting.value = false;
+                      }
+                    },
+              child: isSubmitting.value
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Text('Kirim'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void onClose() {
     idController.dispose();

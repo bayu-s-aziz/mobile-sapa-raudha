@@ -19,6 +19,7 @@ abstract class Routes {
   static const adminParentForm = _Paths.adminParentForm;
   static const adminStudentManagement = _Paths.adminStudentManagement;
   static const adminStudentForm = _Paths.adminStudentForm;
+  static const adminPasswordReset = _Paths.adminPasswordReset;
 
   // Pengumuman
   static const announcementList = _Paths.announcementList;
@@ -59,6 +60,7 @@ abstract class _Paths {
   static const adminParentForm = '/admin/parents/form';
   static const adminStudentManagement = '/admin/students';
   static const adminStudentForm = '/admin/students/form';
+  static const adminPasswordReset = '/admin/password-reset';
   // Tambahkan path lain sesuai kebutuhan (absensi, dll)
   // Path pengumuman
   static const announcementList = '/announcements';
