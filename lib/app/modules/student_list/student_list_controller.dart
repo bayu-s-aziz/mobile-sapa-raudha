@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class StudentListController extends GetxController {
   final RxBool isLoading = true.obs;
@@ -60,12 +61,7 @@ class StudentListController extends GetxController {
       allStudents.assignAll(students);
       filteredStudents.assignAll(students);
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat data siswa: ${e.toString()}',
-        backgroundColor: Colors.red.shade600,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memuat data siswa: $e');
     } finally {
       isLoading(false);
     }

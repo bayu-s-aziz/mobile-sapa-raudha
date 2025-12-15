@@ -7,6 +7,7 @@ import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 // Import package kalender
 import 'package:table_calendar/table_calendar.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class AttendanceHistoryController extends GetxController {
   // --- STATE UNTUK KALENDER ---
@@ -62,11 +63,7 @@ class AttendanceHistoryController extends GetxController {
       }
       absenceEvents.value = map;
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat riwayat absensi: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackbarHelper.showError('Gagal memuat riwayat absensi: $e');
     } finally {
       isLoading.value = false;
     }

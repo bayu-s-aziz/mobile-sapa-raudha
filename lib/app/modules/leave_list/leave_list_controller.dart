@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class LeaveListController extends GetxController {
   final RxList<Map<String, dynamic>> leaves = <Map<String, dynamic>>[].obs;
@@ -20,7 +21,7 @@ class LeaveListController extends GetxController {
       final data = await _leaveService.getLeaveRequests();
       leaves.assignAll(data);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat data izin: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat data izin: $e');
     } finally {
       isLoading(false);
     }

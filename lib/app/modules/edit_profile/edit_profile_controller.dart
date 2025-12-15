@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sapa_raudha/app/modules/profile/profile_controller.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class EditProfileController extends GetxController {
   final ProfileController profileController = Get.find<ProfileController>();
@@ -34,28 +35,16 @@ class EditProfileController extends GetxController {
       if (image != null) {
         selectedImage.value = image;
         photoUrl.value = image.path; // Local path for preview
-        Get.snackbar(
-          'Berhasil',
-          'Foto dipilih. Tekan Simpan untuk mengupload.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackbarHelper.showInfo('Foto dipilih. Tekan Simpan untuk mengupload.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memilih foto: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackbarHelper.showError('Gagal memilih foto: $e');
     }
   }
 
   Future<void> saveProfile() async {
     if (selectedImage.value == null) {
-      Get.snackbar(
-        'Info',
-        'Tidak ada perubahan untuk disimpan.',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackbarHelper.showInfo('Tidak ada perubahan untuk disimpan.');
       return;
     }
 
@@ -77,21 +66,9 @@ class EditProfileController extends GetxController {
       profileController.profile.refresh();
 
       Get.back();
-      Get.snackbar(
-        'Berhasil',
-        'Foto profil berhasil diperbarui.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showSuccess('Foto profil berhasil diperbarui.');
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal menyimpan foto: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal menyimpan foto: $e');
     } finally {
       isLoading(false);
     }

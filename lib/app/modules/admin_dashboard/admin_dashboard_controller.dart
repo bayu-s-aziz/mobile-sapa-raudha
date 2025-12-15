@@ -5,6 +5,7 @@ import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class AdminDashboardController extends GetxController {
   final StudentService _studentService = Get.find<StudentService>();
@@ -119,7 +120,7 @@ class AdminDashboardController extends GetxController {
       // Generate recent activities
       _generateRecentActivities();
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat statistik: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat statistik: $e');
     } finally {
       isLoading(false);
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/class_service.dart';
 import 'package:sapa_raudha/app/data/services/teacher_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class AdminClassManagementController extends GetxController {
   final ClassService _classService = Get.find<ClassService>();
@@ -36,7 +37,7 @@ class AdminClassManagementController extends GetxController {
       final data = await _classService.getClasses();
       classes.assignAll(data);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat data kelas: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat data kelas: $e');
     } finally {
       isLoading(false);
     }
@@ -126,13 +127,10 @@ class AdminClassManagementController extends GetxController {
                     data['homeroom_teacher_id'] = selectedTeacherId.value!;
                   }
                   await _classService.createClass(data);
-                  Get.snackbar('Sukses', 'Kelas berhasil ditambahkan');
+                  SnackbarHelper.showSuccess('Kelas berhasil ditambahkan');
                   await fetchClasses();
                 } catch (e) {
-                  Get.snackbar(
-                    'Error',
-                    'Gagal menambahkan kelas: ${e.toString()}',
-                  );
+                  SnackbarHelper.showError('Gagal menambahkan kelas: $e');
                 }
               }
             },
@@ -229,13 +227,10 @@ class AdminClassManagementController extends GetxController {
                     data['homeroom_teacher_id'] = selectedTeacherId.value!;
                   }
                   await _classService.updateClass(classData['id'], data);
-                  Get.snackbar('Sukses', 'Kelas berhasil diperbarui');
+                  SnackbarHelper.showSuccess('Kelas berhasil diperbarui');
                   await fetchClasses();
                 } catch (e) {
-                  Get.snackbar(
-                    'Error',
-                    'Gagal memperbarui kelas: ${e.toString()}',
-                  );
+                  SnackbarHelper.showError('Gagal memperbarui kelas: $e');
                 }
               }
             },
@@ -260,10 +255,10 @@ class AdminClassManagementController extends GetxController {
               Get.back();
               try {
                 await _classService.deleteClass(id);
-                Get.snackbar('Sukses', 'Kelas berhasil dihapus');
+                SnackbarHelper.showSuccess('Kelas berhasil dihapus');
                 await fetchClasses();
               } catch (e) {
-                Get.snackbar('Error', 'Gagal menghapus kelas: ${e.toString()}');
+                SnackbarHelper.showError('Gagal menghapus kelas: $e');
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),

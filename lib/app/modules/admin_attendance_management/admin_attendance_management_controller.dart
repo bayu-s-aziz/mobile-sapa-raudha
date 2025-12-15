@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -58,7 +59,7 @@ class AdminAttendanceManagementController extends GetxController {
       final data = await _studentService.getClasses();
       classes.assignAll(data);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat data kelas: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat data kelas: $e');
     }
   }
 
@@ -96,7 +97,7 @@ class AdminAttendanceManagementController extends GetxController {
 
       attendanceSummary.assignAll(summary);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat data presensi: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat data presensi: $e');
     } finally {
       isLoading(false);
     }
@@ -351,7 +352,7 @@ class AdminAttendanceManagementController extends GetxController {
           ElevatedButton(
             onPressed: () async {
               if (selectedStatus.value == null) {
-                Get.snackbar('Error', 'Silakan pilih status presensi');
+                SnackbarHelper.showError('Silakan pilih status presensi');
                 return;
               }
 
@@ -366,21 +367,18 @@ class AdminAttendanceManagementController extends GetxController {
                     'status': selectedStatus.value,
                     'notes': notesController.text.trim(),
                   });
-                  Get.snackbar('Sukses', 'Presensi berhasil ditambahkan');
+                  SnackbarHelper.showSuccess('Presensi berhasil ditambahkan');
                 } else {
                   // Update existing attendance record
                   await _attendanceService.updateAttendance(attendance['id'], {
                     'status': selectedStatus.value,
                     'notes': notesController.text.trim(),
                   });
-                  Get.snackbar('Sukses', 'Presensi berhasil diperbarui');
+                  SnackbarHelper.showSuccess('Presensi berhasil diperbarui');
                 }
                 fetchAttendances();
               } catch (e) {
-                Get.snackbar(
-                  'Error',
-                  'Gagal menyimpan presensi: ${e.toString()}',
-                );
+                SnackbarHelper.showError('Gagal menyimpan presensi: $e');
               }
             },
             child: const Text('Simpan'),
@@ -572,23 +570,9 @@ class AdminAttendanceManagementController extends GetxController {
       html.document.body?.children.remove(anchor);
       html.Url.revokeObjectUrl(url);
 
-      Get.snackbar(
-        'Berhasil',
-        'PDF presensi berhasil diunduh',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-      );
+      SnackbarHelper.showSuccess('PDF presensi berhasil diunduh');
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal membuat PDF: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-      );
+      SnackbarHelper.showError('Gagal membuat PDF: $e');
     }
   }
 

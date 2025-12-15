@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 enum LeaveStatus { pending, approved, rejected }
 
@@ -69,11 +70,7 @@ class RequestLeaveController extends GetxController {
         selectedFile.value = File(pickedImage.path);
       }
     } catch (e) {
-      Get.snackbar(
-        "Error",
-        "Gagal mengambil gambar: $e",
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackbarHelper.showError("Gagal mengambil gambar: $e");
     }
   }
 
@@ -92,10 +89,8 @@ class RequestLeaveController extends GetxController {
       // final alasan = reasonController.text;
       // ...
 
-      Get.snackbar(
-        "Berhasil",
+      SnackbarHelper.showSuccess(
         "Formulir izin terkirim (file terlampir jika ada).",
-        snackPosition: SnackPosition.BOTTOM,
       );
     }
   }

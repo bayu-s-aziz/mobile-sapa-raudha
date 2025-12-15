@@ -19,6 +19,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret';
 
+// Helper function to get today's date in YYYY-MM-DD format (UTC+7 for Indonesia)
+function getTodayDate() {
+  const now = new Date();
+  // Convert to UTC+7 (Indonesia Western Time)
+  const utc7Offset = 7 * 60 * 60 * 1000;
+  const localTime = new Date(now.getTime() + utc7Offset);
+  return localTime.toISOString().split('T')[0];
+}
+
 function sign(profile) {
   return jwt.sign(profile, JWT_SECRET, { expiresIn: '12h' });
 }
@@ -166,16 +175,22 @@ app.post('/auth/login', async (req, res) => {
 app.get('/students', authMiddleware, async (req, res) => {
   try {
     const { class_id } = req.query;
+    const today = getTodayDate(); // Use helper function for consistent timezone
+    
     let query = `
       SELECT s.*, c.name as class_name, c.grade,
              p.father_name, p.mother_name, p.guardian_name,
              p.father_job, p.mother_job, p.guardian_job,
-             p.father_phone, p.mother_phone, p.guardian_phone
+             p.father_phone, p.mother_phone, p.guardian_phone,
+             a.status as daily_status,
+             a.check_in,
+             a.check_out
       FROM students s
       LEFT JOIN classes c ON s.class_id = c.id
       LEFT JOIN parents p ON s.id = p.student_id
+      LEFT JOIN attendance a ON s.id = a.student_id AND a.date = ?
     `;
-    const params = [];
+    const params = [today]; // Add today's date as first parameter
     
     if (class_id) {
       query += ' WHERE s.class_id = ?';
@@ -724,7 +739,7 @@ app.post('/attendance/scan', authMiddleware, async (req, res) => {
     }
     
     const student = students[0];
-    const today = new Date().toISOString().split('T')[0];
+    const today = getTodayDate(); // Use helper function
     const now = new Date().toTimeString().split(' ')[0];
     
     // Check if already recorded today
@@ -825,7 +840,7 @@ app.get('/attendance/class/:classId/date/:date', authMiddleware, async (req, res
 // GET /attendance/stats - Get attendance statistics
 app.get('/attendance/stats', authMiddleware, async (req, res) => {
   try {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getTodayDate(); // Use helper function
     
     const [totalStudents] = await pool.query('SELECT COUNT(*) as count FROM students');
     const [todayPresent] = await pool.query(

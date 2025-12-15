@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class AdminStudentManagementController extends GetxController {
   final StudentService _studentService = Get.find<StudentService>();
@@ -27,7 +28,7 @@ class AdminStudentManagementController extends GetxController {
       final data = await _studentService.getClasses();
       classes.assignAll(data);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat data kelas: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat data kelas: $e');
     }
   }
 
@@ -38,7 +39,7 @@ class AdminStudentManagementController extends GetxController {
       students.assignAll(data);
       filteredStudents.assignAll(data);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat data siswa: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat data siswa: $e');
     } finally {
       isLoading(false);
     }
@@ -80,23 +81,11 @@ class AdminStudentManagementController extends GetxController {
               try {
                 await _studentService.deleteStudent(id);
                 Get.back();
-                Get.snackbar(
-                  'Berhasil',
-                  'Siswa berhasil dihapus',
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.green,
-                  colorText: Colors.white,
-                );
+                SnackbarHelper.showSuccess('Siswa berhasil dihapus');
                 fetchStudents();
               } catch (e) {
                 Get.back();
-                Get.snackbar(
-                  'Error',
-                  'Gagal menghapus siswa: $e',
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.red,
-                  colorText: Colors.white,
-                );
+                SnackbarHelper.showError('Gagal menghapus siswa: $e');
               }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),

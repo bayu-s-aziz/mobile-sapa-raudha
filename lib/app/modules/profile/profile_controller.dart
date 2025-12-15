@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class ProfileController extends GetxController {
   final RxMap<String, dynamic> profile = <String, dynamic>{}.obs;
@@ -48,7 +49,7 @@ class ProfileController extends GetxController {
         profile.refresh(); // Force reactive update
       }
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat profil: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat profil: $e');
     } finally {
       isLoading(false);
     }

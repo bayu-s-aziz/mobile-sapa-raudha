@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class ScanPresenceController extends GetxController {
   // final GlobalKey qrKey = GlobalKey(debugLabel: 'QR'); // Tidak diperlukan lagi
@@ -51,13 +52,8 @@ class ScanPresenceController extends GetxController {
   }
 
   void _showPresenceConfirmation(String studentInfo) {
-    Get.snackbar(
-      "Presensi Berhasil",
+    SnackbarHelper.showSuccess(
       "Siswa dengan ID: $studentInfo telah ditandai hadir.",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-      duration: const Duration(seconds: 2),
     );
   }
 
@@ -66,13 +62,7 @@ class ScanPresenceController extends GetxController {
       final res = await _attendanceService.scanAttendance(nisn);
       _showPresenceConfirmation(res['student']?['name'] ?? nisn);
     } catch (e) {
-      Get.snackbar(
-        "Gagal",
-        "Tidak dapat merekam presensi: ${e.toString()}",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError("Tidak dapat merekam presensi: $e");
     } finally {
       Future.delayed(const Duration(seconds: 2), () {
         scannedData.value = '';

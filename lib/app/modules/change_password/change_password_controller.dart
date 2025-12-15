@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class ChangePasswordController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -28,7 +29,7 @@ class ChangePasswordController extends GetxController {
     if (!formKey.currentState!.validate()) return;
     if (newPasswordController.text.trim() !=
         confirmPasswordController.text.trim()) {
-      Get.snackbar('Gagal', 'Konfirmasi password tidak sama');
+      SnackbarHelper.showError('Konfirmasi password tidak sama');
       return;
     }
 
@@ -38,10 +39,10 @@ class ChangePasswordController extends GetxController {
         oldPassword: oldPasswordController.text.trim(),
         newPassword: newPasswordController.text.trim(),
       );
-      Get.snackbar('Berhasil', 'Password berhasil diubah');
+      SnackbarHelper.showSuccess('Password berhasil diubah');
       Get.back();
     } catch (e) {
-      Get.snackbar('Gagal', 'Ubah password gagal: ${e.toString()}');
+      SnackbarHelper.showError('Ubah password gagal: $e');
     } finally {
       isLoading(false);
     }

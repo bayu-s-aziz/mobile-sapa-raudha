@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/auth_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class LoginController extends GetxController {
   // Ganti email -> id (NIK/NISN)
@@ -51,17 +52,7 @@ class LoginController extends GetxController {
 
   void _showErrorSnackbar(String message) {
     if (Get.isSnackbarOpen) Get.closeCurrentSnackbar();
-    Get.snackbar(
-      "Login Gagal",
-      message,
-      backgroundColor: Colors.red.shade600,
-      colorText: Colors.white,
-      snackPosition: SnackPosition.TOP,
-      margin: const EdgeInsets.all(12),
-      borderRadius: 8,
-      icon: const Icon(Icons.error_outline, color: Colors.white),
-      shouldIconPulse: false,
-    );
+    SnackbarHelper.showError(message);
   }
 
   @override

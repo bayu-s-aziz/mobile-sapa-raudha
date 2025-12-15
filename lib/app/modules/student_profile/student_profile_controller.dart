@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class StudentProfileController extends GetxController {
   final Rx<Student?> student = Rx<Student?>(null);
@@ -41,7 +42,7 @@ class StudentProfileController extends GetxController {
       student.value = _mapToStudent(detail, profile);
     } catch (e) {
       errorMessage.value = e.toString();
-      Get.snackbar('Error', 'Gagal memuat profil ananda: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat profil ananda: $e');
     } finally {
       isLoading(false);
     }

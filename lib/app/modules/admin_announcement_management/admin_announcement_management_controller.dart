@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../data/models/announcement_model.dart';
 import '../../data/services/announcement_service.dart';
 import '../../utils/app_colors.dart';
+import '../../utils/snackbar_helper.dart';
 
 class AdminAnnouncementManagementController extends GetxController {
   late final AnnouncementService _announcementService;
@@ -29,13 +30,7 @@ class AdminAnnouncementManagementController extends GetxController {
       announcements.value = data;
       applyFilters();
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat pengumuman: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memuat pengumuman: $e');
     } finally {
       isLoading.value = false;
     }
@@ -93,21 +88,9 @@ class AdminAnnouncementManagementController extends GetxController {
         isLoading.value = true;
         await _announcementService.deleteAnnouncement(id);
         await fetchAnnouncements();
-        Get.snackbar(
-          'Berhasil',
-          'Pengumuman berhasil dihapus',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
+        SnackbarHelper.showSuccess('Pengumuman berhasil dihapus');
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          'Gagal menghapus pengumuman: $e',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        SnackbarHelper.showError('Gagal menghapus pengumuman: $e');
       } finally {
         isLoading.value = false;
       }

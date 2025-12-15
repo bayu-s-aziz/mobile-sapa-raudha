@@ -1,32 +1,39 @@
 // lib/app/modules/student_detail/student_detail_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import '../home/home_controller.dart';
+import '../student_list/student_list_controller.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class StudentDetailController extends GetxController {
   // Gunakan Rx<Student?> agar bisa null-check
   final Rx<Student?> student = Rx<Student?>(null);
   late final StudentService _studentService;
+  late final AttendanceService _attendanceService;
+
+  final RxBool isLoadingAttendance = false.obs;
+  final Rxn<Map<String, dynamic>> todayAttendance = Rxn<Map<String, dynamic>>();
+  final DateFormat _dateFormatter = DateFormat('yyyy-MM-dd');
 
   @override
   void onInit() {
     super.onInit();
     _studentService = Get.find<StudentService>();
+    _attendanceService = Get.find<AttendanceService>();
     // Ambil data Student yang dikirim sebagai argumen
     if (Get.arguments != null && Get.arguments is Student) {
       student.value = Get.arguments as Student;
       _refreshStudentFromServer();
+      _fetchTodayAttendance();
     } else {
       // Handle jika data tidak ditemukan
       Get.back();
-      Get.snackbar(
-        'Error',
-        'Gagal memuat data siswa. Silakan coba lagi.',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackbarHelper.showError('Gagal memuat data siswa. Silakan coba lagi.');
     }
   }
 
@@ -39,6 +46,31 @@ class StudentDetailController extends GetxController {
     if (detail == null) return;
 
     student.value = _mapToStudent(detail, student.value!);
+  }
+
+  Future<void> _fetchTodayAttendance() async {
+    if (student.value?.nisn == null) return;
+
+    isLoadingAttendance.value = true;
+    try {
+      final today = _dateFormatter.format(DateTime.now());
+      final records = await _attendanceService.getStudentHistory(
+        student.value!.nisn!,
+        startDate: today,
+        endDate: today,
+        limit: 1,
+      );
+
+      if (records.isNotEmpty) {
+        todayAttendance.value = records.first;
+      } else {
+        todayAttendance.value = null;
+      }
+    } catch (e) {
+      SnackbarHelper.showError('Gagal memuat status kehadiran: $e');
+    } finally {
+      isLoadingAttendance.value = false;
+    }
   }
 
   Student _mapToStudent(Map<String, dynamic> data, Student current) {
@@ -130,5 +162,132 @@ class StudentDetailController extends GetxController {
       }
     }
     return null;
+  }
+
+  void updateAttendanceStatus() {
+    if (student.value == null) return;
+
+    final selectedStatus = Rxn<String>(todayAttendance.value?['status']);
+    final notesController = TextEditingController(
+      text: todayAttendance.value?['notes'] ?? '',
+    );
+    final isNewRecord = todayAttendance.value == null;
+
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          isNewRecord ? 'Tambah Presensi Hari Ini' : 'Ubah Status Kehadiran',
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              student.value!.name,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'NISN: ${student.value!.nisn}',
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            ),
+            const SizedBox(height: 16),
+            Obx(
+              () => DropdownButtonFormField<String>(
+                value: selectedStatus.value,
+                decoration: const InputDecoration(
+                  labelText: 'Status Kehadiran',
+                  border: OutlineInputBorder(),
+                ),
+                items: const [
+                  DropdownMenuItem(value: 'hadir', child: Text('Hadir')),
+                  DropdownMenuItem(value: 'sakit', child: Text('Sakit')),
+                  DropdownMenuItem(value: 'izin', child: Text('Izin')),
+                  DropdownMenuItem(value: 'alpa', child: Text('Alpa')),
+                ],
+                onChanged: (value) => selectedStatus.value = value,
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: notesController,
+              decoration: const InputDecoration(
+                labelText: 'Keterangan (opsional)',
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 3,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text('Batal')),
+          ElevatedButton(
+            onPressed: () async {
+              if (selectedStatus.value == null) {
+                SnackbarHelper.showError('Silakan pilih status kehadiran');
+                return;
+              }
+
+              Get.back();
+              isLoadingAttendance.value = true;
+
+              try {
+                final today = _dateFormatter.format(DateTime.now());
+                final studentId = int.tryParse(student.value!.id);
+
+                if (studentId == null) {
+                  throw Exception('Invalid student ID');
+                }
+
+                if (isNewRecord) {
+                  // Create new attendance record
+                  await _attendanceService.createAttendance({
+                    'student_id': studentId,
+                    'date': today,
+                    'status': selectedStatus.value,
+                    'notes': notesController.text.trim(),
+                  });
+                  SnackbarHelper.showSuccess(
+                    'Status kehadiran berhasil ditambahkan',
+                  );
+                } else {
+                  // Update existing attendance record
+                  final attendanceId = todayAttendance.value!['id'];
+                  await _attendanceService.updateAttendance(attendanceId, {
+                    'status': selectedStatus.value,
+                    'notes': notesController.text.trim(),
+                  });
+                  SnackbarHelper.showSuccess(
+                    'Status kehadiran berhasil diubah',
+                  );
+                }
+
+                // Refresh attendance data
+                await _fetchTodayAttendance();
+
+                // Update home controller if registered
+                if (Get.isRegistered<HomeController>()) {
+                  final homeController = Get.find<HomeController>();
+                  homeController.fetchAttendanceStats();
+                }
+
+                // Refresh student list if registered
+                if (Get.isRegistered<StudentListController>()) {
+                  final studentListController =
+                      Get.find<StudentListController>();
+                  studentListController.fetchStudents();
+                }
+              } catch (e) {
+                SnackbarHelper.showError(
+                  'Gagal menyimpan status kehadiran: $e',
+                );
+              } finally {
+                isLoadingAttendance.value = false;
+              }
+            },
+            child: const Text('Simpan'),
+          ),
+        ],
+      ),
+    );
   }
 }

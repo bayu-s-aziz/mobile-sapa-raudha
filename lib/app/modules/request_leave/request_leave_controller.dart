@@ -8,6 +8,7 @@ import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/modules/leave_list/leave_list_controller.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class RequestLeaveController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -55,13 +56,7 @@ class RequestLeaveController extends GetxController {
         selectedFile.value = File(pickedImage.path);
       }
     } catch (e) {
-      Get.snackbar(
-        "Error",
-        "Gagal mengambil gambar: $e",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withAlpha((0.8 * 255).round()),
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError("Gagal mengambil gambar: $e");
     }
   }
 
@@ -74,7 +69,7 @@ class RequestLeaveController extends GetxController {
   void submitLeaveRequest() async {
     if (!formKey.currentState!.validate()) return;
     if (_studentNisn == null) {
-      Get.snackbar('Error', 'NISN anak tidak ditemukan');
+      SnackbarHelper.showError('NISN anak tidak ditemukan');
       return;
     }
 
@@ -89,13 +84,7 @@ class RequestLeaveController extends GetxController {
         attachment: selectedFile.value,
       );
 
-      Get.snackbar(
-        "Berhasil",
-        "Formulir izin terkirim.",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showSuccess("Formulir izin terkirim.");
 
       clearImage();
       reasonController.clear();
@@ -116,13 +105,7 @@ class RequestLeaveController extends GetxController {
       await leaveList?.fetchLeaves();
       Get.back();
     } catch (e) {
-      Get.snackbar(
-        'Gagal',
-        'Pengajuan izin gagal: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Pengajuan izin gagal: $e');
     }
   }
 }

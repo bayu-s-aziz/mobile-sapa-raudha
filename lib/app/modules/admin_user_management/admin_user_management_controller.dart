@@ -4,6 +4,7 @@ import '../../data/models/teacher_model.dart';
 import '../../data/models/parent_model.dart';
 import '../../data/services/teacher_service.dart';
 import '../../data/services/parent_service.dart';
+import '../../utils/snackbar_helper.dart';
 
 class AdminUserManagementController extends GetxController {
   late final TeacherService _teacherService;
@@ -49,13 +50,7 @@ class AdminUserManagementController extends GetxController {
       teachers.value = data;
       applyFilters();
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat data guru: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memuat data guru: $e');
     }
   }
 
@@ -65,13 +60,7 @@ class AdminUserManagementController extends GetxController {
       parents.value = data;
       applyFilters();
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat data orang tua: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memuat data orang tua: $e');
     }
   }
 
@@ -136,21 +125,9 @@ class AdminUserManagementController extends GetxController {
         isLoading.value = true;
         await _teacherService.deleteTeacher(id);
         await fetchTeachers();
-        Get.snackbar(
-          'Berhasil',
-          'Data guru berhasil dihapus',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
+        SnackbarHelper.showSuccess('Data guru berhasil dihapus');
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          'Gagal menghapus data guru: $e',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        SnackbarHelper.showError('Gagal menghapus data guru: $e');
       } finally {
         isLoading.value = false;
       }
@@ -180,21 +157,9 @@ class AdminUserManagementController extends GetxController {
         isLoading.value = true;
         await _parentService.deleteParent(id);
         await fetchParents();
-        Get.snackbar(
-          'Berhasil',
-          'Data orang tua berhasil dihapus',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
+        SnackbarHelper.showSuccess('Data orang tua berhasil dihapus');
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          'Gagal menghapus data orang tua: $e',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        SnackbarHelper.showError('Gagal menghapus data orang tua: $e');
       } finally {
         isLoading.value = false;
       }

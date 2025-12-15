@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/leave_request_model.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import '../home/home_controller.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class ConfirmLeaveController extends GetxController {
   final RxBool isLoading = true.obs;
@@ -35,7 +36,7 @@ class ConfirmLeaveController extends GetxController {
       }).toList();
       leaveRequests.assignAll(mapped);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat pengajuan izin: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat pengajuan izin: $e');
     } finally {
       isLoading(false);
     }
@@ -83,18 +84,12 @@ class ConfirmLeaveController extends GetxController {
           // Segarkan badge pending dan daftar dari sumber API
           Get.find<HomeController>().fetchPendingLeaveCount();
           fetchLeaveRequests();
-          Get.snackbar(
-            'Berhasil',
+          SnackbarHelper.showSuccess(
             'Pengajuan izin ${request.studentName} telah di-${newStatus == LeaveStatus.approved ? 'setujui' : 'tolak'}.',
-            snackPosition: SnackPosition.BOTTOM,
           );
         })
         .catchError((e) {
-          Get.snackbar(
-            'Gagal',
-            'Tidak dapat memperbarui status: ${e.toString()}',
-            snackPosition: SnackPosition.BOTTOM,
-          );
+          SnackbarHelper.showError('Tidak dapat memperbarui status: $e');
         })
         .whenComplete(() => isLoading(false));
   }

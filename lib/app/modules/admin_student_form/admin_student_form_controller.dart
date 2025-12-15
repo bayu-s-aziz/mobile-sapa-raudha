@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../data/services/student_service.dart';
+import '../../utils/snackbar_helper.dart';
 
 class AdminStudentFormController extends GetxController {
   late final StudentService _studentService;
@@ -48,13 +49,7 @@ class AdminStudentFormController extends GetxController {
       final data = await _studentService.getClasses();
       classes.assignAll(data);
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat data kelas: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memuat data kelas: $e');
     }
   }
 
@@ -100,13 +95,7 @@ class AdminStudentFormController extends GetxController {
         selectedPhoto.value = File(image.path);
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memilih foto: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memilih foto: $e');
     }
   }
 
@@ -167,23 +156,13 @@ class AdminStudentFormController extends GetxController {
       }
 
       Get.back(result: true);
-      Get.snackbar(
-        'Berhasil',
+      SnackbarHelper.showSuccess(
         isEditMode.value
             ? 'Data siswa berhasil diperbarui'
             : 'Data siswa berhasil ditambahkan',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
       );
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal menyimpan data siswa: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal menyimpan data siswa: $e');
     } finally {
       isLoading.value = false;
     }

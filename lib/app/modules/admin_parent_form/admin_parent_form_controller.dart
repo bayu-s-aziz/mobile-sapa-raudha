@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../data/models/parent_model.dart';
 import '../../data/services/parent_service.dart';
+import '../../utils/snackbar_helper.dart';
 
 class AdminParentFormController extends GetxController {
   late final ParentService _parentService;
@@ -57,13 +58,7 @@ class AdminParentFormController extends GetxController {
         selectedPhoto.value = File(image.path);
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memilih foto: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memilih foto: $e');
     }
   }
 
@@ -100,23 +95,13 @@ class AdminParentFormController extends GetxController {
       }
 
       Get.back(result: true);
-      Get.snackbar(
-        'Berhasil',
+      SnackbarHelper.showSuccess(
         isEditMode.value
             ? 'Data orang tua berhasil diperbarui'
             : 'Data orang tua berhasil ditambahkan',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
       );
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal menyimpan data orang tua: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal menyimpan data orang tua: $e');
     } finally {
       isLoading.value = false;
     }

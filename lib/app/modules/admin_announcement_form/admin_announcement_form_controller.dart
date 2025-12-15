@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/models/announcement_model.dart';
 import '../../data/services/announcement_service.dart';
+import '../../utils/snackbar_helper.dart';
 
 class AdminAnnouncementFormController extends GetxController {
   late final AnnouncementService _announcementService;
@@ -56,14 +57,7 @@ class AdminAnnouncementFormController extends GetxController {
 
         // Show success snackbar after modal is closed
         Future.delayed(const Duration(milliseconds: 300), () {
-          Get.snackbar(
-            'Berhasil',
-            'Pengumuman berhasil diperbarui',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-            duration: const Duration(seconds: 3),
-          );
+          SnackbarHelper.showSuccess('Pengumuman berhasil diperbarui');
         });
       } else {
         // Create new announcement
@@ -78,25 +72,11 @@ class AdminAnnouncementFormController extends GetxController {
 
         // Show success snackbar after modal is closed
         Future.delayed(const Duration(milliseconds: 300), () {
-          Get.snackbar(
-            'Berhasil',
-            'Pengumuman berhasil ditambahkan',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-            duration: const Duration(seconds: 3),
-          );
+          SnackbarHelper.showSuccess('Pengumuman berhasil ditambahkan');
         });
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal menyimpan pengumuman: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-      );
+      SnackbarHelper.showError('Gagal menyimpan pengumuman: $e');
     } finally {
       isLoading.value = false;
     }

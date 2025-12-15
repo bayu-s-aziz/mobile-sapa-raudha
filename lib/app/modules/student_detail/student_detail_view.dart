@@ -87,6 +87,9 @@ class StudentDetailView extends GetView<StudentDetailController> {
                   ),
                 ),
                 const Divider(height: 1, thickness: 1),
+                // Status Kehadiran Hari Ini
+                _buildAttendanceSection(context),
+                const Divider(height: 1, thickness: 1),
                 // Info Tambahan (Orang Tua)
                 _buildInfoSection(
                   context,
@@ -139,6 +142,108 @@ class StudentDetailView extends GetView<StudentDetailController> {
         }),
       ),
     );
+  }
+
+  Widget _buildAttendanceSection(BuildContext context) {
+    return Obx(() {
+      final isLoading = controller.isLoadingAttendance.value;
+      final attendance = controller.todayAttendance.value;
+
+      String statusText = 'Belum Absen';
+      Color statusColor = Colors.grey;
+      IconData statusIcon = Icons.remove_circle_outline;
+
+      if (attendance != null) {
+        final status = attendance['status']?.toString().toLowerCase() ?? '';
+        switch (status) {
+          case 'hadir':
+            statusText = 'Hadir';
+            statusColor = Colors.green;
+            statusIcon = Icons.check_circle_outline;
+            break;
+          case 'sakit':
+            statusText = 'Sakit';
+            statusColor = Colors.orange;
+            statusIcon = Icons.local_hospital_outlined;
+            break;
+          case 'izin':
+            statusText = 'Izin';
+            statusColor = Colors.blue;
+            statusIcon = Icons.info_outline;
+            break;
+          case 'alpa':
+            statusText = 'Alpa';
+            statusColor = Colors.red;
+            statusIcon = Icons.cancel_outlined;
+            break;
+        }
+      }
+
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'STATUS KEHADIRAN HARI INI',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(color: AppColors.alternate.withAlpha(122)),
+              ),
+              child: isLoading
+                  ? const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : ListTile(
+                      leading: Icon(statusIcon, color: statusColor, size: 32),
+                      title: Text(
+                        statusText,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: statusColor,
+                        ),
+                      ),
+                      subtitle:
+                          attendance != null && attendance['notes'] != null
+                          ? Text(
+                              'Ket: ${attendance['notes']}',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: AppColors.secondaryText,
+                              ),
+                            )
+                          : null,
+                      trailing: ElevatedButton.icon(
+                        onPressed: controller.updateAttendanceStatus,
+                        icon: Icon(
+                          attendance == null ? Icons.add : Icons.edit,
+                          size: 16,
+                        ),
+                        label: Text(attendance == null ? 'Tambah' : 'Ubah'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                        ),
+                      ),
+                    ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _buildInfoSection(

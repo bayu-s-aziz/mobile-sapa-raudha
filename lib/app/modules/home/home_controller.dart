@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 // Impor service dan model pengumuman
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 import 'package:sapa_raudha/app/data/models/announcement_model.dart';
@@ -82,7 +83,7 @@ class HomeController extends GetxController {
       _applyProfile(profile);
       fetchChildTodayStatus();
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat profil: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat profil: $e');
     } finally {
       isLoadingProfile(false);
     }
@@ -140,7 +141,7 @@ class HomeController extends GetxController {
           recentAnnouncements.assignAll(data.take(3).toList());
         })
         .catchError((e) {
-          Get.snackbar('Error', 'Gagal memuat pengumuman: ${e.toString()}');
+          SnackbarHelper.showError('Gagal memuat pengumuman: $e');
         })
         .whenComplete(() => isLoadingAnnouncements(false));
   }
@@ -158,7 +159,7 @@ class HomeController extends GetxController {
         'absent': res['today']?['absent'] as int? ?? 0,
       });
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat statistik presensi: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat statistik presensi: $e');
     } finally {
       isLoadingStats(false);
     }
@@ -198,7 +199,7 @@ class HomeController extends GetxController {
         _updateChildStatus(statusLabel: 'Belum absen');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memuat status ananda: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memuat status ananda: $e');
     }
   }
 

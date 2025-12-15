@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../data/models/teacher_model.dart';
 import '../../data/services/teacher_service.dart';
+import '../../utils/snackbar_helper.dart';
 
 class AdminTeacherFormController extends GetxController {
   late final TeacherService _teacherService;
@@ -59,13 +60,7 @@ class AdminTeacherFormController extends GetxController {
         selectedPhoto.value = File(image.path);
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memilih foto: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal memilih foto: $e');
     }
   }
 
@@ -106,23 +101,13 @@ class AdminTeacherFormController extends GetxController {
       }
 
       Get.back();
-      Get.snackbar(
-        'Berhasil',
+      SnackbarHelper.showSuccess(
         isEditMode.value
             ? 'Data guru berhasil diperbarui'
             : 'Data guru berhasil ditambahkan',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
       );
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal menyimpan data guru: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      SnackbarHelper.showError('Gagal menyimpan data guru: $e');
     } finally {
       isLoading.value = false;
     }

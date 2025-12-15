@@ -7,6 +7,7 @@ import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/modules/announcement_list/announcement_list_controller.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:file_picker/file_picker.dart'; // <-- IMPOR FILE PICKER
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class CreateAnnouncementController extends GetxController {
   final AnnouncementService _announcementService =
@@ -29,7 +30,7 @@ class CreateAnnouncementController extends GetxController {
     if (Get.isRegistered<HomeController>()) {
       _homeController = Get.find<HomeController>();
     } else {
-      Get.snackbar('Error', 'User data not found.');
+      SnackbarHelper.showError('User data not found.');
       Get.back();
     }
   }
@@ -53,10 +54,10 @@ class CreateAnnouncementController extends GetxController {
         pickedFile.value = result.files.first; // Simpan file yang dipilih
       } else {
         // User membatalkan pemilihan
-        Get.snackbar('Batal', 'Tidak ada file yang dipilih.');
+        SnackbarHelper.showInfo('Tidak ada file yang dipilih.');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Gagal memilih file: ${e.toString()}');
+      SnackbarHelper.showError('Gagal memilih file: $e');
     }
   }
 
@@ -78,16 +79,7 @@ class CreateAnnouncementController extends GetxController {
           )
           .then((_) {
             Get.back();
-            Get.snackbar(
-              'Berhasil',
-              'Pengumuman berhasil dipublikasikan.',
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.green.shade600,
-              colorText: Colors.white,
-              margin: const EdgeInsets.all(12),
-              borderRadius: 8,
-              icon: const Icon(Icons.check_circle_outline, color: Colors.white),
-            );
+            SnackbarHelper.showSuccess('Pengumuman berhasil dipublikasikan.');
 
             _homeController.refreshAnnouncements();
 
@@ -98,16 +90,7 @@ class CreateAnnouncementController extends GetxController {
             }
           })
           .catchError((e) {
-            Get.snackbar(
-              'Gagal',
-              'Terjadi kesalahan: ${e.toString()}',
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.red.shade600,
-              colorText: Colors.white,
-              margin: const EdgeInsets.all(12),
-              borderRadius: 8,
-              icon: const Icon(Icons.error_outline, color: Colors.white),
-            );
+            SnackbarHelper.showError('Terjadi kesalahan: $e');
           })
           .whenComplete(() {
             isLoading(false);

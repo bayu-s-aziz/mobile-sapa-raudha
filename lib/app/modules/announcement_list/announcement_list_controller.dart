@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/announcement_model.dart';
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class AnnouncementListController extends GetxController {
   final AnnouncementService _announcementService =
@@ -28,11 +29,7 @@ class AnnouncementListController extends GetxController {
       final data = await _announcementService.getAllAnnouncements();
       announcements.assignAll(data);
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat pengumuman: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackbarHelper.showError('Gagal memuat pengumuman: $e');
     } finally {
       isLoading(false);
     }
