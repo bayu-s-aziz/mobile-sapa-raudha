@@ -49,7 +49,31 @@ class AdminMainLayoutView extends GetView<AdminMainLayoutController> {
                           : NavigationRailLabelType.none,
                       leading: Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 24),
-                        child: Icon(Icons.school, color: AppColors.primary),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/logo_ra.png',
+                              width: 50,
+                              height: 50,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'SAPA Raudaha',
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              'Al-Islam',
+                              style: TextStyle(
+                                color: AppColors.secondaryText,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       selectedIconTheme: const IconThemeData(size: 24),
                       destinations: const [
