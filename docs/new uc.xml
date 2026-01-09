@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-12-16T00:00:00.000Z" agent="Draw.io" version="24.0.0">
+  <diagram name="Use Case Diagram - Sapa Raudha" id="use-case-sapa-raudha">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2339" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- System Boundary -->
+        <mxCell id="system-boundary" value="Sistem Informasi Presensi Sapa Raudha&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=14;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="400" y="80" width="1200" height="2200" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== ACTORS ==================== -->
+        
+        <!-- Admin Actor -->
+        <mxCell id="actor-admin" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="200" y="400" width="60" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Guru Actor -->
+        <mxCell id="actor-guru" value="Guru" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="200" y="900" width="60" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Orang Tua Actor -->
+        <mxCell id="actor-parent" value="Orang Tua" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="200" y="1500" width="60" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== USE CASES - AUTHENTICATION ==================== -->
+        
+        <!-- UC1: Login -->
+        <mxCell id="uc1" value="Login ke Sistem" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="200" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC31: Lupa Password -->
+        <mxCell id="uc31" value="Lupa Password" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="720" y="200" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC36: Validasi Login -->
+        <mxCell id="uc36" value="Validasi Login" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="720" y="330" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC37: Generate Token -->
+        <mxCell id="uc37" value="Generate Token" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="900" y="330" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC32: Logout -->
+        <mxCell id="uc32" value="Logout" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1400" y="200" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== USE CASES - ADMIN ==================== -->
+        
+        <!-- UC2: Kelola Data Guru -->
+        <mxCell id="uc2" value="Kelola Data Guru" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="350" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC3: Kelola Data Orang Tua -->
+        <mxCell id="uc3" value="Kelola Data&#xa;Orang Tua" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="450" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC4: Kelola Data Siswa -->
+        <mxCell id="uc4" value="Kelola Data Siswa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="550" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC5: Kelola Data Kelas -->
+        <mxCell id="uc5" value="Kelola Data Kelas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="550" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC6: Kelola Presensi -->
+        <mxCell id="uc6" value="Kelola Presensi&#xa;Siswa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="650" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC7: Kelola Pengumuman -->
+        <mxCell id="uc7" value="Kelola&#xa;Pengumuman" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="650" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC8: Lihat Dashboard -->
+        <mxCell id="uc8" value="Lihat Statistik&#xa;Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="860" y="550" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC9: Proses Reset Password -->
+        <mxCell id="uc9" value="Proses Permintaan&#xa;Reset Password" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="550" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC10: Kirim WhatsApp -->
+        <mxCell id="uc10" value="Kirim Password&#xa;via WhatsApp" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1240" y="550" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC11: Export Laporan -->
+        <mxCell id="uc11" value="Export Laporan&#xa;Presensi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="860" y="650" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== USE CASES - GURU ==================== -->
+        
+        <!-- UC12: Scan QR -->
+        <mxCell id="uc12" value="Scan QR Code&#xa;Presensi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="800" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC13: Ubah Status Kehadiran -->
+        <mxCell id="uc13" value="Ubah Status&#xa;Kehadiran Siswa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="800" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC14: Lihat Daftar Siswa -->
+        <mxCell id="uc14" value="Lihat Daftar Siswa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="900" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC15: Lihat Detail Siswa -->
+        <mxCell id="uc15" value="Lihat Detail Siswa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="900" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC16: Buat Pengumuman -->
+        <mxCell id="uc16" value="Buat Pengumuman" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="1000" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC16A: Upload File Lampiran -->
+        <mxCell id="uc16a" value="Upload File&#xa;Lampiran" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="1000" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC17: Lihat Daftar Izin -->
+        <mxCell id="uc17" value="Lihat Daftar&#xa;Pengajuan Izin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="860" y="900" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC18: Approve Izin -->
+        <mxCell id="uc18" value="Approve&#xa;Pengajuan Izin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="900" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC19: Reject Izin -->
+        <mxCell id="uc19" value="Reject&#xa;Pengajuan Izin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="900" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== USE CASES - ORANG TUA ==================== -->
+        
+        <!-- UC24: Lihat Profil Anak -->
+        <mxCell id="uc24" value="Lihat Profil Anak" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="1400" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC25: Lihat Riwayat Kehadiran -->
+        <mxCell id="uc25" value="Lihat Riwayat&#xa;Kehadiran Anak" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="1400" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC33: Ganti Periode -->
+        <mxCell id="uc33" value="Ganti Periode&#xa;Bulan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="860" y="1400" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC26: Ajukan Izin -->
+        <mxCell id="uc26" value="Ajukan Izin Siswa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="1520" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC27: Upload Lampiran Surat -->
+        <mxCell id="uc27" value="Upload Lampiran&#xa;Surat" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="1520" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC28: Lihat Status Izin -->
+        <mxCell id="uc28" value="Lihat Status&#xa;Pengajuan Izin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="860" y="1520" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC29: Lihat Pengumuman -->
+        <mxCell id="uc29" value="Lihat Daftar&#xa;Pengumuman" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="1520" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC30: Detail Pengumuman -->
+        <mxCell id="uc30" value="Lihat Detail&#xa;Pengumuman" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="1520" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== USE CASES - SHARED ==================== -->
+        
+        <!-- UC20: Lihat/Ubah Profil -->
+        <mxCell id="uc20" value="Lihat Profil" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="1750" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC20A: Ubah Profil Lengkap (Admin) -->
+        <mxCell id="uc20a" value="Ubah Profil Lengkap&#xa;(Admin)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="500" y="1880" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC21: Ubah Password -->
+        <mxCell id="uc21" value="Ubah Password" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="680" y="1750" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC23: Ubah Foto -->
+        <mxCell id="uc23" value="Ubah Foto Profil" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="860" y="1750" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC38: Simpan Foto -->
+        <mxCell id="uc38" value="Simpan Foto" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="1750" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC34: Filter Data -->
+        <mxCell id="uc34" value="Filter Data" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="860" y="450" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC35: Refresh Data -->
+        <mxCell id="uc35" value="Refresh Data" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="450" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC40: Tambah Data -->
+        <mxCell id="uc40" value="Tambah Data" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="350" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC41: Edit Data -->
+        <mxCell id="uc41" value="Edit Data" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="450" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- UC39: Hapus Data -->
+        <mxCell id="uc39" value="Hapus Data" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="550" width="140" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== ASSOCIATIONS (Actor to Use Case) ==================== -->
+        
+        <!-- Admin Associations -->
+        <mxCell id="assoc-admin-uc1" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc2" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc3" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc4" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc5" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc6" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc7" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc8" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc9" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc9">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc11" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc20a" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc20a">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc21" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc21">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-admin-uc32" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-admin" target="uc32">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Guru Associations -->
+        <mxCell id="assoc-guru-uc1" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc12" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc12">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc13" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc13">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc14" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc14">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc15" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc15">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc16" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc16">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc17" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc17">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc18" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc18">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc19" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc19">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc20" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc20">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc21" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc21">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc23" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc23">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-guru-uc32" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-guru" target="uc32">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Orang Tua Associations -->
+        <mxCell id="assoc-parent-uc1" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc24" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc24">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc25" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc25">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc26" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc26">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc28" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc28">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc29" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc29">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc30" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc30">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc20" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc20">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc21" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc21">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc23" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc23">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="assoc-parent-uc32" style="endArrow=none;html=1;strokeWidth=1;" edge="1" parent="1" source="actor-parent" target="uc32">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== INCLUDE RELATIONSHIPS ==================== -->
+        
+        <!-- Login includes -->
+        <mxCell id="include-uc1-uc36" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc1" target="uc36">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="include-uc1-uc37" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc1" target="uc37">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Kelola includes -->
+        <mxCell id="include-uc2-uc40" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc2" target="uc40">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="include-uc2-uc41" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc2" target="uc41">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="include-uc2-uc39" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc2" target="uc39">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="include-uc4-uc34" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc4" target="uc34">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="include-uc7-uc35" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc7" target="uc35">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Process Reset Password includes Kirim WhatsApp -->
+        <mxCell id="include-uc9-uc10" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc9" target="uc10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Scan QR includes Validasi -->
+        <mxCell id="include-uc12-uc36" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc12" target="uc36">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Ubah Foto includes Simpan Foto -->
+        <mxCell id="include-uc23-uc38" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc23" target="uc38">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="include-uc20a-uc38" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc20a" target="uc38">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== EXTEND RELATIONSHIPS ==================== -->
+        
+        <!-- Lupa Password extends Login -->
+        <mxCell id="extend-uc31-uc1" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc31" target="uc1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Upload Lampiran extends Buat Pengumuman -->
+        <mxCell id="extend-uc16a-uc16" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc16a" target="uc16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Upload Lampiran Surat extends Ajukan Izin -->
+        <mxCell id="extend-uc27-uc26" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc27" target="uc26">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Ganti Periode extends Lihat Riwayat -->
+        <mxCell id="extend-uc33-uc25" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;html=1;dashPattern=5 5;strokeWidth=1.5;endFill=0;" edge="1" parent="1" source="uc33" target="uc25">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== GENERALIZATION ==================== -->
+        
+        <!-- Ubah Profil Lengkap generalizes Lihat Profil -->
+        <mxCell id="generalize-uc20a-uc20" value="" style="endArrow=block;dashed=0;endFill=0;endSize=12;html=1;strokeWidth=2;" edge="1" parent="1" source="uc20a" target="uc20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- ==================== NOTES ==================== -->
+        
+        <mxCell id="note-auth" value="NOTE:&#xa;Semua use case kecuali Login dan Lupa Password&#xa;memerlukan autentikasi (Precondition)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;size=15;align=left;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="450" y="2100" width="300" height="80" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="note-colors" value="LEGENDA:&#xa;🔵 Biru = Admin Only&#xa;🟢 Hijau = Guru Only&#xa;🟠 Orange = Orang Tua Only&#xa;🟡 Kuning = Shared (semua actor)&#xa;🟣 Ungu = Helper (include/extend)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#f5f5f5;strokeColor=#666666;size=15;align=left;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="800" y="2100" width="250" height="120" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
