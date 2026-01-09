@@ -7,7 +7,10 @@ import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'dart:html' as html;
+import 'package:printing/printing.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:sapa_raudha/app/utils/pdf_saver_stub.dart'
+    if (dart.library.html) 'package:sapa_raudha/app/utils/pdf_saver_web.dart';
 
 enum PeriodFilter { day, week, month }
 
@@ -538,11 +541,6 @@ class AdminAttendanceManagementController extends GetxController {
         }
       }
 
-      // Save and download PDF for web
-      final bytes = await pdf.save();
-      final blob = html.Blob([bytes], 'application/pdf');
-      final url = html.Url.createObjectUrlFromBlob(blob);
-
       // Generate filename based on period type
       String filename = 'presensi_';
       if (selectedPeriod.value == PeriodFilter.day) {
@@ -561,14 +559,16 @@ class AdminAttendanceManagementController extends GetxController {
       }
       filename += '.pdf';
 
-      final anchor = html.document.createElement('a') as html.AnchorElement
-        ..href = url
-        ..style.display = 'none'
-        ..download = filename;
-      html.document.body?.children.add(anchor);
-      anchor.click();
-      html.document.body?.children.remove(anchor);
-      html.Url.revokeObjectUrl(url);
+      // Save and download PDF based on platform
+      final bytes = await pdf.save();
+
+      if (kIsWeb) {
+        // Web platform - use dart:html
+        await savePdfWeb(bytes, filename);
+      } else {
+        // Desktop/Mobile platform - use printing package
+        await Printing.sharePdf(bytes: bytes, filename: filename);
+      }
 
       SnackbarHelper.showSuccess('PDF presensi berhasil diunduh');
     } catch (e) {

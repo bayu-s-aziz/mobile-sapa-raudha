@@ -96,14 +96,7 @@ class LoginController extends GetxController {
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              identifierController.dispose();
-              nameController.dispose();
-              Get.back();
-            },
-            child: const Text('Batal'),
-          ),
+          TextButton(onPressed: () => Get.back(), child: const Text('Batal')),
           Obx(
             () => ElevatedButton(
               onPressed: isSubmitting.value
@@ -133,9 +126,6 @@ class LoginController extends GetxController {
                         );
 
                         Get.back();
-                        identifierController.dispose();
-                        nameController.dispose();
-
                         SnackbarHelper.showSuccess(
                           'Permintaan reset password berhasil dikirim. Admin akan menghubungi Anda segera.',
                         );
@@ -158,7 +148,11 @@ class LoginController extends GetxController {
           ),
         ],
       ),
-    );
+    ).then((_) {
+      // Dispose controllers when dialog is dismissed (any way it closes)
+      identifierController.dispose();
+      nameController.dispose();
+    });
   }
 
   @override

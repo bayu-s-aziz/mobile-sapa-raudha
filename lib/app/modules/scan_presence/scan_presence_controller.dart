@@ -3,17 +3,15 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
+import 'dart:io' show Platform;
 
 class ScanPresenceController extends GetxController {
   // final GlobalKey qrKey = GlobalKey(debugLabel: 'QR'); // Tidak diperlukan lagi
   // QRViewController? qrViewController; // Ganti dengan MobileScannerController
 
-  final MobileScannerController scannerController = MobileScannerController(
-    // Atur opsi kamera jika perlu, misal:
-    // facing: CameraFacing.back,
-    // torchEnabled: false,
-    returnImage: false, // Hemat memori jika tidak butuh gambar
-  );
+  MobileScannerController? scannerController;
+  
+  bool get isMobilePlatform => Platform.isAndroid || Platform.isIOS;
   final RxString scannedData = ''.obs;
   final RxBool isFlashOn = false.obs;
   bool _isProcessing = false;
@@ -23,11 +21,18 @@ class ScanPresenceController extends GetxController {
   void onInit() {
     super.onInit();
     _attendanceService = Get.find<AttendanceService>();
+    
+    // Only initialize scanner on mobile platforms
+    if (isMobilePlatform) {
+      scannerController = MobileScannerController(
+        returnImage: false,
+      );
+    }
   }
 
   @override
   void onClose() {
-    scannerController.dispose();
+    scannerController?.dispose();
     super.onClose();
   }
 
@@ -47,8 +52,10 @@ class ScanPresenceController extends GetxController {
   }
 
   void toggleFlash() {
-    scannerController.toggleTorch();
-    isFlashOn.value = !isFlashOn.value;
+    if (scannerController != null) {
+      scannerController!.toggleTorch();
+      isFlashOn.value = !isFlashOn.value;
+    }
   }
 
   void _showPresenceConfirmation(String studentInfo) {

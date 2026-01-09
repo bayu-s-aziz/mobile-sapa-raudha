@@ -78,7 +78,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 const SizedBox(height: 40),
                 Text(
-                  'Selamat Datang!',
+                  'Selamat Datang di SAPA Raudha!',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -86,6 +86,14 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
                 const SizedBox(height: 8),
+                Text(
+                  'Sistem Informasi Presensi dan Komunikasi Terpadu Raudhatul Athfal',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+                ),
+                const SizedBox(height: 4),
                 Text(
                   'Silakan masuk untuk melanjutkan',
                   textAlign: TextAlign.center,

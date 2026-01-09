@@ -53,7 +53,9 @@ static void my_application_activate(GApplication* application) {
     gtk_window_set_title(window, "sapa_raudha");
   }
 
-  gtk_window_set_default_size(window, 1280, 720);
+  // Set ukuran window seperti smartphone portrait (400x800)
+  gtk_window_set_default_size(window, 400, 800);
+  gtk_window_set_resizable(window, TRUE);
 
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(project, self->dart_entrypoint_arguments);

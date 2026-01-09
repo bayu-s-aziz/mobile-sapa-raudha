@@ -19,9 +19,34 @@ import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/class_service.dart';
 import 'package:sapa_raudha/app/data/services/teacher_service.dart';
+import 'dart:io' show Platform;
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Set window size untuk desktop (Linux, Windows, macOS) agar menyerupai smartphone portrait
+  if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+    await windowManager.ensureInitialized();
+
+    const windowSize = Size(400, 800); // Ukuran smartphone portrait
+    const windowOptions = WindowOptions(
+      size: windowSize,
+      minimumSize: Size(360, 640),
+      maximumSize: Size(450, 900),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.normal,
+      title: 'Sapa Raudha',
+    );
+
+    await windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
   await initializeDateFormatting('id_ID', null);
   await GetStorage.init();
   Get.put(LocalStorageService());
