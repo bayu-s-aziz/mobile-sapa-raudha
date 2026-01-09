@@ -19,6 +19,7 @@ import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/class_service.dart';
 import 'package:sapa_raudha/app/data/services/teacher_service.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
 import 'package:window_manager/window_manager.dart';
 
@@ -26,7 +27,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Set window size untuk desktop (Linux, Windows, macOS) agar menyerupai smartphone portrait
-  if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+  // Hanya di platform desktop, tidak di web
+  if (!kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
     await windowManager.ensureInitialized();
 
     const windowSize = Size(400, 800); // Ukuran smartphone portrait

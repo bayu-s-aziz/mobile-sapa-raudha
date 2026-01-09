@@ -50,7 +50,8 @@ class ScanPresenceView extends GetView<ScanPresenceController> {
                       Expanded(
                         child: Stack(
                           children: [
-                            if (controller.isMobilePlatform && controller.scannerController != null)
+                            if (controller.isScannerAvailable &&
+                                controller.scannerController != null)
                               MobileScanner(
                                 controller: controller.scannerController!,
                                 onDetect: controller.onBarcodeDetected,
@@ -65,23 +66,30 @@ class ScanPresenceView extends GetView<ScanPresenceController> {
                                       Icon(
                                         Icons.qr_code_scanner,
                                         size: 80,
-                                        color: AppColors.secondaryText.withAlpha((0.5 * 255).round()),
+                                        color: AppColors.secondaryText
+                                            .withAlpha((0.5 * 255).round()),
                                       ),
                                       const SizedBox(height: 24),
                                       Text(
-                                        'Fitur Scanner Tidak Tersedia',
-                                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.primaryText,
-                                        ),
+                                        'Scanner Tidak Tersedia',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primaryText,
+                                            ),
                                         textAlign: TextAlign.center,
                                       ),
                                       const SizedBox(height: 12),
                                       Text(
-                                        'Scanner QR Code hanya tersedia di perangkat mobile (Android/iOS)',
-                                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                          color: AppColors.secondaryText,
-                                        ),
+                                        'Scanner QR Code tersedia di:\n• Android & iOS\n• Browser (Chrome, Firefox, dll)',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: AppColors.secondaryText,
+                                            ),
                                         textAlign: TextAlign.center,
                                       ),
                                     ],

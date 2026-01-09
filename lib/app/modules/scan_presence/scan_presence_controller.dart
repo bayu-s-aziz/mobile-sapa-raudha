@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
 
 class ScanPresenceController extends GetxController {
@@ -10,8 +11,12 @@ class ScanPresenceController extends GetxController {
   // QRViewController? qrViewController; // Ganti dengan MobileScannerController
 
   MobileScannerController? scannerController;
-  
-  bool get isMobilePlatform => Platform.isAndroid || Platform.isIOS;
+
+  // Scanner tersedia di Android, iOS, dan Web (browser)
+  // Linux, Windows, macOS desktop tidak didukung oleh mobile_scanner
+  bool get isScannerAvailable =>
+      kIsWeb || (!kIsWeb && (Platform.isAndroid || Platform.isIOS));
+
   final RxString scannedData = ''.obs;
   final RxBool isFlashOn = false.obs;
   bool _isProcessing = false;
@@ -21,12 +26,10 @@ class ScanPresenceController extends GetxController {
   void onInit() {
     super.onInit();
     _attendanceService = Get.find<AttendanceService>();
-    
-    // Only initialize scanner on mobile platforms
-    if (isMobilePlatform) {
-      scannerController = MobileScannerController(
-        returnImage: false,
-      );
+
+    // Initialize scanner only on supported platforms
+    if (isScannerAvailable) {
+      scannerController = MobileScannerController(returnImage: false);
     }
   }
 
