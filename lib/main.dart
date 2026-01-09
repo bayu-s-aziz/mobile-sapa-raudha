@@ -54,11 +54,13 @@ void main() async {
   Get.put(LocalStorageService());
 
   // Base URL configurable via --dart-define=API_BASE_URL=
+  // Production: http://api.ra-alislam.sch.id (after SSL: https://api.ra-alislam.sch.id)
+  // Fallback: http://159.223.44.203
   Get.put(
     ApiClient(
       baseUrl: const String.fromEnvironment(
         'API_BASE_URL',
-        defaultValue: 'http://localhost:3000',
+        defaultValue: 'http://api.ra-alislam.sch.id',
       ),
     ),
   );
@@ -80,7 +82,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Sapa Raudha",
+      title: "SAPA Raudha",
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.login,
       getPages: AppPages.routes,

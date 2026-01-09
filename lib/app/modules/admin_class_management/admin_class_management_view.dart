@@ -214,20 +214,29 @@ class AdminClassManagementView extends GetView<AdminClassManagementController> {
       ),
       child: Row(
         children: [
-          Text(
-            'Manajemen Kelas',
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          Flexible(
+            child: Text(
+              'Manajemen Kelas',
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-          const Spacer(),
-          ElevatedButton.icon(
-            onPressed: () => controller.showAddClassDialog(),
-            icon: const Icon(Icons.add),
-            label: const Text('Tambah Kelas'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
+          const SizedBox(width: 16),
+          Flexible(
+            child: ElevatedButton.icon(
+              onPressed: () => controller.showAddClassDialog(),
+              icon: const Icon(Icons.add, size: 18),
+              label: const Text('Tambah Kelas'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 8),
