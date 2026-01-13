@@ -145,10 +145,7 @@ class PollingNotificationService extends GetxService {
   }
 
   Future<void> _initializeBackgroundTasks() async {
-    await Workmanager().initialize(
-      callbackDispatcher,
-      isInDebugMode: kDebugMode,
-    );
+    await Workmanager().initialize(callbackDispatcher);
   }
 
   Future<void> startPolling() async {
@@ -160,7 +157,7 @@ class PollingNotificationService extends GetxService {
         backgroundTaskName,
         frequency: pollingInterval,
         constraints: Constraints(networkType: NetworkType.connected),
-        existingWorkPolicy: ExistingWorkPolicy.replace,
+        existingWorkPolicy: ExistingPeriodicWorkPolicy.replace,
       );
 
       isPollingEnabled.value = true;
