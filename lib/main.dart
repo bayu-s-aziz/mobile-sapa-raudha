@@ -31,7 +31,7 @@ void main() async {
   if (!kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
     await windowManager.ensureInitialized();
 
-    const windowSize = Size(400, 800); // Ukuran smartphone portrait
+    const windowSize = Size(400, 800); // Ukuran smartphone portrait (DEFAULT)
     const windowOptions = WindowOptions(
       size: windowSize,
       minimumSize: Size(360, 640),

@@ -1,0 +1,272 @@
+# Sequence Diagram - Admin (Sapa Raudha)
+
+## Login Admin
+```mermaid
+sequenceDiagram
+    participant Admin as Admin (Web)
+    participant Web as Web Admin UI
+    participant Auth as Auth Service
+    participant DB as Database
+
+    Admin->>Web: Buka halaman login
+    Admin->>Web: Input NIK & password
+    Admin->>Web: Klik Login
+    Web->>Auth: Kirim kredensial
+    Auth->>DB: Query guru by NIK
+    DB-->>Auth: Data guru + password_hash + role
+    Auth->>Auth: Validasi password & role=admin
+    alt Kredensial valid
+        Auth-->>Web: Token/sesi login
+        Web-->>Admin: Redirect ke dashboard
+    else Invalid
+        Auth-->>Web: Error (invalid credential/role)
+        Web-->>Admin: Tampilkan pesan error
+    end
+```
+
+## Kelola Data Guru (CRUD)
+```mermaid
+sequenceDiagram
+    participant Admin as Admin (Web)
+    participant Web as Web Admin UI
+    participant GuruSvc as Guru Service
+    participant DB as Database
+
+    Admin->>Web: Buka menu Kelola Guru
+    Web->>GuruSvc: Request list guru
+    GuruSvc->>DB: SELECT * FROM gurus
+    DB-->>GuruSvc: Daftar guru
+    GuruSvc-->>Web: Data guru
+    Web-->>Admin: Tampilkan tabel guru
+
+    alt Tambah guru
+        Admin->>Web: Klik Tambah
+        Admin->>Web: Isi NIK, nama, email, phone, role, subject, password
+        Web->>GuruSvc: Validasi & create
+        GuruSvc->>DB: INSERT INTO gurus
+        DB-->>GuruSvc: OK
+        GuruSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Edit guru
+        Admin->>Web: Pilih guru + ubah data
+        Web->>GuruSvc: Validasi & update
+        GuruSvc->>DB: UPDATE gurus SET ...
+        DB-->>GuruSvc: OK
+        GuruSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Hapus guru
+        Admin->>Web: Pilih guru + konfirmasi hapus
+        Web->>GuruSvc: Hapus guru
+        GuruSvc->>DB: DELETE FROM gurus WHERE id=?
+        DB-->>GuruSvc: OK (cek constraint wali kelas)
+        GuruSvc-->>Web: Sukses/gagal (tergantung constraint)
+        Web-->>Admin: Notifikasi hasil + refresh list
+    end
+```
+
+## Kelola Data Siswa (CRUD + Orang Tua + QR)
+```mermaid
+sequenceDiagram
+    participant Admin as Admin (Web)
+    participant Web as Web Admin UI
+    participant SiswaSvc as Siswa Service
+    participant QR as QR Generator
+    participant DB as Database
+
+    Admin->>Web: Buka menu Kelola Siswa
+    Web->>SiswaSvc: Request list siswa
+    SiswaSvc->>DB: SELECT students JOIN classes
+    DB-->>SiswaSvc: Daftar siswa
+    SiswaSvc-->>Web: Data siswa
+    Web-->>Admin: Tampilkan tabel siswa
+
+    alt Tambah siswa
+        Admin->>Web: Klik Tambah
+        Admin->>Web: Isi data siswa (NISN, NIS, nama, kelas, gender, TTL, agama, alamat)
+        Admin->>Web: Isi data orang tua/wali + password orang tua
+        Web->>SiswaSvc: Validasi & create siswa+orangtua
+        SiswaSvc->>DB: INSERT INTO students
+        SiswaSvc->>DB: INSERT INTO parents (student_id fk)
+        SiswaSvc->>QR: Generate QR dari NISN
+        QR-->>SiswaSvc: QR code path
+        SiswaSvc->>DB: UPDATE students SET qr_code_path
+        DB-->>SiswaSvc: OK
+        SiswaSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Edit siswa
+        Admin->>Web: Pilih siswa + ubah data siswa/orang tua
+        Web->>SiswaSvc: Validasi & update
+        SiswaSvc->>DB: UPDATE students/parents
+        DB-->>SiswaSvc: OK
+        SiswaSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Hapus siswa
+        Admin->>Web: Pilih siswa + konfirmasi hapus
+        Web->>SiswaSvc: Hapus siswa
+        SiswaSvc->>DB: DELETE FROM students CASCADE parents
+        DB-->>SiswaSvc: OK
+        SiswaSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    end
+```
+
+## Kelola Data Kelas (CRUD)
+```mermaid
+sequenceDiagram
+    participant Admin as Admin (Web)
+    participant Web as Web Admin UI
+    participant KelasSvc as Kelas Service
+    participant DB as Database
+
+    Admin->>Web: Buka menu Kelola Kelas
+    Web->>KelasSvc: Request list kelas
+    KelasSvc->>DB: SELECT * FROM classes JOIN gurus (wali)
+    DB-->>KelasSvc: Daftar kelas
+    KelasSvc-->>Web: Data kelas
+    Web-->>Admin: Tampilkan tabel kelas
+
+    alt Tambah kelas
+        Admin->>Web: Klik Tambah
+        Admin->>Web: Isi nama kelas, grade, wali kelas, tahun ajaran
+        Web->>KelasSvc: Validasi & create
+        KelasSvc->>DB: INSERT INTO classes
+        DB-->>KelasSvc: OK
+        KelasSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Edit kelas
+        Admin->>Web: Pilih kelas + ubah data / wali kelas
+        Web->>KelasSvc: Validasi & update
+        KelasSvc->>DB: UPDATE classes SET ...
+        DB-->>KelasSvc: OK
+        KelasSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Hapus kelas
+        Admin->>Web: Pilih kelas + konfirmasi hapus
+        Web->>KelasSvc: Hapus kelas
+        KelasSvc->>DB: DELETE FROM classes WHERE id=?
+        DB-->>KelasSvc: OK (cek relasi students)
+        KelasSvc-->>Web: Sukses/gagal (jika ada siswa terhubung)
+        Web-->>Admin: Notifikasi hasil + refresh list
+    end
+```
+
+## Kelola Pengumuman (CRUD + Notifikasi)
+```mermaid
+sequenceDiagram
+    participant Admin as Admin (Web)
+    participant Web as Web Admin UI
+    participant PengumumanSvc as Pengumuman Service
+    participant Notif as Notifikasi Service
+    participant DB as Database
+
+    Admin->>Web: Buka menu Kelola Pengumuman
+    Web->>PengumumanSvc: Request list pengumuman
+    PengumumanSvc->>DB: SELECT announcements LEFT JOIN attachments
+    DB-->>PengumumanSvc: Data pengumuman
+    PengumumanSvc-->>Web: Data
+    Web-->>Admin: Tampilkan tabel pengumuman
+
+    alt Tambah pengumuman
+        Admin->>Web: Klik Buat Pengumuman
+        Admin->>Web: Isi judul, konten, target audience, (opsional) lampiran
+        Web->>PengumumanSvc: Validasi & create
+        PengumumanSvc->>DB: INSERT INTO announcements
+        alt Ada lampiran
+            PengumumanSvc->>DB: INSERT INTO attachments
+        end
+        PengumumanSvc-->>Web: Sukses
+        Web->>Notif: Kirim notifikasi ke target audience
+        Notif-->>Web: OK
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Edit pengumuman
+        Admin->>Web: Pilih pengumuman + ubah data
+        Web->>PengumumanSvc: Validasi & update
+        PengumumanSvc->>DB: UPDATE announcements/attachments
+        DB-->>PengumumanSvc: OK
+        PengumumanSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Hapus pengumuman
+        Admin->>Web: Pilih pengumuman + konfirmasi hapus
+        Web->>PengumumanSvc: Hapus pengumuman
+        PengumumanSvc->>DB: DELETE FROM announcements (CASCADE attachments)
+        DB-->>PengumumanSvc: OK
+        PengumumanSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    end
+```
+
+## Proses Reset Password (Approve / Reject)
+```mermaid
+sequenceDiagram
+    participant Admin as Admin (Web)
+    participant Web as Web Admin UI
+    participant ResetSvc as Reset Password Service
+    participant DB as Database
+    participant SMS as WhatsApp/SMS Gateway
+
+    Admin->>Web: Buka menu Permintaan Reset Password
+    Web->>ResetSvc: Request list pending
+    ResetSvc->>DB: SELECT * FROM password_reset_requests WHERE status='pending'
+    DB-->>ResetSvc: Daftar permintaan pending
+    ResetSvc-->>Web: Data
+    Web-->>Admin: Tampilkan daftar
+
+    Admin->>Web: Pilih permintaan
+    Web->>ResetSvc: Minta detail
+    ResetSvc->>DB: SELECT ... WHERE id=?
+    DB-->>ResetSvc: Detail permintaan
+    ResetSvc-->>Web: Detail
+    Web-->>Admin: Tampilkan detail
+
+    Admin->>Web: Pilih Approve/Reject
+    alt Approve
+        Web->>ResetSvc: Approve permintaan
+        ResetSvc->>DB: UPDATE password_reset_requests SET status='completed', processed_by, processed_at
+        ResetSvc->>DB: UPDATE gurus/parents SET password_hash=new_hash
+        ResetSvc->>SMS: Kirim password baru ke phone_number
+        SMS-->>ResetSvc: OK
+        ResetSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi sukses + refresh list
+    else Reject
+        Admin->>Web: Input alasan penolakan
+        Web->>ResetSvc: Reject permintaan
+        ResetSvc->>DB: UPDATE password_reset_requests SET status='rejected', notes, processed_by, processed_at
+        ResetSvc-->>Web: Sukses
+        Web-->>Admin: Notifikasi penolakan + refresh list
+    end
+```
+
+## Pantau Dashboard Admin
+```mermaid
+sequenceDiagram
+    participant Admin as Admin (Web)
+    participant Web as Web Admin UI
+    participant Dashboard as Dashboard Service
+    participant DB as Database
+
+    Admin->>Web: Login & buka dashboard
+    Web->>Dashboard: Request data dashboard (statistik, grafik, pengumuman, pending requests)
+    Dashboard->>DB: Query totals (gurus, students, classes)
+    Dashboard->>DB: Query presensi hari ini & tren
+    Dashboard->>DB: Query pengumuman terbaru
+    Dashboard->>DB: Query permintaan izin & reset password pending
+    DB-->>Dashboard: Data terhimpun
+    Dashboard-->>Web: Paket data dashboard
+    Web-->>Admin: Render kartu statistik, grafik, list pengumuman, badge pending
+
+    alt Filter data (periode/kelas)
+        Admin->>Web: Set filter
+        Web->>Dashboard: Request data dengan filter
+        Dashboard->>DB: Query ulang dengan filter
+        DB-->>Dashboard: Data
+        Dashboard-->>Web: Data terfilter
+        Web-->>Admin: Refresh dashboard
+    else Export laporan
+        Admin->>Web: Klik Export (PDF/Excel)
+        Web->>Dashboard: Generate laporan
+        Dashboard->>DB: Query data untuk laporan
+        DB-->>Dashboard: Data
+        Dashboard-->>Web: File laporan
+        Web-->>Admin: Unduh laporan
+    end
+```

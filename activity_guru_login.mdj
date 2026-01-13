@@ -1,0 +1,2660 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "SapaRaudha - Activity Diagram",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLActivity",
+					"_id": "Activity_LoginGuru",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Login Guru",
+					"ownedElements": [
+						{
+							"_type": "UMLActivityDiagram",
+							"_id": "ActivityDiagram_LoginGuru",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "AD - Login Guru",
+							"ownedViews": [
+								{
+									"_type": "UMLFrameView",
+									"_id": "Frame_LoginGuru",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Activity_LoginGuru"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo0Xls0GnKfE=",
+											"_parent": {
+												"$ref": "Frame_LoginGuru"
+											},
+											"font": "Arial;13;1",
+											"parentStyle": true,
+											"left": 45,
+											"top": 21,
+											"width": 17.341796875,
+											"height": 13,
+											"text": "act"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "Frame_LoginGuru_NameLabel",
+											"_parent": {
+												"$ref": "Frame_LoginGuru"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 68.341796875,
+											"top": 21,
+											"width": 64.32080078125,
+											"height": 13,
+											"text": "Login Guru"
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 40,
+									"top": 16,
+									"width": 904,
+									"height": 664,
+									"nameLabel": {
+										"$ref": "Frame_LoginGuru_NameLabel"
+									},
+									"frameTypeLabel": {
+										"$ref": "AAAAAAGbo0Xls0GnKfE="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Guru",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Partition_Guru"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo0Xls0Gq3Mg=",
+											"_parent": {
+												"$ref": "Swimlane_Guru"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 56,
+											"top": 52,
+											"width": 220,
+											"height": 13,
+											"text": "Guru",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Guru_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Guru"
+											},
+											"model": {
+												"$ref": "Partition_Guru"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEGszrA=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 55,
+													"top": 61,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEGtQNU=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 55,
+													"top": 76,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEGuc1Q=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 55,
+													"top": 91,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEGv09c=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 55,
+													"top": 106,
+													"width": 208,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 50,
+											"top": 56,
+											"width": 218,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XltEGszrA="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XltEGtQNU="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XltEGuc1Q="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XltEGv09c="
+											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbo0b5dkKGGWQ="
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 56,
+									"top": 48,
+									"width": 220,
+									"height": 600,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0Xls0Gq3Mg="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_System",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Partition_System"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo0XltEGx03A=",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 277,
+											"top": 52,
+											"width": 320,
+											"height": 13,
+											"text": "Sistem",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_System_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"model": {
+												"$ref": "Partition_System"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEGzOyA=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 284,
+													"top": 61,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEG06nw=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 284,
+													"top": 76,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEG1wMg=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 284,
+													"top": 91,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltEG2qPc=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 284,
+													"top": 106,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 279,
+											"top": 56,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XltEGzOyA="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XltEG06nw="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XltEG1wMg="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XltEG2qPc="
+											}
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 277,
+									"top": 48,
+									"width": 320,
+									"height": 600,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0XltEGx03A="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Database",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Partition_Database"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo0XltEG4kt8=",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 598,
+											"top": 52,
+											"width": 320,
+											"height": 13,
+											"text": "Database",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Database_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"model": {
+												"$ref": "Partition_Database"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUG6LEo=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 605,
+													"top": 61,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUG78QU=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 605,
+													"top": 76,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUG8ldY=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 605,
+													"top": 91,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUG9fOM=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 605,
+													"top": 106,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 600,
+											"top": 56,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XltUG6LEo="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XltUG78QU="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XltUG8ldY="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XltUG9fOM="
+											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbo0g+T0KZngc="
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 598,
+									"top": 48,
+									"width": 320,
+									"height": 600,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0XltEG4kt8="
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_BukaAplikasi",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_BukaAplikasiModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_BukaAplikasi_NameLabel",
+											"_parent": {
+												"$ref": "Action_BukaAplikasi"
+											},
+											"model": {
+												"$ref": "Action_BukaAplikasiModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUHF7CI=",
+													"_parent": {
+														"$ref": "Action_BukaAplikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUHGwj0=",
+													"_parent": {
+														"$ref": "Action_BukaAplikasi_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 143,
+													"width": 131.03173828125,
+													"height": 13,
+													"text": "Buka Aplikasi Mobile"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUHHkRc=",
+													"_parent": {
+														"$ref": "Action_BukaAplikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltUHIxVo=",
+													"_parent": {
+														"$ref": "Action_BukaAplikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 136,
+											"width": 141.03173828125,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XltUHF7CI="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XltUHGwj0="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XltUHHkRc="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XltUHIxVo="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 136,
+									"width": 140.03173828125,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_BukaAplikasi_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_InputNIKPassword",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_InputNIKPasswordModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_InputNIKPassword_NameLabel",
+											"_parent": {
+												"$ref": "Action_InputNIKPassword"
+											},
+											"model": {
+												"$ref": "Action_InputNIKPasswordModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHQePI=",
+													"_parent": {
+														"$ref": "Action_InputNIKPassword_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHRljc=",
+													"_parent": {
+														"$ref": "Action_InputNIKPassword_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 207,
+													"width": 136.7890625,
+													"height": 13,
+													"text": "Input NIK & Password"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHSHOo=",
+													"_parent": {
+														"$ref": "Action_InputNIKPassword_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHT4VM=",
+													"_parent": {
+														"$ref": "Action_InputNIKPassword_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 200,
+											"width": 146.7890625,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XltkHQePI="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XltkHRljc="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XltkHSHOo="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XltkHT4VM="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 200,
+									"width": 145.7890625,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_InputNIKPassword_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_ValidasiLogin",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_ValidasiLoginModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_ValidasiLogin_NameLabel",
+											"_parent": {
+												"$ref": "Action_ValidasiLogin"
+											},
+											"model": {
+												"$ref": "Action_ValidasiLoginModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHbhGM=",
+													"_parent": {
+														"$ref": "Action_ValidasiLogin_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHceFU=",
+													"_parent": {
+														"$ref": "Action_ValidasiLogin_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 333,
+													"top": 207,
+													"width": 209,
+													"height": 13,
+													"text": "Validasi NIK & Password"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHdwR4=",
+													"_parent": {
+														"$ref": "Action_ValidasiLogin_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XltkHe/ss=",
+													"_parent": {
+														"$ref": "Action_ValidasiLogin_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 328,
+											"top": 200,
+											"width": 219,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XltkHbhGM="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XltkHceFU="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XltkHdwR4="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XltkHe/ss="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 328,
+									"top": 200,
+									"width": 218,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_ValidasiLogin_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_CekDatabase",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_CekDatabaseModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_CekDatabase_NameLabel",
+											"_parent": {
+												"$ref": "Action_CekDatabase"
+											},
+											"model": {
+												"$ref": "Action_CekDatabaseModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0Hmuc4=",
+													"_parent": {
+														"$ref": "Action_CekDatabase_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0HnV8I=",
+													"_parent": {
+														"$ref": "Action_CekDatabase_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 661,
+													"top": 207,
+													"width": 209,
+													"height": 13,
+													"text": "Cek Data Guru di Tabel guru"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0HoSFA=",
+													"_parent": {
+														"$ref": "Action_CekDatabase_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0HpRf4=",
+													"_parent": {
+														"$ref": "Action_CekDatabase_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 656,
+											"top": 200,
+											"width": 219,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0Xlt0Hmuc4="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0Xlt0HnV8I="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0Xlt0HoSFA="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0Xlt0HpRf4="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 656,
+									"top": 200,
+									"width": 218,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_CekDatabase_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanError",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_TampilkanErrorModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanError_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanError"
+											},
+											"model": {
+												"$ref": "Action_TampilkanErrorModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0HxCdM=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0HyMKo=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 287,
+													"width": 141.64501953125,
+													"height": 13,
+													"text": "Tampilkan Pesan Error"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0Hz2ho=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0H0bL0=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 280,
+											"width": 151.64501953125,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0Xlt0HxCdM="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0Xlt0HyMKo="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0Xlt0Hz2ho="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0Xlt0H0bL0="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 280,
+									"width": 150.64501953125,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanError_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_GenerateToken",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_GenerateTokenModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_GenerateToken_NameLabel",
+											"_parent": {
+												"$ref": "Action_GenerateToken"
+											},
+											"model": {
+												"$ref": "Action_GenerateTokenModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0H86CI=",
+													"_parent": {
+														"$ref": "Action_GenerateToken_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0H99nw=",
+													"_parent": {
+														"$ref": "Action_GenerateToken_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 333,
+													"top": 367,
+													"width": 209,
+													"height": 13,
+													"text": "Generate JWT Token"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0Xlt0H+414=",
+													"_parent": {
+														"$ref": "Action_GenerateToken_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluEH/dPk=",
+													"_parent": {
+														"$ref": "Action_GenerateToken_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 328,
+											"top": 360,
+											"width": 219,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0Xlt0H86CI="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0Xlt0H99nw="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0Xlt0H+414="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XluEH/dPk="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 328,
+									"top": 360,
+									"width": 218,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_GenerateToken_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_SimpanSession",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_SimpanSessionModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_SimpanSession_NameLabel",
+											"_parent": {
+												"$ref": "Action_SimpanSession"
+											},
+											"model": {
+												"$ref": "Action_SimpanSessionModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluEIHziY=",
+													"_parent": {
+														"$ref": "Action_SimpanSession_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluEIIkNw=",
+													"_parent": {
+														"$ref": "Action_SimpanSession_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 333,
+													"top": 431,
+													"width": 209,
+													"height": 13,
+													"text": "Simpan Token & Profile"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluEIJrAQ=",
+													"_parent": {
+														"$ref": "Action_SimpanSession_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluEIKI9I=",
+													"_parent": {
+														"$ref": "Action_SimpanSession_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 328,
+											"top": 424,
+											"width": 219,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XluEIHziY="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XluEIIkNw="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XluEIJrAQ="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XluEIKI9I="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 328,
+									"top": 424,
+									"width": 218,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_SimpanSession_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanDashboard",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_TampilkanDashboardModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanDashboard_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanDashboard"
+											},
+											"model": {
+												"$ref": "Action_TampilkanDashboardModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUISlb8=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -32,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUITFoc=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 85,
+													"top": 511,
+													"width": 170.5078125,
+													"height": 13,
+													"text": "Tampilkan Dashboard Guru"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUIURas=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -32,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Login Guru)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUIVDxs=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -32,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 80,
+											"top": 504,
+											"width": 180.5078125,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XluUISlb8="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XluUITFoc="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XluUIURas="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XluUIVDxs="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 80,
+									"top": 504,
+									"width": 179.5078125,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanDashboard_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_BukaApp_Input",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_BukaApp_InputModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlukIdbRA=",
+											"_parent": {
+												"$ref": "Flow_BukaApp_Input"
+											},
+											"model": {
+												"$ref": "Flow_BukaApp_InputModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 196,
+											"top": 181,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_BukaApp_Input"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlukIe4vY=",
+											"_parent": {
+												"$ref": "Flow_BukaApp_Input"
+											},
+											"model": {
+												"$ref": "Flow_BukaApp_InputModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 152,
+											"top": 182,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_BukaApp_Input"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_BukaApp_Input_NameLabel",
+											"_parent": {
+												"$ref": "Flow_BukaApp_Input"
+											},
+											"model": {
+												"$ref": "Flow_BukaApp_InputModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 167,
+											"top": 193,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_InputNIKPassword"
+									},
+									"tail": {
+										"$ref": "Action_BukaAplikasi"
+									},
+									"lineStyle": 1,
+									"points": "167:178;167:199",
+									"nameLabel": {
+										"$ref": "Flow_BukaApp_Input_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0XlukIdbRA="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0XlukIe4vY="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_Input_Validasi",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Input_ValidasiModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0Xlu0IiLys=",
+											"_parent": {
+												"$ref": "Flow_Input_Validasi"
+											},
+											"model": {
+												"$ref": "Flow_Input_ValidasiModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 285,
+											"top": 184,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_Input_Validasi"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0Xlu0IjRwM=",
+											"_parent": {
+												"$ref": "Flow_Input_Validasi"
+											},
+											"model": {
+												"$ref": "Flow_Input_ValidasiModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 285,
+											"top": 229,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_Input_Validasi"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_Input_Validasi_NameLabel",
+											"_parent": {
+												"$ref": "Flow_Input_Validasi"
+											},
+											"model": {
+												"$ref": "Flow_Input_ValidasiModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 327,
+											"top": 214,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_ValidasiLogin"
+									},
+									"tail": {
+										"$ref": "Action_InputNIKPassword"
+									},
+									"lineStyle": 1,
+									"points": "243:220;327:220",
+									"nameLabel": {
+										"$ref": "Flow_Input_Validasi_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0Xlu0IiLys="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0Xlu0IjRwM="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_Validasi_CekDB",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Validasi_CekDBModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0Xlu0IneWM=",
+											"_parent": {
+												"$ref": "Flow_Validasi_CekDB"
+											},
+											"model": {
+												"$ref": "Flow_Validasi_CekDBModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 601,
+											"top": 184,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_Validasi_CekDB"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0Xlu0IoQ0o=",
+											"_parent": {
+												"$ref": "Flow_Validasi_CekDB"
+											},
+											"model": {
+												"$ref": "Flow_Validasi_CekDBModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 601,
+											"top": 229,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_Validasi_CekDB"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_Validasi_CekDB_NameLabel",
+											"_parent": {
+												"$ref": "Flow_Validasi_CekDB"
+											},
+											"model": {
+												"$ref": "Flow_Validasi_CekDBModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 655,
+											"top": 214,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_CekDatabase"
+									},
+									"tail": {
+										"$ref": "Action_ValidasiLogin"
+									},
+									"lineStyle": 1,
+									"points": "547:220;655:220",
+									"nameLabel": {
+										"$ref": "Flow_Validasi_CekDB_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0Xlu0IneWM="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0Xlu0IoQ0o="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_Error_Input",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Error_InputModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlvEI24K0=",
+											"_parent": {
+												"$ref": "Flow_Error_Input"
+											},
+											"model": {
+												"$ref": "Flow_Error_InputModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 36,
+											"top": 252,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_Error_Input"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlvEI3YhU=",
+											"_parent": {
+												"$ref": "Flow_Error_Input"
+											},
+											"model": {
+												"$ref": "Flow_Error_InputModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 80,
+											"top": 253,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_Error_Input"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_Error_Input_NameLabel",
+											"_parent": {
+												"$ref": "Flow_Error_Input"
+											},
+											"model": {
+												"$ref": "Flow_Error_InputModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 96,
+											"top": 213,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_InputNIKPassword"
+									},
+									"tail": {
+										"$ref": "Action_TampilkanError"
+									},
+									"points": "96:299;66:299;66:219;96:219",
+									"nameLabel": {
+										"$ref": "Flow_Error_Input_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0XlvEI24K0="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0XlvEI3YhU="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_Token_Session",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Token_SessionModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlvEJAqng=",
+											"_parent": {
+												"$ref": "Flow_Token_Session"
+											},
+											"model": {
+												"$ref": "Flow_Token_SessionModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 466,
+											"top": 405,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_Token_Session"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlvEJBFHc=",
+											"_parent": {
+												"$ref": "Flow_Token_Session"
+											},
+											"model": {
+												"$ref": "Flow_Token_SessionModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 422,
+											"top": 406,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_Token_Session"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_Token_Session_NameLabel",
+											"_parent": {
+												"$ref": "Flow_Token_Session"
+											},
+											"model": {
+												"$ref": "Flow_Token_SessionModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 437,
+											"top": 417,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_SimpanSession"
+									},
+									"tail": {
+										"$ref": "Action_GenerateToken"
+									},
+									"lineStyle": 1,
+									"points": "437:402;437:423",
+									"nameLabel": {
+										"$ref": "Flow_Token_Session_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0XlvEJAqng="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0XlvEJBFHc="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_Session_Dashboard",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Session_DashboardModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlvUJFo2E=",
+											"_parent": {
+												"$ref": "Flow_Session_Dashboard"
+											},
+											"model": {
+												"$ref": "Flow_Session_DashboardModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 195,
+											"top": 436,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_Session_Dashboard"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0XlvUJGW88=",
+											"_parent": {
+												"$ref": "Flow_Session_Dashboard"
+											},
+											"model": {
+												"$ref": "Flow_Session_DashboardModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 151,
+											"top": 437,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_Session_Dashboard"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_Session_Dashboard_NameLabel",
+											"_parent": {
+												"$ref": "Flow_Session_Dashboard"
+											},
+											"model": {
+												"$ref": "Flow_Session_DashboardModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 166,
+											"top": 498,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanDashboard"
+									},
+									"tail": {
+										"$ref": "Action_SimpanSession"
+									},
+									"points": "328:443;166:443;166:504",
+									"nameLabel": {
+										"$ref": "Flow_Session_Dashboard_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0XlvUJFo2E="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0XlvUJGW88="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo0btrkJ1P0w=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "InitialNode_LoginGuruModel"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 156,
+									"top": 88,
+									"width": 20,
+									"height": 20
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo0btsEJ2N9A=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Initial_BukaAppModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0btsEJ37w4=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0btsEJ2N9A="
+											},
+											"model": {
+												"$ref": "Flow_Initial_BukaAppModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 180,
+											"top": 115,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0btsEJ2N9A="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0btsEJ4+Ps=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0btsEJ2N9A="
+											},
+											"model": {
+												"$ref": "Flow_Initial_BukaAppModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 195,
+											"top": 115,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0btsEJ2N9A="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0btsEJ5Z/o=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0btsEJ2N9A="
+											},
+											"model": {
+												"$ref": "Flow_Initial_BukaAppModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 151,
+											"top": 116,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0btsEJ2N9A="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_BukaAplikasi"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo0btrkJ1P0w="
+									},
+									"lineStyle": 1,
+									"points": "166:109;166:135",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0btsEJ37w4="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0btsEJ4+Ps="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0btsEJ5Z/o="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo0b5dkKHWps=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Dashboard_FinalModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0b5dkKIsaY=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0b5dkKHWps="
+											},
+											"model": {
+												"$ref": "Flow_Dashboard_FinalModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 174,
+											"top": 557,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0b5dkKHWps="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0b5dkKJ0qY=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0b5dkKHWps="
+											},
+											"model": {
+												"$ref": "Flow_Dashboard_FinalModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 189,
+											"top": 557,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0b5dkKHWps="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0b5dkKKnwE=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0b5dkKHWps="
+											},
+											"model": {
+												"$ref": "Flow_Dashboard_FinalModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 145,
+											"top": 558,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0b5dkKHWps="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbo0b5dkKGGWQ="
+									},
+									"tail": {
+										"$ref": "Action_TampilkanDashboard"
+									},
+									"points": "160:545;160:584",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0b5dkKIsaY="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0b5dkKJ0qY="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0b5dkKKnwE="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo0b5dkKGGWQ=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "FinalNode_LoginGuruModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 144,
+									"top": 584,
+									"width": 26,
+									"height": 26
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo0g+UEKabt8=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_CekDB_DecisionModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKb6aU=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKabt8="
+											},
+											"model": {
+												"$ref": "Flow_CekDB_DecisionModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 778,
+											"top": 261,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKabt8="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKcT3c=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKabt8="
+											},
+											"model": {
+												"$ref": "Flow_CekDB_DecisionModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 793,
+											"top": 261,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKabt8="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKdGTk=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKabt8="
+											},
+											"model": {
+												"$ref": "Flow_CekDB_DecisionModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 749,
+											"top": 262,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKabt8="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbo0g+T0KZngc="
+									},
+									"tail": {
+										"$ref": "Action_CekDatabase"
+									},
+									"points": "764:241;764:296",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0g+UEKb6aU="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0g+UEKcT3c="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0g+UEKdGTk="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo0g+UEKeCwU=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Decision_ErrorModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKfzSw=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKeCwU="
+											},
+											"model": {
+												"$ref": "Flow_Decision_ErrorModel"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 445,
+											"top": 314,
+											"width": 96.103515625,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKeCwU="
+											},
+											"edgePosition": 1,
+											"text": "[Data tidak valid]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKgQjM=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKeCwU="
+											},
+											"model": {
+												"$ref": "Flow_Decision_ErrorModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 493,
+											"top": 329,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKeCwU="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKhzTo=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKeCwU="
+											},
+											"model": {
+												"$ref": "Flow_Decision_ErrorModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 494,
+											"top": 284,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKeCwU="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanError"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo0g+T0KZngc="
+									},
+									"points": "742:305;247:305",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0g+UEKfzSw="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0g+UEKgQjM="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0g+UEKhzTo="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo0g+UEKihhk=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Flow_Decision_TokenModel"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKj8YQ=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKihhk="
+											},
+											"model": {
+												"$ref": "Flow_Decision_TokenModel"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 745,
+											"top": 389,
+											"width": 35.166015625,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKihhk="
+											},
+											"edgePosition": 1,
+											"text": "[Valid]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKkwFM=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKihhk="
+											},
+											"model": {
+												"$ref": "Flow_Decision_TokenModel"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 762,
+											"top": 404,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKihhk="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo0g+UEKlW8Q=",
+											"_parent": {
+												"$ref": "AAAAAAGbo0g+UEKihhk="
+											},
+											"model": {
+												"$ref": "Flow_Decision_TokenModel"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 763,
+											"top": 359,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo0g+UEKihhk="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_GenerateToken"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo0g+T0KZngc="
+									},
+									"points": "763:315;763:380;546:380",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo0g+UEKj8YQ="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo0g+UEKkwFM="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo0g+UEKlW8Q="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo0g+T0KZngc=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Decision_DataValidModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 742,
+									"top": 296,
+									"width": 23,
+									"height": 19
+								}
+							]
+						}
+					],
+					"nodes": [
+						{
+							"_type": "UMLInitialNode",
+							"_id": "InitialNode_LoginGuruModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Initial1"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_BukaAplikasiModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Buka Aplikasi Mobile"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_InputNIKPasswordModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Input NIK & Password"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_ValidasiLoginModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Validasi NIK & Password"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_CekDatabaseModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Cek Data Guru di Tabel guru"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanErrorModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Tampilkan Pesan Error"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_GenerateTokenModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Generate JWT Token"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_SimpanSessionModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Simpan Token & Profile"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanDashboardModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Tampilkan Dashboard Guru"
+						}
+					],
+					"edges": [
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Initial_BukaAppModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "InitialNode_LoginGuruModel"
+							},
+							"target": {
+								"$ref": "Action_BukaAplikasiModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_BukaApp_InputModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_BukaAplikasiModel"
+							},
+							"target": {
+								"$ref": "Action_InputNIKPasswordModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Input_ValidasiModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_InputNIKPasswordModel"
+							},
+							"target": {
+								"$ref": "Action_ValidasiLoginModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Validasi_CekDBModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_ValidasiLoginModel"
+							},
+							"target": {
+								"$ref": "Action_CekDatabaseModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_CekDB_DecisionModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_CekDatabaseModel"
+							},
+							"target": {
+								"$ref": "Decision_DataValidModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Decision_ErrorModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "[Data tidak valid]",
+							"source": {
+								"$ref": "Decision_DataValidModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanErrorModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Error_InputModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_TampilkanErrorModel"
+							},
+							"target": {
+								"$ref": "Action_InputNIKPasswordModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Decision_TokenModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "[Valid]",
+							"source": {
+								"$ref": "Decision_DataValidModel"
+							},
+							"target": {
+								"$ref": "Action_GenerateTokenModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Token_SessionModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_GenerateTokenModel"
+							},
+							"target": {
+								"$ref": "Action_SimpanSessionModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Session_DashboardModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_SimpanSessionModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanDashboardModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_Dashboard_FinalModel",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "Action_TampilkanDashboardModel"
+							},
+							"target": {
+								"$ref": "FinalNode_LoginGuruModel"
+							}
+						}
+					],
+					"groups": [
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Guru",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Guru",
+							"nodes": [
+								{
+									"_type": "UMLActivityFinalNode",
+									"_id": "FinalNode_LoginGuruModel",
+									"_parent": {
+										"$ref": "Partition_Guru"
+									},
+									"name": "ActivityFinal1"
+								}
+							]
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_System",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Sistem"
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Database",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"name": "Database",
+							"nodes": [
+								{
+									"_type": "UMLDecisionNode",
+									"_id": "Decision_DataValidModel",
+									"_parent": {
+										"$ref": "Partition_Database"
+									},
+									"name": "Decision1"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"documentVersion": 1
+}

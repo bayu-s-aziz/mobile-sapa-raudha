@@ -1,0 +1,165 @@
+{
+	"_type": "Project",
+	"_id": "ActivityDiagram_Admin_KelolaGuru_Project",
+	"name": "Activity Diagram - Admin Kelola Data Guru",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "ActivityDiagram_Admin_KelolaGuru_Model",
+			"_parent": {
+				"$ref": "ActivityDiagram_Admin_KelolaGuru_Project"
+			},
+			"name": "Admin Kelola Guru Model",
+			"ownedElements": [
+				{
+					"_type": "UMLActivityDiagram",
+					"_id": "ActivityDiagram_Admin_KelolaGuru",
+					"_parent": {
+						"$ref": "ActivityDiagram_Admin_KelolaGuru_Model"
+					},
+					"name": "Activity Diagram - Admin Kelola Data Guru",
+					"ownedViews": [],
+					"documentation": "Activity diagram untuk proses kelola data guru oleh admin.\n\nDeskripsi:\n1. Admin membuka menu Kelola Guru\n2. Sistem menampilkan daftar guru\n3. Admin memilih aksi (Tambah/Edit/Hapus)\n4. Untuk Tambah: Admin input data guru baru (NIK, nama, email, phone, role, subject, password)\n5. Untuk Edit: Admin pilih guru, ubah data, simpan\n6. Untuk Hapus: Admin pilih guru, konfirmasi hapus\n7. Sistem menyimpan perubahan ke database\n8. Sistem menampilkan notifikasi sukses/gagal"
+				},
+				{
+					"_type": "UMLActivity",
+					"_id": "Activity_AdminKelolaGuru",
+					"_parent": {
+						"$ref": "ActivityDiagram_Admin_KelolaGuru_Model"
+					},
+					"name": "Kelola Data Guru",
+					"ownedElements": [
+						{
+							"_type": "UMLActivityNode",
+							"_id": "InitialNode_Start",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Start"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_BukaMenuGuru",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Buka Menu Kelola Guru"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanDaftarGuru",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Sistem Tampilkan Daftar Guru"
+						},
+						{
+							"_type": "UMLDecisionNode",
+							"_id": "Decision_PilihAksi",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Pilih Aksi?"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_KlikTambah",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Klik Tambah Guru"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_InputDataGuru",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Input Data Guru Baru (NIK, Nama, Email, Phone, Role, Subject, Password)"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_PilihGuru",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Pilih Guru dari Daftar"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_UbahData",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Ubah Data Guru"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_KonfirmasiHapus",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Konfirmasi Hapus Guru"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_ValidasiData",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Sistem Validasi Data"
+						},
+						{
+							"_type": "UMLDecisionNode",
+							"_id": "Decision_DataValid",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Data Valid?"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanError",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Tampilkan Pesan Error"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_SimpanKeDatabase",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Simpan Perubahan ke Database"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanSukses",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Tampilkan Notifikasi Sukses"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_RefreshDaftar",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "Refresh Daftar Guru"
+						},
+						{
+							"_type": "UMLActivityFinalNode",
+							"_id": "FinalNode_End",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaGuru"
+							},
+							"name": "End"
+						}
+					]
+				}
+			]
+		}
+	]
+}

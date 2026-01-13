@@ -1,0 +1,165 @@
+{
+	"_type": "Project",
+	"_id": "ActivityDiagram_Admin_PantauDashboard_Project",
+	"name": "Activity Diagram - Admin Pantau Dashboard",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "ActivityDiagram_Admin_PantauDashboard_Model",
+			"_parent": {
+				"$ref": "ActivityDiagram_Admin_PantauDashboard_Project"
+			},
+			"name": "Admin Pantau Dashboard Model",
+			"ownedElements": [
+				{
+					"_type": "UMLActivityDiagram",
+					"_id": "ActivityDiagram_Admin_PantauDashboard",
+					"_parent": {
+						"$ref": "ActivityDiagram_Admin_PantauDashboard_Model"
+					},
+					"name": "Activity Diagram - Admin Pantau Dashboard",
+					"ownedViews": [],
+					"documentation": "Activity diagram untuk pantau dashboard admin.\n\nDeskripsi:\n1. Admin login ke sistem\n2. Sistem menampilkan dashboard dengan statistik:\n   - Total guru, siswa, kelas\n   - Statistik presensi hari ini (hadir, izin, sakit, alpa)\n   - Grafik presensi mingguan/bulanan\n   - Daftar pengumuman terbaru\n   - Permintaan izin pending\n   - Permintaan reset password pending\n3. Admin dapat filter data berdasarkan periode/kelas\n4. Admin dapat export laporan dalam format PDF/Excel\n5. Admin dapat melihat detail dengan klik pada statistik tertentu"
+				},
+				{
+					"_type": "UMLActivity",
+					"_id": "Activity_AdminPantauDashboard",
+					"_parent": {
+						"$ref": "ActivityDiagram_Admin_PantauDashboard_Model"
+					},
+					"name": "Pantau Dashboard Admin",
+					"ownedElements": [
+						{
+							"_type": "UMLActivityNode",
+							"_id": "InitialNode_Start",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Start"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_LoginSistem",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Admin Login ke Sistem"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_LoadDataDashboard",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Sistem Load Data Dashboard"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanStatistik",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Tampilkan Statistik (Total Guru, Siswa, Kelas)"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanPresensi",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Tampilkan Statistik Presensi Hari Ini"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanGrafik",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Tampilkan Grafik Presensi (Mingguan/Bulanan)"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanPengumumanTerbaru",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Tampilkan Pengumuman Terbaru"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanPermintaanPending",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Tampilkan Permintaan Pending (Izin & Reset Password)"
+						},
+						{
+							"_type": "UMLDecisionNode",
+							"_id": "Decision_AdminAksi",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Admin Pilih Aksi?"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_FilterData",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Filter Data (Periode/Kelas)"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_RefreshDashboard",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Refresh Dashboard dengan Filter"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_ExportLaporan",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Export Laporan (PDF/Excel)"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_DownloadFile",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Download File Laporan"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_LihatDetail",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Lihat Detail Data"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_RedirectKeMenu",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "Redirect ke Menu Terkait"
+						},
+						{
+							"_type": "UMLActivityFinalNode",
+							"_id": "FinalNode_End",
+							"_parent": {
+								"$ref": "Activity_AdminPantauDashboard"
+							},
+							"name": "End"
+						}
+					]
+				}
+			]
+		}
+	]
+}

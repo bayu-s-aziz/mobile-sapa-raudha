@@ -5,6 +5,8 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import http from 'http';
+import { WebSocketServer } from 'ws';
 import { pool } from './mysql.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -563,6 +565,47 @@ app.post('/announcements', authMiddleware, upload.single('attachment'), async (r
           req.file.size
         ]
       );
+    }
+
+    // Send notification via WebSocket
+    try {
+      const notificationData = {
+        type: 'announcement',
+        announcement_id: announcementId
+      };
+
+      if (target_audience === 'all') {
+        // Broadcast to all parents
+        await createAndSendNotification({
+          title: 'Pengumuman Baru',
+          body: title,
+          userRole: 'parent',
+          isBroadcast: true,
+          data: notificationData
+        });
+      } else if (target_class_id) {
+        // Send to specific class parents
+        const [parents] = await pool.query(
+          `SELECT DISTINCT p.id 
+           FROM parents p 
+           JOIN students s ON p.student_id = s.id 
+           WHERE s.class_id = ?`,
+          [target_class_id]
+        );
+
+        for (const parent of parents) {
+          await createAndSendNotification({
+            title: 'Pengumuman Baru',
+            body: title,
+            userId: parent.id,
+            userRole: 'parent',
+            data: notificationData
+          });
+        }
+      }
+    } catch (notifError) {
+      console.error('Error sending notification:', notifError);
+      // Continue even if notification fails
     }
     
     return res.status(201).json({ 
@@ -1740,4 +1783,178 @@ app.get('/api/password-reset-requests/pending-count', authMiddleware, async (req
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`API listening on ${port}`));
+
+// Create HTTP server
+const server = http.createServer(app);
+
+// Initialize WebSocket
+const wss = new WebSocketServer({ server, path: '/ws' });
+
+// Map untuk menyimpan koneksi WebSocket
+const connections = new Map();
+
+wss.on('connection', async (ws, req) => {
+  let userId = null;
+  let userRole = null;
+  let isAuthenticated = false;
+
+  try {
+    // Parse token dari query string
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const token = url.searchParams.get('token');
+
+    if (!token) {
+      ws.close(1008, 'No token provided');
+      return;
+    }
+
+    // Verify token
+    const decoded = jwt.verify(token, JWT_SECRET);
+    userId = decoded.id;
+    userRole = decoded.role;
+    isAuthenticated = true;
+
+    // Store connection
+    const connectionKey = `${userRole}_${userId}`;
+    connections.set(connectionKey, ws);
+
+    console.log(`WebSocket connected: User ${userId} (${userRole})`);
+
+    // Send welcome message
+    ws.send(JSON.stringify({
+      type: 'message',
+      message: 'Connected to SAPA Raudha notification service'
+    }));
+
+  } catch (error) {
+    console.error('WebSocket authentication error:', error);
+    ws.close(1008, 'Authentication failed');
+    return;
+  }
+
+  // Handle incoming messages
+  ws.on('message', (message) => {
+    try {
+      const data = JSON.parse(message.toString());
+      
+      switch (data.type) {
+        case 'ping':
+          // Respond to heartbeat
+          ws.send(JSON.stringify({ type: 'pong' }));
+          break;
+        
+        default:
+          console.log('Unknown message type:', data.type);
+      }
+    } catch (error) {
+      console.error('Error parsing message:', error);
+    }
+  });
+
+  // Handle connection close
+  ws.on('close', () => {
+    if (isAuthenticated) {
+      const connectionKey = `${userRole}_${userId}`;
+      connections.delete(connectionKey);
+      console.log(`WebSocket disconnected: User ${userId} (${userRole})`);
+    }
+  });
+
+  // Handle errors
+  ws.on('error', (error) => {
+    console.error('WebSocket error:', error);
+  });
+});
+
+// Helper functions untuk mengirim notifikasi via WebSocket
+function sendNotificationToUser(userId, userRole, notification) {
+  const connectionKey = `${userRole}_${userId}`;
+  const ws = connections.get(connectionKey);
+
+  if (ws && ws.readyState === 1) { // 1 = OPEN
+    ws.send(JSON.stringify({
+      type: 'notification',
+      ...notification
+    }));
+    return true;
+  }
+  return false;
+}
+
+function broadcastToRole(role, notification) {
+  let sentCount = 0;
+  
+  connections.forEach((ws, key) => {
+    if (key.startsWith(`${role}_`) && ws.readyState === 1) {
+      ws.send(JSON.stringify({
+        type: 'notification',
+        ...notification
+      }));
+      sentCount++;
+    }
+  });
+
+  console.log(`Broadcast to ${role}: ${sentCount} connections`);
+  return sentCount;
+}
+
+function broadcastToAll(notification) {
+  let sentCount = 0;
+  
+  connections.forEach((ws) => {
+    if (ws.readyState === 1) {
+      ws.send(JSON.stringify({
+        type: 'notification',
+        ...notification
+      }));
+      sentCount++;
+    }
+  });
+
+  console.log(`Broadcast to all: ${sentCount} connections`);
+  return sentCount;
+}
+
+// Helper untuk save notification ke database dan kirim via WebSocket
+async function createAndSendNotification({ title, body, userId, userRole, isBroadcast = false, data = {} }) {
+  try {
+    // Save ke database
+    const [result] = await pool.query(
+      `INSERT INTO notifications 
+       (title, body, user_id, user_role, is_broadcast, data, created_at) 
+       VALUES (?, ?, ?, ?, ?, ?, NOW())`,
+      [title, body, userId || null, userRole || null, isBroadcast ? 1 : 0, JSON.stringify(data)]
+    );
+
+    const notification = {
+      id: result.insertId,
+      title,
+      body,
+      data
+    };
+
+    // Send via WebSocket
+    if (isBroadcast) {
+      if (userRole) {
+        broadcastToRole(userRole, notification);
+      } else {
+        broadcastToAll(notification);
+      }
+    } else if (userId && userRole) {
+      sendNotificationToUser(userId, userRole, notification);
+    }
+
+    return notification;
+  } catch (error) {
+    console.error('Error creating notification:', error);
+    throw error;
+  }
+}
+
+// Make functions available to routes
+app.sendNotificationToUser = sendNotificationToUser;
+app.broadcastToRole = broadcastToRole;
+app.broadcastToAll = broadcastToAll;
+app.createAndSendNotification = createAndSendNotification;
+
+server.listen(port, () => console.log(`Server listening on ${port}`));

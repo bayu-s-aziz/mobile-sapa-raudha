@@ -7678,26 +7678,15 @@
 							"name": "requestLeave()"
 						}
 					]
-								{
-									"_type": "UMLParameter",
-									"_id": "Parent_getStudents_return",
-									"_parent": {
-										"$ref": "Parent_getStudents"
-									},
-									"name": "return",
-									"type": "List<Student>",
-									"direction": "return"
-								}
-							]
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "Parent_updateProfile",
-							"_parent": {
-								"$ref": "Parent_Class"
-							},
-							"name": "updateProfile",
-							"parameters": [
+				},
+				{
+					"_type": "UMLClass",
+					"_id": "Student_Class",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Student",
+					"attributes": [
 								{
 									"_type": "UMLParameter",
 									"_id": "Parent_updateProfile_return",

@@ -11,10 +11,6 @@ class AdminMainLayoutView extends GetView<AdminMainLayoutController> {
 
   @override
   Widget build(BuildContext context) {
-    if (!GetPlatform.isWeb) {
-      Future.microtask(() => Get.offAllNamed(Routes.login));
-      return const SizedBox.shrink();
-    }
     final role = Get.find<LocalStorageService>().read<String>('role');
     if (role != 'admin') {
       Future.microtask(() => Get.offAllNamed(Routes.login));

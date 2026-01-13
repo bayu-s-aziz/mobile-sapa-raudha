@@ -138,7 +138,7 @@ class AdminStudentManagementView
                                         backgroundImage: NetworkImage(
                                           student['photo_url'],
                                         ),
-                                        onBackgroundImageError: (_, __) {},
+                                        onBackgroundImageError: (_, _) {},
                                         child: student['photo_url'] == null
                                             ? Icon(
                                                 Icons.person,

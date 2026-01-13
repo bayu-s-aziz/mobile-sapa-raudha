@@ -1,0 +1,27 @@
+{
+  "_type": "Project",
+  "_id": "Seq_Admin_Siswa_Project",
+  "name": "Sequence Diagram - Admin Kelola Siswa",
+  "ownedElements": [
+    {"_type": "UMLModel", "_id": "Seq_Admin_Siswa_Model", "_parent": {"$ref": "Seq_Admin_Siswa_Project"}, "name": "Model",
+      "ownedElements": [
+        {"_type": "UMLCollaboration", "_id": "Seq_Admin_Siswa_Collab", "_parent": {"$ref": "Seq_Admin_Siswa_Model"}, "name": "Kelola Data Siswa",
+          "ownedElements": [
+            {"_type": "UMLInteraction", "_id": "Seq_Admin_Siswa_Interaction", "_parent": {"$ref": "Seq_Admin_Siswa_Collab"}, "name": "Kelola Siswa Interaction",
+              "ownedElements": [
+                {"_type": "UMLSequenceDiagram", "_id": "Seq_Admin_Siswa", "_parent": {"$ref": "Seq_Admin_Siswa_Interaction"}, "name": "Kelola Siswa Sequence Diagram", "ownedViews": [],
+                  "documentation": "Participants: Admin (Web), Web Admin UI, Siswa Service, QR Generator, Database.\n\nList: Admin buka menu, UI minta daftar, Service SELECT JOIN classes, DB kembalikan daftar.\nTambah: Admin isi data siswa & orang tua, UI kirim create, Service INSERT students & parents, Service generate QR dari NISN, UPDATE students.qr_code_path, DB OK, UI sukses & refresh.\nEdit: Admin ubah data siswa/orang tua, UI update, Service UPDATE, DB OK, UI sukses & refresh.\nHapus: Admin konfirmasi hapus, UI delete, Service DELETE students (CASCADE parents), DB OK, UI sukses & refresh."
+                }
+              ]
+            },
+            {"_type": "UMLLifeline", "_id": "LL_Admin", "_parent": {"$ref": "Seq_Admin_Siswa_Interaction"}, "name": "Admin (Web)"},
+            {"_type": "UMLLifeline", "_id": "LL_Web", "_parent": {"$ref": "Seq_Admin_Siswa_Interaction"}, "name": "Web Admin UI"},
+            {"_type": "UMLLifeline", "_id": "LL_Svc", "_parent": {"$ref": "Seq_Admin_Siswa_Interaction"}, "name": "Siswa Service"},
+            {"_type": "UMLLifeline", "_id": "LL_QR", "_parent": {"$ref": "Seq_Admin_Siswa_Interaction"}, "name": "QR Generator"},
+            {"_type": "UMLLifeline", "_id": "LL_DB", "_parent": {"$ref": "Seq_Admin_Siswa_Interaction"}, "name": "Database"}
+          ]
+        }
+      ]
+    }
+  ]
+}

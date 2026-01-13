@@ -514,6 +514,11 @@ class HomeView extends GetView<HomeController> {
           title: "Data Siswa",
           onTap: controller.goToStudentData,
         ),
+        _DashboardCard(
+          icon: Icons.notifications_outlined,
+          title: "Notifikasi",
+          onTap: controller.goToNotifications,
+        ),
       ],
     );
   }
@@ -546,6 +551,11 @@ class HomeView extends GetView<HomeController> {
           icon: Icons.person_outline,
           title: "Profil Anak",
           onTap: controller.goToStudentProfile,
+        ),
+        _DashboardCard(
+          icon: Icons.notifications_outlined,
+          title: "Notifikasi",
+          onTap: controller.goToNotifications,
         ),
       ],
     );

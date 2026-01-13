@@ -38,6 +38,9 @@ abstract class Routes {
   static const studentDetail = _Paths.studentDetail;
   static const leaveList = _Paths.leaveList;
 
+  // Notifikasi
+  static const notifications = _Paths.notifications;
+
   // --- TAMBAHKAN INI ---
   static const studentProfile = _Paths.studentProfile; // Untuk Ortu
   // --- AKHIR TAMBAHAN ---
@@ -82,4 +85,7 @@ abstract class _Paths {
   // --- TAMBAHKAN INI ---
   static const studentProfile = '/student-profile';
   // --- AKHIR TAMBAHAN ---
+
+  // Notifikasi
+  static const notifications = '/notifications';
 }

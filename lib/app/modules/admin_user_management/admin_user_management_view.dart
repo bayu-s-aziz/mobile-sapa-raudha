@@ -479,7 +479,7 @@ class AdminUserManagementView extends GetView<AdminUserManagementController> {
                             ? CircleAvatar(
                                 radius: 20,
                                 backgroundImage: NetworkImage(parent.photoUrl!),
-                                onBackgroundImageError: (_, __) {},
+                                onBackgroundImageError: (_, _) {},
                                 child: parent.photoUrl == null
                                     ? Icon(
                                         Icons.family_restroom,

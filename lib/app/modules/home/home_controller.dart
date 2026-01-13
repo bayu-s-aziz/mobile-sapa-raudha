@@ -20,6 +20,7 @@ import '../confirm_leave/confirm_leave_view.dart';
 import '../student_profile/student_profile_view.dart';
 import '../attendance_history/attendance_history_view.dart';
 import '../announcement_detail/announcement_detail_view.dart';
+import '../notification_list/notification_list_view.dart';
 // --- AKHIR TAMBAHAN ---
 
 class HomeController extends GetxController {
@@ -279,6 +280,10 @@ class HomeController extends GetxController {
 
   void goToAttendanceHistory() {
     currentActionView.value = const AttendanceHistoryView();
+  }
+
+  void goToNotifications() {
+    currentActionView.value = const NotificationListView();
   }
 
   // --- MODIFIKASI FUNGSI INI ---

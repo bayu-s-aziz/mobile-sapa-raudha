@@ -123,7 +123,7 @@ class AdminPasswordResetView extends GetView<AdminPasswordResetController> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: statusColor.withOpacity(0.1),
+                    color: statusColor.withAlpha(25),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(

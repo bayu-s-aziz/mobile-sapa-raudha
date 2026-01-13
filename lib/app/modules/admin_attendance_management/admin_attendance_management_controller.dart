@@ -672,7 +672,7 @@ class AdminAttendanceManagementController extends GetxController {
                   _buildTableCell(attendance['notes'] ?? '-'),
                 ],
               );
-            }).toList(),
+            }),
           ],
         ),
 
@@ -889,7 +889,7 @@ class AdminAttendanceManagementController extends GetxController {
                   ),
                 ],
               );
-            }).toList(),
+            }),
           ],
         ),
 

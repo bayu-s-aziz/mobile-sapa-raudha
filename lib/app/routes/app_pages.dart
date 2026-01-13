@@ -27,6 +27,8 @@ import '../modules/announcement_list/announcement_list_binding.dart';
 import '../modules/create_announcement/create_announcement_binding.dart';
 import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
+import '../modules/notification_list/notification_list_binding.dart';
+import '../modules/notification_list/notification_list_view.dart';
 import '../modules/login/login_binding.dart';
 import '../modules/login/login_view.dart';
 import '../modules/scan_presence/scan_presence_binding.dart';
@@ -71,6 +73,7 @@ class AppPages {
         RequestLeaveBinding().dependencies();
         LeaveListBinding().dependencies();
         ProfileBinding().dependencies();
+        NotificationListBinding().dependencies();
 
         // Binding untuk action pages
         CreateAnnouncementBinding().dependencies();
@@ -88,6 +91,11 @@ class AppPages {
       name: _Paths.scanPresence,
       page: () => const ScanPresenceView(),
       binding: ScanPresenceBinding(),
+    ),
+    GetPage(
+      name: _Paths.notifications,
+      page: () => const NotificationListView(),
+      binding: NotificationListBinding(),
     ),
     GetPage(
       name: _Paths.requestLeave,

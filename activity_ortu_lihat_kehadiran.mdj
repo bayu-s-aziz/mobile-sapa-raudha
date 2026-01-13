@@ -1,0 +1,2291 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "SapaRaudha - Activity Diagram Lihat Kehadiran",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLActivity",
+					"_id": "Activity_LihatKehadiran",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Lihat Kehadiran Anak",
+					"ownedElements": [
+						{
+							"_type": "UMLActivityDiagram",
+							"_id": "ActivityDiagram_LihatKehadiran",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "AD - Lihat Kehadiran Anak",
+							"ownedViews": [
+								{
+									"_type": "UMLFrameView",
+									"_id": "Frame_LihatKehadiran",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Activity_LihatKehadiran"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpKJdOrrPGAQ=",
+											"_parent": {
+												"$ref": "Frame_LihatKehadiran"
+											},
+											"font": "Arial;13;1",
+											"parentStyle": true,
+											"left": 45,
+											"top": 21,
+											"width": 17.341796875,
+											"height": 13,
+											"text": "act"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "Frame_LihatKehadiran_NameLabel",
+											"_parent": {
+												"$ref": "Frame_LihatKehadiran"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 68.341796875,
+											"top": 21,
+											"width": 124.3125,
+											"height": 13,
+											"text": "Lihat Kehadiran Anak"
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 40,
+									"top": 16,
+									"width": 696,
+									"height": 660,
+									"nameLabel": {
+										"$ref": "Frame_LihatKehadiran_NameLabel"
+									},
+									"frameTypeLabel": {
+										"$ref": "AAAAAAGbpKJdOrrPGAQ="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Ortu",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Partition_Ortu"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpKJdO7rSq6Q=",
+											"_parent": {
+												"$ref": "Swimlane_Ortu"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 56,
+											"top": 52,
+											"width": 220,
+											"height": 13,
+											"text": "Orang Tua",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Ortu_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Ortu"
+											},
+											"model": {
+												"$ref": "Partition_Ortu"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPLrUAys=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 61,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPLrVnvo=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 76,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPLrWNfY=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 91,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPLrXvOE=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 106,
+													"width": 208,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 58,
+											"top": 56,
+											"width": 218,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdPLrUAys="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdPLrVnvo="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdPLrWNfY="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdPLrXvOE="
+											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbpKS4crwBjN4="
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 56,
+									"top": 48,
+									"width": 220,
+									"height": 596,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpKJdO7rSq6Q="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_System",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Partition_System"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpKJdPbrZswk=",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 276,
+											"top": 52,
+											"width": 224,
+											"height": 13,
+											"text": "Sistem",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_System_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"model": {
+												"$ref": "Partition_System"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbrbbVM=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 61,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbrcGfM=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 76,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbrdJfQ=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 91,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbreEe0=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 106,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 278,
+											"top": 56,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdPbrbbVM="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdPbrcGfM="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdPbrdJfQ="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdPbreEe0="
+											}
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 276,
+									"top": 48,
+									"width": 224,
+									"height": 596,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpKJdPbrZswk="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Database",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Partition_Database"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpKJdPbrgV88=",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 501,
+											"top": 52,
+											"width": 216,
+											"height": 13,
+											"text": "Database",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Database_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"model": {
+												"$ref": "Partition_Database"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbrixiE=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 527,
+													"top": 61,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbrjaVo=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 527,
+													"top": 76,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbrk9yI=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 527,
+													"top": 91,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdPbrl5/8=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 527,
+													"top": 106,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 522,
+											"top": 56,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdPbrixiE="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdPbrjaVo="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdPbrk9yI="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdPbrl5/8="
+											}
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 501,
+									"top": 48,
+									"width": 216,
+									"height": 596,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpKJdPbrgV88="
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_BukaDashboard",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Action_BukaDashboardModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_BukaDashboard_NameLabel",
+											"_parent": {
+												"$ref": "Action_BukaDashboard"
+											},
+											"model": {
+												"$ref": "Action_BukaDashboardModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7rtmMQ=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7ru6qM=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 151,
+													"width": 131,
+													"height": 13,
+													"text": "Buka Dashboard",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7rv1js=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 162.58251953125,
+													"height": 13,
+													"text": "(from Lihat Kehadiran Anak)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7rwTG0=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 144,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdP7rtmMQ="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdP7ru6qM="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdP7rv1js="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdP7rwTG0="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 144,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_BukaDashboard_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_PilihMenu",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Action_PilihMenuModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_PilihMenu_NameLabel",
+											"_parent": {
+												"$ref": "Action_PilihMenu"
+											},
+											"model": {
+												"$ref": "Action_PilihMenuModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7r4LZg=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7r5F9A=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 207,
+													"width": 133.18359375,
+													"height": 13,
+													"text": "Pilih Menu Kehadiran",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7r6z00=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 162.58251953125,
+													"height": 13,
+													"text": "(from Lihat Kehadiran Anak)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdP7r72cM=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 200,
+											"width": 143.18359375,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdP7r4LZg="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdP7r5F9A="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdP7r6z00="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdP7r72cM="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 200,
+									"width": 142.18359375,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_PilihMenu_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_PilihAnak",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Action_PilihAnakModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_PilihAnak_NameLabel",
+											"_parent": {
+												"$ref": "Action_PilihAnak"
+											},
+											"model": {
+												"$ref": "Action_PilihAnakModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsD1JU=",
+													"_parent": {
+														"$ref": "Action_PilihAnak_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsELCU=",
+													"_parent": {
+														"$ref": "Action_PilihAnak_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 263,
+													"width": 131,
+													"height": 13,
+													"text": "Pilih Anak",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsFLSo=",
+													"_parent": {
+														"$ref": "Action_PilihAnak_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 162.58251953125,
+													"height": 13,
+													"text": "(from Lihat Kehadiran Anak)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsGaGk=",
+													"_parent": {
+														"$ref": "Action_PilihAnak_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 256,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdQLsD1JU="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdQLsELCU="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdQLsFLSo="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdQLsGaGk="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 256,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_PilihAnak_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_KirimRequest",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Action_KirimRequestModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_KirimRequest_NameLabel",
+											"_parent": {
+												"$ref": "Action_KirimRequest"
+											},
+											"model": {
+												"$ref": "Action_KirimRequestModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsOdwM=",
+													"_parent": {
+														"$ref": "Action_KirimRequest_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsPWPQ=",
+													"_parent": {
+														"$ref": "Action_KirimRequest_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 333,
+													"top": 263,
+													"width": 135,
+													"height": 26,
+													"text": "Kirim Request Data Kehadiran",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsQPVY=",
+													"_parent": {
+														"$ref": "Action_KirimRequest_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 162.58251953125,
+													"height": 13,
+													"text": "(from Lihat Kehadiran Anak)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsRaZU=",
+													"_parent": {
+														"$ref": "Action_KirimRequest_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 328,
+											"top": 256,
+											"width": 145,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdQLsOdwM="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdQLsPWPQ="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdQLsQPVY="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdQLsRaZU="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 328,
+									"top": 256,
+									"width": 144,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_KirimRequest_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_AmbilData",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Action_AmbilDataModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_AmbilData_NameLabel",
+											"_parent": {
+												"$ref": "Action_AmbilData"
+											},
+											"model": {
+												"$ref": "Action_AmbilDataModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsZCTo=",
+													"_parent": {
+														"$ref": "Action_AmbilData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -240,
+													"top": -48,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsaT/4=",
+													"_parent": {
+														"$ref": "Action_AmbilData_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 541,
+													"top": 239,
+													"width": 143,
+													"height": 39,
+													"text": "Ambil Data dari Tabel students & attendances",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQLsbuaY=",
+													"_parent": {
+														"$ref": "Action_AmbilData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -240,
+													"top": -48,
+													"width": 162.58251953125,
+													"height": 13,
+													"text": "(from Lihat Kehadiran Anak)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbscwwY=",
+													"_parent": {
+														"$ref": "Action_AmbilData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -240,
+													"top": -48,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 536,
+											"top": 232,
+											"width": 153,
+											"height": 51,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdQLsZCTo="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdQLsaT/4="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdQLsbuaY="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdQbscwwY="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 536,
+									"top": 232,
+									"width": 152,
+									"height": 80,
+									"nameCompartment": {
+										"$ref": "Action_AmbilData_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_ProsesData",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Action_ProsesDataModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_ProsesData_NameLabel",
+											"_parent": {
+												"$ref": "Action_ProsesData"
+											},
+											"model": {
+												"$ref": "Action_ProsesDataModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbskIRU=",
+													"_parent": {
+														"$ref": "Action_ProsesData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -32,
+													"top": 128,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbslbTM=",
+													"_parent": {
+														"$ref": "Action_ProsesData_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 317,
+													"top": 391,
+													"width": 151,
+													"height": 26,
+													"text": "Proses Data Kehadiran (Hitung Statistik)",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbsm4Ww=",
+													"_parent": {
+														"$ref": "Action_ProsesData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -32,
+													"top": 128,
+													"width": 162.58251953125,
+													"height": 13,
+													"text": "(from Lihat Kehadiran Anak)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbsnxto=",
+													"_parent": {
+														"$ref": "Action_ProsesData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -32,
+													"top": 128,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 312,
+											"top": 384,
+											"width": 161,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdQbskIRU="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdQbslbTM="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdQbsm4Ww="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdQbsnxto="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 312,
+									"top": 384,
+									"width": 160,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_ProsesData_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanRiwayat",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Action_TampilkanRiwayatModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanRiwayat_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanRiwayat"
+											},
+											"model": {
+												"$ref": "Action_TampilkanRiwayatModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbsveGo=",
+													"_parent": {
+														"$ref": "Action_TampilkanRiwayat_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbswkHM=",
+													"_parent": {
+														"$ref": "Action_TampilkanRiwayat_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 391,
+													"width": 143,
+													"height": 26,
+													"text": "Tampilkan Riwayat Kehadiran & Statistik",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbsx8pk=",
+													"_parent": {
+														"$ref": "Action_TampilkanRiwayat_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 162.58251953125,
+													"height": 13,
+													"text": "(from Lihat Kehadiran Anak)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpKJdQbsyneY=",
+													"_parent": {
+														"$ref": "Action_TampilkanRiwayat_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 384,
+											"width": 153,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpKJdQbsveGo="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpKJdQbswkHM="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpKJdQbsx8pk="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpKJdQbsyneY="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 384,
+									"width": 152,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanRiwayat_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_2",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Flow_2_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdQ7tQ+Gs=",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 195,
+											"top": 185,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_2"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdQ7tRaBw=",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 151,
+											"top": 186,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_2"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_2_NameLabel",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 166,
+											"top": 194,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_PilihMenu"
+									},
+									"tail": {
+										"$ref": "Action_BukaDashboard"
+									},
+									"points": "166:185;166:200",
+									"nameLabel": {
+										"$ref": "Flow_2_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKJdQ7tQ+Gs="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKJdQ7tRaBw="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_3",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Flow_3_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdQ7tV1cc=",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 196,
+											"top": 241,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_3"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdQ7tWiCc=",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 152,
+											"top": 242,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_3"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_3_NameLabel",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 167,
+											"top": 250,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_PilihAnak"
+									},
+									"tail": {
+										"$ref": "Action_PilihMenu"
+									},
+									"points": "167:241;167:256",
+									"nameLabel": {
+										"$ref": "Flow_3_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKJdQ7tV1cc="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKJdQ7tWiCc="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_4",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Flow_4_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtaDbY=",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 282,
+											"top": 240,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_4"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtb86s=",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 282,
+											"top": 285,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_4"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_4_NameLabel",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 328,
+											"top": 270,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_KirimRequest"
+									},
+									"tail": {
+										"$ref": "Action_PilihAnak"
+									},
+									"points": "236:276;328:276",
+									"nameLabel": {
+										"$ref": "Flow_4_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKJdRLtaDbY="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKJdRLtb86s="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_5",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Flow_5_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtfUf4=",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 504,
+											"top": 240,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_5"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtgyj8=",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 504,
+											"top": 285,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_5"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_5_NameLabel",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 536,
+											"top": 270,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_AmbilData"
+									},
+									"tail": {
+										"$ref": "Action_KirimRequest"
+									},
+									"points": "472:276;536:276",
+									"nameLabel": {
+										"$ref": "Flow_5_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKJdRLtfUf4="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKJdRLtgyj8="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_6",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Flow_6_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtk4nI=",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 647,
+											"top": 440,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_6"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtlD88=",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 648,
+											"top": 395,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_6"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_6_NameLabel",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 472,
+											"top": 410,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_ProsesData"
+									},
+									"tail": {
+										"$ref": "Action_AmbilData"
+									},
+									"points": "648:312;648:416;472:416",
+									"nameLabel": {
+										"$ref": "Flow_6_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKJdRLtk4nI="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKJdRLtlD88="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_7",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Flow_7_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtpxfk=",
+											"_parent": {
+												"$ref": "Flow_7"
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 279,
+											"top": 419,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_7"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKJdRLtqC4k=",
+											"_parent": {
+												"$ref": "Flow_7"
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 280,
+											"top": 374,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_7"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_7_NameLabel",
+											"_parent": {
+												"$ref": "Flow_7"
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 248,
+											"top": 389,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanRiwayat"
+									},
+									"tail": {
+										"$ref": "Action_ProsesData"
+									},
+									"points": "312:395;248:395",
+									"nameLabel": {
+										"$ref": "Flow_7_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKJdRLtpxfk="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKJdRLtqC4k="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbpKKQLbuzmno=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "InitialNode_LihatKehadiranModel"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 159,
+									"top": 88,
+									"width": 20,
+									"height": 20
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbpKKQMLu0g4k=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "Flow_1_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKKQMbu1bEs=",
+											"_parent": {
+												"$ref": "AAAAAAGbpKKQMLu0g4k="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 183,
+											"top": 119,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpKKQMLu0g4k="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKKQMbu2iVU=",
+											"_parent": {
+												"$ref": "AAAAAAGbpKKQMLu0g4k="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 198,
+											"top": 119,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpKKQMLu0g4k="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKKQMbu3FZ8=",
+											"_parent": {
+												"$ref": "AAAAAAGbpKKQMLu0g4k="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 154,
+											"top": 120,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpKKQMLu0g4k="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_BukaDashboard"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbpKKQLbuzmno="
+									},
+									"points": "169:108;169:144",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpKKQMbu1bEs="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKKQMbu2iVU="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKKQMbu3FZ8="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbpKS4crwBjN4=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "FinalNode_LihatKehadiranModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 160,
+									"top": 528,
+									"width": 26,
+									"height": 26
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbpKi0crzag8I=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LihatKehadiran"
+									},
+									"model": {
+										"$ref": "AAAAAAGbpKi0crzZBbk="
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKi0crzbn/w=",
+											"_parent": {
+												"$ref": "AAAAAAGbpKi0crzag8I="
+											},
+											"model": {
+												"$ref": "AAAAAAGbpKi0crzZBbk="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 186,
+											"top": 476,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpKi0crzag8I="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKi0crzcHYw=",
+											"_parent": {
+												"$ref": "AAAAAAGbpKi0crzag8I="
+											},
+											"model": {
+												"$ref": "AAAAAAGbpKi0crzZBbk="
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 201,
+											"top": 476,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpKi0crzag8I="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpKi0crzdXCY=",
+											"_parent": {
+												"$ref": "AAAAAAGbpKi0crzag8I="
+											},
+											"model": {
+												"$ref": "AAAAAAGbpKi0crzZBbk="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 157,
+											"top": 477,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpKi0crzag8I="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbpKS4crwBjN4="
+									},
+									"tail": {
+										"$ref": "Action_TampilkanRiwayat"
+									},
+									"lineStyle": 1,
+									"points": "172:439;173:527",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpKi0crzbn/w="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpKi0crzcHYw="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpKi0crzdXCY="
+									}
+								}
+							]
+						}
+					],
+					"nodes": [
+						{
+							"_type": "UMLInitialNode",
+							"_id": "InitialNode_LihatKehadiranModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Initial1"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_BukaDashboardModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Buka Dashboard"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_PilihMenuModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Pilih Menu Kehadiran"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_PilihAnakModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Pilih Anak"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_KirimRequestModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Kirim Request Data Kehadiran"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_AmbilDataModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Ambil Data dari Tabel students & attendances"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_ProsesDataModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Proses Data Kehadiran (Hitung Statistik)"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanRiwayatModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Tampilkan Riwayat Kehadiran & Statistik"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_PilihFilterModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Pilih Filter Tanggal (Opsional)"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_LihatDetailModel",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Tampilkan Detail Kehadiran Terfilter"
+						}
+					],
+					"edges": [
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_1_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "InitialNode_LihatKehadiranModel"
+							},
+							"target": {
+								"$ref": "Action_BukaDashboardModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_2_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_BukaDashboardModel"
+							},
+							"target": {
+								"$ref": "Action_PilihMenuModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_3_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_PilihMenuModel"
+							},
+							"target": {
+								"$ref": "Action_PilihAnakModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_4_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_PilihAnakModel"
+							},
+							"target": {
+								"$ref": "Action_KirimRequestModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_5_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_KirimRequestModel"
+							},
+							"target": {
+								"$ref": "Action_AmbilDataModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_6_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_AmbilDataModel"
+							},
+							"target": {
+								"$ref": "Action_ProsesDataModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_7_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_ProsesDataModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanRiwayatModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_8_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_TampilkanRiwayatModel"
+							},
+							"target": {
+								"$ref": "Action_PilihFilterModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_9_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_PilihFilterModel"
+							},
+							"target": {
+								"$ref": "Decision_FilterModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_10_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "[Filter]",
+							"source": {
+								"$ref": "Decision_FilterModel"
+							},
+							"target": {
+								"$ref": "Action_LihatDetailModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_11_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "[Selesai]",
+							"source": {
+								"$ref": "Decision_FilterModel"
+							},
+							"target": {
+								"$ref": "FinalNode_LihatKehadiranModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_12_Model",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_LihatDetailModel"
+							},
+							"target": {
+								"$ref": "Action_PilihFilterModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "AAAAAAGbpKi0crzZBbk=",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"source": {
+								"$ref": "Action_TampilkanRiwayatModel"
+							},
+							"target": {
+								"$ref": "FinalNode_LihatKehadiranModel"
+							}
+						}
+					],
+					"groups": [
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Ortu",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Orang Tua",
+							"nodes": [
+								{
+									"_type": "UMLActivityFinalNode",
+									"_id": "FinalNode_LihatKehadiranModel",
+									"_parent": {
+										"$ref": "Partition_Ortu"
+									},
+									"name": "ActivityFinal1"
+								}
+							]
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_System",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Sistem",
+							"nodes": [
+								{
+									"_type": "UMLDecisionNode",
+									"_id": "Decision_FilterModel",
+									"_parent": {
+										"$ref": "Partition_System"
+									},
+									"name": "Decision1"
+								}
+							]
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Database",
+							"_parent": {
+								"$ref": "Activity_LihatKehadiran"
+							},
+							"name": "Database"
+						}
+					]
+				}
+			]
+		}
+	],
+	"documentVersion": 1
+}

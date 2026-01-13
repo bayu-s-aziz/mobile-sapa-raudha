@@ -193,7 +193,7 @@ class StudentDetailController extends GetxController {
             const SizedBox(height: 16),
             Obx(
               () => DropdownButtonFormField<String>(
-                value: selectedStatus.value,
+                initialValue: selectedStatus.value,
                 decoration: const InputDecoration(
                   labelText: 'Status Kehadiran',
                   border: OutlineInputBorder(),

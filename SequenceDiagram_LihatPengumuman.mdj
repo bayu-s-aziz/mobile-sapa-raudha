@@ -1,0 +1,2974 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "Sequence Diagram - Lihat Pengumuman",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLCollaboration",
+					"_id": "Collaboration",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Lihat Pengumuman",
+					"ownedElements": [
+						{
+							"_type": "UMLInteraction",
+							"_id": "Interaction",
+							"_parent": {
+								"$ref": "Collaboration"
+							},
+							"name": "Lihat Pengumuman Interaction",
+							"ownedElements": [
+								{
+									"_type": "UMLSequenceDiagram",
+									"_id": "SequenceDiagram",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Lihat Pengumuman Sequence Diagram",
+									"ownedViews": [
+										{
+											"_type": "UMLFrameView",
+											"_id": "Frame",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Interaction"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpYzQ0N2UofI=",
+													"_parent": {
+														"$ref": "Frame"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 13,
+													"top": 13,
+													"width": 13.72998046875,
+													"height": 13,
+													"text": "sd"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "Frame_Label",
+													"_parent": {
+														"$ref": "Frame"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 32.72998046875,
+													"top": 13,
+													"width": 177.05517578125,
+													"height": 13,
+													"text": "Lihat Pengumuman Interaction"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 8,
+											"top": 8,
+											"width": 896,
+											"height": 600,
+											"nameLabel": {
+												"$ref": "Frame_Label"
+											},
+											"frameTypeLabel": {
+												"$ref": "AAAAAAGbpYzQ0N2UofI="
+											}
+										},
+										{
+											"_type": "UMLSeqLifelineView",
+											"_id": "Lifeline_UI",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Lifeline_UI_Model"
+											},
+											"subViews": [
+												{
+													"_type": "UMLNameCompartmentView",
+													"_id": "Lifeline_UI_Name",
+													"_parent": {
+														"$ref": "Lifeline_UI"
+													},
+													"model": {
+														"$ref": "Lifeline_UI_Model"
+													},
+													"subViews": [
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ092tIaY=",
+															"_parent": {
+																"$ref": "Lifeline_UI_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ092uhQI=",
+															"_parent": {
+																"$ref": "Lifeline_UI_Name"
+															},
+															"font": "Arial;13;1",
+															"parentStyle": true,
+															"left": 241,
+															"top": 47,
+															"width": 128.025390625,
+															"height": 13,
+															"text": "PengumumanPage"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ092vdUw=",
+															"_parent": {
+																"$ref": "Lifeline_UI_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"width": 215.3251953125,
+															"height": 13,
+															"text": "(from Lihat Pengumuman Interaction)"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ092w0hA=",
+															"_parent": {
+																"$ref": "Lifeline_UI_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13,
+															"horizontalAlignment": 1
+														},
+														{
+															"_type": "LabelView",
+															"_id": "Lifeline_UI_Label",
+															"_parent": {
+																"$ref": "Lifeline_UI_Name"
+															},
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"left": 241,
+															"top": 62,
+															"width": 128.025390625,
+															"height": 13,
+															"text": ":PengumumanPage"
+														}
+													],
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 236,
+													"top": 40,
+													"width": 138.025390625,
+													"height": 40,
+													"stereotypeLabel": {
+														"$ref": "AAAAAAGbpYzQ092tIaY="
+													},
+													"nameLabel": {
+														"$ref": "AAAAAAGbpYzQ092uhQI="
+													},
+													"namespaceLabel": {
+														"$ref": "AAAAAAGbpYzQ092vdUw="
+													},
+													"propertyLabel": {
+														"$ref": "AAAAAAGbpYzQ092w0hA="
+													}
+												},
+												{
+													"_type": "UMLLinePartView",
+													"_id": "Lifeline_UI_Line",
+													"_parent": {
+														"$ref": "Lifeline_UI"
+													},
+													"model": {
+														"$ref": "Lifeline_UI_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 305,
+													"top": 81,
+													"width": 1,
+													"height": 540
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 236,
+											"top": 40,
+											"width": 137.025390625,
+											"height": 581,
+											"nameCompartment": {
+												"$ref": "Lifeline_UI_Name"
+											},
+											"linePart": {
+												"$ref": "Lifeline_UI_Line"
+											}
+										},
+										{
+											"_type": "UMLSeqLifelineView",
+											"_id": "Lifeline_Controller",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Lifeline_Controller_Model"
+											},
+											"subViews": [
+												{
+													"_type": "UMLNameCompartmentView",
+													"_id": "Lifeline_Controller_Name",
+													"_parent": {
+														"$ref": "Lifeline_Controller"
+													},
+													"model": {
+														"$ref": "Lifeline_Controller_Model"
+													},
+													"subViews": [
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1N27RlY=",
+															"_parent": {
+																"$ref": "Lifeline_Controller_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1N286LA=",
+															"_parent": {
+																"$ref": "Lifeline_Controller_Name"
+															},
+															"font": "Arial;13;1",
+															"parentStyle": true,
+															"left": 421,
+															"top": 47,
+															"width": 159.0654296875,
+															"height": 13,
+															"text": "PengumumanController"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1N29sAU=",
+															"_parent": {
+																"$ref": "Lifeline_Controller_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"width": 215.3251953125,
+															"height": 13,
+															"text": "(from Lihat Pengumuman Interaction)"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1N2+IS0=",
+															"_parent": {
+																"$ref": "Lifeline_Controller_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13,
+															"horizontalAlignment": 1
+														},
+														{
+															"_type": "LabelView",
+															"_id": "Lifeline_Controller_Label",
+															"_parent": {
+																"$ref": "Lifeline_Controller_Name"
+															},
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"left": 421,
+															"top": 62,
+															"width": 159.0654296875,
+															"height": 13,
+															"text": ":PengumumanController"
+														}
+													],
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 416,
+													"top": 40,
+													"width": 169.0654296875,
+													"height": 40,
+													"stereotypeLabel": {
+														"$ref": "AAAAAAGbpYzQ1N27RlY="
+													},
+													"nameLabel": {
+														"$ref": "AAAAAAGbpYzQ1N286LA="
+													},
+													"namespaceLabel": {
+														"$ref": "AAAAAAGbpYzQ1N29sAU="
+													},
+													"propertyLabel": {
+														"$ref": "AAAAAAGbpYzQ1N2+IS0="
+													}
+												},
+												{
+													"_type": "UMLLinePartView",
+													"_id": "Lifeline_Controller_Line",
+													"_parent": {
+														"$ref": "Lifeline_Controller"
+													},
+													"model": {
+														"$ref": "Lifeline_Controller_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 500,
+													"top": 81,
+													"width": 1,
+													"height": 509
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 416,
+											"top": 40,
+											"width": 168.0654296875,
+											"height": 550,
+											"nameCompartment": {
+												"$ref": "Lifeline_Controller_Name"
+											},
+											"linePart": {
+												"$ref": "Lifeline_Controller_Line"
+											}
+										},
+										{
+											"_type": "UMLSeqLifelineView",
+											"_id": "Lifeline_API",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Lifeline_API_Model"
+											},
+											"subViews": [
+												{
+													"_type": "UMLNameCompartmentView",
+													"_id": "Lifeline_API_Name",
+													"_parent": {
+														"$ref": "Lifeline_API"
+													},
+													"model": {
+														"$ref": "Lifeline_API_Model"
+													},
+													"subViews": [
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1d3JfrQ=",
+															"_parent": {
+																"$ref": "Lifeline_API_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1d3Kl5o=",
+															"_parent": {
+																"$ref": "Lifeline_API_Name"
+															},
+															"font": "Arial;13;1",
+															"parentStyle": true,
+															"left": 601,
+															"top": 47,
+															"width": 101,
+															"height": 13,
+															"text": "API Server"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1d3LdJ8=",
+															"_parent": {
+																"$ref": "Lifeline_API_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"width": 215.3251953125,
+															"height": 13,
+															"text": "(from Lihat Pengumuman Interaction)"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1d3Mrbs=",
+															"_parent": {
+																"$ref": "Lifeline_API_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13,
+															"horizontalAlignment": 1
+														},
+														{
+															"_type": "LabelView",
+															"_id": "Lifeline_API_Label",
+															"_parent": {
+																"$ref": "Lifeline_API_Name"
+															},
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"left": 601,
+															"top": 62,
+															"width": 101,
+															"height": 13,
+															"text": ":API Server"
+														}
+													],
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 596,
+													"top": 40,
+													"width": 111,
+													"height": 40,
+													"stereotypeLabel": {
+														"$ref": "AAAAAAGbpYzQ1d3JfrQ="
+													},
+													"nameLabel": {
+														"$ref": "AAAAAAGbpYzQ1d3Kl5o="
+													},
+													"namespaceLabel": {
+														"$ref": "AAAAAAGbpYzQ1d3LdJ8="
+													},
+													"propertyLabel": {
+														"$ref": "AAAAAAGbpYzQ1d3Mrbs="
+													}
+												},
+												{
+													"_type": "UMLLinePartView",
+													"_id": "Lifeline_API_Line",
+													"_parent": {
+														"$ref": "Lifeline_API"
+													},
+													"model": {
+														"$ref": "Lifeline_API_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 651,
+													"top": 81,
+													"width": 1,
+													"height": 509
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 596,
+											"top": 40,
+											"width": 110,
+											"height": 550,
+											"nameCompartment": {
+												"$ref": "Lifeline_API_Name"
+											},
+											"linePart": {
+												"$ref": "Lifeline_API_Line"
+											}
+										},
+										{
+											"_type": "UMLSeqLifelineView",
+											"_id": "Lifeline_DB",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Lifeline_DB_Model"
+											},
+											"subViews": [
+												{
+													"_type": "UMLNameCompartmentView",
+													"_id": "Lifeline_DB_Name",
+													"_parent": {
+														"$ref": "Lifeline_DB"
+													},
+													"model": {
+														"$ref": "Lifeline_DB_Model"
+													},
+													"subViews": [
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1t3XR2M=",
+															"_parent": {
+																"$ref": "Lifeline_DB_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1t3YmYU=",
+															"_parent": {
+																"$ref": "Lifeline_DB_Name"
+															},
+															"font": "Arial;13;1",
+															"parentStyle": true,
+															"left": 781,
+															"top": 47,
+															"width": 101,
+															"height": 13,
+															"text": "Database"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1t3ZEcA=",
+															"_parent": {
+																"$ref": "Lifeline_DB_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"width": 215.3251953125,
+															"height": 13,
+															"text": "(from Lihat Pengumuman Interaction)"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpYzQ1t3aqjE=",
+															"_parent": {
+																"$ref": "Lifeline_DB_Name"
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13,
+															"horizontalAlignment": 1
+														},
+														{
+															"_type": "LabelView",
+															"_id": "Lifeline_DB_Label",
+															"_parent": {
+																"$ref": "Lifeline_DB_Name"
+															},
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"left": 781,
+															"top": 62,
+															"width": 101,
+															"height": 13,
+															"text": ":Database"
+														}
+													],
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 776,
+													"top": 40,
+													"width": 111,
+													"height": 40,
+													"stereotypeLabel": {
+														"$ref": "AAAAAAGbpYzQ1t3XR2M="
+													},
+													"nameLabel": {
+														"$ref": "AAAAAAGbpYzQ1t3YmYU="
+													},
+													"namespaceLabel": {
+														"$ref": "AAAAAAGbpYzQ1t3ZEcA="
+													},
+													"propertyLabel": {
+														"$ref": "AAAAAAGbpYzQ1t3aqjE="
+													}
+												},
+												{
+													"_type": "UMLLinePartView",
+													"_id": "Lifeline_DB_Line",
+													"_parent": {
+														"$ref": "Lifeline_DB"
+													},
+													"model": {
+														"$ref": "Lifeline_DB_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 831,
+													"top": 81,
+													"width": 1,
+													"height": 509
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 776,
+											"top": 40,
+											"width": 110,
+											"height": 550,
+											"nameCompartment": {
+												"$ref": "Lifeline_DB_Name"
+											},
+											"linePart": {
+												"$ref": "Lifeline_DB_Line"
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_1",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_1_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ193fHmA=",
+													"_parent": {
+														"$ref": "Message_1"
+													},
+													"model": {
+														"$ref": "Message_1_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 196,
+													"top": 89,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_1"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ193g6NU=",
+													"_parent": {
+														"$ref": "Message_1"
+													},
+													"model": {
+														"$ref": "Message_1_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 196,
+													"top": 124,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_1"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ193hIv4=",
+													"_parent": {
+														"$ref": "Message_1"
+													},
+													"model": {
+														"$ref": "Message_1_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 298,
+													"top": 120,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_1_NameLabel",
+													"_parent": {
+														"$ref": "Message_1"
+													},
+													"model": {
+														"$ref": "Message_1_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 104,
+													"top": 103,
+													"width": 177.76611328125,
+													"height": 13,
+													"alpha": -4.331883465341588,
+													"distance": 10.770329614269007,
+													"hostEdge": {
+														"$ref": "Message_1"
+													},
+													"edgePosition": 1,
+													"text": "Pilih Menu Pengumuman"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"tail": {
+												"$ref": "AAAAAAGbpY1o8N6hARs="
+											},
+											"points": "94:120;298:120",
+											"nameLabel": {
+												"$ref": "Message_1_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ193fHmA="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ193g6NU="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ193hIv4="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_2",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_2_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2N3lJWA=",
+													"_parent": {
+														"$ref": "Message_2"
+													},
+													"model": {
+														"$ref": "Message_2_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 399,
+													"top": 119,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_2"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2N3mymc=",
+													"_parent": {
+														"$ref": "Message_2"
+													},
+													"model": {
+														"$ref": "Message_2_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 399,
+													"top": 154,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_2"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2N3njOk=",
+													"_parent": {
+														"$ref": "Message_2"
+													},
+													"model": {
+														"$ref": "Message_2_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 493,
+													"top": 150,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_2_NameLabel",
+													"_parent": {
+														"$ref": "Message_2"
+													},
+													"model": {
+														"$ref": "Message_2_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 319,
+													"top": 134,
+													"width": 160.41796875,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_2"
+													},
+													"edgePosition": 1,
+													"text": "getPengumumanList()"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_Controller_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"points": "306:150;493:150",
+											"nameLabel": {
+												"$ref": "Message_2_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2N3lJWA="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2N3mymc="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2N3njOk="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_3",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_3_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2N3rt7s=",
+													"_parent": {
+														"$ref": "Message_3"
+													},
+													"model": {
+														"$ref": "Message_3_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 572,
+													"top": 159,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_3"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2N3smuA=",
+													"_parent": {
+														"$ref": "Message_3"
+													},
+													"model": {
+														"$ref": "Message_3_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 572,
+													"top": 194,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_3"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2N3tv+Y=",
+													"_parent": {
+														"$ref": "Message_3"
+													},
+													"model": {
+														"$ref": "Message_3_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 644,
+													"top": 190,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_3_NameLabel",
+													"_parent": {
+														"$ref": "Message_3"
+													},
+													"model": {
+														"$ref": "Message_3_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 500,
+													"top": 174,
+													"width": 145.96435546875,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_3"
+													},
+													"edgePosition": 1,
+													"text": "GET /pengumuman"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_API_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_Controller_Line"
+											},
+											"points": "501:190;644:190",
+											"nameLabel": {
+												"$ref": "Message_3_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2N3rt7s="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2N3smuA="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2N3tv+Y="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_5",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_5_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2d33Jjc=",
+													"_parent": {
+														"$ref": "Message_5"
+													},
+													"model": {
+														"$ref": "Message_5_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 740,
+													"top": 289,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_5"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2d34BEs=",
+													"_parent": {
+														"$ref": "Message_5"
+													},
+													"model": {
+														"$ref": "Message_5_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 741,
+													"top": 254,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_5"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2d35qv8=",
+													"_parent": {
+														"$ref": "Message_5"
+													},
+													"model": {
+														"$ref": "Message_5_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 651,
+													"top": 270,
+													"width": 14,
+													"height": 25
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_5_NameLabel",
+													"_parent": {
+														"$ref": "Message_5"
+													},
+													"model": {
+														"$ref": "Message_5_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 654,
+													"top": 254,
+													"width": 175,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_5"
+													},
+													"edgePosition": 1,
+													"text": "Return pengumuman list"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_API_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_DB_Line"
+											},
+											"points": "831:270;652:270",
+											"nameLabel": {
+												"$ref": "Message_5_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2d33Jjc="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2d34BEs="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2d35qv8="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_4",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_4_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2d3xOeo=",
+													"_parent": {
+														"$ref": "Message_4"
+													},
+													"model": {
+														"$ref": "Message_4_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 738,
+													"top": 199,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_4"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2d3ywNQ=",
+													"_parent": {
+														"$ref": "Message_4"
+													},
+													"model": {
+														"$ref": "Message_4_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 738,
+													"top": 234,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_4"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2d3z4KM=",
+													"_parent": {
+														"$ref": "Message_4"
+													},
+													"model": {
+														"$ref": "Message_4_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 824,
+													"top": 230,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_4_NameLabel",
+													"_parent": {
+														"$ref": "Message_4"
+													},
+													"model": {
+														"$ref": "Message_4_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 584,
+													"top": 214,
+													"width": 308.5341796875,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_4"
+													},
+													"edgePosition": 1,
+													"text": " Query pengumuman ORDER BY tanggal DESC"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_DB_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_API_Line"
+											},
+											"points": "652:230;824:230",
+											"nameLabel": {
+												"$ref": "Message_4_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2d3xOeo="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2d3ywNQ="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2d3z4KM="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_6",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_6_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t39AM4=",
+													"_parent": {
+														"$ref": "Message_6"
+													},
+													"model": {
+														"$ref": "Message_6_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 575,
+													"top": 329,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_6"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t3+/sw=",
+													"_parent": {
+														"$ref": "Message_6"
+													},
+													"model": {
+														"$ref": "Message_6_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 576,
+													"top": 294,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_6"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2t3/XsM=",
+													"_parent": {
+														"$ref": "Message_6"
+													},
+													"model": {
+														"$ref": "Message_6_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 500,
+													"top": 310,
+													"width": 14,
+													"height": 25
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_6_NameLabel",
+													"_parent": {
+														"$ref": "Message_6"
+													},
+													"model": {
+														"$ref": "Message_6_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 526,
+													"top": 294,
+													"width": 100.45166015625,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_6"
+													},
+													"edgePosition": 1,
+													"text": "Return data"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_Controller_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_API_Line"
+											},
+											"points": "651:310;501:310",
+											"nameLabel": {
+												"$ref": "Message_6_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2t39AM4="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2t3+/sw="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2t3/XsM="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_9",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_9_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t4PO20=",
+													"_parent": {
+														"$ref": "Message_9"
+													},
+													"model": {
+														"$ref": "Message_9_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 198,
+													"top": 451,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_9"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t4QKyI=",
+													"_parent": {
+														"$ref": "Message_9"
+													},
+													"model": {
+														"$ref": "Message_9_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 199,
+													"top": 416,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_9"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2t4R5JY=",
+													"_parent": {
+														"$ref": "Message_9"
+													},
+													"model": {
+														"$ref": "Message_9_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 93,
+													"top": 432,
+													"width": 14,
+													"height": 25
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_9_NameLabel",
+													"_parent": {
+														"$ref": "Message_9"
+													},
+													"model": {
+														"$ref": "Message_9_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 133,
+													"top": 416,
+													"width": 133,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_9"
+													},
+													"edgePosition": 1,
+													"text": "Tampilkan Detail"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "AAAAAAGbpY1o8N6hARs="
+											},
+											"tail": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"points": "305:432;94:432",
+											"nameLabel": {
+												"$ref": "Message_9_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2t4PO20="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2t4QKyI="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2t4R5JY="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_8",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_8_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t4Jeic=",
+													"_parent": {
+														"$ref": "Message_8"
+													},
+													"model": {
+														"$ref": "Message_8_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 196,
+													"top": 361,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_8"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t4KMvo=",
+													"_parent": {
+														"$ref": "Message_8"
+													},
+													"model": {
+														"$ref": "Message_8_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 196,
+													"top": 396,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_8"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2t4LnOo=",
+													"_parent": {
+														"$ref": "Message_8"
+													},
+													"model": {
+														"$ref": "Message_8_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 298,
+													"top": 392,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_8_NameLabel",
+													"_parent": {
+														"$ref": "Message_8"
+													},
+													"model": {
+														"$ref": "Message_8_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 126,
+													"top": 376,
+													"width": 141.63525390625,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_8"
+													},
+													"edgePosition": 1,
+													"text": "Pilih Pengumuman"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"tail": {
+												"$ref": "AAAAAAGbpY1o8N6hARs="
+											},
+											"points": "94:392;298:392",
+											"nameLabel": {
+												"$ref": "Message_8_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2t4Jeic="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2t4KMvo="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2t4LnOo="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_10",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_10_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294V4VM=",
+													"_parent": {
+														"$ref": "Message_10"
+													},
+													"model": {
+														"$ref": "Message_10_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 196,
+													"top": 441,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_10"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294Wv9k=",
+													"_parent": {
+														"$ref": "Message_10"
+													},
+													"model": {
+														"$ref": "Message_10_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 196,
+													"top": 476,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_10"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ294Xb+E=",
+													"_parent": {
+														"$ref": "Message_10"
+													},
+													"model": {
+														"$ref": "Message_10_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 298,
+													"top": 472,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_10_NameLabel",
+													"_parent": {
+														"$ref": "Message_10"
+													},
+													"model": {
+														"$ref": "Message_10_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 84,
+													"top": 456,
+													"width": 224,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_10"
+													},
+													"edgePosition": 1,
+													"text": "Download Lampiran (optional)"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"tail": {
+												"$ref": "AAAAAAGbpY1o8N6hARs="
+											},
+											"points": "94:472;298:472",
+											"nameLabel": {
+												"$ref": "Message_10_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ294V4VM="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ294Wv9k="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ294Xb+E="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_11",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_11_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294bsgM=",
+													"_parent": {
+														"$ref": "Message_11"
+													},
+													"model": {
+														"$ref": "Message_11_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 475,
+													"top": 479,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_11"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294cThw=",
+													"_parent": {
+														"$ref": "Message_11"
+													},
+													"model": {
+														"$ref": "Message_11_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 475,
+													"top": 514,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_11"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ294dsmQ=",
+													"_parent": {
+														"$ref": "Message_11"
+													},
+													"model": {
+														"$ref": "Message_11_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 644,
+													"top": 510,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_11_NameLabel",
+													"_parent": {
+														"$ref": "Message_11"
+													},
+													"model": {
+														"$ref": "Message_11_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 402,
+													"top": 494,
+													"width": 147,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_11"
+													},
+													"edgePosition": 1,
+													"text": "downloadFile(url)"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_API_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"points": "306:510;644:510",
+											"nameLabel": {
+												"$ref": "Message_11_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ294bsgM="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ294cThw="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ294dsmQ="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_12",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_12_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294hZyI=",
+													"_parent": {
+														"$ref": "Message_12"
+													},
+													"model": {
+														"$ref": "Message_12_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 477,
+													"top": 569,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_12"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294iYRk=",
+													"_parent": {
+														"$ref": "Message_12"
+													},
+													"model": {
+														"$ref": "Message_12_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 478,
+													"top": 534,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_12"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ294jCLU=",
+													"_parent": {
+														"$ref": "Message_12"
+													},
+													"model": {
+														"$ref": "Message_12_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 305,
+													"top": 550,
+													"width": 14,
+													"height": 25
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_12_NameLabel",
+													"_parent": {
+														"$ref": "Message_12"
+													},
+													"model": {
+														"$ref": "Message_12_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 426,
+													"top": 534,
+													"width": 105,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_12"
+													},
+													"edgePosition": 1,
+													"text": "Return file"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_API_Line"
+											},
+											"points": "651:550;306:550",
+											"nameLabel": {
+												"$ref": "Message_12_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ294hZyI="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ294iYRk="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ294jCLU="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_13",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_13_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294nhfk=",
+													"_parent": {
+														"$ref": "Message_13"
+													},
+													"model": {
+														"$ref": "Message_13_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 198,
+													"top": 611,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_13"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ294oQKQ=",
+													"_parent": {
+														"$ref": "Message_13"
+													},
+													"model": {
+														"$ref": "Message_13_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 199,
+													"top": 576,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_13"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ294pNBA=",
+													"_parent": {
+														"$ref": "Message_13"
+													},
+													"model": {
+														"$ref": "Message_13_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 93,
+													"top": 592,
+													"width": 14,
+													"height": 25
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_13_NameLabel",
+													"_parent": {
+														"$ref": "Message_13"
+													},
+													"model": {
+														"$ref": "Message_13_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 127,
+													"top": 576,
+													"width": 144.5361328125,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_13"
+													},
+													"edgePosition": 1,
+													"text": "Save & Open file"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "AAAAAAGbpY1o8N6hARs="
+											},
+											"tail": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"points": "305:592;94:592",
+											"nameLabel": {
+												"$ref": "Message_13_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ294nhfk="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ294oQKQ="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ294pNBA="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_7",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "Message_7_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t4DJ/c=",
+													"_parent": {
+														"$ref": "Message_7"
+													},
+													"model": {
+														"$ref": "Message_7_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 402,
+													"top": 369,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_7"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpYzQ2t4EE1g=",
+													"_parent": {
+														"$ref": "Message_7"
+													},
+													"model": {
+														"$ref": "Message_7_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 403,
+													"top": 334,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_7"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpYzQ2t4FwhM=",
+													"_parent": {
+														"$ref": "Message_7"
+													},
+													"model": {
+														"$ref": "Message_7_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 305,
+													"top": 350,
+													"width": 14,
+													"height": 25
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_7_NameLabel",
+													"_parent": {
+														"$ref": "Message_7"
+													},
+													"model": {
+														"$ref": "Message_7_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 296,
+													"top": 334,
+													"width": 214.60791015625,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_7"
+													},
+													"edgePosition": 1,
+													"text": "Tampilkan Daftar Pengumuman"
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"tail": {
+												"$ref": "Lifeline_Controller_Line"
+											},
+											"points": "500:350;306:350",
+											"nameLabel": {
+												"$ref": "Message_7_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpYzQ2t4DJ/c="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpYzQ2t4EE1g="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpYzQ2t4FwhM="
+											}
+										},
+										{
+											"_type": "UMLSeqLifelineView",
+											"_id": "AAAAAAGbpY1o8N6b3+0=",
+											"_parent": {
+												"$ref": "SequenceDiagram"
+											},
+											"model": {
+												"$ref": "AAAAAAGbpY1o796ay7s="
+											},
+											"subViews": [
+												{
+													"_type": "UMLNameCompartmentView",
+													"_id": "AAAAAAGbpY1o8N6c0gk=",
+													"_parent": {
+														"$ref": "AAAAAAGbpY1o8N6b3+0="
+													},
+													"model": {
+														"$ref": "AAAAAAGbpY1o796ay7s="
+													},
+													"subViews": [
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpY1o8N6dBLk=",
+															"_parent": {
+																"$ref": "AAAAAAGbpY1o8N6c0gk="
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpY1o8N6eC4M=",
+															"_parent": {
+																"$ref": "AAAAAAGbpY1o8N6c0gk="
+															},
+															"font": "Arial;13;1",
+															"parentStyle": true,
+															"left": 40,
+															"top": 87,
+															"width": 106.9296875,
+															"height": 13,
+															"text": "Orang Tua: Actor"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpY1o8N6fBb8=",
+															"_parent": {
+																"$ref": "AAAAAAGbpY1o8N6c0gk="
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"width": 215.3251953125,
+															"height": 13,
+															"text": "(from Lihat Pengumuman Interaction)"
+														},
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAGbpY1o8N6gMAY=",
+															"_parent": {
+																"$ref": "AAAAAAGbpY1o8N6c0gk="
+															},
+															"visible": false,
+															"font": "Arial;13;0",
+															"parentStyle": true,
+															"height": 13,
+															"horizontalAlignment": 1
+														}
+													],
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 35,
+													"top": 80,
+													"width": 116.9296875,
+													"height": 25,
+													"stereotypeLabel": {
+														"$ref": "AAAAAAGbpY1o8N6dBLk="
+													},
+													"nameLabel": {
+														"$ref": "AAAAAAGbpY1o8N6eC4M="
+													},
+													"namespaceLabel": {
+														"$ref": "AAAAAAGbpY1o8N6fBb8="
+													},
+													"propertyLabel": {
+														"$ref": "AAAAAAGbpY1o8N6gMAY="
+													}
+												},
+												{
+													"_type": "UMLLinePartView",
+													"_id": "AAAAAAGbpY1o8N6hARs=",
+													"_parent": {
+														"$ref": "AAAAAAGbpY1o8N6b3+0="
+													},
+													"model": {
+														"$ref": "AAAAAAGbpY1o796ay7s="
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 93,
+													"top": 106,
+													"width": 1,
+													"height": 534
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 35,
+											"top": 40,
+											"width": 115.9296875,
+											"height": 600,
+											"stereotypeDisplay": "icon",
+											"nameCompartment": {
+												"$ref": "AAAAAAGbpY1o8N6c0gk="
+											},
+											"linePart": {
+												"$ref": "AAAAAAGbpY1o8N6hARs="
+											}
+										}
+									],
+									"showSequenceNumber": false
+								},
+								{
+									"_type": "UMLLifeline",
+									"_id": "Lifeline_UI_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "PengumumanPage",
+									"represent": {
+										"$ref": "Role_UI"
+									},
+									"isMultiInstance": false
+								},
+								{
+									"_type": "UMLLifeline",
+									"_id": "Lifeline_Controller_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "PengumumanController",
+									"represent": {
+										"$ref": "Role_Controller"
+									},
+									"isMultiInstance": false
+								},
+								{
+									"_type": "UMLLifeline",
+									"_id": "Lifeline_API_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "API Server",
+									"represent": {
+										"$ref": "Role_API"
+									},
+									"isMultiInstance": false
+								},
+								{
+									"_type": "UMLLifeline",
+									"_id": "Lifeline_DB_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Database",
+									"represent": {
+										"$ref": "Role_DB"
+									},
+									"isMultiInstance": false
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_1_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Pilih Menu Pengumuman",
+									"source": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_2_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "getPengumumanList()",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_Controller_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_3_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "GET /pengumuman",
+									"source": {
+										"$ref": "Lifeline_Controller_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_API_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_4_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": " Query pengumuman ORDER BY tanggal DESC",
+									"source": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_DB_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_5_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Return pengumuman list",
+									"source": {
+										"$ref": "Lifeline_DB_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_6_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Return data",
+									"source": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_Controller_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_7_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Tampilkan Daftar Pengumuman",
+									"source": {
+										"$ref": "Lifeline_Controller_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_8_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Pilih Pengumuman",
+									"source": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_9_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Tampilkan Detail",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_10_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Download Lampiran (optional)",
+									"source": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_11_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "downloadFile(url)",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_API_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_12_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Return file",
+									"source": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_13_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Save & Open file",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"messageSort": "reply"
+								}
+							],
+							"messages": [
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_1_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Pilih Menu Pengumuman",
+									"source": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_2_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "getPengumumanList()",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_Controller_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_3_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "GET /pengumuman",
+									"source": {
+										"$ref": "Lifeline_Controller_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_API_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_4_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": " Query pengumuman ORDER BY tanggal DESC",
+									"source": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_DB_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_5_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Return pengumuman list",
+									"source": {
+										"$ref": "Lifeline_DB_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_6_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Return data",
+									"source": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_Controller_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_7_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Tampilkan Daftar Pengumuman",
+									"source": {
+										"$ref": "Lifeline_Controller_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_8_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Pilih Pengumuman",
+									"source": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_9_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Tampilkan Detail",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_10_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Download Lampiran (optional)",
+									"source": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_11_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "downloadFile(url)",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_API_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_12_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Return file",
+									"source": {
+										"$ref": "Lifeline_API_Model"
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"messageSort": "reply"
+								},
+								{
+									"_type": "UMLMessage",
+									"_id": "Message_13_Model",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Save & Open file",
+									"source": {
+										"$ref": "Lifeline_UI_Model"
+									},
+									"target": {
+										"$ref": "AAAAAAGbpY1o796ay7s="
+									},
+									"messageSort": "reply"
+								}
+							],
+							"participants": [
+								{
+									"_type": "UMLAttribute",
+									"_id": "Role_User",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "User",
+									"type": "Actor"
+								},
+								{
+									"_type": "UMLAttribute",
+									"_id": "Role_UI",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "PengumumanPage",
+									"type": ""
+								},
+								{
+									"_type": "UMLAttribute",
+									"_id": "Role_Controller",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "PengumumanController",
+									"type": ""
+								},
+								{
+									"_type": "UMLAttribute",
+									"_id": "Role_API",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "API Server",
+									"type": ""
+								},
+								{
+									"_type": "UMLAttribute",
+									"_id": "Role_DB",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Database",
+									"type": ""
+								},
+								{
+									"_type": "UMLLifeline",
+									"_id": "AAAAAAGbpY1o796ay7s=",
+									"_parent": {
+										"$ref": "Interaction"
+									},
+									"name": "Orang Tua",
+									"represent": {
+										"$ref": "AAAAAAGbpY1o796Z5DQ="
+									},
+									"isMultiInstance": false
+								}
+							]
+						}
+					],
+					"attributes": [
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGbpY1o796Z5DQ=",
+							"_parent": {
+								"$ref": "Collaboration"
+							},
+							"name": "Role1",
+							"type": {
+								"$ref": "AAAAAAGbpYz+1d5uzr8="
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAGbpYzsH95pxOA=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model1",
+			"ownedElements": [
+				{
+					"_type": "UMLUseCaseDiagram",
+					"_id": "AAAAAAGbpYzsH95qeCY=",
+					"_parent": {
+						"$ref": "AAAAAAGbpYzsH95pxOA="
+					},
+					"name": "UseCaseDiagram1",
+					"ownedViews": [
+						{
+							"_type": "UMLActorView",
+							"_id": "AAAAAAGbpYz+1t5wxsE=",
+							"_parent": {
+								"$ref": "AAAAAAGbpYzsH95qeCY="
+							},
+							"model": {
+								"$ref": "AAAAAAGbpYz+1d5uzr8="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAGbpYz+1t5xlhQ=",
+									"_parent": {
+										"$ref": "AAAAAAGbpYz+1t5wxsE="
+									},
+									"model": {
+										"$ref": "AAAAAAGbpYz+1d5uzr8="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpYz+1t5yj6M=",
+											"_parent": {
+												"$ref": "AAAAAAGbpYz+1t5xlhQ="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpYz+1t5zoWA=",
+											"_parent": {
+												"$ref": "AAAAAAGbpYz+1t5xlhQ="
+											},
+											"font": "Arial;13;1",
+											"parentStyle": true,
+											"left": 117,
+											"top": 454,
+											"width": 42.17724609375,
+											"height": 13,
+											"text": "Actor"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpYz+1t50OCU=",
+											"_parent": {
+												"$ref": "AAAAAAGbpYz+1t5xlhQ="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"width": 80.9072265625,
+											"height": 13,
+											"text": "(from Model1)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpYz+1t5137Y=",
+											"_parent": {
+												"$ref": "AAAAAAGbpYz+1t5xlhQ="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": true,
+									"left": 112,
+									"top": 447,
+									"width": 52.17724609375,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpYz+1t5yj6M="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAGbpYz+1t5zoWA="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAGbpYz+1t50OCU="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpYz+1t5137Y="
+									}
+								},
+								{
+									"_type": "UMLAttributeCompartmentView",
+									"_id": "AAAAAAGbpYz+1t52Dl8=",
+									"_parent": {
+										"$ref": "AAAAAAGbpYz+1t5wxsE="
+									},
+									"model": {
+										"$ref": "AAAAAAGbpYz+1d5uzr8="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"parentStyle": true,
+									"width": 10,
+									"height": 10
+								},
+								{
+									"_type": "UMLOperationCompartmentView",
+									"_id": "AAAAAAGbpYz+1t5343Q=",
+									"_parent": {
+										"$ref": "AAAAAAGbpYz+1t5wxsE="
+									},
+									"model": {
+										"$ref": "AAAAAAGbpYz+1d5uzr8="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"parentStyle": true,
+									"width": 10,
+									"height": 10
+								},
+								{
+									"_type": "UMLReceptionCompartmentView",
+									"_id": "AAAAAAGbpYz+1t54Mmo=",
+									"_parent": {
+										"$ref": "AAAAAAGbpYz+1t5wxsE="
+									},
+									"model": {
+										"$ref": "AAAAAAGbpYz+1d5uzr8="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"parentStyle": true,
+									"width": 10,
+									"height": 10
+								},
+								{
+									"_type": "UMLTemplateParameterCompartmentView",
+									"_id": "AAAAAAGbpYz+1955s0k=",
+									"_parent": {
+										"$ref": "AAAAAAGbpYz+1t5wxsE="
+									},
+									"model": {
+										"$ref": "AAAAAAGbpYz+1d5uzr8="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"parentStyle": true,
+									"width": 10,
+									"height": 10
+								}
+							],
+							"font": "Arial;13;0",
+							"parentStyle": false,
+							"containerChangeable": true,
+							"left": 112,
+							"top": 392,
+							"width": 51.17724609375,
+							"height": 80,
+							"nameCompartment": {
+								"$ref": "AAAAAAGbpYz+1t5xlhQ="
+							},
+							"suppressAttributes": true,
+							"suppressOperations": true,
+							"attributeCompartment": {
+								"$ref": "AAAAAAGbpYz+1t52Dl8="
+							},
+							"operationCompartment": {
+								"$ref": "AAAAAAGbpYz+1t5343Q="
+							},
+							"receptionCompartment": {
+								"$ref": "AAAAAAGbpYz+1t54Mmo="
+							},
+							"templateParameterCompartment": {
+								"$ref": "AAAAAAGbpYz+1955s0k="
+							}
+						}
+					]
+				},
+				{
+					"_type": "UMLActor",
+					"_id": "AAAAAAGbpYz+1d5uzr8=",
+					"_parent": {
+						"$ref": "AAAAAAGbpYzsH95pxOA="
+					},
+					"name": "Actor"
+				}
+			]
+		}
+	],
+	"documentVersion": 1
+}

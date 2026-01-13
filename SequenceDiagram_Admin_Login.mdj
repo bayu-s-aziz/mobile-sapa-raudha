@@ -1,0 +1,43 @@
+{
+  "_type": "Project",
+  "_id": "Seq_Admin_Login_Project",
+  "name": "Sequence Diagram - Admin Login",
+  "ownedElements": [
+    {
+      "_type": "UMLModel",
+      "_id": "Seq_Admin_Login_Model",
+      "_parent": {"$ref": "Seq_Admin_Login_Project"},
+      "name": "Model",
+      "ownedElements": [
+        {
+          "_type": "UMLCollaboration",
+          "_id": "Seq_Admin_Login_Collab",
+          "_parent": {"$ref": "Seq_Admin_Login_Model"},
+          "name": "Admin Login",
+          "ownedElements": [
+            {
+              "_type": "UMLInteraction",
+              "_id": "Seq_Admin_Login_Interaction",
+              "_parent": {"$ref": "Seq_Admin_Login_Collab"},
+              "name": "Admin Login Interaction",
+              "ownedElements": [
+                {
+                  "_type": "UMLSequenceDiagram",
+                  "_id": "Seq_Admin_Login",
+                  "_parent": {"$ref": "Seq_Admin_Login_Interaction"},
+                  "name": "Admin Login Sequence Diagram",
+                  "ownedViews": [],
+                  "documentation": "Participants: Admin (Web), Web Admin UI, Auth Service, Database.\n\nFlow: Admin membuka halaman login → input NIK & password → klik Login → UI kirim kredensial ke Auth → Auth query guru by NIK → Database kembalikan data (password_hash, role) → Auth validasi password & role=admin → jika valid, kirim token/sesi ke UI dan redirect ke dashboard; jika invalid, kembalikan error dan UI tampilkan pesan."
+                }
+              ]
+            },
+            {"_type": "UMLLifeline", "_id": "LL_Admin", "_parent": {"$ref": "Seq_Admin_Login_Interaction"}, "name": "Admin (Web)"},
+            {"_type": "UMLLifeline", "_id": "LL_Web", "_parent": {"$ref": "Seq_Admin_Login_Interaction"}, "name": "Web Admin UI"},
+            {"_type": "UMLLifeline", "_id": "LL_Auth", "_parent": {"$ref": "Seq_Admin_Login_Interaction"}, "name": "Auth Service"},
+            {"_type": "UMLLifeline", "_id": "LL_DB", "_parent": {"$ref": "Seq_Admin_Login_Interaction"}, "name": "Database"}
+          ]
+        }
+      ]
+    }
+  ]
+}

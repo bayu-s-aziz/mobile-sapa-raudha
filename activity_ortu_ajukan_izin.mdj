@@ -1,0 +1,3582 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "SapaRaudha - Activity Diagram Ajukan Izin",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLActivity",
+					"_id": "Activity_AjukanIzin",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Ajukan Permohonan Izin",
+					"ownedElements": [
+						{
+							"_type": "UMLActivityDiagram",
+							"_id": "ActivityDiagram_AjukanIzin",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "AD - Ajukan Permohonan Izin",
+							"ownedViews": [
+								{
+									"_type": "UMLFrameView",
+									"_id": "Frame_AjukanIzin",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Activity_AjukanIzin"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpJDWhbVaRms=",
+											"_parent": {
+												"$ref": "Frame_AjukanIzin"
+											},
+											"font": "Arial;13;1",
+											"parentStyle": true,
+											"left": 53,
+											"top": 21,
+											"width": 17.341796875,
+											"height": 13,
+											"text": "act"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "Frame_AjukanIzin_NameLabel",
+											"_parent": {
+												"$ref": "Frame_AjukanIzin"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 76.341796875,
+											"top": 21,
+											"width": 141.6416015625,
+											"height": 13,
+											"text": "Ajukan Permohonan Izin"
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 48,
+									"top": 16,
+									"width": 656,
+									"height": 724,
+									"nameLabel": {
+										"$ref": "Frame_AjukanIzin_NameLabel"
+									},
+									"frameTypeLabel": {
+										"$ref": "AAAAAAGbpJDWhbVaRms="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Ortu",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Partition_Ortu"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpJDWhrVdU/Y=",
+											"_parent": {
+												"$ref": "Swimlane_Ortu"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 56,
+											"top": 52,
+											"width": 220,
+											"height": 13,
+											"text": "Orang Tua",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Ortu_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Ortu"
+											},
+											"model": {
+												"$ref": "Partition_Ortu"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWhrVfOpE=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 45,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWhrVgOyA=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 60,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWhrVhHGI=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 75,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWhrViYss=",
+													"_parent": {
+														"$ref": "Swimlane_Ortu_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 63,
+													"top": 90,
+													"width": 208,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 58,
+											"top": 40,
+											"width": 218,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWhrVfOpE="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWhrVgOyA="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWhrVhHGI="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWhrViYss="
+											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbpJFKJraJ7Hw="
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 56,
+									"top": 48,
+									"width": 220,
+									"height": 660,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJDWhrVdU/Y="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_System",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Partition_System"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpJDWh7Vkv5c=",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 276,
+											"top": 52,
+											"width": 204,
+											"height": 13,
+											"text": "Sistem",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_System_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"model": {
+												"$ref": "Partition_System"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7VmEfM=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 61,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7VnF94=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 76,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7VoCP8=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 91,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7Vp8IQ=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 283,
+													"top": 106,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 278,
+											"top": 56,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWh7VmEfM="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWh7VnF94="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWh7VoCP8="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWh7Vp8IQ="
+											}
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 276,
+									"top": 48,
+									"width": 204,
+									"height": 660,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJDWh7Vkv5c="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Database",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Partition_Database"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbpJDWh7VrjvQ=",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 480,
+											"top": 52,
+											"width": 208,
+											"height": 13,
+											"text": "Database",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Database_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"model": {
+												"$ref": "Partition_Database"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7VtWc4=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 479,
+													"top": 61,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7Vup6s=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 479,
+													"top": 76,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7VveAQ=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 479,
+													"top": 91,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWh7VwYvw=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 479,
+													"top": 106,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 474,
+											"top": 56,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWh7VtWc4="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWh7Vup6s="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWh7VveAQ="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWh7VwYvw="
+											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbpJIM/Lajwsg="
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 480,
+									"top": 48,
+									"width": 208,
+									"height": 660,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJDWh7VrjvQ="
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_BukaDashboard",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_BukaDashboardModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_BukaDashboard_NameLabel",
+											"_parent": {
+												"$ref": "Action_BukaDashboard"
+											},
+											"model": {
+												"$ref": "Action_BukaDashboardModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLV4Q2A=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": -32,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLV5I58=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 135,
+													"width": 131,
+													"height": 13,
+													"text": "Buka Dashboard"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLV64wI=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": -32,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLV7xRg=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": -32,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 128,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWiLV4Q2A="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWiLV5I58="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWiLV64wI="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWiLV7xRg="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 128,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_BukaDashboard_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_PilihMenu",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_PilihMenuModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_PilihMenu_NameLabel",
+											"_parent": {
+												"$ref": "Action_PilihMenu"
+											},
+											"model": {
+												"$ref": "Action_PilihMenuModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLWDynE=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLWEe+U=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 207,
+													"width": 131,
+													"height": 13,
+													"text": "Pilih Menu Izin"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLWFX6U=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWiLWG09U=",
+													"_parent": {
+														"$ref": "Action_PilihMenu_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 200,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWiLWDynE="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWiLWEe+U="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWiLWFX6U="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWiLWG09U="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 200,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_PilihMenu_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_KlikTombol",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_KlikTombolModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_KlikTombol_NameLabel",
+											"_parent": {
+												"$ref": "Action_KlikTombol"
+											},
+											"model": {
+												"$ref": "Action_KlikTombolModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWOBaA=",
+													"_parent": {
+														"$ref": "Action_KlikTombol_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWPhn0=",
+													"_parent": {
+														"$ref": "Action_KlikTombol_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 263,
+													"width": 131,
+													"height": 13,
+													"text": "Klik Tombol Ajukan"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWQdz8=",
+													"_parent": {
+														"$ref": "Action_KlikTombol_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWRg9E=",
+													"_parent": {
+														"$ref": "Action_KlikTombol_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 256,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWibWOBaA="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWibWPhn0="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWibWQdz8="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWibWRg9E="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 256,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_KlikTombol_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanForm",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_TampilkanFormModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanForm_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanForm"
+											},
+											"model": {
+												"$ref": "Action_TampilkanFormModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWZoRs=",
+													"_parent": {
+														"$ref": "Action_TampilkanForm_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -64,
+													"top": -16,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWaUwk=",
+													"_parent": {
+														"$ref": "Action_TampilkanForm_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 301,
+													"top": 255,
+													"width": 151,
+													"height": 26,
+													"text": "Tampilkan Form Permohonan",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWbRIM=",
+													"_parent": {
+														"$ref": "Action_TampilkanForm_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -64,
+													"top": -16,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWcmDc=",
+													"_parent": {
+														"$ref": "Action_TampilkanForm_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -64,
+													"top": -16,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 296,
+											"top": 248,
+											"width": 161,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWibWZoRs="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWibWaUwk="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWibWbRIM="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWibWcmDc="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 296,
+									"top": 248,
+									"width": 160,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanForm_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_InputData",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_InputDataModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_InputData_NameLabel",
+											"_parent": {
+												"$ref": "Action_InputData"
+											},
+											"model": {
+												"$ref": "Action_InputDataModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWk/HA=",
+													"_parent": {
+														"$ref": "Action_InputData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 32,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWlT44=",
+													"_parent": {
+														"$ref": "Action_InputData_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 335,
+													"width": 135,
+													"height": 26,
+													"text": "Input Data (Tanggal, Alasan)",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWm664=",
+													"_parent": {
+														"$ref": "Action_InputData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 32,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWibWnwfA=",
+													"_parent": {
+														"$ref": "Action_InputData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 32,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 328,
+											"width": 145,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWibWk/HA="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWibWlT44="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWibWm664="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWibWnwfA="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 328,
+									"width": 144,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_InputData_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_UploadDokumen",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_UploadDokumenModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_UploadDokumen_NameLabel",
+											"_parent": {
+												"$ref": "Action_UploadDokumen"
+											},
+											"model": {
+												"$ref": "Action_UploadDokumenModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirWvhiY=",
+													"_parent": {
+														"$ref": "Action_UploadDokumen_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 48,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirWw5Yc=",
+													"_parent": {
+														"$ref": "Action_UploadDokumen_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 407,
+													"width": 131,
+													"height": 13,
+													"text": "Upload Dokumen"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirWx1js=",
+													"_parent": {
+														"$ref": "Action_UploadDokumen_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 48,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirWyzaQ=",
+													"_parent": {
+														"$ref": "Action_UploadDokumen_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 48,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 400,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWirWvhiY="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWirWw5Yc="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWirWx1js="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWirWyzaQ="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 400,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_UploadDokumen_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_KirimData",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_KirimDataModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_KirimData_NameLabel",
+											"_parent": {
+												"$ref": "Action_KirimData"
+											},
+											"model": {
+												"$ref": "Action_KirimDataModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirW6R60=",
+													"_parent": {
+														"$ref": "Action_KirimData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 16,
+													"top": 80,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirW7E6E=",
+													"_parent": {
+														"$ref": "Action_KirimData_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 109,
+													"top": 479,
+													"width": 131,
+													"height": 13,
+													"text": "Kirim Data"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirW82FY=",
+													"_parent": {
+														"$ref": "Action_KirimData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 16,
+													"top": 80,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWirW9GKM=",
+													"_parent": {
+														"$ref": "Action_KirimData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 16,
+													"top": 80,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 104,
+											"top": 472,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWirW6R60="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWirW7E6E="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWirW82FY="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWirW9GKM="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 104,
+									"top": 472,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_KirimData_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_ValidasiData",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_ValidasiDataModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_ValidasiData_NameLabel",
+											"_parent": {
+												"$ref": "Action_ValidasiData"
+											},
+											"model": {
+												"$ref": "Action_ValidasiDataModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XF+0g=",
+													"_parent": {
+														"$ref": "Action_ValidasiData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -48,
+													"top": 64,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XG7Ak=",
+													"_parent": {
+														"$ref": "Action_ValidasiData_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 309,
+													"top": 471,
+													"width": 127,
+													"height": 13,
+													"text": "Validasi Data",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XHouo=",
+													"_parent": {
+														"$ref": "Action_ValidasiData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -48,
+													"top": 64,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XI2f8=",
+													"_parent": {
+														"$ref": "Action_ValidasiData_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -48,
+													"top": 64,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 304,
+											"top": 464,
+											"width": 137,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWi7XF+0g="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWi7XG7Ak="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWi7XHouo="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWi7XI2f8="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 304,
+									"top": 464,
+									"width": 136,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_ValidasiData_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_SimpanDatabase",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_SimpanDatabaseModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_SimpanDatabase_NameLabel",
+											"_parent": {
+												"$ref": "Action_SimpanDatabase"
+											},
+											"model": {
+												"$ref": "Action_SimpanDatabaseModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XQn3k=",
+													"_parent": {
+														"$ref": "Action_SimpanDatabase_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -352,
+													"top": 160,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XRLBQ=",
+													"_parent": {
+														"$ref": "Action_SimpanDatabase_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 509,
+													"top": 575,
+													"width": 159,
+													"height": 39,
+													"text": "Simpan ke Tabel leave_requests (status: pending)",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XSFsc=",
+													"_parent": {
+														"$ref": "Action_SimpanDatabase_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -352,
+													"top": 160,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWi7XTN7Q=",
+													"_parent": {
+														"$ref": "Action_SimpanDatabase_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -352,
+													"top": 160,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 504,
+											"top": 568,
+											"width": 169,
+											"height": 51,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWi7XQn3k="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWi7XRLBQ="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWi7XSFsc="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWi7XTN7Q="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 504,
+									"top": 568,
+									"width": 168,
+									"height": 67,
+									"nameCompartment": {
+										"$ref": "Action_SimpanDatabase_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_KirimNotifikasi",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_KirimNotifikasiModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_KirimNotifikasi_NameLabel",
+											"_parent": {
+												"$ref": "Action_KirimNotifikasi"
+											},
+											"model": {
+												"$ref": "Action_KirimNotifikasiModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXbxaE=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -48,
+													"top": 32,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXcogI=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 309,
+													"top": 575,
+													"width": 127,
+													"height": 26,
+													"text": "Kirim Notifikasi ke Guru",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXdRHU=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -48,
+													"top": 32,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXel1Y=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -48,
+													"top": 32,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 304,
+											"top": 568,
+											"width": 137,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWjLXbxaE="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWjLXcogI="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWjLXdRHU="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWjLXel1Y="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 304,
+									"top": 568,
+									"width": 136,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_KirimNotifikasi_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanSukses",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_TampilkanSuksesModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanSukses_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanSukses"
+											},
+											"model": {
+												"$ref": "Action_TampilkanSuksesModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXmpTs=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": -96,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXnCQs=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 575,
+													"width": 127,
+													"height": 26,
+													"text": "Tampilkan Pesan Sukses",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXoX/E=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": -96,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjLXpbe4=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": -96,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 568,
+											"width": 137,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWjLXmpTs="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWjLXnCQs="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWjLXoX/E="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWjLXpbe4="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 568,
+									"width": 136,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanSukses_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanError",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Action_TampilkanErrorModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanError_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanError"
+											},
+											"model": {
+												"$ref": "Action_TampilkanErrorModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjbXxCjc=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -288,
+													"top": -208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjbXyQag=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 517,
+													"top": 343,
+													"width": 159,
+													"height": 13,
+													"text": "Tampilkan Pesan Error",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjbXz6nc=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -288,
+													"top": -208,
+													"width": 179.91162109375,
+													"height": 13,
+													"text": "(from Ajukan Permohonan Izin)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbpJDWjbX0z60=",
+													"_parent": {
+														"$ref": "Action_TampilkanError_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -288,
+													"top": -208,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 512,
+											"top": 336,
+											"width": 169,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbpJDWjbXxCjc="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbpJDWjbXyQag="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbpJDWjbXz6nc="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpJDWjbX0z60="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 512,
+									"top": 336,
+									"width": 168,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanError_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_2",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_2_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWkLX868w=",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 195,
+											"top": 177,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_2"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWkLX9iUg=",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 151,
+											"top": 178,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_2"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_2_NameLabel",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 166,
+											"top": 194,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_PilihMenu"
+									},
+									"tail": {
+										"$ref": "Action_BukaDashboard"
+									},
+									"points": "166:169;166:200",
+									"nameLabel": {
+										"$ref": "Flow_2_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWkLX868w="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWkLX9iUg="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_3",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_3_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWkbYBZ+Q=",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 195,
+											"top": 241,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_3"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWkbYCx3o=",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 151,
+											"top": 242,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_3"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_3_NameLabel",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 166,
+											"top": 250,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_KlikTombol"
+									},
+									"tail": {
+										"$ref": "Action_PilihMenu"
+									},
+									"points": "166:241;166:256",
+									"nameLabel": {
+										"$ref": "Flow_3_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWkbYBZ+Q="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWkbYCx3o="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_4",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_4_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWkbYGR30=",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 266,
+											"top": 240,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_4"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWkbYHonM=",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 266,
+											"top": 285,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_4"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_4_NameLabel",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 296,
+											"top": 270,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanForm"
+									},
+									"tail": {
+										"$ref": "Action_KlikTombol"
+									},
+									"points": "236:276;296:276",
+									"nameLabel": {
+										"$ref": "Flow_4_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWkbYGR30="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWkbYHonM="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_5",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_5_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWkbYLoVk=",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 298,
+											"top": 344,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_5"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWk7YMWHA=",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 299,
+											"top": 299,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_5"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_5_NameLabel",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 166,
+											"top": 322,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_InputData"
+									},
+									"tail": {
+										"$ref": "Action_TampilkanForm"
+									},
+									"points": "432:302;432:320;166:320;166:328",
+									"nameLabel": {
+										"$ref": "Flow_5_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWkbYLoVk="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWk7YMWHA="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_6",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_6_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWk7YQErA=",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 197,
+											"top": 384,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_6"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWk7YRLXc=",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 153,
+											"top": 385,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_6"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_6_NameLabel",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 168,
+											"top": 394,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_UploadDokumen"
+									},
+									"tail": {
+										"$ref": "Action_InputData"
+									},
+									"points": "168:382;168:400",
+									"nameLabel": {
+										"$ref": "Flow_6_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWk7YQErA="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWk7YRLXc="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_7",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_7_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWk7YV5q8=",
+											"_parent": {
+												"$ref": "Flow_7"
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 195,
+											"top": 449,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_7"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWk7YWXZw=",
+											"_parent": {
+												"$ref": "Flow_7"
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 151,
+											"top": 450,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_7"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_7_NameLabel",
+											"_parent": {
+												"$ref": "Flow_7"
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 166,
+											"top": 466,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_KirimData"
+									},
+									"tail": {
+										"$ref": "Action_UploadDokumen"
+									},
+									"points": "166:441;166:472",
+									"nameLabel": {
+										"$ref": "Flow_7_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWk7YV5q8="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWk7YWXZw="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_8",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_8_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlLYaAhg=",
+											"_parent": {
+												"$ref": "Flow_8"
+											},
+											"model": {
+												"$ref": "Flow_8_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 274,
+											"top": 456,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_8"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlLYb72Q=",
+											"_parent": {
+												"$ref": "Flow_8"
+											},
+											"model": {
+												"$ref": "Flow_8_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 274,
+											"top": 501,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_8"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_8_NameLabel",
+											"_parent": {
+												"$ref": "Flow_8"
+											},
+											"model": {
+												"$ref": "Flow_8_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 304,
+											"top": 486,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_ValidasiData"
+									},
+									"tail": {
+										"$ref": "Action_KirimData"
+									},
+									"points": "244:492;304:492",
+									"nameLabel": {
+										"$ref": "Flow_8_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWlLYaAhg="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWlLYb72Q="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_12",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_12_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlbYuskw=",
+											"_parent": {
+												"$ref": "Flow_12"
+											},
+											"model": {
+												"$ref": "Flow_12_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 471,
+											"top": 616,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_12"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlbYv6W0=",
+											"_parent": {
+												"$ref": "Flow_12"
+											},
+											"model": {
+												"$ref": "Flow_12_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 472,
+											"top": 571,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_12"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_12_NameLabel",
+											"_parent": {
+												"$ref": "Flow_12"
+											},
+											"model": {
+												"$ref": "Flow_12_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 440,
+											"top": 586,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_KirimNotifikasi"
+									},
+									"tail": {
+										"$ref": "Action_SimpanDatabase"
+									},
+									"points": "504:592;440:592",
+									"nameLabel": {
+										"$ref": "Flow_12_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWlbYuskw="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWlbYv6W0="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_13",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_13_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlbYz6hg=",
+											"_parent": {
+												"$ref": "Flow_13"
+											},
+											"model": {
+												"$ref": "Flow_13_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 267,
+											"top": 616,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_13"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlbY0Y9M=",
+											"_parent": {
+												"$ref": "Flow_13"
+											},
+											"model": {
+												"$ref": "Flow_13_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 268,
+											"top": 571,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_13"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_13_NameLabel",
+											"_parent": {
+												"$ref": "Flow_13"
+											},
+											"model": {
+												"$ref": "Flow_13_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 232,
+											"top": 586,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanSukses"
+									},
+									"tail": {
+										"$ref": "Action_KirimNotifikasi"
+									},
+									"points": "304:592;232:592",
+									"nameLabel": {
+										"$ref": "Flow_13_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWlbYz6hg="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWlbY0Y9M="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_15",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_15_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlrY9LsU=",
+											"_parent": {
+												"$ref": "Flow_15"
+											},
+											"model": {
+												"$ref": "Flow_15_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 375,
+											"top": 379,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_15"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJDWlrY+vJ8=",
+											"_parent": {
+												"$ref": "Flow_15"
+											},
+											"model": {
+												"$ref": "Flow_15_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 376,
+											"top": 334,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_15"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_15_NameLabel",
+											"_parent": {
+												"$ref": "Flow_15"
+											},
+											"model": {
+												"$ref": "Flow_15_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 240,
+											"top": 349,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_InputData"
+									},
+									"tail": {
+										"$ref": "Action_TampilkanError"
+									},
+									"points": "512:355;240:355",
+									"nameLabel": {
+										"$ref": "Flow_15_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJDWlrY9LsU="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJDWlrY+vJ8="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbpJE/F7Z4d20=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "InitialNode_AjukanIzinModel"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 145,
+									"top": 94,
+									"width": 20,
+									"height": 20
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbpJE/G7Z5abc=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_1_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJE/G7Z62lk=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJE/G7Z5abc="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 171,
+											"top": 114,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJE/G7Z5abc="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJE/HLZ7p4g=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJE/G7Z5abc="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 186,
+											"top": 114,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJE/G7Z5abc="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJE/HLZ871w=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJE/G7Z5abc="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 142,
+											"top": 115,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJE/G7Z5abc="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_BukaDashboard"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbpJE/F7Z4d20="
+									},
+									"points": "157:114;157:128",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJE/G7Z62lk="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJE/HLZ7p4g="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJE/HLZ871w="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbpJFKJ7aKM68=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_14_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJFKJ7aLI64=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJFKJ7aKM68="
+											},
+											"model": {
+												"$ref": "Flow_14_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 177,
+											"top": 640,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJFKJ7aKM68="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJFKJ7aMnz4=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJFKJ7aKM68="
+											},
+											"model": {
+												"$ref": "Flow_14_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 192,
+											"top": 640,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJFKJ7aKM68="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJFKJ7aNgSE=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJFKJ7aKM68="
+											},
+											"model": {
+												"$ref": "Flow_14_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 148,
+											"top": 641,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJFKJ7aKM68="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbpJFKJraJ7Hw="
+									},
+									"tail": {
+										"$ref": "Action_TampilkanSukses"
+									},
+									"points": "163:622;163:672",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJFKJ7aLI64="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJFKJ7aMnz4="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJFKJ7aNgSE="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbpJFKJraJ7Hw=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "FinalNode_AjukanIzinModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_Ortu"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 152,
+									"top": 672,
+									"width": 26,
+									"height": 26
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbpJIM/bakIJg=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_9_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/balTqY=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/bakIJg="
+											},
+											"model": {
+												"$ref": "Flow_9_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 512,
+											"top": 478,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/bakIJg="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/bamTpM=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/bakIJg="
+											},
+											"model": {
+												"$ref": "Flow_9_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 512,
+											"top": 463,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/bakIJg="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/banQkM=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/bakIJg="
+											},
+											"model": {
+												"$ref": "Flow_9_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 512,
+											"top": 508,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/bakIJg="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbpJIM/Lajwsg="
+									},
+									"tail": {
+										"$ref": "Action_ValidasiData"
+									},
+									"points": "440:499;584:499",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJIM/balTqY="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJIM/bamTpM="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJIM/banQkM="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbpJIM/bao+1o=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_10_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/bapmgU=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/bao+1o="
+											},
+											"model": {
+												"$ref": "Flow_10_Model"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 600,
+											"top": 524,
+											"width": 22.15966796875,
+											"height": 13,
+											"alpha": 1.9237862581758933,
+											"distance": 20.248456731316587,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/bao+1o="
+											},
+											"edgePosition": 1,
+											"text": "[Ya]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/baqdCg=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/bao+1o="
+											},
+											"model": {
+												"$ref": "Flow_10_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 621,
+											"top": 530,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/bao+1o="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/barPkk=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/bao+1o="
+											},
+											"model": {
+												"$ref": "Flow_10_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 577,
+											"top": 531,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/bao+1o="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_SimpanDatabase"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbpJIM/Lajwsg="
+									},
+									"points": "592:507;592:568",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJIM/bapmgU="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJIM/baqdCg="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJIM/barPkk="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbpJIM/ras6fM=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Flow_11_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/ratJrA=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/ras6fM="
+											},
+											"model": {
+												"$ref": "Flow_11_Model"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 607,
+											"top": 423,
+											"width": 38.5302734375,
+											"height": 13,
+											"alpha": -1.5102641125450882,
+											"distance": 33.06055050963308,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/ras6fM="
+											},
+											"edgePosition": 1,
+											"text": "[Tidak]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/raulEg=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/ras6fM="
+											},
+											"model": {
+												"$ref": "Flow_11_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 564,
+											"top": 425,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/ras6fM="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbpJIM/rav1sY=",
+											"_parent": {
+												"$ref": "AAAAAAGbpJIM/ras6fM="
+											},
+											"model": {
+												"$ref": "Flow_11_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 608,
+											"top": 426,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbpJIM/ras6fM="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanError"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbpJIM/Lajwsg="
+									},
+									"points": "594:488;594:377",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbpJIM/ratJrA="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbpJIM/raulEg="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbpJIM/rav1sY="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbpJIM/Lajwsg=",
+									"_parent": {
+										"$ref": "ActivityDiagram_AjukanIzin"
+									},
+									"model": {
+										"$ref": "Decision_DataValidModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 584,
+									"top": 488,
+									"width": 23,
+									"height": 19
+								}
+							]
+						}
+					],
+					"nodes": [
+						{
+							"_type": "UMLAction",
+							"_id": "Action_BukaDashboardModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Buka Dashboard"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_PilihMenuModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Pilih Menu Izin"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_KlikTombolModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Klik Tombol Ajukan"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanFormModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Tampilkan Form Permohonan"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_InputDataModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Input Data (Tanggal, Alasan)"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_UploadDokumenModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Upload Dokumen"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_KirimDataModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Kirim Data"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_ValidasiDataModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Validasi Data"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_SimpanDatabaseModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Simpan ke Tabel leave_requests (status: pending)"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_KirimNotifikasiModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Kirim Notifikasi ke Guru"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanSuksesModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Tampilkan Pesan Sukses"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanErrorModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Tampilkan Pesan Error"
+						},
+						{
+							"_type": "UMLInitialNode",
+							"_id": "InitialNode_AjukanIzinModel",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Initial1"
+						}
+					],
+					"edges": [
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_1_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "InitialNode_AjukanIzinModel"
+							},
+							"target": {
+								"$ref": "Action_BukaDashboardModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_2_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_BukaDashboardModel"
+							},
+							"target": {
+								"$ref": "Action_PilihMenuModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_3_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_PilihMenuModel"
+							},
+							"target": {
+								"$ref": "Action_KlikTombolModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_4_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_KlikTombolModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanFormModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_5_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_TampilkanFormModel"
+							},
+							"target": {
+								"$ref": "Action_InputDataModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_6_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_InputDataModel"
+							},
+							"target": {
+								"$ref": "Action_UploadDokumenModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_7_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_UploadDokumenModel"
+							},
+							"target": {
+								"$ref": "Action_KirimDataModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_8_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_KirimDataModel"
+							},
+							"target": {
+								"$ref": "Action_ValidasiDataModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_9_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_ValidasiDataModel"
+							},
+							"target": {
+								"$ref": "Decision_DataValidModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_10_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "[Ya]",
+							"source": {
+								"$ref": "Decision_DataValidModel"
+							},
+							"target": {
+								"$ref": "Action_SimpanDatabaseModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_11_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "[Tidak]",
+							"source": {
+								"$ref": "Decision_DataValidModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanErrorModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_12_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_SimpanDatabaseModel"
+							},
+							"target": {
+								"$ref": "Action_KirimNotifikasiModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_13_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_KirimNotifikasiModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanSuksesModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_14_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_TampilkanSuksesModel"
+							},
+							"target": {
+								"$ref": "FinalNode_AjukanIzinModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_15_Model",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"source": {
+								"$ref": "Action_TampilkanErrorModel"
+							},
+							"target": {
+								"$ref": "Action_InputDataModel"
+							}
+						}
+					],
+					"groups": [
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Ortu",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Orang Tua",
+							"nodes": [
+								{
+									"_type": "UMLActivityFinalNode",
+									"_id": "FinalNode_AjukanIzinModel",
+									"_parent": {
+										"$ref": "Partition_Ortu"
+									},
+									"name": "ActivityFinal1"
+								}
+							]
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_System",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Sistem"
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Database",
+							"_parent": {
+								"$ref": "Activity_AjukanIzin"
+							},
+							"name": "Database",
+							"nodes": [
+								{
+									"_type": "UMLDecisionNode",
+									"_id": "Decision_DataValidModel",
+									"_parent": {
+										"$ref": "Partition_Database"
+									},
+									"name": "Decision1"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"documentVersion": 1
+}

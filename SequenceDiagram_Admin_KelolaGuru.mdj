@@ -1,0 +1,26 @@
+{
+  "_type": "Project",
+  "_id": "Seq_Admin_Guru_Project",
+  "name": "Sequence Diagram - Admin Kelola Guru",
+  "ownedElements": [
+    {"_type": "UMLModel", "_id": "Seq_Admin_Guru_Model", "_parent": {"$ref": "Seq_Admin_Guru_Project"}, "name": "Model",
+      "ownedElements": [
+        {"_type": "UMLCollaboration", "_id": "Seq_Admin_Guru_Collab", "_parent": {"$ref": "Seq_Admin_Guru_Model"}, "name": "Kelola Data Guru",
+          "ownedElements": [
+            {"_type": "UMLInteraction", "_id": "Seq_Admin_Guru_Interaction", "_parent": {"$ref": "Seq_Admin_Guru_Collab"}, "name": "Kelola Guru Interaction",
+              "ownedElements": [
+                {"_type": "UMLSequenceDiagram", "_id": "Seq_Admin_Guru", "_parent": {"$ref": "Seq_Admin_Guru_Interaction"}, "name": "Kelola Guru Sequence Diagram", "ownedViews": [],
+                  "documentation": "Participants: Admin (Web), Web Admin UI, Guru Service, Database.\n\nList: Admin buka menu, UI minta daftar, Service SELECT * FROM gurus, DB kembalikan daftar.\nTambah: Admin isi data, UI kirim create, Service INSERT gurus, DB OK, UI tampilkan sukses & refresh.\nEdit: Admin ubah data, UI kirim update, Service UPDATE gurus, DB OK, UI sukses & refresh.\nHapus: Admin konfirmasi hapus, UI kirim delete, Service DELETE gurus (cek wali kelas), DB OK/Gagal, UI tampilkan hasil."
+                }
+              ]
+            },
+            {"_type": "UMLLifeline", "_id": "LL_Admin", "_parent": {"$ref": "Seq_Admin_Guru_Interaction"}, "name": "Admin (Web)"},
+            {"_type": "UMLLifeline", "_id": "LL_Web", "_parent": {"$ref": "Seq_Admin_Guru_Interaction"}, "name": "Web Admin UI"},
+            {"_type": "UMLLifeline", "_id": "LL_Svc", "_parent": {"$ref": "Seq_Admin_Guru_Interaction"}, "name": "Guru Service"},
+            {"_type": "UMLLifeline", "_id": "LL_DB", "_parent": {"$ref": "Seq_Admin_Guru_Interaction"}, "name": "Database"}
+          ]
+        }
+      ]
+    }
+  ]
+}

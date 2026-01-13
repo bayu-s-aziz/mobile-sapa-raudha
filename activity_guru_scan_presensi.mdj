@@ -1,0 +1,3846 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "SapaRaudha - Activity Diagram Scan Presensi",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLActivity",
+					"_id": "Activity_ScanPresensi",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Scan Presensi Siswa",
+					"ownedElements": [
+						{
+							"_type": "UMLActivityDiagram",
+							"_id": "ActivityDiagram_ScanPresensi",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "AD - Scan Presensi Siswa",
+							"ownedViews": [
+								{
+									"_type": "UMLFrameView",
+									"_id": "Frame_ScanPresensi",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Activity_ScanPresensi"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo1pbs1Ahvu8=",
+											"_parent": {
+												"$ref": "Frame_ScanPresensi"
+											},
+											"font": "Arial;13;1",
+											"parentStyle": true,
+											"left": 69,
+											"top": 21,
+											"width": 17.341796875,
+											"height": 13,
+											"text": "act"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "Frame_ScanPresensi_NameLabel",
+											"_parent": {
+												"$ref": "Frame_ScanPresensi"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 92.341796875,
+											"top": 21,
+											"width": 122.10986328125,
+											"height": 13,
+											"text": "Scan Presensi Siswa"
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 64,
+									"top": 16,
+									"width": 968,
+									"height": 1000,
+									"nameLabel": {
+										"$ref": "Frame_ScanPresensi_NameLabel"
+									},
+									"frameTypeLabel": {
+										"$ref": "AAAAAAGbo1pbs1Ahvu8="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Guru",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Partition_Guru"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo1pbtFAktIE=",
+											"_parent": {
+												"$ref": "Swimlane_Guru"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 80,
+											"top": 52,
+											"width": 288,
+											"height": 13,
+											"text": "Guru",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Guru_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Guru"
+											},
+											"model": {
+												"$ref": "Partition_Guru"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtFAm/C4=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 87,
+													"top": 293,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtFAnISc=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 87,
+													"top": 308,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtFAouJU=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 87,
+													"top": 323,
+													"width": 208,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtFApQTE=",
+													"_parent": {
+														"$ref": "Swimlane_Guru_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 87,
+													"top": 338,
+													"width": 208,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 82,
+											"top": 288,
+											"width": 218,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbtFAm/C4="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbtFAnISc="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbtFAouJU="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbtFApQTE="
+											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbo1uQGlG3rA8="
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 80,
+									"top": 48,
+									"width": 288,
+									"height": 952,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1pbtFAktIE="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_System",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Partition_System"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo1pbtFArBZk=",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 368,
+											"top": 52,
+											"width": 320,
+											"height": 13,
+											"text": "Sistem",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_System_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_System"
+											},
+											"model": {
+												"$ref": "Partition_System"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVAt80c=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 335,
+													"top": 277,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVAuNV8=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 335,
+													"top": 292,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVAvhiU=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 335,
+													"top": 307,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVAwN7w=",
+													"_parent": {
+														"$ref": "Swimlane_System_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 335,
+													"top": 322,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 330,
+											"top": 272,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbtVAt80c="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbtVAuNV8="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbtVAvhiU="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbtVAwN7w="
+											}
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 368,
+									"top": 48,
+									"width": 320,
+									"height": 952,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1pbtFArBZk="
+									}
+								},
+								{
+									"_type": "UMLSwimlaneView",
+									"_id": "Swimlane_Database",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Partition_Database"
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAGbo1pbtVAyNYk=",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 688,
+											"top": 52,
+											"width": 320,
+											"height": 13,
+											"text": "Database",
+											"verticalAlignment": 3
+										},
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Swimlane_Database_NameLabel",
+											"_parent": {
+												"$ref": "Swimlane_Database"
+											},
+											"model": {
+												"$ref": "Partition_Database"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVA0uV0=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 631,
+													"top": 293,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVA1AWs=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 631,
+													"top": 308,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVA2+XM=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 631,
+													"top": 323,
+													"width": 308,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtVA33aw=",
+													"_parent": {
+														"$ref": "Swimlane_Database_NameLabel"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 631,
+													"top": 338,
+													"width": 308,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 626,
+											"top": 288,
+											"width": 318,
+											"height": 68,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbtVA0uV0="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbtVA1AWs="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbtVA2+XM="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbtVA33aw="
+											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbo1ssmVFdv54="
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 688,
+									"top": 48,
+									"width": 320,
+									"height": 952,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1pbtVAyNYk="
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_BukaDashboard",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_BukaDashboardModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_BukaDashboard_NameLabel",
+											"_parent": {
+												"$ref": "Action_BukaDashboard"
+											},
+											"model": {
+												"$ref": "Action_BukaDashboardModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlA/cIk=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 32,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBAc9s=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 109,
+													"top": 159,
+													"width": 138.96630859375,
+													"height": 13,
+													"text": "Buka Dashboard Guru"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBBEEg=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 32,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBCyAk=",
+													"_parent": {
+														"$ref": "Action_BukaDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 32,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 104,
+											"top": 152,
+											"width": 148.96630859375,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbtlA/cIk="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbtlBAc9s="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbtlBBEEg="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbtlBCyAk="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 104,
+									"top": 152,
+									"width": 147.96630859375,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_BukaDashboard_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_PilihMenuPresensi",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_PilihMenuPresensiModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_PilihMenuPresensi_NameLabel",
+											"_parent": {
+												"$ref": "Action_PilihMenuPresensi"
+											},
+											"model": {
+												"$ref": "Action_PilihMenuPresensiModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBKM6g=",
+													"_parent": {
+														"$ref": "Action_PilihMenuPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 96,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBLG3A=",
+													"_parent": {
+														"$ref": "Action_PilihMenuPresensi_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 113,
+													"top": 255,
+													"width": 131,
+													"height": 13,
+													"text": "Pilih Menu Presensi"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBM57Q=",
+													"_parent": {
+														"$ref": "Action_PilihMenuPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 96,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBNtgQ=",
+													"_parent": {
+														"$ref": "Action_PilihMenuPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"top": 96,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 108,
+											"top": 248,
+											"width": 141,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbtlBKM6g="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbtlBLG3A="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbtlBM57Q="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbtlBNtgQ="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 108,
+									"top": 248,
+									"width": 140,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_PilihMenuPresensi_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanScanner",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_TampilkanScannerModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanScanner_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanScanner"
+											},
+											"model": {
+												"$ref": "Action_TampilkanScannerModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBVDV0=",
+													"_parent": {
+														"$ref": "Action_TampilkanScanner_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 192,
+													"top": 96,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBWgHg=",
+													"_parent": {
+														"$ref": "Action_TampilkanScanner_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 429,
+													"top": 255,
+													"width": 209,
+													"height": 13,
+													"text": "Tampilkan QR Scanner"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBXSm8=",
+													"_parent": {
+														"$ref": "Action_TampilkanScanner_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 192,
+													"top": 96,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbtlBY/KQ=",
+													"_parent": {
+														"$ref": "Action_TampilkanScanner_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 192,
+													"top": 96,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 424,
+											"top": 248,
+											"width": 219,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbtlBVDV0="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbtlBWgHg="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbtlBXSm8="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbtlBY/KQ="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 424,
+									"top": 248,
+									"width": 218,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanScanner_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_ScanQRCode",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_ScanQRCodeModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_ScanQRCode_NameLabel",
+											"_parent": {
+												"$ref": "Action_ScanQRCode"
+											},
+											"model": {
+												"$ref": "Action_ScanQRCodeModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1BgMwM=",
+													"_parent": {
+														"$ref": "Action_ScanQRCode_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 48,
+													"top": 224,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1Bhnj0=",
+													"_parent": {
+														"$ref": "Action_ScanQRCode_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 129,
+													"top": 383,
+													"width": 131.76171875,
+													"height": 13,
+													"text": "Scan QR Code Siswa"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1BifsE=",
+													"_parent": {
+														"$ref": "Action_ScanQRCode_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 48,
+													"top": 224,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1BjDag=",
+													"_parent": {
+														"$ref": "Action_ScanQRCode_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 48,
+													"top": 224,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 124,
+											"top": 376,
+											"width": 141.76171875,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbt1BgMwM="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbt1Bhnj0="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbt1BifsE="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbt1BjDag="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 124,
+									"top": 376,
+									"width": 140.76171875,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_ScanQRCode_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_BacaDataQR",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_BacaDataQRModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_BacaDataQR_NameLabel",
+											"_parent": {
+												"$ref": "Action_BacaDataQR"
+											},
+											"model": {
+												"$ref": "Action_BacaDataQRModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1Br3fU=",
+													"_parent": {
+														"$ref": "Action_BacaDataQR_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 192,
+													"top": 240,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1BsksI=",
+													"_parent": {
+														"$ref": "Action_BacaDataQR_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 429,
+													"top": 391,
+													"width": 209,
+													"height": 13,
+													"text": "Baca Data QR Code (student_id)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1BtWVg=",
+													"_parent": {
+														"$ref": "Action_BacaDataQR_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 192,
+													"top": 240,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1BuZro=",
+													"_parent": {
+														"$ref": "Action_BacaDataQR_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 192,
+													"top": 240,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 424,
+											"top": 384,
+											"width": 219,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbt1Br3fU="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbt1BsksI="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbt1BtWVg="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbt1BuZro="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 424,
+									"top": 384,
+									"width": 218,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_BacaDataQR_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_ValidasiSiswa",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_ValidasiSiswaModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_ValidasiSiswa_NameLabel",
+											"_parent": {
+												"$ref": "Action_ValidasiSiswa"
+											},
+											"model": {
+												"$ref": "Action_ValidasiSiswaModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1B2F3M=",
+													"_parent": {
+														"$ref": "Action_ValidasiSiswa_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 128,
+													"top": 240,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1B3ZoA=",
+													"_parent": {
+														"$ref": "Action_ValidasiSiswa_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 725,
+													"top": 391,
+													"width": 231.22314453125,
+													"height": 13,
+													"text": "Validasi Data Siswa di Tabel students"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1B4woQ=",
+													"_parent": {
+														"$ref": "Action_ValidasiSiswa_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 128,
+													"top": 240,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbt1B5/D4=",
+													"_parent": {
+														"$ref": "Action_ValidasiSiswa_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 128,
+													"top": 240,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 720,
+											"top": 384,
+											"width": 241.22314453125,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbt1B2F3M="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbt1B3ZoA="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbt1B4woQ="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbt1B5/D4="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 720,
+									"top": 384,
+									"width": 240.22314453125,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_ValidasiSiswa_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanErrorSiswa",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_TampilkanErrorSiswaModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanErrorSiswa_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanErrorSiswa"
+											},
+											"model": {
+												"$ref": "Action_TampilkanErrorSiswaModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCBvII=",
+													"_parent": {
+														"$ref": "Action_TampilkanErrorSiswa_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 36,
+													"top": 240,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCCaio=",
+													"_parent": {
+														"$ref": "Action_TampilkanErrorSiswa_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 125,
+													"top": 471,
+													"width": 159,
+													"height": 26,
+													"text": "Tampilkan Error \"Siswa Tidak Terdaftar\"",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCDXpM=",
+													"_parent": {
+														"$ref": "Action_TampilkanErrorSiswa_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 36,
+													"top": 240,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCEE+w=",
+													"_parent": {
+														"$ref": "Action_TampilkanErrorSiswa_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 36,
+													"top": 240,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 120,
+											"top": 464,
+											"width": 169,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbuFCBvII="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbuFCCaio="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbuFCDXpM="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbuFCEE+w="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 120,
+									"top": 464,
+									"width": 168,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanErrorSiswa_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_CekPresensiHariIni",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_CekPresensiHariIniModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_CekPresensiHariIni_NameLabel",
+											"_parent": {
+												"$ref": "Action_CekPresensiHariIni"
+											},
+											"model": {
+												"$ref": "Action_CekPresensiHariIniModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCMDp4=",
+													"_parent": {
+														"$ref": "Action_CekPresensiHariIni_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 112,
+													"top": 320,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCNt4Q=",
+													"_parent": {
+														"$ref": "Action_CekPresensiHariIni_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 717,
+													"top": 591,
+													"width": 261.57763671875,
+													"height": 13,
+													"text": "Cek Presensi Hari Ini di Tabel attendances"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCOllY=",
+													"_parent": {
+														"$ref": "Action_CekPresensiHariIni_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 112,
+													"top": 320,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuFCPRf8=",
+													"_parent": {
+														"$ref": "Action_CekPresensiHariIni_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 112,
+													"top": 320,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 712,
+											"top": 584,
+											"width": 271.57763671875,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbuFCMDp4="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbuFCNt4Q="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbuFCOllY="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbuFCPRf8="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 712,
+									"top": 584,
+									"width": 270.57763671875,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_CekPresensiHariIni_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanSudahPresensi",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_TampilkanSudahPresensiModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanSudahPresensi_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanSudahPresensi"
+											},
+											"model": {
+												"$ref": "Action_TampilkanSudahPresensiModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCXO/I=",
+													"_parent": {
+														"$ref": "Action_TampilkanSudahPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -8,
+													"top": 144,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCYjaY=",
+													"_parent": {
+														"$ref": "Action_TampilkanSudahPresensi_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 125,
+													"top": 583,
+													"width": 194.48486328125,
+													"height": 26,
+													"text": "Tampilkan \"Sudah Presensi Hari Ini\"",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCZyv0=",
+													"_parent": {
+														"$ref": "Action_TampilkanSudahPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -8,
+													"top": 144,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCaA+c=",
+													"_parent": {
+														"$ref": "Action_TampilkanSudahPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -8,
+													"top": 144,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 120,
+											"top": 576,
+											"width": 204.48486328125,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbuVCXO/I="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbuVCYjaY="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbuVCZyv0="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbuVCaA+c="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 120,
+									"top": 576,
+									"width": 203.48486328125,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanSudahPresensi_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_SimpanPresensi",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_SimpanPresensiModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_SimpanPresensi_NameLabel",
+											"_parent": {
+												"$ref": "Action_SimpanPresensi"
+											},
+											"model": {
+												"$ref": "Action_SimpanPresensiModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCi9Bg=",
+													"_parent": {
+														"$ref": "Action_SimpanPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 144,
+													"top": 176,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCjL7A=",
+													"_parent": {
+														"$ref": "Action_SimpanPresensi_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 733,
+													"top": 679,
+													"width": 231,
+													"height": 26,
+													"text": "Simpan Data Presensi (student_id, date, time, status)",
+													"wordWrap": true
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCke+Y=",
+													"_parent": {
+														"$ref": "Action_SimpanPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 144,
+													"top": 176,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVClq1Y=",
+													"_parent": {
+														"$ref": "Action_SimpanPresensi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 144,
+													"top": 176,
+													"horizontalAlignment": 1,
+													"wordWrap": true
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 728,
+											"top": 672,
+											"width": 241,
+											"height": 38,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbuVCi9Bg="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbuVCjL7A="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbuVCke+Y="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbuVClq1Y="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 728,
+									"top": 672,
+									"width": 240,
+									"height": 54,
+									"nameCompartment": {
+										"$ref": "Action_SimpanPresensi_NameLabel"
+									},
+									"wordWrap": true
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_KirimNotifikasi",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_KirimNotifikasiModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_KirimNotifikasi_NameLabel",
+											"_parent": {
+												"$ref": "Action_KirimNotifikasi"
+											},
+											"model": {
+												"$ref": "Action_KirimNotifikasiModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCtmt0=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 160,
+													"top": 288,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCuqe8=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 413,
+													"top": 799,
+													"width": 209,
+													"height": 13,
+													"text": "Kirim Notifikasi ke Orang Tua"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCvYv0=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 160,
+													"top": 288,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbuVCwz2A=",
+													"_parent": {
+														"$ref": "Action_KirimNotifikasi_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 160,
+													"top": 288,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 408,
+											"top": 792,
+											"width": 219,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbuVCtmt0="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbuVCuqe8="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbuVCvYv0="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbuVCwz2A="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 408,
+									"top": 792,
+									"width": 218,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_KirimNotifikasi_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanSukses",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Action_TampilkanSuksesModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanSukses_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanSukses"
+											},
+											"model": {
+												"$ref": "Action_TampilkanSuksesModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbulC4L2w=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -18,
+													"top": 160,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbulC5aHk=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 101,
+													"top": 799,
+													"width": 184.98681640625,
+													"height": 13,
+													"text": "Tampilkan Konfirmasi Sukses"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbulC6mYo=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -18,
+													"top": 160,
+													"width": 160.3798828125,
+													"height": 13,
+													"text": "(from Scan Presensi Siswa)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo1pbulC7AFc=",
+													"_parent": {
+														"$ref": "Action_TampilkanSukses_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -18,
+													"top": 160,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 96,
+											"top": 792,
+											"width": 194.98681640625,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo1pbulC4L2w="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo1pbulC5aHk="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo1pbulC6mYo="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo1pbulC7AFc="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 96,
+									"top": 792,
+									"width": 193.98681640625,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanSukses_NameLabel"
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_2",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_2_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbu1DDmjI=",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 206,
+											"top": 213,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_2"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbu1DEDSo=",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 162,
+											"top": 214,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_2"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_2_NameLabel",
+											"_parent": {
+												"$ref": "Flow_2"
+											},
+											"model": {
+												"$ref": "Flow_2_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 177,
+											"top": 242,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_PilihMenuPresensi"
+									},
+									"tail": {
+										"$ref": "Action_BukaDashboard"
+									},
+									"points": "177:193;177:248",
+									"nameLabel": {
+										"$ref": "Flow_2_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbu1DDmjI="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbu1DEDSo="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_3",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_3_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDIpvQ=",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 336,
+											"top": 232,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_3"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDJ0TI=",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 336,
+											"top": 277,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_3"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_3_NameLabel",
+											"_parent": {
+												"$ref": "Flow_3"
+											},
+											"model": {
+												"$ref": "Flow_3_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 424,
+											"top": 262,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanScanner"
+									},
+									"tail": {
+										"$ref": "Action_PilihMenuPresensi"
+									},
+									"points": "248:268;424:268",
+									"nameLabel": {
+										"$ref": "Flow_3_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbvFDIpvQ="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbvFDJ0TI="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_4",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_4_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDN4bM=",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 367,
+											"top": 368,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_4"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDORZE=",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 368,
+											"top": 323,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_4"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_4_NameLabel",
+											"_parent": {
+												"$ref": "Flow_4"
+											},
+											"model": {
+												"$ref": "Flow_4_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 192,
+											"top": 370,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_ScanQRCode"
+									},
+									"tail": {
+										"$ref": "Action_TampilkanScanner"
+									},
+									"points": "544:289;544:344;192:344;192:376",
+									"nameLabel": {
+										"$ref": "Flow_4_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbvFDN4bM="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbvFDORZE="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_5",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_5_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDSxC4=",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 344,
+											"top": 360,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_5"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDTlqE=",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 344,
+											"top": 405,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_5"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_5_NameLabel",
+											"_parent": {
+												"$ref": "Flow_5"
+											},
+											"model": {
+												"$ref": "Flow_5_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 424,
+											"top": 390,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_BacaDataQR"
+									},
+									"tail": {
+										"$ref": "Action_ScanQRCode"
+									},
+									"points": "265:396;424:396",
+									"nameLabel": {
+										"$ref": "Flow_5_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbvFDSxC4="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbvFDTlqE="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_6",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_6_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDXRAM=",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 681,
+											"top": 360,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_6"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvFDYAmw=",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 681,
+											"top": 405,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_6"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_6_NameLabel",
+											"_parent": {
+												"$ref": "Flow_6"
+											},
+											"model": {
+												"$ref": "Flow_6_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 720,
+											"top": 390,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_ValidasiSiswa"
+									},
+									"tail": {
+										"$ref": "Action_BacaDataQR"
+									},
+									"points": "642:396;720:396",
+									"nameLabel": {
+										"$ref": "Flow_6_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbvFDXRAM="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbvFDYAmw="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_9",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_9_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvVDmqao=",
+											"_parent": {
+												"$ref": "Flow_9"
+											},
+											"model": {
+												"$ref": "Flow_9_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 162,
+											"top": 433,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_9"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvVDncl4=",
+											"_parent": {
+												"$ref": "Flow_9"
+											},
+											"model": {
+												"$ref": "Flow_9_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 206,
+											"top": 434,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_9"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_9_NameLabel",
+											"_parent": {
+												"$ref": "Flow_9"
+											},
+											"model": {
+												"$ref": "Flow_9_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 192,
+											"top": 411,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_ScanQRCode"
+									},
+									"tail": {
+										"$ref": "Action_TampilkanErrorSiswa"
+									},
+									"points": "192:464;192:417",
+									"nameLabel": {
+										"$ref": "Flow_9_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbvVDmqao="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbvVDncl4="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_13",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_13_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvlD6ju4=",
+											"_parent": {
+												"$ref": "Flow_13"
+											},
+											"model": {
+												"$ref": "Flow_13_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 66,
+											"top": 496,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_13"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbvlD7gRA=",
+											"_parent": {
+												"$ref": "Flow_13"
+											},
+											"model": {
+												"$ref": "Flow_13_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 111,
+											"top": 497,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_13"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_13_NameLabel",
+											"_parent": {
+												"$ref": "Flow_13"
+											},
+											"model": {
+												"$ref": "Flow_13_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 124,
+											"top": 390,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_ScanQRCode"
+									},
+									"tail": {
+										"$ref": "Action_TampilkanSudahPresensi"
+									},
+									"points": "120:611;96:611;96:396;124:396",
+									"nameLabel": {
+										"$ref": "Flow_13_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbvlD6ju4="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbvlD7gRA="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_15",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_15_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbv1EEorQ=",
+											"_parent": {
+												"$ref": "Flow_15"
+											},
+											"model": {
+												"$ref": "Flow_15_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 847,
+											"top": 832,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_15"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbv1EFu9A=",
+											"_parent": {
+												"$ref": "Flow_15"
+											},
+											"model": {
+												"$ref": "Flow_15_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 848,
+											"top": 787,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_15"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_15_NameLabel",
+											"_parent": {
+												"$ref": "Flow_15"
+											},
+											"model": {
+												"$ref": "Flow_15_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 626,
+											"top": 802,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_KirimNotifikasi"
+									},
+									"tail": {
+										"$ref": "Action_SimpanPresensi"
+									},
+									"points": "848:726;848:808;626:808",
+									"nameLabel": {
+										"$ref": "Flow_15_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbv1EEorQ="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbv1EFu9A="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "Flow_16",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_16_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbv1EJ6kY=",
+											"_parent": {
+												"$ref": "Flow_16"
+											},
+											"model": {
+												"$ref": "Flow_16_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 348,
+											"top": 840,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "Flow_16"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1pbv1EK2Wo=",
+											"_parent": {
+												"$ref": "Flow_16"
+											},
+											"model": {
+												"$ref": "Flow_16_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 349,
+											"top": 795,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "Flow_16"
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "Flow_16_NameLabel",
+											"_parent": {
+												"$ref": "Flow_16"
+											},
+											"model": {
+												"$ref": "Flow_16_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 290,
+											"top": 810,
+											"height": 13,
+											"alpha": 0,
+											"distance": 0
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanSukses"
+									},
+									"tail": {
+										"$ref": "Action_KirimNotifikasi"
+									},
+									"points": "408:816;290:816",
+									"nameLabel": {
+										"$ref": "Flow_16_NameLabel"
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1pbv1EJ6kY="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1pbv1EK2Wo="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo1skjFFMmko=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "InitialNode_ScanPresensiModel"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 168,
+									"top": 86,
+									"width": 20,
+									"height": 20
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1skjVFNvEU=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_1_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1skjVFOrl0=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1skjVFNvEU="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 192,
+											"top": 122,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1skjVFNvEU="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1skjVFPQBY=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1skjVFNvEU="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 207,
+											"top": 122,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1skjVFNvEU="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1skjVFQtAM=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1skjVFNvEU="
+											},
+											"model": {
+												"$ref": "Flow_1_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 163,
+											"top": 123,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1skjVFNvEU="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_BukaDashboard"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo1skjFFMmko="
+									},
+									"points": "178:106;178:152",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1skjVFOrl0="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1skjVFPQBY="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1skjVFQtAM="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1ssmlFebcA=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_7_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssmlFfAdo=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssmlFebcA="
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 854,
+											"top": 445,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssmlFebcA="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssmlFgjPk=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssmlFebcA="
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 869,
+											"top": 445,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssmlFebcA="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssmlFhxnM=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssmlFebcA="
+											},
+											"model": {
+												"$ref": "Flow_7_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 825,
+											"top": 446,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssmlFebcA="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbo1ssmVFdv54="
+									},
+									"tail": {
+										"$ref": "Action_ValidasiSiswa"
+									},
+									"points": "840:425;840:480",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1ssmlFfAdo="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1ssmlFgjPk="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1ssmlFhxnM="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1ssmlFisJg=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_8_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssmlFjMXY=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssmlFisJg="
+											},
+											"model": {
+												"$ref": "Flow_8_Model"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 488,
+											"top": 479,
+											"width": 103.32080078125,
+											"height": 13,
+											"alpha": -0.11710881282628938,
+											"distance": 17.11724276862369,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssmlFisJg="
+											},
+											"edgePosition": 1,
+											"text": "[Siswa tidak valid]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssmlFklSM=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssmlFisJg="
+											},
+											"model": {
+												"$ref": "Flow_8_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 555,
+											"top": 512,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssmlFisJg="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssmlFllhs=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssmlFisJg="
+											},
+											"model": {
+												"$ref": "Flow_8_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 556,
+											"top": 467,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssmlFisJg="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanErrorSiswa"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo1ssmVFdv54="
+									},
+									"points": "824:488;288:488",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1ssmlFjMXY="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1ssmlFklSM="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1ssmlFllhs="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1ssm1FmMAM=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_10_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssm1Fn0xY=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssm1FmMAM="
+											},
+											"model": {
+												"$ref": "Flow_10_Model"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 800,
+											"top": 527,
+											"width": 72.2490234375,
+											"height": 13,
+											"alpha": -2.6224478488251495,
+											"distance": 8.06225774829855,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssm1FmMAM="
+											},
+											"edgePosition": 1,
+											"text": "[Siswa valid]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssm1Fo7b4=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssm1FmMAM="
+											},
+											"model": {
+												"$ref": "Flow_10_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 869,
+											"top": 534,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssm1FmMAM="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1ssm1FpGoM=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1ssm1FmMAM="
+											},
+											"model": {
+												"$ref": "Flow_10_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 825,
+											"top": 535,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1ssm1FmMAM="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_CekPresensiHariIni"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo1ssmVFdv54="
+									},
+									"points": "840:499;840:584",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1ssm1Fn0xY="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1ssm1Fo7b4="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1ssm1FpGoM="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo1s2qFGKRXw=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Decision_SudahPresensiModel"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 527,
+									"top": 592,
+									"width": 23,
+									"height": 19
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1s2qFGLrJY=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_11_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qFGMnQo=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qFGLrJY="
+											},
+											"model": {
+												"$ref": "Flow_11_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 630,
+											"top": 612,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qFGLrJY="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qFGNYLc=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qFGLrJY="
+											},
+											"model": {
+												"$ref": "Flow_11_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 630,
+											"top": 627,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qFGLrJY="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qFGO1no=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qFGLrJY="
+											},
+											"model": {
+												"$ref": "Flow_11_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 631,
+											"top": 582,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qFGLrJY="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbo1s2qFGKRXw="
+									},
+									"tail": {
+										"$ref": "Action_CekPresensiHariIni"
+									},
+									"points": "712:603;550:603",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1s2qFGMnQo="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1s2qFGNYLc="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1s2qFGO1no="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1s2qVGPjoo=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_12_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qVGQNSg=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qVGPjoo="
+											},
+											"model": {
+												"$ref": "Flow_12_Model"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 400,
+											"top": 592,
+											"width": 97.5634765625,
+											"height": 13,
+											"alpha": 3.228330954742342,
+											"distance": 23.08679276123039,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qVGPjoo="
+											},
+											"edgePosition": 1,
+											"text": "[Sudah presensi]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qVGRGU4=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qVGPjoo="
+											},
+											"model": {
+												"$ref": "Flow_12_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 424,
+											"top": 624,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qVGPjoo="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qVGSzTA=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qVGPjoo="
+											},
+											"model": {
+												"$ref": "Flow_12_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 425,
+											"top": 579,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qVGPjoo="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_TampilkanSudahPresensi"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo1s2qFGKRXw="
+									},
+									"points": "527:600;323:600",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1s2qVGQNSg="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1s2qVGRGU4="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1s2qVGSzTA="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1s2qlGTxuI=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_14_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qlGUsCs=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qlGTxuI="
+											},
+											"model": {
+												"$ref": "Flow_14_Model"
+											},
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 552,
+											"top": 688,
+											"width": 96.82080078125,
+											"height": 13,
+											"alpha": 0.08047099834222696,
+											"distance": 62.20128616033595,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qlGTxuI="
+											},
+											"edgePosition": 1,
+											"text": "[Belum presensi]"
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qlGVtwo=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qlGTxuI="
+											},
+											"model": {
+												"$ref": "Flow_14_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 538,
+											"top": 663,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qlGTxuI="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1s2qlGW1a4=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1s2qlGTxuI="
+											},
+											"model": {
+												"$ref": "Flow_14_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 538,
+											"top": 708,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1s2qlGTxuI="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_SimpanPresensi"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbo1s2qFGKRXw="
+									},
+									"points": "538:611;538:699;728:699",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1s2qlGUsCs="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1s2qlGVtwo="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1s2qlGW1a4="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbo1uQGlG4j6g=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Flow_17_Model"
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1uQGlG5PT8=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1uQGlG4j6g="
+											},
+											"model": {
+												"$ref": "Flow_17_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 214,
+											"top": 861,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1uQGlG4j6g="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1uQGlG6DE8=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1uQGlG4j6g="
+											},
+											"model": {
+												"$ref": "Flow_17_Model"
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 229,
+											"top": 861,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1uQGlG4j6g="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbo1uQGlG7i4k=",
+											"_parent": {
+												"$ref": "AAAAAAGbo1uQGlG4j6g="
+											},
+											"model": {
+												"$ref": "Flow_17_Model"
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 185,
+											"top": 862,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbo1uQGlG4j6g="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "AAAAAAGbo1uQGlG3rA8="
+									},
+									"tail": {
+										"$ref": "Action_TampilkanSukses"
+									},
+									"points": "200:833;200:904",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbo1uQGlG5PT8="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbo1uQGlG6DE8="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbo1uQGlG7i4k="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo1uQGlG3rA8=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "FinalNode_ScanPresensiModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_Guru"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 189,
+									"top": 904,
+									"width": 26,
+									"height": 26
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo1ssmVFdv54=",
+									"_parent": {
+										"$ref": "ActivityDiagram_ScanPresensi"
+									},
+									"model": {
+										"$ref": "Decision_SiswaValidModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_Database"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 824,
+									"top": 480,
+									"width": 23,
+									"height": 19
+								}
+							]
+						}
+					],
+					"nodes": [
+						{
+							"_type": "UMLInitialNode",
+							"_id": "InitialNode_ScanPresensiModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Initial1"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_BukaDashboardModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Buka Dashboard Guru"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_PilihMenuPresensiModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Pilih Menu Presensi"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanScannerModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Tampilkan QR Scanner"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_ScanQRCodeModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Scan QR Code Siswa"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_BacaDataQRModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Baca Data QR Code (student_id)"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_ValidasiSiswaModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Validasi Data Siswa di Tabel students"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanErrorSiswaModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Tampilkan Error \"Siswa Tidak Terdaftar\""
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_CekPresensiHariIniModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Cek Presensi Hari Ini di Tabel attendances"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanSudahPresensiModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Tampilkan \"Sudah Presensi Hari Ini\""
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_SimpanPresensiModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Simpan Data Presensi (student_id, date, time, status)"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_KirimNotifikasiModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Kirim Notifikasi ke Orang Tua"
+						},
+						{
+							"_type": "UMLAction",
+							"_id": "Action_TampilkanSuksesModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Tampilkan Konfirmasi Sukses"
+						},
+						{
+							"_type": "UMLDecisionNode",
+							"_id": "Decision_SudahPresensiModel",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Decision2"
+						}
+					],
+					"edges": [
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_1_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "InitialNode_ScanPresensiModel"
+							},
+							"target": {
+								"$ref": "Action_BukaDashboardModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_2_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_BukaDashboardModel"
+							},
+							"target": {
+								"$ref": "Action_PilihMenuPresensiModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_3_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_PilihMenuPresensiModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanScannerModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_4_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_TampilkanScannerModel"
+							},
+							"target": {
+								"$ref": "Action_ScanQRCodeModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_5_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_ScanQRCodeModel"
+							},
+							"target": {
+								"$ref": "Action_BacaDataQRModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_6_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_BacaDataQRModel"
+							},
+							"target": {
+								"$ref": "Action_ValidasiSiswaModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_7_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_ValidasiSiswaModel"
+							},
+							"target": {
+								"$ref": "Decision_SiswaValidModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_8_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "[Siswa tidak valid]",
+							"source": {
+								"$ref": "Decision_SiswaValidModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanErrorSiswaModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_9_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_TampilkanErrorSiswaModel"
+							},
+							"target": {
+								"$ref": "Action_ScanQRCodeModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_10_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "[Siswa valid]",
+							"source": {
+								"$ref": "Decision_SiswaValidModel"
+							},
+							"target": {
+								"$ref": "Action_CekPresensiHariIniModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_11_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_CekPresensiHariIniModel"
+							},
+							"target": {
+								"$ref": "Decision_SudahPresensiModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_12_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "[Sudah presensi]",
+							"source": {
+								"$ref": "Decision_SudahPresensiModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanSudahPresensiModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_13_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_TampilkanSudahPresensiModel"
+							},
+							"target": {
+								"$ref": "Action_ScanQRCodeModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_14_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "[Belum presensi]",
+							"source": {
+								"$ref": "Decision_SudahPresensiModel"
+							},
+							"target": {
+								"$ref": "Action_SimpanPresensiModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_15_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_SimpanPresensiModel"
+							},
+							"target": {
+								"$ref": "Action_KirimNotifikasiModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_16_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_KirimNotifikasiModel"
+							},
+							"target": {
+								"$ref": "Action_TampilkanSuksesModel"
+							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "Flow_17_Model",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"source": {
+								"$ref": "Action_TampilkanSuksesModel"
+							},
+							"target": {
+								"$ref": "FinalNode_ScanPresensiModel"
+							}
+						}
+					],
+					"groups": [
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Guru",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Guru",
+							"nodes": [
+								{
+									"_type": "UMLActivityFinalNode",
+									"_id": "FinalNode_ScanPresensiModel",
+									"_parent": {
+										"$ref": "Partition_Guru"
+									},
+									"name": "ActivityFinal1"
+								}
+							]
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_System",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Sistem"
+						},
+						{
+							"_type": "UMLActivityPartition",
+							"_id": "Partition_Database",
+							"_parent": {
+								"$ref": "Activity_ScanPresensi"
+							},
+							"name": "Database",
+							"nodes": [
+								{
+									"_type": "UMLDecisionNode",
+									"_id": "Decision_SiswaValidModel",
+									"_parent": {
+										"$ref": "Partition_Database"
+									},
+									"name": "Decision1"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"documentVersion": 1
+}

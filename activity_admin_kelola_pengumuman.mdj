@@ -1,0 +1,197 @@
+{
+	"_type": "Project",
+	"_id": "ActivityDiagram_Admin_KelolaPengumuman_Project",
+	"name": "Activity Diagram - Admin Kelola Pengumuman",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "ActivityDiagram_Admin_KelolaPengumuman_Model",
+			"_parent": {
+				"$ref": "ActivityDiagram_Admin_KelolaPengumuman_Project"
+			},
+			"name": "Admin Kelola Pengumuman Model",
+			"ownedElements": [
+				{
+					"_type": "UMLActivityDiagram",
+					"_id": "ActivityDiagram_Admin_KelolaPengumuman",
+					"_parent": {
+						"$ref": "ActivityDiagram_Admin_KelolaPengumuman_Model"
+					},
+					"name": "Activity Diagram - Admin Kelola Pengumuman",
+					"ownedViews": [],
+					"documentation": "Activity diagram untuk proses kelola pengumuman oleh admin.\n\nDeskripsi:\n1. Admin membuka menu Kelola Pengumuman\n2. Sistem menampilkan daftar pengumuman\n3. Admin memilih aksi (Tambah/Edit/Hapus)\n4. Untuk Tambah: Admin input judul, konten, pilih target audience (all/parents/teachers/class), upload lampiran (optional)\n5. Untuk Edit: Admin pilih pengumuman, ubah data, simpan\n6. Untuk Hapus: Admin pilih pengumuman, konfirmasi hapus\n7. Sistem menyimpan perubahan ke database\n8. Sistem mengirim notifikasi ke target audience\n9. Sistem menampilkan notifikasi sukses/gagal"
+				},
+				{
+					"_type": "UMLActivity",
+					"_id": "Activity_AdminKelolaPengumuman",
+					"_parent": {
+						"$ref": "ActivityDiagram_Admin_KelolaPengumuman_Model"
+					},
+					"name": "Kelola Pengumuman",
+					"ownedElements": [
+						{
+							"_type": "UMLActivityNode",
+							"_id": "InitialNode_Start",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Start"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_BukaMenuPengumuman",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Buka Menu Kelola Pengumuman"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanDaftarPengumuman",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Sistem Tampilkan Daftar Pengumuman"
+						},
+						{
+							"_type": "UMLDecisionNode",
+							"_id": "Decision_PilihAksi",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Pilih Aksi?"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_KlikTambah",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Klik Buat Pengumuman"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_InputJudulKonten",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Input Judul dan Konten Pengumuman"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_PilihTargetAudience",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Pilih Target Audience (All/Parents/Teachers/Class)"
+						},
+						{
+							"_type": "UMLDecisionNode",
+							"_id": "Decision_AdaLampiran",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Ada Lampiran?"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_UploadLampiran",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Upload Lampiran (PDF/Image)"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_PilihPengumuman",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Pilih Pengumuman dari Daftar"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_UbahData",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Ubah Data Pengumuman"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_KonfirmasiHapus",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Konfirmasi Hapus Pengumuman"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_ValidasiData",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Sistem Validasi Data"
+						},
+						{
+							"_type": "UMLDecisionNode",
+							"_id": "Decision_DataValid",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Data Valid?"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanError",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Tampilkan Pesan Error"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_SimpanKeDatabase",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Simpan Pengumuman ke Database"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_KirimNotifikasi",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Kirim Notifikasi ke Target Audience"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_TampilkanSukses",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Tampilkan Notifikasi Sukses"
+						},
+						{
+							"_type": "UMLActivityNode",
+							"_id": "Action_RefreshDaftar",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "Refresh Daftar Pengumuman"
+						},
+						{
+							"_type": "UMLActivityFinalNode",
+							"_id": "FinalNode_End",
+							"_parent": {
+								"$ref": "Activity_AdminKelolaPengumuman"
+							},
+							"name": "End"
+						}
+					]
+				}
+			]
+		}
+	]
+}
