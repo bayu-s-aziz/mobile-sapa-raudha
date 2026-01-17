@@ -51,15 +51,26 @@ class ApiClient extends GetxService {
     bool needsAuth = false,
   }) async {
     final headers = await _getHeaders(needsAuth: needsAuth);
-    final res = await http.post(
-      Uri.parse('$baseUrl$path'),
-      headers: headers,
-      body: jsonEncode(body),
-    );
-    if (res.statusCode >= 200 && res.statusCode < 300) {
-      return jsonDecode(res.body) as Map<String, dynamic>;
+    final url = '$baseUrl$path';
+    print('[API] POST $url');
+    print('[API] Body: ${jsonEncode(body)}');
+
+    try {
+      final res = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode(body),
+      );
+      print('[API] Response ${res.statusCode}: ${res.body}');
+
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        return jsonDecode(res.body) as Map<String, dynamic>;
+      }
+      throw Exception('HTTP ${res.statusCode}: ${res.body}');
+    } catch (e) {
+      print('[API] Error: $e');
+      rethrow;
     }
-    throw Exception('HTTP ${res.statusCode}: ${res.body}');
   }
 
   Future<Map<String, dynamic>> put(

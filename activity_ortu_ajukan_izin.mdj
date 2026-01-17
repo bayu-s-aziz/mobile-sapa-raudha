@@ -71,7 +71,7 @@
 									"left": 48,
 									"top": 16,
 									"width": 656,
-									"height": 724,
+									"height": 792,
 									"nameLabel": {
 										"$ref": "Frame_AjukanIzin_NameLabel"
 									},
@@ -198,7 +198,7 @@
 									"left": 56,
 									"top": 48,
 									"width": 220,
-									"height": 660,
+									"height": 752,
 									"nameLabel": {
 										"$ref": "AAAAAAGbpJDWhrVdU/Y="
 									}
@@ -246,7 +246,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 283,
+													"left": 327,
 													"top": 61,
 													"width": 308,
 													"height": 13
@@ -259,7 +259,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 283,
+													"left": 327,
 													"top": 76,
 													"width": 308,
 													"height": 13
@@ -272,7 +272,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 283,
+													"left": 327,
 													"top": 91,
 													"width": 308,
 													"height": 13
@@ -285,7 +285,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 283,
+													"left": 327,
 													"top": 106,
 													"width": 308,
 													"height": 13,
@@ -294,7 +294,7 @@
 											],
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 278,
+											"left": 322,
 											"top": 56,
 											"width": 318,
 											"height": 68,
@@ -317,7 +317,7 @@
 									"left": 276,
 									"top": 48,
 									"width": 204,
-									"height": 660,
+									"height": 752,
 									"nameLabel": {
 										"$ref": "AAAAAAGbpJDWh7Vkv5c="
 									}
@@ -441,7 +441,7 @@
 									"left": 480,
 									"top": 48,
 									"width": 208,
-									"height": 660,
+									"height": 752,
 									"nameLabel": {
 										"$ref": "AAAAAAGbpJDWh7VrjvQ="
 									}
@@ -594,7 +594,7 @@
 													"parentStyle": true,
 													"left": 101,
 													"top": 207,
-													"width": 131,
+													"width": 127,
 													"height": 13,
 													"text": "Pilih Menu Izin"
 												},
@@ -628,7 +628,7 @@
 											"parentStyle": true,
 											"left": 96,
 											"top": 200,
-											"width": 141,
+											"width": 137,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGbpJDWiLWDynE="
@@ -651,7 +651,7 @@
 									"parentStyle": false,
 									"left": 96,
 									"top": 200,
-									"width": 140,
+									"width": 136,
 									"height": 41,
 									"nameCompartment": {
 										"$ref": "Action_PilihMenu_NameLabel"
@@ -698,9 +698,9 @@
 													"parentStyle": true,
 													"left": 101,
 													"top": 263,
-													"width": 131,
+													"width": 132.19970703125,
 													"height": 13,
-													"text": "Klik Tombol Ajukan"
+													"text": "Klik Tombol Buat Izin"
 												},
 												{
 													"_type": "LabelView",
@@ -732,7 +732,7 @@
 											"parentStyle": true,
 											"left": 96,
 											"top": 256,
-											"width": 141,
+											"width": 142.19970703125,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGbpJDWibWOBaA="
@@ -755,7 +755,7 @@
 									"parentStyle": false,
 									"left": 96,
 									"top": 256,
-									"width": 140,
+									"width": 141.19970703125,
 									"height": 41,
 									"nameCompartment": {
 										"$ref": "Action_KlikTombol_NameLabel"
@@ -1024,9 +1024,10 @@
 													"parentStyle": true,
 													"left": 101,
 													"top": 407,
-													"width": 131,
-													"height": 13,
-													"text": "Upload Dokumen"
+													"width": 135,
+													"height": 26,
+													"text": "Upload Dokumen (jika ada)",
+													"wordWrap": true
 												},
 												{
 													"_type": "LabelView",
@@ -1052,16 +1053,16 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"top": 48,
-													"height": 13,
-													"horizontalAlignment": 1
+													"horizontalAlignment": 1,
+													"wordWrap": true
 												}
 											],
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 96,
 											"top": 400,
-											"width": 141,
-											"height": 25,
+											"width": 145,
+											"height": 38,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGbpJDWirWvhiY="
 											},
@@ -1083,11 +1084,12 @@
 									"parentStyle": false,
 									"left": 96,
 									"top": 400,
-									"width": 140,
-									"height": 41,
+									"width": 144,
+									"height": 54,
 									"nameCompartment": {
 										"$ref": "Action_UploadDokumen_NameLabel"
-									}
+									},
+									"wordWrap": true
 								},
 								{
 									"_type": "UMLActionView",
@@ -1229,7 +1231,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": -48,
-													"top": 64,
+													"top": 80,
 													"height": 13
 												},
 												{
@@ -1241,7 +1243,7 @@
 													"font": "Arial;13;1",
 													"parentStyle": true,
 													"left": 309,
-													"top": 471,
+													"top": 479,
 													"width": 127,
 													"height": 13,
 													"text": "Validasi Data",
@@ -1257,7 +1259,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": -48,
-													"top": 64,
+													"top": 80,
 													"width": 179.91162109375,
 													"height": 13,
 													"text": "(from Ajukan Permohonan Izin)"
@@ -1272,7 +1274,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": -48,
-													"top": 64,
+													"top": 80,
 													"horizontalAlignment": 1,
 													"wordWrap": true
 												}
@@ -1280,7 +1282,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 304,
-											"top": 464,
+											"top": 472,
 											"width": 137,
 											"height": 25,
 											"stereotypeLabel": {
@@ -1303,7 +1305,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 304,
-									"top": 464,
+									"top": 472,
 									"width": 136,
 									"height": 41,
 									"nameCompartment": {
@@ -1564,7 +1566,8 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"top": -96,
+													"left": 416,
+													"top": 80,
 													"height": 13
 												},
 												{
@@ -1575,8 +1578,8 @@
 													},
 													"font": "Arial;13;1",
 													"parentStyle": true,
-													"left": 101,
-													"top": 575,
+													"left": 309,
+													"top": 663,
 													"width": 127,
 													"height": 26,
 													"text": "Tampilkan Pesan Sukses",
@@ -1591,7 +1594,8 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"top": -96,
+													"left": 416,
+													"top": 80,
 													"width": 179.91162109375,
 													"height": 13,
 													"text": "(from Ajukan Permohonan Izin)"
@@ -1605,15 +1609,16 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"top": -96,
+													"left": 416,
+													"top": 80,
 													"horizontalAlignment": 1,
 													"wordWrap": true
 												}
 											],
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 96,
-											"top": 568,
+											"left": 304,
+											"top": 656,
 											"width": 137,
 											"height": 38,
 											"stereotypeLabel": {
@@ -1635,8 +1640,8 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 96,
-									"top": 568,
+									"left": 304,
+									"top": 656,
 									"width": 136,
 									"height": 54,
 									"nameCompartment": {
@@ -1673,8 +1678,8 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": -288,
-													"top": -208,
+													"left": -736,
+													"top": -224,
 													"height": 13
 												},
 												{
@@ -1685,8 +1690,8 @@
 													},
 													"font": "Arial;13;1",
 													"parentStyle": true,
-													"left": 517,
-													"top": 343,
+													"left": 293,
+													"top": 335,
 													"width": 159,
 													"height": 13,
 													"text": "Tampilkan Pesan Error",
@@ -1701,8 +1706,8 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": -288,
-													"top": -208,
+													"left": -736,
+													"top": -224,
 													"width": 179.91162109375,
 													"height": 13,
 													"text": "(from Ajukan Permohonan Izin)"
@@ -1716,16 +1721,16 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": -288,
-													"top": -208,
+													"left": -736,
+													"top": -224,
 													"horizontalAlignment": 1,
 													"wordWrap": true
 												}
 											],
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 512,
-											"top": 336,
+											"left": 288,
+											"top": 328,
 											"width": 169,
 											"height": 25,
 											"stereotypeLabel": {
@@ -1747,8 +1752,8 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 512,
-									"top": 336,
+									"left": 288,
+									"top": 328,
 									"width": 168,
 									"height": 41,
 									"nameCompartment": {
@@ -2021,7 +2026,7 @@
 									"tail": {
 										"$ref": "Action_KlikTombol"
 									},
-									"points": "236:276;296:276",
+									"points": "237:276;296:276",
 									"nameLabel": {
 										"$ref": "Flow_4_NameLabel"
 									},
@@ -2239,7 +2244,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": false,
 											"left": 195,
-											"top": 449,
+											"top": 456,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -2261,7 +2266,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": false,
 											"left": 151,
-											"top": 450,
+											"top": 457,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -2297,7 +2302,7 @@
 									"tail": {
 										"$ref": "Action_UploadDokumen"
 									},
-									"points": "166:441;166:472",
+									"points": "166:454;166:472",
 									"nameLabel": {
 										"$ref": "Flow_7_NameLabel"
 									},
@@ -2514,8 +2519,8 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 267,
-											"top": 616,
+											"left": 397,
+											"top": 632,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -2536,8 +2541,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 268,
-											"top": 571,
+											"left": 353,
+											"top": 633,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -2558,8 +2563,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 232,
-											"top": 586,
+											"left": 368,
+											"top": 650,
 											"height": 13,
 											"alpha": 0,
 											"distance": 0
@@ -2573,7 +2578,7 @@
 									"tail": {
 										"$ref": "Action_KirimNotifikasi"
 									},
-									"points": "304:592;232:592",
+									"points": "368:622;368:656",
 									"nameLabel": {
 										"$ref": "Flow_13_NameLabel"
 									},
@@ -2606,7 +2611,7 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 375,
+											"left": 263,
 											"top": 379,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -2628,7 +2633,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 376,
+											"left": 264,
 											"top": 334,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -2665,7 +2670,7 @@
 									"tail": {
 										"$ref": "Action_TampilkanError"
 									},
-									"points": "512:355;240:355",
+									"points": "288:355;240:355",
 									"nameLabel": {
 										"$ref": "Flow_15_NameLabel"
 									},
@@ -2812,8 +2817,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 177,
-											"top": 640,
+											"left": 385,
+											"top": 728,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 15,
@@ -2834,8 +2839,8 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 192,
-											"top": 640,
+											"left": 400,
+											"top": 728,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -2856,8 +2861,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 148,
-											"top": 641,
+											"left": 356,
+											"top": 729,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -2875,7 +2880,7 @@
 									"tail": {
 										"$ref": "Action_TampilkanSukses"
 									},
-									"points": "163:622;163:672",
+									"points": "371:710;371:760",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGbpJFKJ7aLI64="
@@ -2902,8 +2907,8 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"containerChangeable": true,
-									"left": 152,
-									"top": 672,
+									"left": 360,
+									"top": 760,
 									"width": 26,
 									"height": 26
 								},
@@ -2930,7 +2935,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": false,
 											"left": 512,
-											"top": 478,
+											"top": 467,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 15,
@@ -2952,7 +2957,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": false,
 											"left": 512,
-											"top": 463,
+											"top": 452,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -2974,7 +2979,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": false,
 											"left": 512,
-											"top": 508,
+											"top": 497,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -2992,7 +2997,7 @@
 									"tail": {
 										"$ref": "Action_ValidasiData"
 									},
-									"points": "440:499;584:499",
+									"points": "440:488;584:488",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGbpJIM/balTqY="
@@ -3027,7 +3032,7 @@
 											"parentStyle": false,
 											"left": 600,
 											"top": 524,
-											"width": 22.15966796875,
+											"width": 22.51513671875,
 											"height": 13,
 											"alpha": 1.9237862581758933,
 											"distance": 20.248456731316587,
@@ -3123,12 +3128,12 @@
 											},
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 607,
-											"top": 423,
+											"left": 504,
+											"top": 344,
 											"width": 38.5302734375,
 											"height": 13,
-											"alpha": -1.5102641125450882,
-											"distance": 33.06055050963308,
+											"alpha": 0.028161570952214277,
+											"distance": 71.02816342831905,
 											"hostEdge": {
 												"$ref": "AAAAAAGbpJIM/ras6fM="
 											},
@@ -3147,8 +3152,8 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 564,
-											"top": 425,
+											"left": 593,
+											"top": 372,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -3169,8 +3174,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 608,
-											"top": 426,
+											"left": 594,
+											"top": 327,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -3188,7 +3193,7 @@
 									"tail": {
 										"$ref": "AAAAAAGbpJIM/Lajwsg="
 									},
-									"points": "594:488;594:377",
+									"points": "594:488;594:348;456:348",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGbpJIM/ratJrA="
@@ -3246,7 +3251,7 @@
 							"_parent": {
 								"$ref": "Activity_AjukanIzin"
 							},
-							"name": "Klik Tombol Ajukan"
+							"name": "Klik Tombol Buat Izin"
 						},
 						{
 							"_type": "UMLAction",
@@ -3270,7 +3275,7 @@
 							"_parent": {
 								"$ref": "Activity_AjukanIzin"
 							},
-							"name": "Upload Dokumen"
+							"name": "Upload Dokumen (jika ada)"
 						},
 						{
 							"_type": "UMLAction",

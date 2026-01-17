@@ -2192,7 +2192,7 @@
 														"$ref": "AAAAAAGbrxXqArb2cck="
 													},
 													"edgePosition": 1,
-													"text": "Ack Success"
+													"text": "Success"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -2905,7 +2905,7 @@
 									"_parent": {
 										"$ref": "Interaction"
 									},
-									"name": "Ack Success",
+									"name": "Success",
 									"source": {
 										"$ref": "AAAAAAGbrwDFYbY9Ik0="
 									},
@@ -3074,7 +3074,8 @@
 							"_parent": {
 								"$ref": "Collaboration"
 							},
-							"name": "Role3"
+							"name": "Role3",
+							"type": ""
 						}
 					]
 				}

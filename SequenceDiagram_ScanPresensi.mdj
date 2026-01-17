@@ -2563,7 +2563,7 @@
 														"$ref": "AAAAAAGbrvTLFNpzJj0="
 													},
 													"edgePosition": 1,
-													"text": "Ack Success"
+													"text": "Success"
 												},
 												{
 													"_type": "EdgeLabelView",
@@ -3321,7 +3321,7 @@
 									"_parent": {
 										"$ref": "Interaction"
 									},
-									"name": "Ack Success",
+									"name": "Success",
 									"source": {
 										"$ref": "AAAAAAGbruS4ednAN10="
 									},

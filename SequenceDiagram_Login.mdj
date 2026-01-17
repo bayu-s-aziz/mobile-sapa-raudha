@@ -25,7 +25,7 @@
 							"_parent": {
 								"$ref": "Collaboration_Login"
 							},
-							"name": "Login Interaction",
+							"name": "Login",
 							"ownedElements": [
 								{
 									"_type": "UMLSequenceDiagram",
@@ -53,8 +53,8 @@
 													},
 													"font": "Arial;13;1",
 													"parentStyle": true,
-													"left": 21,
-													"top": 5,
+													"left": 37,
+													"top": 13,
 													"width": 13.72998046875,
 													"height": 13,
 													"text": "sd"
@@ -67,18 +67,19 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 40.72998046875,
-													"top": 5,
-													"width": 96.12255859375,
+													"left": 56.72998046875,
+													"top": 13,
+													"width": 31.80810546875,
 													"height": 13,
-													"text": "Login Interaction"
+													"text": "Login"
 												}
 											],
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 16,
-											"width": 850,
-											"height": 650,
+											"left": 32,
+											"top": 8,
+											"width": 816,
+											"height": 616,
 											"nameLabel": {
 												"$ref": "Frame_Login_Label"
 											},
@@ -147,7 +148,7 @@
 															"top": 62,
 															"width": 145.392578125,
 															"height": 13,
-															"text": "(from Login Interaction)"
+															"text": "(from Login)"
 														},
 														{
 															"_type": "LabelView",
@@ -173,8 +174,7 @@
 															"left": 261,
 															"top": 62,
 															"width": 145.392578125,
-															"height": 13,
-															"text": ":LoginPage"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -210,7 +210,7 @@
 													"left": 333,
 													"top": 81,
 													"width": 1,
-													"height": 552
+													"height": 527
 												}
 											],
 											"font": "Arial;13;0",
@@ -218,7 +218,7 @@
 											"left": 256,
 											"top": 40,
 											"width": 154.392578125,
-											"height": 593,
+											"height": 568,
 											"stereotypeDisplay": "none",
 											"showProperty": false,
 											"showType": false,
@@ -287,7 +287,7 @@
 															"left": 18,
 															"width": 134.392578125,
 															"height": 13,
-															"text": "(from Login Interaction)"
+															"text": "(from Login)"
 														},
 														{
 															"_type": "LabelView",
@@ -313,8 +313,7 @@
 															"left": 429,
 															"top": 62,
 															"width": 121,
-															"height": 13,
-															"text": ":AuthController"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -350,7 +349,7 @@
 													"left": 489,
 													"top": 81,
 													"width": 1,
-													"height": 552
+													"height": 527
 												}
 											],
 											"font": "Arial;13;0",
@@ -358,7 +357,7 @@
 											"left": 424,
 											"top": 40,
 											"width": 130,
-											"height": 593,
+											"height": 568,
 											"nameCompartment": {
 												"$ref": "Lifeline_AuthController_Name"
 											},
@@ -422,7 +421,7 @@
 															"parentStyle": true,
 															"width": 134.392578125,
 															"height": 13,
-															"text": "(from Login Interaction)"
+															"text": "(from Login)"
 														},
 														{
 															"_type": "LabelView",
@@ -447,8 +446,7 @@
 															"left": 605,
 															"top": 62,
 															"width": 101,
-															"height": 13,
-															"text": ":API Server"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -484,7 +482,7 @@
 													"left": 655,
 													"top": 81,
 													"width": 1,
-													"height": 552
+													"height": 527
 												}
 											],
 											"font": "Arial;13;0",
@@ -492,7 +490,7 @@
 											"left": 600,
 											"top": 40,
 											"width": 110,
-											"height": 593,
+											"height": 568,
 											"nameCompartment": {
 												"$ref": "Lifeline_API_Name"
 											},
@@ -561,7 +559,7 @@
 															"top": 62,
 															"width": 145.392578125,
 															"height": 13,
-															"text": "(from Login Interaction)"
+															"text": "(from Login)"
 														},
 														{
 															"_type": "LabelView",
@@ -587,8 +585,7 @@
 															"left": 733,
 															"top": 62,
 															"width": 103,
-															"height": 13,
-															"text": ":Database"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -624,7 +621,7 @@
 													"left": 784,
 													"top": 81,
 													"width": 1,
-													"height": 552
+													"height": 527
 												}
 											],
 											"font": "Arial;13;0",
@@ -632,7 +629,7 @@
 											"left": 728,
 											"top": 40,
 											"width": 112,
-											"height": 593,
+											"height": 568,
 											"showProperty": false,
 											"showType": false,
 											"nameCompartment": {
@@ -993,122 +990,6 @@
 										},
 										{
 											"_type": "UMLSeqMessageView",
-											"_id": "Message_BukaApp",
-											"_parent": {
-												"$ref": "SequenceDiagram_Login"
-											},
-											"model": {
-												"$ref": "Message_BukaApp_Model"
-											},
-											"subViews": [
-												{
-													"_type": "EdgeLabelView",
-													"_id": "AAAAAAGbpMECSg4PYLg=",
-													"_parent": {
-														"$ref": "Message_BukaApp"
-													},
-													"model": {
-														"$ref": "Message_BukaApp_Model"
-													},
-													"visible": false,
-													"font": "Arial;13;0",
-													"parentStyle": false,
-													"left": 226,
-													"top": 156,
-													"height": 13,
-													"alpha": -1.5707963267948966,
-													"distance": 10,
-													"hostEdge": {
-														"$ref": "Message_BukaApp"
-													},
-													"edgePosition": 1
-												},
-												{
-													"_type": "UMLActivationView",
-													"_id": "AAAAAAGbpMECSg4QDBY=",
-													"_parent": {
-														"$ref": "Message_BukaApp"
-													},
-													"model": {
-														"$ref": "Message_BukaApp_Model"
-													},
-													"font": "Arial;13;0",
-													"parentStyle": false,
-													"left": 326,
-													"top": 152,
-													"width": 14,
-													"height": 28
-												},
-												{
-													"_type": "EdgeLabelView",
-													"_id": "Message_BukaApp_NameLabel",
-													"_parent": {
-														"$ref": "Message_BukaApp"
-													},
-													"model": {
-														"$ref": "Message_BukaApp_Model"
-													},
-													"font": "Arial;13;0",
-													"parentStyle": false,
-													"left": 171,
-													"top": 130,
-													"width": 110.55712890625,
-													"height": 13,
-													"alpha": 1.5707957017948966,
-													"distance": 16,
-													"hostEdge": {
-														"$ref": "Message_BukaApp"
-													},
-													"edgePosition": 1,
-													"text": "Buka Aplikasi"
-												},
-												{
-													"_type": "EdgeLabelView",
-													"_id": "Message_BukaApp_StereotypeLabel",
-													"_parent": {
-														"$ref": "Message_BukaApp"
-													},
-													"model": {
-														"$ref": "Message_BukaApp_Model"
-													},
-													"visible": false,
-													"font": "Arial;13;0",
-													"parentStyle": false,
-													"left": 226,
-													"top": 121,
-													"height": 13,
-													"alpha": 1.5707963267948966,
-													"distance": 25,
-													"hostEdge": {
-														"$ref": "Message_BukaApp"
-													},
-													"edgePosition": 1
-												}
-											],
-											"font": "Arial;13;0",
-											"parentStyle": false,
-											"head": {
-												"$ref": "Lifeline_UI_Line"
-											},
-											"tail": {
-												"$ref": "AAAAAAGbpUkZ4jRZ0bg="
-											},
-											"points": "127:152;326:152",
-											"nameLabel": {
-												"$ref": "Message_BukaApp_NameLabel"
-											},
-											"stereotypeLabel": {
-												"$ref": "Message_BukaApp_StereotypeLabel"
-											},
-											"propertyLabel": {
-												"$ref": "AAAAAAGbpMECSg4PYLg="
-											},
-											"activation": {
-												"$ref": "AAAAAAGbpMECSg4QDBY="
-											}
-										},
-										{
-											"_type": "UMLSeqMessageView",
 											"_id": "Message_TampilkanHalamanLogin",
 											"_parent": {
 												"$ref": "SequenceDiagram_Login"
@@ -1130,7 +1011,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 230,
-													"top": 112,
+													"top": 144,
 													"height": 13,
 													"alpha": -1.5707963267948966,
 													"distance": 10,
@@ -1152,7 +1033,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 126,
-													"top": 128,
+													"top": 160,
 													"width": 14,
 													"height": 25
 												},
@@ -1168,7 +1049,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 139,
-													"top": 112,
+													"top": 144,
 													"width": 182.1015625,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -1192,7 +1073,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 230,
-													"top": 97,
+													"top": 129,
 													"height": 13,
 													"alpha": -1.5707963267948966,
 													"distance": 25,
@@ -1210,7 +1091,7 @@
 											"tail": {
 												"$ref": "Lifeline_UI_Line"
 											},
-											"points": "333:128;127:128",
+											"points": "333:160;127:160",
 											"nameLabel": {
 												"$ref": "Message_TampilkanHalamanLogin_NameLabel"
 											},
@@ -1222,6 +1103,122 @@
 											},
 											"activation": {
 												"$ref": "AAAAAAGbpMECVA4XfQQ="
+											}
+										},
+										{
+											"_type": "UMLSeqMessageView",
+											"_id": "Message_BukaApp",
+											"_parent": {
+												"$ref": "SequenceDiagram_Login"
+											},
+											"model": {
+												"$ref": "Message_BukaApp_Model"
+											},
+											"subViews": [
+												{
+													"_type": "EdgeLabelView",
+													"_id": "AAAAAAGbpMECSg4PYLg=",
+													"_parent": {
+														"$ref": "Message_BukaApp"
+													},
+													"model": {
+														"$ref": "Message_BukaApp_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 226,
+													"top": 132,
+													"height": 13,
+													"alpha": -1.5707963267948966,
+													"distance": 10,
+													"hostEdge": {
+														"$ref": "Message_BukaApp"
+													},
+													"edgePosition": 1
+												},
+												{
+													"_type": "UMLActivationView",
+													"_id": "AAAAAAGbpMECSg4QDBY=",
+													"_parent": {
+														"$ref": "Message_BukaApp"
+													},
+													"model": {
+														"$ref": "Message_BukaApp_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 326,
+													"top": 128,
+													"width": 14,
+													"height": 28
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_BukaApp_NameLabel",
+													"_parent": {
+														"$ref": "Message_BukaApp"
+													},
+													"model": {
+														"$ref": "Message_BukaApp_Model"
+													},
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 171,
+													"top": 106,
+													"width": 110.55712890625,
+													"height": 13,
+													"alpha": 1.5707957017948966,
+													"distance": 16,
+													"hostEdge": {
+														"$ref": "Message_BukaApp"
+													},
+													"edgePosition": 1,
+													"text": "Buka Aplikasi"
+												},
+												{
+													"_type": "EdgeLabelView",
+													"_id": "Message_BukaApp_StereotypeLabel",
+													"_parent": {
+														"$ref": "Message_BukaApp"
+													},
+													"model": {
+														"$ref": "Message_BukaApp_Model"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": false,
+													"left": 226,
+													"top": 97,
+													"height": 13,
+													"alpha": 1.5707963267948966,
+													"distance": 25,
+													"hostEdge": {
+														"$ref": "Message_BukaApp"
+													},
+													"edgePosition": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"head": {
+												"$ref": "Lifeline_UI_Line"
+											},
+											"tail": {
+												"$ref": "AAAAAAGbpUkZ4jRZ0bg="
+											},
+											"points": "127:128;326:128",
+											"nameLabel": {
+												"$ref": "Message_BukaApp_NameLabel"
+											},
+											"stereotypeLabel": {
+												"$ref": "Message_BukaApp_StereotypeLabel"
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbpMECSg4PYLg="
+											},
+											"activation": {
+												"$ref": "AAAAAAGbpMECSg4QDBY="
 											}
 										},
 										{
@@ -2099,7 +2096,7 @@
 															"left": -366,
 															"width": 134.392578125,
 															"height": 13,
-															"text": "(from Login Interaction)"
+															"text": "(from Login)"
 														},
 														{
 															"_type": "LabelView",
@@ -2148,7 +2145,7 @@
 													"left": 126,
 													"top": 106,
 													"width": 1,
-													"height": 550
+													"height": 502
 												}
 											],
 											"font": "Arial;13;0",
@@ -2156,7 +2153,7 @@
 											"left": 48,
 											"top": 40,
 											"width": 156.37060546875,
-											"height": 616,
+											"height": 568,
 											"stereotypeDisplay": "icon",
 											"nameCompartment": {
 												"$ref": "AAAAAAGbpUkZ4jRUim8="
@@ -2294,6 +2291,20 @@
 							"messages": [
 								{
 									"_type": "UMLMessage",
+									"_id": "Message_BukaApp_Model",
+									"_parent": {
+										"$ref": "Interaction_Login"
+									},
+									"name": "Buka Aplikasi",
+									"source": {
+										"$ref": "AAAAAAGbpUkZ4TRSld4="
+									},
+									"target": {
+										"$ref": "Lifeline_UI_Model"
+									}
+								},
+								{
+									"_type": "UMLMessage",
 									"_id": "Message_TampilkanHalamanLogin_Model",
 									"_parent": {
 										"$ref": "Interaction_Login"
@@ -2306,20 +2317,6 @@
 										"$ref": "AAAAAAGbpUkZ4TRSld4="
 									},
 									"messageSort": "reply"
-								},
-								{
-									"_type": "UMLMessage",
-									"_id": "Message_BukaApp_Model",
-									"_parent": {
-										"$ref": "Interaction_Login"
-									},
-									"name": "Buka Aplikasi",
-									"source": {
-										"$ref": "AAAAAAGbpUkZ4TRSld4="
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									}
 								},
 								{
 									"_type": "UMLMessage",
@@ -2594,9 +2591,9 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 32.72998046875,
+													"left": 30.55908203125,
 													"top": 13,
-													"width": 67.9326171875,
+													"width": 62.8037109375,
 													"height": 13,
 													"text": "Interaction1"
 												},
@@ -2610,7 +2607,7 @@
 													"parentStyle": true,
 													"left": 13,
 													"top": 13,
-													"width": 13.72998046875,
+													"width": 11.55908203125,
 													"height": 13,
 													"text": "sd"
 												}

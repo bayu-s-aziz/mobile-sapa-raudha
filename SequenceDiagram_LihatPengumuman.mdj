@@ -25,7 +25,7 @@
 							"_parent": {
 								"$ref": "Collaboration"
 							},
-							"name": "Lihat Pengumuman Interaction",
+							"name": "Lihat Pengumuman",
 							"ownedElements": [
 								{
 									"_type": "UMLSequenceDiagram",
@@ -69,9 +69,9 @@
 													"parentStyle": true,
 													"left": 32.72998046875,
 													"top": 13,
-													"width": 177.05517578125,
+													"width": 112.74072265625,
 													"height": 13,
-													"text": "Lihat Pengumuman Interaction"
+													"text": "Lihat Pengumuman"
 												}
 											],
 											"font": "Arial;13;0",
@@ -116,6 +116,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"parentStyle": true,
+															"left": -8,
 															"height": 13
 														},
 														{
@@ -126,7 +127,7 @@
 															},
 															"font": "Arial;13;1",
 															"parentStyle": true,
-															"left": 241,
+															"left": 237,
 															"top": 47,
 															"width": 128.025390625,
 															"height": 13,
@@ -141,9 +142,10 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"parentStyle": true,
+															"left": -8,
 															"width": 215.3251953125,
 															"height": 13,
-															"text": "(from Lihat Pengumuman Interaction)"
+															"text": "(from Lihat Pengumuman)"
 														},
 														{
 															"_type": "LabelView",
@@ -154,6 +156,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"parentStyle": true,
+															"left": -8,
 															"height": 13,
 															"horizontalAlignment": 1
 														},
@@ -165,16 +168,15 @@
 															},
 															"font": "Arial;13;0",
 															"parentStyle": true,
-															"left": 241,
+															"left": 237,
 															"top": 62,
 															"width": 128.025390625,
-															"height": 13,
-															"text": ":PengumumanPage"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 236,
+													"left": 232,
 													"top": 40,
 													"width": 138.025390625,
 													"height": 40,
@@ -202,18 +204,18 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 305,
+													"left": 301,
 													"top": 81,
 													"width": 1,
-													"height": 540
+													"height": 526
 												}
 											],
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 236,
+											"left": 232,
 											"top": 40,
 											"width": 137.025390625,
-											"height": 581,
+											"height": 567,
 											"nameCompartment": {
 												"$ref": "Lifeline_UI_Name"
 											},
@@ -277,7 +279,7 @@
 															"parentStyle": true,
 															"width": 215.3251953125,
 															"height": 13,
-															"text": "(from Lihat Pengumuman Interaction)"
+															"text": "(from Lihat Pengumuman)"
 														},
 														{
 															"_type": "LabelView",
@@ -302,8 +304,7 @@
 															"left": 421,
 															"top": 62,
 															"width": 159.0654296875,
-															"height": 13,
-															"text": ":PengumumanController"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -339,7 +340,7 @@
 													"left": 500,
 													"top": 81,
 													"width": 1,
-													"height": 509
+													"height": 519
 												}
 											],
 											"font": "Arial;13;0",
@@ -347,7 +348,7 @@
 											"left": 416,
 											"top": 40,
 											"width": 168.0654296875,
-											"height": 550,
+											"height": 560,
 											"nameCompartment": {
 												"$ref": "Lifeline_Controller_Name"
 											},
@@ -411,7 +412,7 @@
 															"parentStyle": true,
 															"width": 215.3251953125,
 															"height": 13,
-															"text": "(from Lihat Pengumuman Interaction)"
+															"text": "(from Lihat Pengumuman)"
 														},
 														{
 															"_type": "LabelView",
@@ -436,8 +437,7 @@
 															"left": 601,
 															"top": 62,
 															"width": 101,
-															"height": 13,
-															"text": ":API Server"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -473,7 +473,7 @@
 													"left": 651,
 													"top": 81,
 													"width": 1,
-													"height": 509
+													"height": 519
 												}
 											],
 											"font": "Arial;13;0",
@@ -481,7 +481,7 @@
 											"left": 596,
 											"top": 40,
 											"width": 110,
-											"height": 550,
+											"height": 560,
 											"nameCompartment": {
 												"$ref": "Lifeline_API_Name"
 											},
@@ -545,7 +545,7 @@
 															"parentStyle": true,
 															"width": 215.3251953125,
 															"height": 13,
-															"text": "(from Lihat Pengumuman Interaction)"
+															"text": "(from Lihat Pengumuman)"
 														},
 														{
 															"_type": "LabelView",
@@ -570,8 +570,7 @@
 															"left": 781,
 															"top": 62,
 															"width": 101,
-															"height": 13,
-															"text": ":Database"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -607,7 +606,7 @@
 													"left": 831,
 													"top": 81,
 													"width": 1,
-													"height": 509
+													"height": 519
 												}
 											],
 											"font": "Arial;13;0",
@@ -615,7 +614,7 @@
 											"left": 776,
 											"top": 40,
 											"width": 110,
-											"height": 550,
+											"height": 560,
 											"nameCompartment": {
 												"$ref": "Lifeline_DB_Name"
 											},
@@ -645,7 +644,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 196,
+													"left": 194,
 													"top": 89,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -667,7 +666,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 196,
+													"left": 194,
 													"top": 124,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -688,7 +687,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 298,
+													"left": 294,
 													"top": 120,
 													"width": 14,
 													"height": 28
@@ -704,7 +703,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 104,
+													"left": 102,
 													"top": 103,
 													"width": 177.76611328125,
 													"height": 13,
@@ -725,7 +724,7 @@
 											"tail": {
 												"$ref": "AAAAAAGbpY1o8N6hARs="
 											},
-											"points": "94:120;298:120",
+											"points": "94:120;294:120",
 											"nameLabel": {
 												"$ref": "Message_1_NameLabel"
 											},
@@ -761,7 +760,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 399,
+													"left": 397,
 													"top": 119,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -783,7 +782,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 399,
+													"left": 397,
 													"top": 154,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -820,7 +819,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 319,
+													"left": 317,
 													"top": 134,
 													"width": 160.41796875,
 													"height": 13,
@@ -841,7 +840,7 @@
 											"tail": {
 												"$ref": "Lifeline_UI_Line"
 											},
-											"points": "306:150;493:150",
+											"points": "302:150;493:150",
 											"nameLabel": {
 												"$ref": "Message_2_NameLabel"
 											},
@@ -1343,7 +1342,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 198,
+													"left": 196,
 													"top": 451,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -1365,7 +1364,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 199,
+													"left": 197,
 													"top": 416,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -1403,7 +1402,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 133,
+													"left": 131,
 													"top": 416,
 													"width": 133,
 													"height": 13,
@@ -1424,7 +1423,7 @@
 											"tail": {
 												"$ref": "Lifeline_UI_Line"
 											},
-											"points": "305:432;94:432",
+											"points": "301:432;94:432",
 											"nameLabel": {
 												"$ref": "Message_9_NameLabel"
 											},
@@ -1460,7 +1459,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 196,
+													"left": 194,
 													"top": 361,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -1482,7 +1481,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 196,
+													"left": 194,
 													"top": 396,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -1503,7 +1502,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 298,
+													"left": 294,
 													"top": 392,
 													"width": 14,
 													"height": 28
@@ -1519,7 +1518,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 126,
+													"left": 124,
 													"top": 376,
 													"width": 141.63525390625,
 													"height": 13,
@@ -1540,7 +1539,7 @@
 											"tail": {
 												"$ref": "AAAAAAGbpY1o8N6hARs="
 											},
-											"points": "94:392;298:392",
+											"points": "94:392;294:392",
 											"nameLabel": {
 												"$ref": "Message_8_NameLabel"
 											},
@@ -1576,7 +1575,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 196,
+													"left": 194,
 													"top": 441,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -1598,7 +1597,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 196,
+													"left": 194,
 													"top": 476,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -1619,7 +1618,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 298,
+													"left": 294,
 													"top": 472,
 													"width": 14,
 													"height": 28
@@ -1635,7 +1634,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 84,
+													"left": 82,
 													"top": 456,
 													"width": 224,
 													"height": 13,
@@ -1656,7 +1655,7 @@
 											"tail": {
 												"$ref": "AAAAAAGbpY1o8N6hARs="
 											},
-											"points": "94:472;298:472",
+											"points": "94:472;294:472",
 											"nameLabel": {
 												"$ref": "Message_10_NameLabel"
 											},
@@ -1692,7 +1691,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 475,
+													"left": 473,
 													"top": 479,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -1714,7 +1713,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 475,
+													"left": 473,
 													"top": 514,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -1751,7 +1750,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 402,
+													"left": 400,
 													"top": 494,
 													"width": 147,
 													"height": 13,
@@ -1772,7 +1771,7 @@
 											"tail": {
 												"$ref": "Lifeline_UI_Line"
 											},
-											"points": "306:510;644:510",
+											"points": "302:510;644:510",
 											"nameLabel": {
 												"$ref": "Message_11_NameLabel"
 											},
@@ -1808,7 +1807,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 477,
+													"left": 475,
 													"top": 569,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -1830,7 +1829,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 478,
+													"left": 476,
 													"top": 534,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -1852,7 +1851,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 305,
+													"left": 301,
 													"top": 550,
 													"width": 14,
 													"height": 25
@@ -1868,7 +1867,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 426,
+													"left": 424,
 													"top": 534,
 													"width": 105,
 													"height": 13,
@@ -1889,7 +1888,7 @@
 											"tail": {
 												"$ref": "Lifeline_API_Line"
 											},
-											"points": "651:550;306:550",
+											"points": "651:550;302:550",
 											"nameLabel": {
 												"$ref": "Message_12_NameLabel"
 											},
@@ -1925,7 +1924,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 198,
+													"left": 196,
 													"top": 611,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -1947,7 +1946,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 199,
+													"left": 197,
 													"top": 576,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -1985,7 +1984,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 127,
+													"left": 125,
 													"top": 576,
 													"width": 144.5361328125,
 													"height": 13,
@@ -2006,7 +2005,7 @@
 											"tail": {
 												"$ref": "Lifeline_UI_Line"
 											},
-											"points": "305:592;94:592",
+											"points": "301:592;94:592",
 											"nameLabel": {
 												"$ref": "Message_13_NameLabel"
 											},
@@ -2042,7 +2041,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 402,
+													"left": 400,
 													"top": 369,
 													"height": 13,
 													"alpha": 1.5707963267948966,
@@ -2064,7 +2063,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 403,
+													"left": 401,
 													"top": 334,
 													"height": 13,
 													"alpha": -1.5707963267948966,
@@ -2086,7 +2085,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 305,
+													"left": 301,
 													"top": 350,
 													"width": 14,
 													"height": 25
@@ -2102,7 +2101,7 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 296,
+													"left": 294,
 													"top": 334,
 													"width": 214.60791015625,
 													"height": 13,
@@ -2123,7 +2122,7 @@
 											"tail": {
 												"$ref": "Lifeline_Controller_Line"
 											},
-											"points": "500:350;306:350",
+											"points": "500:350;302:350",
 											"nameLabel": {
 												"$ref": "Message_7_NameLabel"
 											},
@@ -2193,7 +2192,7 @@
 															"parentStyle": true,
 															"width": 215.3251953125,
 															"height": 13,
-															"text": "(from Lihat Pengumuman Interaction)"
+															"text": "(from Lihat Pengumuman)"
 														},
 														{
 															"_type": "LabelView",
@@ -2241,7 +2240,7 @@
 													"left": 93,
 													"top": 106,
 													"width": 1,
-													"height": 534
+													"height": 494
 												}
 											],
 											"font": "Arial;13;0",
@@ -2249,7 +2248,7 @@
 											"left": 35,
 											"top": 40,
 											"width": 115.9296875,
-											"height": 600,
+											"height": 560,
 											"stereotypeDisplay": "icon",
 											"nameCompartment": {
 												"$ref": "AAAAAAGbpY1o8N6c0gk="
@@ -2312,189 +2311,72 @@
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_1_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "Pilih Menu Pengumuman",
-									"source": {
-										"$ref": "AAAAAAGbpY1o796ay7s="
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									}
+									"name": "Pilih Menu Pengumuman"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_2_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "getPengumumanList()",
-									"source": {
-										"$ref": "Lifeline_UI_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_Controller_Model"
-									}
+									"name": "getPengumumanList()"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_3_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "GET /pengumuman",
-									"source": {
-										"$ref": "Lifeline_Controller_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_API_Model"
-									}
+									"name": "GET /pengumuman"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_4_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": " Query pengumuman ORDER BY tanggal DESC",
-									"source": {
-										"$ref": "Lifeline_API_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_DB_Model"
-									}
+									"name": " Query pengumuman ORDER BY tanggal DESC"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_5_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Return pengumuman list",
-									"source": {
-										"$ref": "Lifeline_DB_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_API_Model"
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_6_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Return data",
-									"source": {
-										"$ref": "Lifeline_API_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_Controller_Model"
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_7_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Tampilkan Daftar Pengumuman",
-									"source": {
-										"$ref": "Lifeline_Controller_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_8_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "Pilih Pengumuman",
-									"source": {
-										"$ref": "AAAAAAGbpY1o796ay7s="
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									}
+									"name": "Pilih Pengumuman"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_9_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Tampilkan Detail",
-									"source": {
-										"$ref": "Lifeline_UI_Model"
-									},
-									"target": {
-										"$ref": "AAAAAAGbpY1o796ay7s="
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_10_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "Download Lampiran (optional)",
-									"source": {
-										"$ref": "AAAAAAGbpY1o796ay7s="
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									}
+									"name": "Download Lampiran (optional)"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_11_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "downloadFile(url)",
-									"source": {
-										"$ref": "Lifeline_UI_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_API_Model"
-									}
+									"name": "downloadFile(url)"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_12_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Return file",
-									"source": {
-										"$ref": "Lifeline_API_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_13_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Save & Open file",
-									"source": {
-										"$ref": "Lifeline_UI_Model"
-									},
-									"target": {
-										"$ref": "AAAAAAGbpY1o796ay7s="
-									},
 									"messageSort": "reply"
 								}
 							],

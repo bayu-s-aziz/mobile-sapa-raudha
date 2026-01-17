@@ -54,13 +54,13 @@ void main() async {
   Get.put(LocalStorageService());
 
   // Base URL configurable via --dart-define=API_BASE_URL=
-  // Production: http://api.ra-alislam.sch.id (after SSL: https://api.ra-alislam.sch.id)
-  // Fallback: http://159.223.44.203
+  // Using IP directly because DNS may not be available on mobile devices
+  // Production: http://159.223.44.203 (later: https://api.ra-alislam.sch.id)
   Get.put(
     ApiClient(
       baseUrl: const String.fromEnvironment(
         'API_BASE_URL',
-        defaultValue: 'http://api.ra-alislam.sch.id',
+        defaultValue: 'http://159.223.44.203',
       ),
     ),
   );

@@ -25,7 +25,7 @@
 							"_parent": {
 								"$ref": "Collaboration"
 							},
-							"name": "Review Izin (Guru) Interaction",
+							"name": "Review Izin (Guru)",
 							"ownedElements": [
 								{
 									"_type": "UMLSequenceDiagram",
@@ -33,7 +33,7 @@
 									"_parent": {
 										"$ref": "Interaction"
 									},
-									"name": "Review Izin (Guru) Sequence Diagram",
+									"name": "Review Izin (Guru)",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -69,9 +69,9 @@
 													"parentStyle": true,
 													"left": 48.72998046875,
 													"top": 5,
-													"width": 171.95166015625,
+													"width": 107.63720703125,
 													"height": 13,
-													"text": "Review Izin (Guru) Interaction"
+													"text": "Review Izin (Guru)"
 												}
 											],
 											"font": "Arial;13;0",
@@ -144,7 +144,7 @@
 															"left": -120,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -281,7 +281,7 @@
 															"top": 62,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -420,7 +420,7 @@
 															"left": -280,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -556,7 +556,7 @@
 															"left": -384,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -2554,7 +2554,7 @@
 															"left": -86,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -2678,7 +2678,7 @@
 															"left": -372,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -2803,7 +2803,7 @@
 															"left": -176,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -3394,7 +3394,7 @@
 															"left": -240,
 															"width": 210.2216796875,
 															"height": 13,
-															"text": "(from Review Izin (Guru) Interaction)"
+															"text": "(from Review Izin (Guru))"
 														},
 														{
 															"_type": "LabelView",
@@ -4030,7 +4030,8 @@
 							"_parent": {
 								"$ref": "Collaboration"
 							},
-							"name": "Role4"
+							"name": "Role4",
+							"type": ""
 						}
 					]
 				}

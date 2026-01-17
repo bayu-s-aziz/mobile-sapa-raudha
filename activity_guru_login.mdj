@@ -188,11 +188,6 @@
 											}
 										}
 									],
-									"containedViews": [
-										{
-											"$ref": "AAAAAAGbo0b5dkKGGWQ="
-										}
-									],
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 56,
@@ -246,8 +241,8 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 284,
-													"top": 61,
+													"left": 287,
+													"top": 45,
 													"width": 308,
 													"height": 13
 												},
@@ -259,8 +254,8 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 284,
-													"top": 76,
+													"left": 287,
+													"top": 60,
 													"width": 308,
 													"height": 13
 												},
@@ -272,8 +267,8 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 284,
-													"top": 91,
+													"left": 287,
+													"top": 75,
 													"width": 308,
 													"height": 13
 												},
@@ -285,8 +280,8 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"left": 284,
-													"top": 106,
+													"left": 287,
+													"top": 90,
 													"width": 308,
 													"height": 13,
 													"horizontalAlignment": 1
@@ -294,8 +289,8 @@
 											],
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 279,
-											"top": 56,
+											"left": 282,
+											"top": 40,
 											"width": 318,
 											"height": 68,
 											"stereotypeLabel": {
@@ -310,6 +305,17 @@
 											"propertyLabel": {
 												"$ref": "AAAAAAGbo0XltEG2qPc="
 											}
+										}
+									],
+									"containedViews": [
+										{
+											"$ref": "AAAAAAGbuKa1LHyEXwo="
+										},
+										{
+											"$ref": "AAAAAAGbo0b5dkKGGWQ="
+										},
+										{
+											"$ref": "Action_TampilkanDashboard"
 										}
 									],
 									"font": "Arial;13;0",
@@ -500,7 +506,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"width": 102.5908203125,
+													"width": 104.03173828125,
 													"height": 13,
 													"text": "(from Login Guru)"
 												},
@@ -604,7 +610,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"width": 102.5908203125,
+													"width": 104.03173828125,
 													"height": 13,
 													"text": "(from Login Guru)"
 												},
@@ -708,7 +714,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"width": 102.5908203125,
+													"width": 104.03173828125,
 													"height": 13,
 													"text": "(from Login Guru)"
 												},
@@ -812,7 +818,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"width": 102.5908203125,
+													"width": 104.03173828125,
 													"height": 13,
 													"text": "(from Login Guru)"
 												},
@@ -891,6 +897,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
+													"left": 512,
 													"height": 13
 												},
 												{
@@ -901,7 +908,7 @@
 													},
 													"font": "Arial;13;1",
 													"parentStyle": true,
-													"left": 101,
+													"left": 357,
 													"top": 287,
 													"width": 141.64501953125,
 													"height": 13,
@@ -916,7 +923,8 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"width": 102.5908203125,
+													"left": 512,
+													"width": 104.03173828125,
 													"height": 13,
 													"text": "(from Login Guru)"
 												},
@@ -929,13 +937,14 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
+													"left": 512,
 													"height": 13,
 													"horizontalAlignment": 1
 												}
 											],
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 96,
+											"left": 352,
 											"top": 280,
 											"width": 151.64501953125,
 											"height": 25,
@@ -958,7 +967,7 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 96,
+									"left": 352,
 									"top": 280,
 									"width": 150.64501953125,
 									"height": 41,
@@ -1020,7 +1029,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"width": 102.5908203125,
+													"width": 104.03173828125,
 													"height": 13,
 													"text": "(from Login Guru)"
 												},
@@ -1124,7 +1133,7 @@
 													"visible": false,
 													"font": "Arial;13;0",
 													"parentStyle": true,
-													"width": 102.5908203125,
+													"width": 104.03173828125,
 													"height": 13,
 													"text": "(from Login Guru)"
 												},
@@ -1175,113 +1184,6 @@
 									}
 								},
 								{
-									"_type": "UMLActionView",
-									"_id": "Action_TampilkanDashboard",
-									"_parent": {
-										"$ref": "ActivityDiagram_LoginGuru"
-									},
-									"model": {
-										"$ref": "Action_TampilkanDashboardModel"
-									},
-									"subViews": [
-										{
-											"_type": "UMLNameCompartmentView",
-											"_id": "Action_TampilkanDashboard_NameLabel",
-											"_parent": {
-												"$ref": "Action_TampilkanDashboard"
-											},
-											"model": {
-												"$ref": "Action_TampilkanDashboardModel"
-											},
-											"subViews": [
-												{
-													"_type": "LabelView",
-													"_id": "AAAAAAGbo0XluUISlb8=",
-													"_parent": {
-														"$ref": "Action_TampilkanDashboard_NameLabel"
-													},
-													"visible": false,
-													"font": "Arial;13;0",
-													"parentStyle": true,
-													"left": -32,
-													"height": 13
-												},
-												{
-													"_type": "LabelView",
-													"_id": "AAAAAAGbo0XluUITFoc=",
-													"_parent": {
-														"$ref": "Action_TampilkanDashboard_NameLabel"
-													},
-													"font": "Arial;13;1",
-													"parentStyle": true,
-													"left": 85,
-													"top": 511,
-													"width": 170.5078125,
-													"height": 13,
-													"text": "Tampilkan Dashboard Guru"
-												},
-												{
-													"_type": "LabelView",
-													"_id": "AAAAAAGbo0XluUIURas=",
-													"_parent": {
-														"$ref": "Action_TampilkanDashboard_NameLabel"
-													},
-													"visible": false,
-													"font": "Arial;13;0",
-													"parentStyle": true,
-													"left": -32,
-													"width": 102.5908203125,
-													"height": 13,
-													"text": "(from Login Guru)"
-												},
-												{
-													"_type": "LabelView",
-													"_id": "AAAAAAGbo0XluUIVDxs=",
-													"_parent": {
-														"$ref": "Action_TampilkanDashboard_NameLabel"
-													},
-													"visible": false,
-													"font": "Arial;13;0",
-													"parentStyle": true,
-													"left": -32,
-													"height": 13,
-													"horizontalAlignment": 1
-												}
-											],
-											"font": "Arial;13;0",
-											"parentStyle": true,
-											"left": 80,
-											"top": 504,
-											"width": 180.5078125,
-											"height": 25,
-											"stereotypeLabel": {
-												"$ref": "AAAAAAGbo0XluUISlb8="
-											},
-											"nameLabel": {
-												"$ref": "AAAAAAGbo0XluUITFoc="
-											},
-											"namespaceLabel": {
-												"$ref": "AAAAAAGbo0XluUIURas="
-											},
-											"propertyLabel": {
-												"$ref": "AAAAAAGbo0XluUIVDxs="
-											}
-										}
-									],
-									"containerView": {
-										"$ref": "Swimlane_Guru"
-									},
-									"font": "Arial;13;0",
-									"parentStyle": false,
-									"left": 80,
-									"top": 504,
-									"width": 179.5078125,
-									"height": 41,
-									"nameCompartment": {
-										"$ref": "Action_TampilkanDashboard_NameLabel"
-									}
-								},
-								{
 									"_type": "UMLControlFlowView",
 									"_id": "Flow_BukaApp_Input",
 									"_parent": {
@@ -1303,8 +1205,8 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 196,
-											"top": 181,
+											"left": 290,
+											"top": 120,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -1325,8 +1227,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 152,
-											"top": 182,
+											"left": 290,
+											"top": 165,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -1347,8 +1249,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 167,
-											"top": 193,
+											"left": 343,
+											"top": 150,
 											"height": 13,
 											"alpha": 0,
 											"distance": 0
@@ -1357,13 +1259,13 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"head": {
-										"$ref": "Action_InputNIKPassword"
+										"$ref": "AAAAAAGbuKa1LHyEXwo="
 									},
 									"tail": {
 										"$ref": "Action_BukaAplikasi"
 									},
 									"lineStyle": 1,
-									"points": "167:178;167:199",
+									"points": "237:156;343:156",
 									"nameLabel": {
 										"$ref": "Flow_BukaApp_Input_NameLabel"
 									},
@@ -1641,7 +1543,7 @@
 									"tail": {
 										"$ref": "Action_TampilkanError"
 									},
-									"points": "96:299;66:299;66:219;96:219",
+									"points": "352:299;66:299;66:219;96:219",
 									"nameLabel": {
 										"$ref": "Flow_Error_Input_NameLabel"
 									},
@@ -1767,8 +1669,8 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 195,
-											"top": 436,
+											"left": 470,
+											"top": 473,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -1789,8 +1691,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 151,
-											"top": 437,
+											"left": 426,
+											"top": 474,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -1811,8 +1713,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 166,
-											"top": 498,
+											"left": 441,
+											"top": 490,
 											"height": 13,
 											"alpha": 0,
 											"distance": 0
@@ -1826,7 +1728,7 @@
 									"tail": {
 										"$ref": "Action_SimpanSession"
 									},
-									"points": "328:443;166:443;166:504",
+									"points": "441:465;441:496",
 									"nameLabel": {
 										"$ref": "Flow_Session_Dashboard_NameLabel"
 									},
@@ -1974,8 +1876,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 174,
-											"top": 557,
+											"left": 446,
+											"top": 549,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 15,
@@ -1996,8 +1898,8 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 189,
-											"top": 557,
+											"left": 461,
+											"top": 549,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -2018,8 +1920,8 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 145,
-											"top": 558,
+											"left": 417,
+											"top": 550,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -2037,7 +1939,7 @@
 									"tail": {
 										"$ref": "Action_TampilkanDashboard"
 									},
-									"points": "160:545;160:584",
+									"points": "432:537;432:576",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGbo0b5dkKIsaY="
@@ -2048,26 +1950,6 @@
 									"propertyLabel": {
 										"$ref": "AAAAAAGbo0b5dkKKnwE="
 									}
-								},
-								{
-									"_type": "UMLControlNodeView",
-									"_id": "AAAAAAGbo0b5dkKGGWQ=",
-									"_parent": {
-										"$ref": "ActivityDiagram_LoginGuru"
-									},
-									"model": {
-										"$ref": "FinalNode_LoginGuruModel"
-									},
-									"containerView": {
-										"$ref": "Swimlane_Guru"
-									},
-									"font": "Arial;13;0",
-									"parentStyle": false,
-									"containerChangeable": true,
-									"left": 144,
-									"top": 584,
-									"width": 26,
-									"height": 26
 								},
 								{
 									"_type": "UMLControlFlowView",
@@ -2187,17 +2069,17 @@
 											},
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 445,
-											"top": 314,
+											"left": 616,
+											"top": 311,
 											"width": 96.103515625,
 											"height": 13,
-											"alpha": 1.5707963267948966,
-											"distance": 15,
+											"alpha": 2.841421550012641,
+											"distance": 43.965895873961216,
 											"hostEdge": {
 												"$ref": "AAAAAAGbo0g+UEKeCwU="
 											},
 											"edgePosition": 1,
-											"text": "[Data tidak valid]"
+											"text": "tidak valid]"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -2211,7 +2093,7 @@
 											"visible": null,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 493,
+											"left": 621,
 											"top": 329,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -2233,7 +2115,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 494,
+											"left": 622,
 											"top": 284,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -2252,7 +2134,7 @@
 									"tail": {
 										"$ref": "AAAAAAGbo0g+T0KZngc="
 									},
-									"points": "742:305;247:305",
+									"points": "742:305;503:305",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAGbo0g+UEKfzSw="
@@ -2285,9 +2167,9 @@
 											},
 											"font": "Arial;13;0",
 											"parentStyle": false,
-											"left": 745,
+											"left": 744,
 											"top": 389,
-											"width": 35.166015625,
+											"width": 36.09912109375,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 15,
@@ -2381,6 +2263,344 @@
 									"top": 296,
 									"width": 23,
 									"height": 19
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "AAAAAAGbuKa1LHyEXwo=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "AAAAAAGbuKa1KXyCdNQ="
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "AAAAAAGbuKa1LHyFusw=",
+											"_parent": {
+												"$ref": "AAAAAAGbuKa1LHyEXwo="
+											},
+											"model": {
+												"$ref": "AAAAAAGbuKa1KXyCdNQ="
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbuKa1LHyG6d8=",
+													"_parent": {
+														"$ref": "AAAAAAGbuKa1LHyFusw="
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -240,
+													"top": 8,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbuKa1LXyHCPk=",
+													"_parent": {
+														"$ref": "AAAAAAGbuKa1LHyFusw="
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 349,
+													"top": 143,
+													"width": 161.11962890625,
+													"height": 13,
+													"text": "Tampilkan Halaman Login"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbuKa1LXyICY8=",
+													"_parent": {
+														"$ref": "AAAAAAGbuKa1LHyFusw="
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -240,
+													"top": 8,
+													"width": 102.5908203125,
+													"height": 13,
+													"text": "(from Sistem)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbuKa1LXyJ0Ac=",
+													"_parent": {
+														"$ref": "AAAAAAGbuKa1LHyFusw="
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": -240,
+													"top": 8,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 344,
+											"top": 136,
+											"width": 171.11962890625,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbuKa1LHyG6d8="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbuKa1LXyHCPk="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbuKa1LXyICY8="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbuKa1LXyJ0Ac="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 344,
+									"top": 136,
+									"width": 170.11962890625,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "AAAAAAGbuKa1LHyFusw="
+									}
+								},
+								{
+									"_type": "UMLControlFlowView",
+									"_id": "AAAAAAGbuKdB1Xyiboc=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "AAAAAAGbuKdB1Hyhw1A="
+									},
+									"subViews": [
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbuKdB1Xyjb3A=",
+											"_parent": {
+												"$ref": "AAAAAAGbuKdB1Xyiboc="
+											},
+											"model": {
+												"$ref": "AAAAAAGbuKdB1Hyhw1A="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 297,
+											"top": 193,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbuKdB1Xyiboc="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbuKdB1Xyk8mI=",
+											"_parent": {
+												"$ref": "AAAAAAGbuKdB1Xyiboc="
+											},
+											"model": {
+												"$ref": "AAAAAAGbuKdB1Hyhw1A="
+											},
+											"visible": null,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 297,
+											"top": 208,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 30,
+											"hostEdge": {
+												"$ref": "AAAAAAGbuKdB1Xyiboc="
+											},
+											"edgePosition": 1
+										},
+										{
+											"_type": "EdgeLabelView",
+											"_id": "AAAAAAGbuKdB1Xyl0r8=",
+											"_parent": {
+												"$ref": "AAAAAAGbuKdB1Xyiboc="
+											},
+											"model": {
+												"$ref": "AAAAAAGbuKdB1Hyhw1A="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"parentStyle": false,
+											"left": 298,
+											"top": 163,
+											"height": 13,
+											"alpha": -1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAGbuKdB1Xyiboc="
+											},
+											"edgePosition": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"head": {
+										"$ref": "Action_InputNIKPassword"
+									},
+									"tail": {
+										"$ref": "AAAAAAGbuKa1LHyEXwo="
+									},
+									"points": "429:177;429:184;168:184;168:200",
+									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAGbuKdB1Xyjb3A="
+									},
+									"stereotypeLabel": {
+										"$ref": "AAAAAAGbuKdB1Xyk8mI="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAGbuKdB1Xyl0r8="
+									}
+								},
+								{
+									"_type": "UMLControlNodeView",
+									"_id": "AAAAAAGbo0b5dkKGGWQ=",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "FinalNode_LoginGuruModel"
+									},
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"containerChangeable": true,
+									"left": 416,
+									"top": 576,
+									"width": 26,
+									"height": 26
+								},
+								{
+									"_type": "UMLActionView",
+									"_id": "Action_TampilkanDashboard",
+									"_parent": {
+										"$ref": "ActivityDiagram_LoginGuru"
+									},
+									"model": {
+										"$ref": "Action_TampilkanDashboardModel"
+									},
+									"subViews": [
+										{
+											"_type": "UMLNameCompartmentView",
+											"_id": "Action_TampilkanDashboard_NameLabel",
+											"_parent": {
+												"$ref": "Action_TampilkanDashboard"
+											},
+											"model": {
+												"$ref": "Action_TampilkanDashboardModel"
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUISlb8=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 784,
+													"top": -24,
+													"height": 13
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUITFoc=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"font": "Arial;13;1",
+													"parentStyle": true,
+													"left": 357,
+													"top": 503,
+													"width": 170.5078125,
+													"height": 13,
+													"text": "Tampilkan Dashboard Guru"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUIURas=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 784,
+													"top": -24,
+													"width": 104.03173828125,
+													"height": 13,
+													"text": "(from Sistem)"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGbo0XluUIVDxs=",
+													"_parent": {
+														"$ref": "Action_TampilkanDashboard_NameLabel"
+													},
+													"visible": false,
+													"font": "Arial;13;0",
+													"parentStyle": true,
+													"left": 784,
+													"top": -24,
+													"height": 13,
+													"horizontalAlignment": 1
+												}
+											],
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 352,
+											"top": 496,
+											"width": 180.5078125,
+											"height": 25,
+											"stereotypeLabel": {
+												"$ref": "AAAAAAGbo0XluUISlb8="
+											},
+											"nameLabel": {
+												"$ref": "AAAAAAGbo0XluUITFoc="
+											},
+											"namespaceLabel": {
+												"$ref": "AAAAAAGbo0XluUIURas="
+											},
+											"propertyLabel": {
+												"$ref": "AAAAAAGbo0XluUIVDxs="
+											}
+										}
+									],
+									"containerView": {
+										"$ref": "Swimlane_System"
+									},
+									"font": "Arial;13;0",
+									"parentStyle": false,
+									"left": 352,
+									"top": 496,
+									"width": 179.5078125,
+									"height": 41,
+									"nameCompartment": {
+										"$ref": "Action_TampilkanDashboard_NameLabel"
+									}
 								}
 							]
 						}
@@ -2449,14 +2669,6 @@
 								"$ref": "Activity_LoginGuru"
 							},
 							"name": "Simpan Token & Profile"
-						},
-						{
-							"_type": "UMLAction",
-							"_id": "Action_TampilkanDashboardModel",
-							"_parent": {
-								"$ref": "Activity_LoginGuru"
-							},
-							"name": "Tampilkan Dashboard Guru"
 						}
 					],
 					"edges": [
@@ -2483,7 +2695,7 @@
 								"$ref": "Action_BukaAplikasiModel"
 							},
 							"target": {
-								"$ref": "Action_InputNIKPasswordModel"
+								"$ref": "AAAAAAGbuKa1KXyCdNQ="
 							}
 						},
 						{
@@ -2531,7 +2743,7 @@
 							"_parent": {
 								"$ref": "Activity_LoginGuru"
 							},
-							"name": "[Data tidak valid]",
+							"name": "tidak valid]",
 							"source": {
 								"$ref": "Decision_DataValidModel"
 							},
@@ -2604,6 +2816,19 @@
 							"target": {
 								"$ref": "FinalNode_LoginGuruModel"
 							}
+						},
+						{
+							"_type": "UMLControlFlow",
+							"_id": "AAAAAAGbuKdB1Hyhw1A=",
+							"_parent": {
+								"$ref": "Activity_LoginGuru"
+							},
+							"source": {
+								"$ref": "AAAAAAGbuKa1KXyCdNQ="
+							},
+							"target": {
+								"$ref": "Action_InputNIKPasswordModel"
+							}
 						}
 					],
 					"groups": [
@@ -2613,17 +2838,7 @@
 							"_parent": {
 								"$ref": "Activity_LoginGuru"
 							},
-							"name": "Guru",
-							"nodes": [
-								{
-									"_type": "UMLActivityFinalNode",
-									"_id": "FinalNode_LoginGuruModel",
-									"_parent": {
-										"$ref": "Partition_Guru"
-									},
-									"name": "ActivityFinal1"
-								}
-							]
+							"name": "Guru"
 						},
 						{
 							"_type": "UMLActivityPartition",
@@ -2631,7 +2846,33 @@
 							"_parent": {
 								"$ref": "Activity_LoginGuru"
 							},
-							"name": "Sistem"
+							"name": "Sistem",
+							"nodes": [
+								{
+									"_type": "UMLAction",
+									"_id": "AAAAAAGbuKa1KXyCdNQ=",
+									"_parent": {
+										"$ref": "Partition_System"
+									},
+									"name": "Tampilkan Halaman Login"
+								},
+								{
+									"_type": "UMLActivityFinalNode",
+									"_id": "FinalNode_LoginGuruModel",
+									"_parent": {
+										"$ref": "Partition_System"
+									},
+									"name": "ActivityFinal1"
+								},
+								{
+									"_type": "UMLAction",
+									"_id": "Action_TampilkanDashboardModel",
+									"_parent": {
+										"$ref": "Partition_System"
+									},
+									"name": "Tampilkan Dashboard Guru"
+								}
+							]
 						},
 						{
 							"_type": "UMLActivityPartition",

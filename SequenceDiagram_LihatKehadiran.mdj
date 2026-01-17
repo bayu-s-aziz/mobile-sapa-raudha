@@ -25,7 +25,7 @@
 							"_parent": {
 								"$ref": "Collaboration"
 							},
-							"name": "Lihat Kehadiran (Orang Tua) Interaction",
+							"name": "Lihat Kehadiran (Orang Tua)",
 							"ownedElements": [
 								{
 									"_type": "UMLSequenceDiagram",
@@ -69,17 +69,17 @@
 													"parentStyle": true,
 													"left": 40.72998046875,
 													"top": 13,
-													"width": 229.3154296875,
+													"width": 165.0009765625,
 													"height": 13,
-													"text": "Lihat Kehadiran (Orang Tua) Interaction"
+													"text": "Lihat Kehadiran (Orang Tua)"
 												}
 											],
 											"font": "Arial;13;0",
 											"parentStyle": false,
 											"left": 16,
 											"top": 8,
-											"width": 1006,
-											"height": 600,
+											"width": 880,
+											"height": 456,
 											"nameLabel": {
 												"$ref": "Frame_Label"
 											},
@@ -143,7 +143,7 @@
 															"parentStyle": true,
 															"width": 267.58544921875,
 															"height": 13,
-															"text": "(from Lihat Kehadiran (Orang Tua) Interaction)"
+															"text": "(from Lihat Kehadiran (Orang Tua))"
 														},
 														{
 															"_type": "LabelView",
@@ -168,8 +168,7 @@
 															"left": 241,
 															"top": 62,
 															"width": 105.6435546875,
-															"height": 13,
-															"text": ":KehadiranPage"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -205,7 +204,7 @@
 													"left": 293,
 													"top": 81,
 													"width": 1,
-													"height": 509
+													"height": 375
 												}
 											],
 											"font": "Arial;13;0",
@@ -213,7 +212,7 @@
 											"left": 236,
 											"top": 40,
 											"width": 114.6435546875,
-											"height": 550,
+											"height": 416,
 											"nameCompartment": {
 												"$ref": "Lifeline_UI_Name"
 											},
@@ -277,7 +276,7 @@
 															"parentStyle": true,
 															"width": 267.58544921875,
 															"height": 13,
-															"text": "(from Lihat Kehadiran (Orang Tua) Interaction)"
+															"text": "(from Lihat Kehadiran (Orang Tua))"
 														},
 														{
 															"_type": "LabelView",
@@ -302,8 +301,7 @@
 															"left": 421,
 															"top": 62,
 															"width": 127.314453125,
-															"height": 13,
-															"text": ":PresensiController"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -339,7 +337,7 @@
 													"left": 484,
 													"top": 81,
 													"width": 1,
-													"height": 509
+													"height": 375
 												}
 											],
 											"font": "Arial;13;0",
@@ -347,7 +345,7 @@
 											"left": 416,
 											"top": 40,
 											"width": 136.314453125,
-											"height": 550,
+											"height": 416,
 											"nameCompartment": {
 												"$ref": "Lifeline_Controller_Name"
 											},
@@ -411,7 +409,7 @@
 															"parentStyle": true,
 															"width": 267.58544921875,
 															"height": 13,
-															"text": "(from Lihat Kehadiran (Orang Tua) Interaction)"
+															"text": "(from Lihat Kehadiran (Orang Tua))"
 														},
 														{
 															"_type": "LabelView",
@@ -436,8 +434,7 @@
 															"left": 601,
 															"top": 62,
 															"width": 101,
-															"height": 13,
-															"text": ":API Server"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -473,7 +470,7 @@
 													"left": 651,
 													"top": 81,
 													"width": 1,
-													"height": 509
+													"height": 375
 												}
 											],
 											"font": "Arial;13;0",
@@ -481,7 +478,7 @@
 											"left": 596,
 											"top": 40,
 											"width": 110,
-											"height": 550,
+											"height": 416,
 											"nameCompartment": {
 												"$ref": "Lifeline_API_Name"
 											},
@@ -545,7 +542,7 @@
 															"parentStyle": true,
 															"width": 267.58544921875,
 															"height": 13,
-															"text": "(from Lihat Kehadiran (Orang Tua) Interaction)"
+															"text": "(from Lihat Kehadiran (Orang Tua))"
 														},
 														{
 															"_type": "LabelView",
@@ -570,8 +567,7 @@
 															"left": 781,
 															"top": 62,
 															"width": 101,
-															"height": 13,
-															"text": ":Database"
+															"height": 13
 														}
 													],
 													"font": "Arial;13;0",
@@ -607,7 +603,7 @@
 													"left": 831,
 													"top": 81,
 													"width": 1,
-													"height": 509
+													"height": 375
 												}
 											],
 											"font": "Arial;13;0",
@@ -615,7 +611,7 @@
 											"left": 776,
 											"top": 40,
 											"width": 110,
-											"height": 550,
+											"height": 416,
 											"nameCompartment": {
 												"$ref": "Lifeline_DB_Name"
 											},
@@ -646,7 +642,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 186,
-													"top": 81,
+													"top": 89,
 													"height": 13,
 													"alpha": 1.5707963267948966,
 													"distance": 25,
@@ -668,7 +664,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 186,
-													"top": 116,
+													"top": 124,
 													"height": 13,
 													"alpha": -1.5707963267948966,
 													"distance": 10,
@@ -689,7 +685,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 286,
-													"top": 112,
+													"top": 120,
 													"width": 14,
 													"height": 28
 												},
@@ -704,9 +700,9 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 106,
-													"top": 96,
-													"width": 161,
+													"left": 100,
+													"top": 104,
+													"width": 173.42431640625,
 													"height": 13,
 													"alpha": 1.5707963267948966,
 													"distance": 10,
@@ -714,7 +710,7 @@
 														"$ref": "Message_1"
 													},
 													"edgePosition": 1,
-													"text": "Pilih Menu Kehadiran"
+													"text": "Pilih Menu Riwayat Kehadiran"
 												}
 											],
 											"font": "Arial;13;0",
@@ -725,7 +721,7 @@
 											"tail": {
 												"$ref": "AAAAAAGbpYoMONWHIPs="
 											},
-											"points": "87:112;286:112",
+											"points": "87:120;286:120",
 											"nameLabel": {
 												"$ref": "Message_1_NameLabel"
 											},
@@ -820,12 +816,12 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 280,
+													"left": 304,
 													"top": 134,
-													"width": 210,
+													"width": 170.52978515625,
 													"height": 13,
-													"alpha": 1.5707963267948966,
-													"distance": 10,
+													"alpha": 1.1902890876138634,
+													"distance": 10.770329614269007,
 													"hostEdge": {
 														"$ref": "Message_2"
 													},
@@ -1053,9 +1049,9 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 484,
+													"left": 494,
 													"top": 294,
-													"width": 168,
+													"width": 148,
 													"height": 13,
 													"alpha": -1.5707963267948966,
 													"distance": 10,
@@ -1286,12 +1282,12 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 637,
+													"left": 664,
 													"top": 214,
-													"width": 203,
+													"width": 168,
 													"height": 13,
-													"alpha": 1.5707963267948966,
-													"distance": 10,
+													"alpha": 0.7853976633976983,
+													"distance": 14.142135623730951,
 													"hostEdge": {
 														"$ref": "Message_4"
 													},
@@ -1403,17 +1399,17 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 99,
-													"top": 416,
+													"left": 96,
+													"top": 415,
 													"width": 182,
 													"height": 13,
-													"alpha": -1.5707963267948966,
-													"distance": 10,
+													"alpha": -1.2793404497484744,
+													"distance": 10.44030650891055,
 													"hostEdge": {
 														"$ref": "Message_9"
 													},
 													"edgePosition": 1,
-													"text": "Tampilkan Detail Harian"
+													"text": "Tampilkan Status Kehadiran"
 												}
 											],
 											"font": "Arial;13;0",
@@ -1529,7 +1525,7 @@
 														"$ref": "Message_8"
 													},
 													"edgePosition": 1,
-													"text": "Lihat Detail"
+													"text": "Pilih Hari"
 												}
 											],
 											"font": "Arial;13;0",
@@ -1636,9 +1632,9 @@
 													},
 													"font": "Arial;13;0",
 													"parentStyle": false,
-													"left": 291,
+													"left": 298,
 													"top": 334,
-													"width": 196,
+													"width": 183,
 													"height": 13,
 													"alpha": -1.5707963267948966,
 													"distance": 10,
@@ -1646,7 +1642,7 @@
 														"$ref": "Message_7"
 													},
 													"edgePosition": 1,
-													"text": "Tampilkan Rekap Kehadiran"
+													"text": "Tampilkan Kalender Kehadiran"
 												}
 											],
 											"font": "Arial;13;0",
@@ -1729,7 +1725,7 @@
 															"left": -78,
 															"width": 267.58544921875,
 															"height": 13,
-															"text": "(from Lihat Kehadiran (Orang Tua) Interaction)"
+															"text": "(from Lihat Kehadiran (Orang Tua))"
 														},
 														{
 															"_type": "LabelView",
@@ -1778,7 +1774,7 @@
 													"left": 86,
 													"top": 106,
 													"width": 1,
-													"height": 534
+													"height": 350
 												}
 											],
 											"font": "Arial;13;0",
@@ -1786,7 +1782,7 @@
 											"left": 24,
 											"top": 40,
 											"width": 123.15966796875,
-											"height": 600,
+											"height": 416,
 											"stereotypeDisplay": "icon",
 											"nameCompartment": {
 												"$ref": "AAAAAAGbpYoMONWCLRk="
@@ -1849,131 +1845,50 @@
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_1_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "Pilih Menu Kehadiran",
-									"source": {
-										"$ref": "AAAAAAGbpYoMN9WAZrI="
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									}
+									"name": "Pilih Menu Kehadiran"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_2_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "getKehadiranSiswa(siswa_id)",
-									"source": {
-										"$ref": "Lifeline_UI_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_Controller_Model"
-									}
+									"name": "getKehadiranSiswa(siswa_id)"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_3_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "GET /presensi/siswa/:id",
-									"source": {
-										"$ref": "Lifeline_Controller_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_API_Model"
-									}
+									"name": "GET /presensi/siswa/:id"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_4_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "Query presensi by siswa_id",
-									"source": {
-										"$ref": "Lifeline_API_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_DB_Model"
-									}
+									"name": "Query presensi by siswa_id"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_5_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Return presensi records",
-									"source": {
-										"$ref": "Lifeline_DB_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_API_Model"
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_6_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Return kehadiran data",
-									"source": {
-										"$ref": "Lifeline_API_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_Controller_Model"
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_7_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Tampilkan Rekap Kehadiran",
-									"source": {
-										"$ref": "Lifeline_Controller_Model"
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									},
 									"messageSort": "reply"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_8_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
-									"name": "Lihat Detail",
-									"source": {
-										"$ref": "AAAAAAGbpYoMN9WAZrI="
-									},
-									"target": {
-										"$ref": "Lifeline_UI_Model"
-									}
+									"name": "Lihat Detail"
 								},
 								{
 									"_type": "UMLMessage",
 									"_id": "Message_9_Model",
-									"_parent": {
-										"$ref": "Interaction"
-									},
 									"name": "Tampilkan Detail Harian",
-									"source": {
-										"$ref": "Lifeline_UI_Model"
-									},
-									"target": {
-										"$ref": "AAAAAAGbpYoMN9WAZrI="
-									},
 									"messageSort": "reply"
 								}
 							],
@@ -1984,7 +1899,7 @@
 									"_parent": {
 										"$ref": "Interaction"
 									},
-									"name": "Pilih Menu Kehadiran",
+									"name": "Pilih Menu Riwayat Kehadiran",
 									"source": {
 										"$ref": "AAAAAAGbpYoMN9WAZrI="
 									},
@@ -2070,7 +1985,7 @@
 									"_parent": {
 										"$ref": "Interaction"
 									},
-									"name": "Tampilkan Rekap Kehadiran",
+									"name": "Tampilkan Kalender Kehadiran",
 									"source": {
 										"$ref": "Lifeline_Controller_Model"
 									},
@@ -2085,7 +2000,7 @@
 									"_parent": {
 										"$ref": "Interaction"
 									},
-									"name": "Lihat Detail",
+									"name": "Pilih Hari",
 									"source": {
 										"$ref": "AAAAAAGbpYoMN9WAZrI="
 									},
@@ -2099,7 +2014,7 @@
 									"_parent": {
 										"$ref": "Interaction"
 									},
-									"name": "Tampilkan Detail Harian",
+									"name": "Tampilkan Status Kehadiran",
 									"source": {
 										"$ref": "Lifeline_UI_Model"
 									},
