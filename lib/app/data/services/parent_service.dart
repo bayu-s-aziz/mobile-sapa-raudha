@@ -1,210 +1,161 @@
 // lib/app/data/services/parent_service.dart
 
 import 'dart:io';
-import 'package:flutter/foundation.dart';
+import 'dart:developer' as developer;
 import 'package:get/get.dart';
-import '../models/parent_model.dart';
 import 'api_client.dart';
 
 class ParentService extends GetxService {
-  final RxList<Parent> parents = <Parent>[].obs;
-  late final ApiClient _apiClient;
+  late final ApiClient _api;
 
   @override
   void onInit() {
     super.onInit();
-    _apiClient = Get.find<ApiClient>();
+    _api = Get.find<ApiClient>();
   }
 
-  Future<List<Parent>> getAllParents() async {
-    try {
-      final data = await _apiClient.getList('/api/parents');
+  /// Get all parents with optional pagination
+  Future<Map<String, dynamic>> getParents({
+    int perPage = 15,
+    int page = 1,
+  }) async {
+    final query = {'per_page': perPage.toString(), 'page': page.toString()};
 
-      final parentsList = data.map((json) {
-        // Determine primary contact name
-        String name =
-            json['father_name'] ??
-            json['mother_name'] ??
-            json['guardian_name'] ??
-            'Unknown';
-        String? relation;
-        String? occupation;
-        String? phone;
+    final queryString = query.entries
+        .map((e) => '${e.key}=${e.value}')
+        .join('&');
 
-        if (json['father_name'] != null) {
-          relation = 'Ayah';
-          occupation = json['father_job'];
-          phone = json['father_phone'];
-        } else if (json['mother_name'] != null) {
-          relation = 'Ibu';
-          occupation = json['mother_job'];
-          phone = json['mother_phone'];
-        } else if (json['guardian_name'] != null) {
-          relation = 'Wali';
-          occupation = json['guardian_job'];
-          phone = json['guardian_phone'];
-        }
-
-        return Parent(
-          id: json['id'].toString(),
-          name: name,
-          email: '', // Not in DB schema
-          phone: phone,
-          relation: relation,
-          occupation: occupation,
-          photoUrl: json['photo_url'],
-          studentIds: [json['student_id'].toString()],
-          isActive: true,
-          password: json['password_hash'],
-          studentNisn: json['student_nisn'],
-          fatherName: json['father_name'],
-          motherName: json['mother_name'],
-        );
-      }).toList();
-
-      parents.value = parentsList;
-      return parentsList;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching parents: $e');
-      }
-      rethrow;
-    }
+    final res = await _api.get('/parents?$queryString');
+    return res;
   }
 
-  Future<Parent?> getParentById(String id) async {
+  /// Get parent detail by ID
+  Future<Map<String, dynamic>?> getParentById(int id) async {
     try {
-      final response = await _apiClient.get('/api/parents/$id');
-
-      String name =
-          response['father_name'] ??
-          response['mother_name'] ??
-          response['guardian_name'] ??
-          'Unknown';
-      String? relation;
-      String? occupation;
-      String? phone;
-
-      if (response['father_name'] != null) {
-        relation = 'Ayah';
-        occupation = response['father_job'];
-        phone = response['father_phone'];
-      } else if (response['mother_name'] != null) {
-        relation = 'Ibu';
-        occupation = response['mother_job'];
-        phone = response['mother_phone'];
-      } else if (response['guardian_name'] != null) {
-        relation = 'Wali';
-        occupation = response['guardian_job'];
-        phone = response['guardian_phone'];
-      }
-
-      return Parent(
-        id: response['id'].toString(),
-        name: name,
-        email: '',
-        phone: phone,
-        relation: relation,
-        occupation: occupation,
-        studentIds: [response['student_id'].toString()],
-        isActive: true,
+      final response = await _api.get('/parents/$id');
+      return response['data'] ?? response;
+    } catch (e, st) {
+      developer.log(
+        'Error fetching parent: $e',
+        name: 'ParentService',
+        error: e,
+        stackTrace: st,
       );
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching parent: $e');
-      }
       return null;
     }
   }
 
-  Future<void> createParent(Parent parent) async {
+  /// Create new parent
+  Future<Map<String, dynamic>> createParent({
+    required String name,
+    required String email,
+    required String password,
+    String? phone,
+    String? fatherName,
+    String? motherName,
+    String? guardianName,
+  }) async {
     try {
-      await _apiClient.post('/api/parents', {
-        'student_id': parent.studentIds.isNotEmpty
-            ? int.parse(parent.studentIds.first)
-            : 0,
-        'father_name': parent.relation == 'Ayah' ? parent.name : null,
-        'father_job': parent.relation == 'Ayah' ? parent.occupation : null,
-        'father_phone': parent.relation == 'Ayah' ? parent.phone : null,
-        'mother_name': parent.relation == 'Ibu' ? parent.name : null,
-        'mother_job': parent.relation == 'Ibu' ? parent.occupation : null,
-        'mother_phone': parent.relation == 'Ibu' ? parent.phone : null,
-        'guardian_name': parent.relation == 'Wali' ? parent.name : null,
-        'guardian_job': parent.relation == 'Wali' ? parent.occupation : null,
-        'guardian_phone': parent.relation == 'Wali' ? parent.phone : null,
-        'password': '123456', // Default password
-      }, needsAuth: true);
-
-      await getAllParents(); // Refresh list
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error creating parent: $e');
-      }
-      rethrow;
-    }
-  }
-
-  Future<void> updateParent(String id, Parent parent) async {
-    try {
-      // Build request body with only non-null values
-      final Map<String, dynamic> body = {};
-
-      if (parent.studentIds.isNotEmpty) {
-        body['student_id'] = int.parse(parent.studentIds.first);
-      }
-
-      // Father data - use fatherName property, not relation-based logic
-      if (parent.fatherName != null && parent.fatherName!.isNotEmpty) {
-        body['father_name'] = parent.fatherName;
-      }
-
-      // Mother data - use motherName property, not relation-based logic
-      if (parent.motherName != null && parent.motherName!.isNotEmpty) {
-        body['mother_name'] = parent.motherName;
-      }
-
-      // Phone number
-      if (parent.phone != null && parent.phone!.isNotEmpty) {
-        body['father_phone'] = parent.phone;
-        body['mother_phone'] = parent.phone;
-      }
-
-      await _apiClient.put('/api/parents/$id', body);
-
-      await getAllParents(); // Refresh list
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error updating parent: $e');
-      }
-      rethrow;
-    }
-  }
-
-  Future<void> deleteParent(String id) async {
-    try {
-      await _apiClient.delete('/api/parents/$id');
-      parents.removeWhere((p) => p.id == id);
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error deleting parent: $e');
-      }
-      rethrow;
-    }
-  }
-
-  Future<void> uploadParentPhoto(String id, File photo) async {
-    try {
-      await _apiClient.postMultipart(
-        '/api/parents/$id/photo',
-        {}, // empty fields
-        'photo', // file field name
-        photo.path, // file path
+      final response = await _api.post('/parents', {
+        'name': name,
+        'email': email,
+        'password': password,
+        if (phone != null) 'phone': phone,
+        if (fatherName != null) 'father_name': fatherName,
+        if (motherName != null) 'mother_name': motherName,
+        if (guardianName != null) 'guardian_name': guardianName,
+      });
+      return response;
+    } catch (e, st) {
+      developer.log(
+        'Error creating parent: $e',
+        name: 'ParentService',
+        error: e,
+        stackTrace: st,
       );
-      await getAllParents(); // Refresh list
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error uploading parent photo: $e');
-      }
+      rethrow;
+    }
+  }
+
+  /// Update parent
+  Future<Map<String, dynamic>> updateParent(
+    int id, {
+    String? name,
+    String? email,
+    String? phone,
+    String? fatherName,
+    String? motherName,
+    String? guardianName,
+  }) async {
+    try {
+      final response = await _api.put('/parents/$id', {
+        if (name != null) 'name': name,
+        if (email != null) 'email': email,
+        if (phone != null) 'phone': phone,
+        if (fatherName != null) 'father_name': fatherName,
+        if (motherName != null) 'mother_name': motherName,
+        if (guardianName != null) 'guardian_name': guardianName,
+      });
+      return response;
+    } catch (e, st) {
+      developer.log(
+        'Error updating parent: $e',
+        name: 'ParentService',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
+  }
+
+  /// Delete parent
+  Future<void> deleteParent(int id) async {
+    try {
+      await _api.delete('/parents/$id');
+    } catch (e, st) {
+      developer.log(
+        'Error deleting parent: $e',
+        name: 'ParentService',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
+  }
+
+  /// Upload parent photo
+  Future<Map<String, dynamic>> uploadPhoto(int id, File photo) async {
+    try {
+      final response = await _api.postMultipart(
+        '/parents/$id/upload-photo',
+        {},
+        'photo',
+        photo.path,
+      );
+      return response;
+    } catch (e, st) {
+      developer.log(
+        'Error uploading parent photo: $e',
+        name: 'ParentService',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
+  }
+
+  /// Switch active parent (for multi-parent scenarios)
+  Future<Map<String, dynamic>> switchActiveParent(int id) async {
+    try {
+      final response = await _api.post('/parents/$id/switch-active-parent', {});
+      return response;
+    } catch (e, st) {
+      developer.log(
+        'Error switching active parent: $e',
+        name: 'ParentService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }

@@ -14,7 +14,7 @@ class LoginView extends GetView<LoginController> {
     return TextField(
       controller: controller.idController,
       decoration: const InputDecoration(
-        labelText: 'NIK atau NISN',
+        labelText: 'Email',
         prefixIcon: Icon(Icons.badge_outlined),
       ),
       keyboardType: TextInputType.number,

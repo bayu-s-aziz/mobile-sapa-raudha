@@ -11,28 +11,52 @@ class StudentService extends GetxService {
     _api = Get.find<ApiClient>();
   }
 
-  /// Get list of all students (guru only)
-  Future<List<Map<String, dynamic>>> getStudents({int? classId}) async {
-    final params = classId != null ? '?class_id=$classId' : '';
-    final res = await _api.get('/students$params');
-    return List<Map<String, dynamic>>.from(res['students'] ?? []);
+  /// Get list of all students with optional filtering
+  /// Query params: class_id, gender, search, per_page
+  Future<List<Map<String, dynamic>>> getStudents({
+    int? classId,
+    String? gender,
+    String? search,
+    int perPage = 15,
+    int page = 1,
+  }) async {
+    final params = <String, String>{};
+    if (classId != null) params['class_id'] = classId.toString();
+    if (gender != null) params['gender'] = gender;
+    if (search != null) params['search'] = search;
+    params['per_page'] = perPage.toString();
+    params['page'] = page.toString();
+
+    final queryString = params.entries
+        .map((e) => '${e.key}=${e.value}')
+        .join('&');
+
+    final res = await _api.get(
+      '/students${queryString.isNotEmpty ? '?$queryString' : ''}',
+    );
+
+    final items = res['data'] ?? res['students'] ?? res;
+    if (items is List) {
+      return items.map((e) => Map<String, dynamic>.from(e as Map)).toList();
+    }
+    return [];
   }
 
   /// Get student detail by ID
-  Future<Map<String, dynamic>?> getStudentById(int id) async {
+  Future<Map<String, dynamic>?> getStudentById(dynamic id) async {
     try {
-      final res = await _api.get('/students/$id');
-      return res['student'];
+      final res = await _api.get('/students/${id.toString()}');
+      return res['data'] ?? res;
     } catch (e) {
       return null;
     }
   }
 
-  /// Get student by NISN
+  /// Find student by NISN (compatibility helper)
   Future<Map<String, dynamic>?> getStudentByNisn(String nisn) async {
     try {
       final res = await _api.get('/students/nisn/$nisn');
-      return res['student'];
+      return res['data'] ?? res;
     } catch (e) {
       return null;
     }
@@ -41,7 +65,12 @@ class StudentService extends GetxService {
   /// Get all classes
   Future<List<Map<String, dynamic>>> getClasses() async {
     final res = await _api.get('/classes');
-    return List<Map<String, dynamic>>.from(res['classes'] ?? []);
+
+    // Handle both paginated and direct list responses
+    if (res['data'] != null && res['data'] is List) {
+      return List<Map<String, dynamic>>.from(res['data']);
+    }
+    return List<Map<String, dynamic>>.from(res['data'] ?? res['classes'] ?? []);
   }
 
   /// Create new student
@@ -51,8 +80,12 @@ class StudentService extends GetxService {
   }
 
   /// Update student
-  Future<void> updateStudent(int id, Map<String, dynamic> data) async {
-    await _api.put('/students/$id', data);
+  Future<Map<String, dynamic>> updateStudent(
+    int id,
+    Map<String, dynamic> data,
+  ) async {
+    final res = await _api.put('/students/$id', data);
+    return res;
   }
 
   /// Delete student
@@ -61,12 +94,26 @@ class StudentService extends GetxService {
   }
 
   /// Upload student photo
-  Future<void> uploadStudentPhoto(int studentId, File photo) async {
-    await _api.postMultipart(
-      '/api/students/$studentId/photo',
+  Future<Map<String, dynamic>> uploadStudentPhoto(
+    int studentId,
+    File photo,
+  ) async {
+    final res = await _api.postMultipart(
+      '/students/$studentId/upload-photo',
       {},
       'photo',
       photo.path,
     );
+    return res;
+  }
+
+  /// Get student attendance records
+  Future<List<Map<String, dynamic>>> getStudentAttendance(int studentId) async {
+    final res = await _api.get('/students/$studentId/attendance');
+
+    if (res['data'] != null && res['data'] is List) {
+      return List<Map<String, dynamic>>.from(res['data']);
+    }
+    return [];
   }
 }

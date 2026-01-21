@@ -18,17 +18,25 @@ class LoginController extends GetxController {
       _showErrorSnackbar("Identitas dan password tidak boleh kosong");
       return;
     }
-    if (!RegExp(r'^\d+$').hasMatch(idController.text.trim())) {
-      _showErrorSnackbar("NIK/NISN harus berupa angka");
+    final identifierInput = idController.text.trim();
+    final isNumeric = RegExp(r'^\d+$').hasMatch(identifierInput);
+    final isEmail = RegExp(r'^\S+@\S+\.\S+$').hasMatch(identifierInput);
+    if (!isNumeric && !isEmail) {
+      _showErrorSnackbar("Masukkan NIK/NISN (angka) atau email yang valid");
       return;
     }
     isLoading(true);
     try {
       final auth = Get.find<AuthService>();
-      final res = await auth.login(
-        identifier: idController.text.trim(),
-        password: passwordController.text,
-      );
+      final res = isEmail
+          ? await auth.login(
+              email: identifierInput,
+              password: passwordController.text,
+            )
+          : await auth.login(
+              identifier: identifierInput,
+              password: passwordController.text,
+            );
       if (res != null) {
         final role = (res['profile']?['role'] ?? '') as String;
         // Admin pages removed: redirect all roles to Home

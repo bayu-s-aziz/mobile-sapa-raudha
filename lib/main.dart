@@ -51,28 +51,10 @@ void main() async {
 
   await initializeDateFormatting('id_ID', null);
   await GetStorage.init();
-  Get.put(LocalStorageService());
 
-  // Base URL configurable via --dart-define=API_BASE_URL=
-  // Using IP directly because DNS may not be available on mobile devices
-  // Production: http://159.223.44.203 (later: https://api.ra-alislam.sch.id)
-  Get.put(
-    ApiClient(
-      baseUrl: const String.fromEnvironment(
-        'API_BASE_URL',
-        defaultValue: 'http://159.223.44.203',
-      ),
-    ),
-  );
-  Get.put(AuthService());
-  Get.put(ProfileService());
-  Get.put(StudentService());
-  Get.put(ClassService());
-  Get.put(TeacherService());
-  Get.put(AttendanceService());
-  Get.put(LeaveService());
-  Get.put(AnnouncementService());
-
+  // NOTE: delay service registrations until after the framework is fully
+  // initialized to avoid platform-channel messages arriving before
+  // framework listeners are registered (causes lifecycle warnings on web).
   runApp(const MainApp());
 }
 
@@ -83,6 +65,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: "SAPA Raudha",
+      // Register services via an initial binding so they are created after
+      // the framework has registered channel listeners.
+      initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.login,
       getPages: AppPages.routes,
@@ -217,5 +202,32 @@ class MainApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     );
+  }
+}
+
+class AppBinding extends Bindings {
+  @override
+  void dependencies() {
+    // Local storage and API client registration
+    Get.put(LocalStorageService());
+
+    Get.put(
+      ApiClient(
+        baseUrl: const String.fromEnvironment(
+          'API_BASE_URL',
+          defaultValue: 'https://sapa.ra-alislam.sch.id',
+        ),
+      ),
+    );
+
+    // Core services
+    Get.put(AuthService());
+    Get.put(ProfileService());
+    Get.put(StudentService());
+    Get.put(ClassService());
+    Get.put(TeacherService());
+    Get.put(AttendanceService());
+    Get.put(LeaveService());
+    Get.put(AnnouncementService());
   }
 }

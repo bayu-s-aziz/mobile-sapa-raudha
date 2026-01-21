@@ -2,74 +2,38 @@
 
 import 'dart:io';
 import 'dart:developer' as developer;
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import '../models/teacher_model.dart';
 import 'api_client.dart';
 
 class TeacherService extends GetxService {
-  final RxList<Teacher> teachers = <Teacher>[].obs;
-  late final ApiClient _apiClient;
+  late final ApiClient _api;
 
   @override
   void onInit() {
     super.onInit();
-    _apiClient = Get.find<ApiClient>();
+    _api = Get.find<ApiClient>();
   }
 
-  Future<List<Teacher>> getAllTeachers() async {
-    try {
-      final data = await _apiClient.getList('/api/teachers');
+  /// Get all teachers
+  Future<Map<String, dynamic>> getTeachers({
+    int perPage = 15,
+    int page = 1,
+  }) async {
+    final query = {'per_page': perPage.toString(), 'page': page.toString()};
 
-      final teachersList = data.map((json) {
-        return Teacher(
-          id: json['id'].toString(),
-          name: json['name'] ?? '',
-          email: json['email'] ?? '',
-          phone: json['phone'],
-          nip: json['nik'],
-          subject: json['subject'],
-          photoUrl: json['photo_url'],
-          gender: null,
-          education: null,
-          joinDate: json['created_at'] != null
-              ? DateTime.parse(json['created_at'])
-              : DateTime.now(),
-          isActive: true,
-          password: json['password_hash'],
-        );
-      }).toList();
+    final queryString = query.entries
+        .map((e) => '${e.key}=${e.value}')
+        .join('&');
 
-      teachers.value = teachersList;
-      return teachersList;
-    } catch (e, st) {
-      developer.log(
-        'Error fetching teachers: $e',
-        name: 'TeacherService',
-        error: e,
-        stackTrace: st,
-      );
-      rethrow;
-    }
+    final res = await _api.get('/teachers?$queryString');
+    return res;
   }
 
-  Future<Teacher?> getTeacherById(String id) async {
+  /// Get single teacher detail by ID
+  Future<Map<String, dynamic>?> getTeacherById(dynamic id) async {
     try {
-      final response = await _apiClient.get('/api/teachers/$id');
-      return Teacher(
-        id: response['id'].toString(),
-        name: response['name'] ?? '',
-        email: response['email'] ?? '',
-        phone: response['phone'],
-        nip: response['nik'],
-        subject: response['subject'],
-        gender: null,
-        education: null,
-        joinDate: response['created_at'] != null
-            ? DateTime.parse(response['created_at'])
-            : DateTime.now(),
-        isActive: true,
-      );
+      final response = await _api.get('/teachers/${id.toString()}');
+      return response['data'] ?? response;
     } catch (e, st) {
       developer.log(
         'Error fetching teacher: $e',
@@ -81,27 +45,25 @@ class TeacherService extends GetxService {
     }
   }
 
-  Future<Teacher> createTeacher(Teacher teacher) async {
+  /// Create new teacher
+  Future<Map<String, dynamic>> createTeacher({
+    required String name,
+    required String email,
+    required String password,
+    String? nip,
+    String? phone,
+    String? gender,
+  }) async {
     try {
-      final response = await _apiClient.post('/api/teachers', {
-        'nik': teacher.nip,
-        'name': teacher.name,
-        'email': teacher.email,
-        'phone': teacher.phone,
-        'role': 'guru',
-        'subject': teacher.subject,
-        'password': '123456', // Default password
-      }, needsAuth: true);
-
-      await getAllTeachers(); // Refresh list
-      return Teacher(
-        id: response['id'].toString(),
-        name: teacher.name,
-        email: teacher.email,
-        phone: teacher.phone,
-        nip: teacher.nip,
-        subject: teacher.subject,
-      );
+      final response = await _api.post('/teachers', {
+        'name': name,
+        'email': email,
+        'password': password,
+        if (nip != null) 'nip': nip,
+        if (phone != null) 'phone': phone,
+        if (gender != null) 'gender': gender,
+      });
+      return response;
     } catch (e, st) {
       developer.log(
         'Error creating teacher: $e',
@@ -113,18 +75,22 @@ class TeacherService extends GetxService {
     }
   }
 
-  Future<void> updateTeacher(String id, Teacher teacher) async {
+  /// Update teacher
+  Future<Map<String, dynamic>> updateTeacher(
+    int id, {
+    String? name,
+    String? email,
+    String? phone,
+    String? gender,
+  }) async {
     try {
-      await _apiClient.put('/api/teachers/$id', {
-        'nik': teacher.nip,
-        'name': teacher.name,
-        'email': teacher.email,
-        'phone': teacher.phone,
-        'role': 'guru',
-        'subject': teacher.subject,
+      final response = await _api.put('/teachers/$id', {
+        if (name != null) 'name': name,
+        if (email != null) 'email': email,
+        if (phone != null) 'phone': phone,
+        if (gender != null) 'gender': gender,
       });
-
-      await getAllTeachers(); // Refresh list
+      return response;
     } catch (e, st) {
       developer.log(
         'Error updating teacher: $e',
@@ -136,10 +102,10 @@ class TeacherService extends GetxService {
     }
   }
 
-  Future<void> deleteTeacher(String id) async {
+  /// Delete teacher
+  Future<void> deleteTeacher(int id) async {
     try {
-      await _apiClient.delete('/api/teachers/$id');
-      teachers.removeWhere((t) => t.id == id);
+      await _api.delete('/teachers/$id');
     } catch (e, st) {
       developer.log(
         'Error deleting teacher: $e',
@@ -151,15 +117,16 @@ class TeacherService extends GetxService {
     }
   }
 
-  Future<void> uploadTeacherPhoto(String id, File photo) async {
+  /// Upload teacher photo
+  Future<Map<String, dynamic>> uploadPhoto(int id, File photo) async {
     try {
-      await _apiClient.postMultipart(
-        '/api/teachers/$id/photo',
-        {}, // empty fields
-        'photo', // file field name
-        photo.path, // file path
+      final response = await _api.postMultipart(
+        '/teachers/$id/upload-photo',
+        {},
+        'photo',
+        photo.path,
       );
-      await getAllTeachers(); // Refresh list
+      return response;
     } catch (e, st) {
       developer.log(
         'Error uploading teacher photo: $e',
