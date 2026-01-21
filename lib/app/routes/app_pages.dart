@@ -1,26 +1,7 @@
 // lib/app/routes/app_pages.dart
 import 'package:get/get.dart';
 // ... imports lainnya ...
-import 'package:sapa_raudha/app/modules/admin_dashboard/admin_dashboard_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_dashboard/admin_dashboard_view.dart';
-import 'package:sapa_raudha/app/modules/admin_main_layout/admin_main_layout_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_main_layout/admin_main_layout_view.dart';
-import 'package:sapa_raudha/app/modules/admin_user_management/admin_user_management_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_user_management/admin_user_management_view.dart';
-import 'package:sapa_raudha/app/modules/admin_announcement_management/admin_announcement_management_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_announcement_management/admin_announcement_management_view.dart';
-import 'package:sapa_raudha/app/modules/admin_announcement_form/admin_announcement_form_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_announcement_form/admin_announcement_form_view.dart';
-import 'package:sapa_raudha/app/modules/admin_teacher_form/admin_teacher_form_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_teacher_form/admin_teacher_form_view.dart';
-import 'package:sapa_raudha/app/modules/admin_parent_form/admin_parent_form_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_parent_form/admin_parent_form_view.dart';
-import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_management_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_student_management/admin_student_management_view.dart';
-import 'package:sapa_raudha/app/modules/admin_student_form/admin_student_form_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_student_form/admin_student_form_view.dart';
-import 'package:sapa_raudha/app/modules/admin_password_reset/admin_password_reset_binding.dart';
-import 'package:sapa_raudha/app/modules/admin_password_reset/admin_password_reset_view.dart';
+// Admin module imports removed
 import 'package:sapa_raudha/app/modules/student_detail/student_detail_binding.dart';
 import '../modules/announcement_detail/announcement_detail_binding.dart'; // Import
 import '../modules/announcement_list/announcement_list_binding.dart';
@@ -112,68 +93,7 @@ class AppPages {
       page: () => const StudentDetailView(),
       binding: StudentDetailBinding(),
     ),
-    // --- TAMBAHKAN GETPAGE ADMIN DI SINI ---
-
-    // Rute utama untuk layout admin
-    GetPage(
-      name: _Paths.adminMain,
-      page: () => AdminMainLayoutView(),
-      binding: AdminMainLayoutBinding(),
-    ),
-
-    // Rute ini bisa digunakan jika Anda ingin mengakses halaman
-    // secara individual, tapi untuk sekarang kita fokus
-    // pada layout utama yang berisi semua halaman.
-    GetPage(
-      name: _Paths.adminDashboard,
-      page: () => AdminDashboardView(),
-      binding: AdminDashboardBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminUserManagement,
-      page: () => AdminUserManagementView(),
-      binding: AdminUserManagementBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminAnnouncementManagement,
-      page: () => const AdminAnnouncementManagementView(),
-      binding: AdminAnnouncementManagementBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminAnnouncementAdd,
-      page: () => const AdminAnnouncementFormView(),
-      binding: AdminAnnouncementFormBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminAnnouncementEdit,
-      page: () => const AdminAnnouncementFormView(),
-      binding: AdminAnnouncementFormBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminTeacherForm,
-      page: () => const AdminTeacherFormView(),
-      binding: AdminTeacherFormBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminParentForm,
-      page: () => const AdminParentFormView(),
-      binding: AdminParentFormBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminStudentManagement,
-      page: () => const AdminStudentManagementView(),
-      binding: AdminStudentManagementBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminStudentForm,
-      page: () => const AdminStudentFormView(),
-      binding: AdminStudentFormBinding(),
-    ),
-    GetPage(
-      name: _Paths.adminPasswordReset,
-      page: () => const AdminPasswordResetView(),
-      binding: AdminPasswordResetBinding(),
-    ),
+    // Admin pages removed
 
     // --- RUTE-RUTE INI DIHAPUS DARI TOP-LEVEL ---
     // GetPage(

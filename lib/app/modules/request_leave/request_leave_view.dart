@@ -2,7 +2,7 @@
 
 import 'dart:io'; // <-- Tambahkan import ini
 import 'package:flutter/material.dart';
-import 'package:device_frame/device_frame.dart';
+// Device frame removed for production
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart'; // <-- Tambahkan import ini
@@ -18,219 +18,214 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
         ? Get.find<HomeController>()
         : null;
 
-    return DeviceFrame(
-      device: Devices.android.samsungGalaxyA50,
-      screen: Scaffold(
-        bottomNavigationBar: homeController != null
-            ? _BottomNav(homeController: homeController)
-            : null,
-        // Body di-wrap dengan GestureDetector untuk menutup keyboard
-        // saat user tap di luar text field
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: FloatingPage(
-            title: 'Ajukan Izin',
-            onBack: Get.back,
-            child: Form(
-              key: controller.formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    'Keterangan Tidak Hadir',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+    return Scaffold(
+      bottomNavigationBar: homeController != null
+          ? _BottomNav(homeController: homeController)
+          : null,
+      // Body di-wrap dengan GestureDetector untuk menutup keyboard
+      // saat user tap di luar text field
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: FloatingPage(
+          title: 'Ajukan Izin',
+          onBack: Get.back,
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Keterangan Tidak Hadir',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
-                  const SizedBox(height: 12),
-                  FormField<String>(
-                    validator: (_) {
-                      if (controller.leaveType.value.isEmpty) {
-                        return 'Pilih salah satu opsi';
-                      }
-                      return null;
-                    },
-                    builder: (state) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Obx(
-                            () => Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: [
-                                _buildLeaveTypeChip(
-                                  label: 'Sakit',
-                                  value: 'sakit',
-                                  selected:
-                                      controller.leaveType.value == 'sakit',
-                                  onSelected: (selected) {
-                                    if (selected) {
-                                      controller.leaveType.value = 'sakit';
-                                      state.didChange('sakit');
-                                    }
-                                  },
-                                ),
-                                _buildLeaveTypeChip(
-                                  label: 'Izin',
-                                  value: 'izin',
-                                  selected:
-                                      controller.leaveType.value == 'izin',
-                                  onSelected: (selected) {
-                                    if (selected) {
-                                      controller.leaveType.value = 'izin';
-                                      state.didChange('izin');
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          if (state.hasError)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Text(
-                                state.errorText ?? '',
-                                style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(color: AppColors.error),
+                ),
+                const SizedBox(height: 12),
+                FormField<String>(
+                  validator: (_) {
+                    if (controller.leaveType.value.isEmpty) {
+                      return 'Pilih salah satu opsi';
+                    }
+                    return null;
+                  },
+                  builder: (state) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Obx(
+                          () => Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              _buildLeaveTypeChip(
+                                label: 'Sakit',
+                                value: 'sakit',
+                                selected: controller.leaveType.value == 'sakit',
+                                onSelected: (selected) {
+                                  if (selected) {
+                                    controller.leaveType.value = 'sakit';
+                                    state.didChange('sakit');
+                                  }
+                                },
                               ),
-                            ),
-                        ],
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Pilih Tanggal Izin',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  // (Misal: Widget untuk pilih tanggal mulai)
-                  TextFormField(
-                    controller: controller.startDateController,
-                    decoration: const InputDecoration(
-                      labelText: 'Tanggal Mulai',
-                      prefixIcon: Icon(Icons.calendar_today_outlined),
-                    ),
-                    readOnly: true,
-                    onTap: () async {
-                      FocusScope.of(context).unfocus();
-                      final picked = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                      );
-                      if (picked != null) {
-                        controller.startDateController.text =
-                            '${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}';
-                      }
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Tanggal mulai harus diisi';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  // (Misal: Widget untuk pilih tanggal selesai)
-                  TextFormField(
-                    controller: controller.endDateController,
-                    decoration: const InputDecoration(
-                      labelText: 'Tanggal Selesai',
-                      prefixIcon: Icon(Icons.calendar_today_outlined),
-                    ),
-                    readOnly: true,
-                    onTap: () async {
-                      FocusScope.of(context).unfocus();
-                      final picked = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                      );
-                      if (picked != null) {
-                        controller.endDateController.text =
-                            '${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}';
-                      }
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Tanggal selesai harus diisi';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  TextFormField(
-                    controller: controller.reasonController,
-                    decoration: const InputDecoration(
-                      labelText: 'Keterangan',
-                      hintText: 'Tuliskan rincian ketidakhadiran.',
-                      alignLabelWithHint: true, // Agar label sejajar hint
-                      prefixIcon: Icon(Icons.notes_outlined),
-                    ),
-                    maxLines: 4,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Alasan tidak boleh kosong';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 24),
-
-                  // --- WIDGET BARU UNTUK UPLOAD FILE ---
-                  Text(
-                    'Lampiran (Opsional)',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Obx(() {
-                    if (controller.selectedFile.value == null) {
-                      // Tampilan Tombol Upload
-                      return OutlinedButton.icon(
-                        onPressed: controller.pickImage,
-                        icon: const Icon(Icons.attach_file_outlined),
-                        label: const Text('Pilih Gambar (Surat Dokter)'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.primaryText,
-                          // Gunakan style border dari theme
-                          side: BorderSide(
-                            color: AppColors.alternate.withAlpha(
-                              (0.8 * 255).round(),
-                            ),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          // Gunakan radius dari theme
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                              _buildLeaveTypeChip(
+                                label: 'Izin',
+                                value: 'izin',
+                                selected: controller.leaveType.value == 'izin',
+                                onSelected: (selected) {
+                                  if (selected) {
+                                    controller.leaveType.value = 'izin';
+                                    state.didChange('izin');
+                                  }
+                                },
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    } else {
-                      // Tampilan Pratinjau File
-                      return _buildFilePreview(
-                        context,
-                        controller.selectedFile.value!,
-                      );
-                    }
-                  }),
-
-                  // -------------------------------------
-                  const SizedBox(height: 40),
-                  // Tombol ini akan otomatis mengambil style modern (pill shape)
-                  ElevatedButton(
-                    onPressed: controller.submitLeaveRequest,
-                    child: const Text('AJUKAN IZIN'),
+                        if (state.hasError)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Text(
+                              state.errorText ?? '',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: AppColors.error),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Pilih Tanggal Izin',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 16),
+                // (Misal: Widget untuk pilih tanggal mulai)
+                TextFormField(
+                  controller: controller.startDateController,
+                  decoration: const InputDecoration(
+                    labelText: 'Tanggal Mulai',
+                    prefixIcon: Icon(Icons.calendar_today_outlined),
+                  ),
+                  readOnly: true,
+                  onTap: () async {
+                    FocusScope.of(context).unfocus();
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      controller.startDateController.text =
+                          '${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}';
+                    }
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Tanggal mulai harus diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                // (Misal: Widget untuk pilih tanggal selesai)
+                TextFormField(
+                  controller: controller.endDateController,
+                  decoration: const InputDecoration(
+                    labelText: 'Tanggal Selesai',
+                    prefixIcon: Icon(Icons.calendar_today_outlined),
+                  ),
+                  readOnly: true,
+                  onTap: () async {
+                    FocusScope.of(context).unfocus();
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      controller.endDateController.text =
+                          '${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}';
+                    }
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Tanggal selesai harus diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 24),
+                TextFormField(
+                  controller: controller.reasonController,
+                  decoration: const InputDecoration(
+                    labelText: 'Keterangan',
+                    hintText: 'Tuliskan rincian ketidakhadiran.',
+                    alignLabelWithHint: true, // Agar label sejajar hint
+                    prefixIcon: Icon(Icons.notes_outlined),
+                  ),
+                  maxLines: 4,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Alasan tidak boleh kosong';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 24),
+
+                // --- WIDGET BARU UNTUK UPLOAD FILE ---
+                Text(
+                  'Lampiran (Opsional)',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Obx(() {
+                  if (controller.selectedFile.value == null) {
+                    // Tampilan Tombol Upload
+                    return OutlinedButton.icon(
+                      onPressed: controller.pickImage,
+                      icon: const Icon(Icons.attach_file_outlined),
+                      label: const Text('Pilih Gambar (Surat Dokter)'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.primaryText,
+                        // Gunakan style border dari theme
+                        side: BorderSide(
+                          color: AppColors.alternate.withAlpha(
+                            (0.8 * 255).round(),
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        // Gunakan radius dari theme
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                    );
+                  } else {
+                    // Tampilan Pratinjau File
+                    return _buildFilePreview(
+                      context,
+                      controller.selectedFile.value!,
+                    );
+                  }
+                }),
+
+                // -------------------------------------
+                const SizedBox(height: 40),
+                // Tombol ini akan otomatis mengambil style modern (pill shape)
+                ElevatedButton(
+                  onPressed: controller.submitLeaveRequest,
+                  child: const Text('AJUKAN IZIN'),
+                ),
+              ],
             ),
           ),
         ),

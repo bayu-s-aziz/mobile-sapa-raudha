@@ -31,11 +31,8 @@ class LoginController extends GetxController {
       );
       if (res != null) {
         final role = (res['profile']?['role'] ?? '') as String;
-        if (role == 'admin') {
-          Get.offAllNamed(Routes.adminMain);
-        } else {
-          Get.offAllNamed(Routes.home, arguments: role);
-        }
+        // Admin pages removed: redirect all roles to Home
+        Get.offAllNamed(Routes.home, arguments: role);
       } else {
         _showErrorSnackbar("Identitas atau password salah");
       }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:device_frame/device_frame.dart';
+// Device frame removed for production
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'home_controller.dart';
@@ -101,61 +101,56 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return DeviceFrame(
-      device: Devices.android.samsungGalaxyA50,
-      screen: Scaffold(
-        // [MODERNISASI] Hapus AppBar dari Scaffold, pindahkan ke dalam body
-        body: Obx(() {
-          if (controller.currentActionView.value != null) {
-            return controller.currentActionView.value!;
-          }
+    return Scaffold(
+      // [MODERNISASI] Hapus AppBar dari Scaffold, pindahkan ke dalam body
+      body: Obx(() {
+        if (controller.currentActionView.value != null) {
+          return controller.currentActionView.value!;
+        }
 
-          final List<Widget> tabPages = [
-            _buildHomeDashboardContent(context),
-            const AnnouncementListView(),
-            controller.userRole.value == 'guru'
-                ? const StudentListView()
-                : const LeaveListView(),
-            const ProfileView(),
-          ];
+        final List<Widget> tabPages = [
+          _buildHomeDashboardContent(context),
+          const AnnouncementListView(),
+          controller.userRole.value == 'guru'
+              ? const StudentListView()
+              : const LeaveListView(),
+          const ProfileView(),
+        ];
 
-          return IndexedStack(
-            index: controller.selectedIndex.value,
-            children: tabPages,
-          );
-        }),
-        bottomNavigationBar: Obx(
-          () => Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(24),
+        return IndexedStack(
+          index: controller.selectedIndex.value,
+          children: tabPages,
+        );
+      }),
+      bottomNavigationBar: Obx(
+        () => Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.alternate.withAlpha((0.5 * 255).round()),
+                blurRadius: 10,
+                offset: const Offset(0, -2),
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.alternate.withAlpha((0.5 * 255).round()),
-                  blurRadius: 10,
-                  offset: const Offset(0, -2),
-                ),
-              ],
-            ),
-            // Padding untuk safety area (bawah) dan horizontal
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).padding.bottom, // Safety area
-              left: 16,
-              right: 16,
-            ),
-            child: BottomNavigationBar(
-              currentIndex: controller.selectedIndex.value,
-              onTap: controller.changeTabIndex,
-              items: controller.userRole.value == 'guru'
-                  ? _buildGuruNavItems()
-                  : _buildParentNavItems(),
-              // [MODERNISASI] Hapus background & elevation dari bar itu sendiri
-              // agar Container parent yang mengontrol tampilan
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
+            ],
+          ),
+          // Padding untuk safety area (bawah) dan horizontal
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom, // Safety area
+            left: 16,
+            right: 16,
+          ),
+          child: BottomNavigationBar(
+            currentIndex: controller.selectedIndex.value,
+            onTap: controller.changeTabIndex,
+            items: controller.userRole.value == 'guru'
+                ? _buildGuruNavItems()
+                : _buildParentNavItems(),
+            // [MODERNISASI] Hapus background & elevation dari bar itu sendiri
+            // agar Container parent yang mengontrol tampilan
+            backgroundColor: Colors.transparent,
+            elevation: 0,
           ),
         ),
       ),

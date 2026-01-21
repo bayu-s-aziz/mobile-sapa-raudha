@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'dart:developer' as developer;
 import 'local_storage_service.dart';
 import 'api_client.dart';
 
@@ -17,7 +18,10 @@ class AuthService extends GetxService {
     required String identifier, // NIK or NISN
     required String password,
   }) async {
-    print('[AUTH] Attempting login with identifier: $identifier');
+    developer.log(
+      '[AUTH] Attempting login with identifier: $identifier',
+      name: 'AuthService',
+    );
 
     try {
       final res = await _api.post('/auth/login', {
@@ -25,20 +29,28 @@ class AuthService extends GetxService {
         'password': password,
       });
 
-      print('[AUTH] Login response: $res');
+      developer.log('[AUTH] Login response: $res', name: 'AuthService');
 
       if (res['token'] != null) {
         await _storage.save('auth_token', res['token']);
         final role = (res['profile']?['role'] ?? '') as String;
         await _storage.save('role', role);
         await _storage.save('profile', res['profile']);
-        print('[AUTH] Login successful, role: $role');
+        developer.log(
+          '[AUTH] Login successful, role: $role',
+          name: 'AuthService',
+        );
         return res;
       }
-      print('[AUTH] No token in response');
+      developer.log('[AUTH] No token in response', name: 'AuthService');
       return null;
-    } catch (e) {
-      print('[AUTH] Login error: $e');
+    } catch (e, st) {
+      developer.log(
+        '[AUTH] Login error: $e',
+        name: 'AuthService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }

@@ -1,6 +1,7 @@
 // lib/app/data/services/teacher_service.dart
 
 import 'dart:io';
+import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../models/teacher_model.dart';
@@ -41,10 +42,13 @@ class TeacherService extends GetxService {
 
       teachers.value = teachersList;
       return teachersList;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching teachers: $e');
-      }
+    } catch (e, st) {
+      developer.log(
+        'Error fetching teachers: $e',
+        name: 'TeacherService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -66,10 +70,13 @@ class TeacherService extends GetxService {
             : DateTime.now(),
         isActive: true,
       );
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching teacher: $e');
-      }
+    } catch (e, st) {
+      developer.log(
+        'Error fetching teacher: $e',
+        name: 'TeacherService',
+        error: e,
+        stackTrace: st,
+      );
       return null;
     }
   }
@@ -95,10 +102,13 @@ class TeacherService extends GetxService {
         nip: teacher.nip,
         subject: teacher.subject,
       );
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error creating teacher: $e');
-      }
+    } catch (e, st) {
+      developer.log(
+        'Error creating teacher: $e',
+        name: 'TeacherService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -115,10 +125,13 @@ class TeacherService extends GetxService {
       });
 
       await getAllTeachers(); // Refresh list
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error updating teacher: $e');
-      }
+    } catch (e, st) {
+      developer.log(
+        'Error updating teacher: $e',
+        name: 'TeacherService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -127,10 +140,13 @@ class TeacherService extends GetxService {
     try {
       await _apiClient.delete('/api/teachers/$id');
       teachers.removeWhere((t) => t.id == id);
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error deleting teacher: $e');
-      }
+    } catch (e, st) {
+      developer.log(
+        'Error deleting teacher: $e',
+        name: 'TeacherService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -144,10 +160,13 @@ class TeacherService extends GetxService {
         photo.path, // file path
       );
       await getAllTeachers(); // Refresh list
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error uploading teacher photo: $e');
-      }
+    } catch (e, st) {
+      developer.log(
+        'Error uploading teacher photo: $e',
+        name: 'TeacherService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }

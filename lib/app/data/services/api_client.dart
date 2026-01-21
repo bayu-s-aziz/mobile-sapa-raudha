@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'local_storage_service.dart';
@@ -52,8 +53,8 @@ class ApiClient extends GetxService {
   }) async {
     final headers = await _getHeaders(needsAuth: needsAuth);
     final url = '$baseUrl$path';
-    print('[API] POST $url');
-    print('[API] Body: ${jsonEncode(body)}');
+    developer.log('[API] POST $url', name: 'ApiClient');
+    developer.log('[API] Body: ${jsonEncode(body)}', name: 'ApiClient');
 
     try {
       final res = await http.post(
@@ -61,14 +62,22 @@ class ApiClient extends GetxService {
         headers: headers,
         body: jsonEncode(body),
       );
-      print('[API] Response ${res.statusCode}: ${res.body}');
+      developer.log(
+        '[API] Response ${res.statusCode}: ${res.body}',
+        name: 'ApiClient',
+      );
 
       if (res.statusCode >= 200 && res.statusCode < 300) {
         return jsonDecode(res.body) as Map<String, dynamic>;
       }
       throw Exception('HTTP ${res.statusCode}: ${res.body}');
-    } catch (e) {
-      print('[API] Error: $e');
+    } catch (e, st) {
+      developer.log(
+        '[API] Error: $e',
+        name: 'ApiClient',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
