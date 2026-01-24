@@ -4,6 +4,22 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'local_storage_service.dart';
 
+class ApiException implements Exception {
+  final int statusCode;
+  final dynamic body;
+  final String message;
+
+  ApiException(this.statusCode, this.body, [String? message])
+    : message =
+          message ??
+          (body is Map && body['message'] != null
+              ? body['message'].toString()
+              : body?.toString() ?? 'HTTP $statusCode');
+
+  @override
+  String toString() => 'ApiException($statusCode): $message';
+}
+
 class ApiClient extends GetxService {
   final String baseUrl;
   ApiClient({required this.baseUrl});
@@ -17,7 +33,11 @@ class ApiClient extends GetxService {
   }
 
   Future<Map<String, String>> _getHeaders({bool needsAuth = false}) async {
-    final headers = {'Content-Type': 'application/json'};
+    final headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    };
     if (needsAuth) {
       final token = _storage.read<String>('auth_token');
       if (token != null) {
@@ -33,7 +53,8 @@ class ApiClient extends GetxService {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return jsonDecode(res.body) as Map<String, dynamic>;
     }
-    throw Exception('HTTP ${res.statusCode}: ${res.body}');
+    final parsed = _parseBody(res.body);
+    throw ApiException(res.statusCode, parsed);
   }
 
   Future<List<dynamic>> getList(String path) async {
@@ -43,7 +64,8 @@ class ApiClient extends GetxService {
       final decoded = jsonDecode(res.body);
       return decoded is List ? decoded : [];
     }
-    throw Exception('HTTP ${res.statusCode}: ${res.body}');
+    final parsed = _parseBody(res.body);
+    throw ApiException(res.statusCode, parsed);
   }
 
   Future<Map<String, dynamic>> post(
@@ -70,7 +92,8 @@ class ApiClient extends GetxService {
       if (res.statusCode >= 200 && res.statusCode < 300) {
         return jsonDecode(res.body) as Map<String, dynamic>;
       }
-      throw Exception('HTTP ${res.statusCode}: ${res.body}');
+      final parsed = _parseBody(res.body);
+      throw ApiException(res.statusCode, parsed);
     } catch (e, st) {
       developer.log(
         '[API] Error: $e',
@@ -95,7 +118,8 @@ class ApiClient extends GetxService {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return jsonDecode(res.body) as Map<String, dynamic>;
     }
-    throw Exception('HTTP ${res.statusCode}: ${res.body}');
+    final parsed = _parseBody(res.body);
+    throw ApiException(res.statusCode, parsed);
   }
 
   Future<Map<String, dynamic>> delete(String path) async {
@@ -104,7 +128,8 @@ class ApiClient extends GetxService {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return jsonDecode(res.body) as Map<String, dynamic>;
     }
-    throw Exception('HTTP ${res.statusCode}: ${res.body}');
+    final parsed = _parseBody(res.body);
+    throw ApiException(res.statusCode, parsed);
   }
 
   /// Upload file dengan multipart
@@ -120,6 +145,7 @@ class ApiClient extends GetxService {
     if (token != null) {
       request.headers['Authorization'] = 'Bearer $token';
     }
+    request.headers['X-Requested-With'] = 'XMLHttpRequest';
 
     request.fields.addAll(fields);
     request.files.add(await http.MultipartFile.fromPath(fileField, filePath));
@@ -130,7 +156,8 @@ class ApiClient extends GetxService {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return jsonDecode(response.body) as Map<String, dynamic>;
     }
-    throw Exception('HTTP ${response.statusCode}: ${response.body}');
+    final parsed = _parseBody(response.body);
+    throw ApiException(response.statusCode, parsed);
   }
 
   /// Upload file dengan multipart menggunakan PUT
@@ -145,6 +172,7 @@ class ApiClient extends GetxService {
     if (token != null) {
       request.headers['Authorization'] = 'Bearer $token';
     }
+    request.headers['X-Requested-With'] = 'XMLHttpRequest';
 
     request.files.add(await http.MultipartFile.fromPath(fileField, filePath));
 
@@ -154,6 +182,15 @@ class ApiClient extends GetxService {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return jsonDecode(response.body) as Map<String, dynamic>;
     }
-    throw Exception('HTTP ${response.statusCode}: ${response.body}');
+    final parsed = _parseBody(response.body);
+    throw ApiException(response.statusCode, parsed);
+  }
+
+  dynamic _parseBody(String body) {
+    try {
+      return jsonDecode(body);
+    } catch (_) {
+      return body;
+    }
   }
 }

@@ -25,37 +25,39 @@ class AuthService extends GetxService {
     );
 
     try {
-      // If backend expects `email` but client uses numeric identifier (NISN/NIK),
-      // send identifier as `email` as well so Laravel auth still accepts it.
-      final inferredEmail =
-          (email == null &&
-              identifier != null &&
-              RegExp(r'^\d+\$').hasMatch(identifier))
-          ? identifier
-          : email;
-
-      final payload = {
-        if (identifier != null) 'identifier': identifier,
-        if (inferredEmail != null) 'email': inferredEmail,
-        'password': password,
-      };
-
-      final res = await _api.post('/auth/login', payload, needsAuth: false);
-
-      developer.log('[AUTH] Login response: $res', name: 'AuthService');
-
-      if (res['success'] == true && res['token'] != null) {
-        await _storage.save('auth_token', res['token']);
-        await _storage.save('user', res['user']);
-
-        final userType = (res['user']?['userable_type'] ?? '') as String;
-        developer.log(
-          '[AUTH] Login successful, user type: $userType',
-          name: 'AuthService',
-        );
-        return res;
+      // Laravel expects 'email' + 'password' (+ optional device_name)
+      final payloadEmail = (email ?? identifier)?.trim();
+      if (payloadEmail == null || payloadEmail.isEmpty) {
+        throw ArgumentError('email is required');
       }
-      developer.log('[AUTH] Login failed', name: 'AuthService');
+
+      final res = await _api.post('/auth/login', {
+        'email': payloadEmail,
+        'password': password,
+        'device_name': 'flutter-app',
+      }, needsAuth: false);
+
+      // Laravel response: { "token": "...", "user": { ... } } or
+      // Fortify session response: { "two_factor": false } (or true)
+      // Handle two_factor flow explicitly so UI can react.
+      final token = res['token'] as String?;
+      if (res.containsKey('two_factor')) {
+        return {'two_factor': res['two_factor']};
+      }
+      Map<String, dynamic>? user;
+      if (res.containsKey('user') && res['user'] != null) {
+        user = Map<String, dynamic>.from(res['user'] as Map);
+      } else if (res.containsKey('data') && res['data'] is Map) {
+        user = Map<String, dynamic>.from(res['data'] as Map);
+      }
+
+      if (token != null) {
+        await _storage.save('auth_token', token);
+      }
+      if (user != null) {
+        await _storage.save('user', user);
+        return user;
+      }
       return null;
     } catch (e, st) {
       developer.log(
@@ -64,6 +66,13 @@ class AuthService extends GetxService {
         error: e,
         stackTrace: st,
       );
+      // If API returned structured errors (validation), log them for UI
+      if (e is ApiException) {
+        developer.log(
+          '[AUTH] ApiException body: ${e.body}',
+          name: 'AuthService',
+        );
+      }
       rethrow;
     }
   }
@@ -90,14 +99,14 @@ class AuthService extends GetxService {
     }
   }
 
-  /// Get current user profile
+  /// Get current user profile (Laravel: returns { "user": ... })
   Future<Map<String, dynamic>?> getProfile() async {
     try {
       final res = await _api.get('/auth/profile');
-
-      if (res['success'] == true && res['user'] != null) {
-        await _storage.save('user', res['user']);
-        return res['user'];
+      final user = res['user'] ?? res;
+      if (user != null) {
+        await _storage.save('user', user);
+        return Map<String, dynamic>.from(user as Map);
       }
       return null;
     } catch (e, st) {
@@ -107,7 +116,7 @@ class AuthService extends GetxService {
         error: e,
         stackTrace: st,
       );
-      rethrow;
+      return null;
     }
   }
 

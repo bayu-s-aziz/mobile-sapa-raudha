@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/auth_service.dart';
+import 'package:sapa_raudha/app/data/services/api_client.dart';
+import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class LoginController extends GetxController {
@@ -18,6 +20,7 @@ class LoginController extends GetxController {
       _showErrorSnackbar("Identitas dan password tidak boleh kosong");
       return;
     }
+
     final identifierInput = idController.text.trim();
     final isNumeric = RegExp(r'^\d+$').hasMatch(identifierInput);
     final isEmail = RegExp(r'^\S+@\S+\.\S+$').hasMatch(identifierInput);
@@ -25,6 +28,7 @@ class LoginController extends GetxController {
       _showErrorSnackbar("Masukkan NIK/NISN (angka) atau email yang valid");
       return;
     }
+
     isLoading(true);
     try {
       final auth = Get.find<AuthService>();
@@ -37,15 +41,74 @@ class LoginController extends GetxController {
               identifier: identifierInput,
               password: passwordController.text,
             );
+
+      // If Fortify returned two_factor (session-based flow)
+      if (res is Map && res!.containsKey('two_factor')) {
+        final two = res['two_factor'];
+        if (two == true) {
+          _showErrorSnackbar('Two-factor authentication required.');
+        } else {
+          _showErrorSnackbar('Login succeeded (session). Please continue.');
+          Get.offAllNamed(Routes.home);
+        }
+        return;
+      }
+
       if (res != null) {
-        final role = (res['profile']?['role'] ?? '') as String;
-        // Admin pages removed: redirect all roles to Home
+        // Normalize role from various possible response shapes
+        String role = '';
+        final Map<String, dynamic> resp = Map<String, dynamic>.from(res as Map);
+
+        if (resp.containsKey('role') && resp['role'] != null) {
+          role = resp['role'].toString();
+        } else if (resp.containsKey('profile') && resp['profile'] is Map) {
+          final profile = Map<String, dynamic>.from(resp['profile'] as Map);
+          if (profile.containsKey('role') && profile['role'] != null) {
+            role = profile['role'].toString();
+          }
+        } else if (resp.containsKey('userable_type') &&
+            resp['userable_type'] != null) {
+          final t = resp['userable_type'].toString();
+          if (t.contains('Guru')) {
+            role = 'guru';
+          } else if (t.contains('Siswa')) {
+            role = 'siswa';
+          } else if (t.toLowerCase().contains('parent') ||
+              t.toLowerCase().contains('ortu')) {
+            role = 'orangtua';
+          }
+        }
+
+        // Persist role for HomeController fallback
+        try {
+          final storage = Get.find<LocalStorageService>();
+          if (role.isNotEmpty) {
+            await storage.save('role', role);
+          }
+        } catch (_) {}
+
+        // Redirect to Home with role argument
         Get.offAllNamed(Routes.home, arguments: role);
       } else {
         _showErrorSnackbar("Identitas atau password salah");
       }
     } catch (e) {
-      _showErrorSnackbar("Terjadi kesalahan: ${e.toString()}");
+      if (e is ApiException) {
+        final body = e.body;
+        if (body is Map && body.containsKey('errors')) {
+          final errors = body['errors'] as Map<String, dynamic>;
+          final messages = errors.values
+              .map((v) => v is List ? v.join(' ') : v.toString())
+              .join('\n');
+          _showErrorSnackbar(messages);
+        } else if (body is Map && body.containsKey('message')) {
+          _showErrorSnackbar(body['message'].toString());
+        } else {
+          _showErrorSnackbar(e.toString());
+        }
+      } else {
+        _showErrorSnackbar("Terjadi kesalahan: ${e.toString()}");
+      }
     } finally {
       isLoading(false);
     }
