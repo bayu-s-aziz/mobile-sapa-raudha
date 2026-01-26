@@ -31,21 +31,22 @@ class AuthService extends GetxService {
         throw ArgumentError('email is required');
       }
 
-      final res = await _api.post('/auth/login', {
+      final res = await _api.post('/login', {
         'email': payloadEmail,
         'password': password,
         'device_name': 'flutter-app',
       }, needsAuth: false);
 
-      // Laravel response: { "token": "...", "user": { ... } } or
-      // Fortify session response: { "two_factor": false } (or true)
-      // Handle two_factor flow explicitly so UI can react.
-      final token = res['token'] as String?;
+      // Laravel response: { "success": true, "data": { "token": "...", "user": { ... } } }
+      final data = res['data'] as Map<String, dynamic>?;
+      final token = (data?['token'] ?? res['token']) as String?;
       if (res.containsKey('two_factor')) {
         return {'two_factor': res['two_factor']};
       }
       Map<String, dynamic>? user;
-      if (res.containsKey('user') && res['user'] != null) {
+      if (data?['user'] != null) {
+        user = Map<String, dynamic>.from(data!['user'] as Map);
+      } else if (res.containsKey('user') && res['user'] != null) {
         user = Map<String, dynamic>.from(res['user'] as Map);
       } else if (res.containsKey('data') && res['data'] is Map) {
         user = Map<String, dynamic>.from(res['data'] as Map);
@@ -102,8 +103,8 @@ class AuthService extends GetxService {
   /// Get current user profile (Laravel: returns { "user": ... })
   Future<Map<String, dynamic>?> getProfile() async {
     try {
-      final res = await _api.get('/auth/profile');
-      final user = res['user'] ?? res;
+      final res = await _api.get('/user');
+      final user = res['data'] ?? res['user'] ?? res;
       if (user != null) {
         await _storage.save('user', user);
         return Map<String, dynamic>.from(user as Map);
@@ -123,7 +124,7 @@ class AuthService extends GetxService {
   /// Logout dan hapus token
   Future<void> logout() async {
     try {
-      await _api.post('/auth/logout', {});
+      await _api.post('/logout', {});
       await _storage.remove('auth_token');
       await _storage.remove('user');
       developer.log('[AUTH] Logout successful', name: 'AuthService');

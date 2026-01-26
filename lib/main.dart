@@ -215,7 +215,7 @@ class AppBinding extends Bindings {
       ApiClient(
         baseUrl: const String.fromEnvironment(
           'API_BASE_URL',
-          defaultValue: 'http://localhost:8000/api',
+          defaultValue: 'https://sapa.ra-alislam.sch.id/api',
         ),
       ),
     );

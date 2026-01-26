@@ -29,10 +29,10 @@ class ProfileService extends GetxService {
   /// Fetch profile from API and cache it
   Future<Map<String, dynamic>> fetchProfile() async {
     try {
-      final res = await _api.get('/auth/profile');
+      final res = await _api.get('/user');
 
-      if (res['success'] == true && res['user'] != null) {
-        final user = Map<String, dynamic>.from(res['user']);
+      if (res['success'] == true && res['data'] != null) {
+        final user = Map<String, dynamic>.from(res['data']);
         await _storage.save('user', user);
         developer.log(
           '[PROFILE] Profile fetched and cached',

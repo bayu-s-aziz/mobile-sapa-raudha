@@ -40,8 +40,12 @@ class ApiClient extends GetxService {
     };
     if (needsAuth) {
       final token = _storage.read<String>('auth_token');
+      developer.log('[API] Token from storage: $token', name: 'ApiClient');
       if (token != null) {
         headers['Authorization'] = 'Bearer $token';
+        developer.log('[API] Authorization header set', name: 'ApiClient');
+      } else {
+        developer.log('[API] No token found', name: 'ApiClient');
       }
     }
     return headers;
