@@ -25,7 +25,7 @@ class LoginController extends GetxController {
     final isNumeric = RegExp(r'^\d+$').hasMatch(identifierInput);
     final isEmail = RegExp(r'^\S+@\S+\.\S+$').hasMatch(identifierInput);
     if (!isNumeric && !isEmail) {
-      _showErrorSnackbar("Masukkan NIK/NISN (angka) atau email yang valid");
+      _showErrorSnackbar("Masukkan email yang valid");
       return;
     }
 

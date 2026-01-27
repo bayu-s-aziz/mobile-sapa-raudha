@@ -17,7 +17,7 @@ class LoginView extends GetView<LoginController> {
         labelText: 'Email',
         prefixIcon: Icon(Icons.badge_outlined),
       ),
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
     );
   }
