@@ -133,8 +133,54 @@ class ProfileService extends GetxService {
   }
 
   /// Get user's photo URL
+  /// Checks multiple possible keys returned by the API: top-level 'photo_url', 'avatar',
+  /// or nested 'userable.photo_url' / 'userable.avatar' / 'userable.student.photo_url'.
   String? getUserPhotoUrl() {
-    return getStoredUserField('photo_url') as String?;
+    final user = getStoredUser();
+    if (user == null) return null;
+
+    // Top-level fields
+    final topPhoto = user['photo_url'];
+    if (topPhoto is String && topPhoto.isNotEmpty) return topPhoto;
+
+    final topAvatar = user['avatar'];
+    if (topAvatar is String && topAvatar.isNotEmpty) return topAvatar;
+
+    // Nested 'userable'
+    final userable = user['userable'] as Map<String, dynamic>?;
+    if (userable != null) {
+      final uPhoto = userable['photo_url'];
+      if (uPhoto is String && uPhoto.isNotEmpty) return uPhoto;
+
+      final uAvatar = userable['avatar'];
+      if (uAvatar is String && uAvatar.isNotEmpty) return uAvatar;
+
+      // If parent, check attached student
+      final student = userable['student'] as Map<String, dynamic>?;
+      final sPhoto = student != null ? student['photo_url'] : null;
+      if (sPhoto is String && sPhoto.isNotEmpty) return sPhoto;
+    }
+
+    // Older fallback keys
+    final alt1 = getStoredUserField('photo') as String?;
+    if (alt1 != null && alt1.isNotEmpty) return alt1;
+    final alt2 = getStoredUserField('url') as String?;
+    if (alt2 != null && alt2.isNotEmpty) return alt2;
+
+    return null;
+  }
+
+  /// Return a normalized (absolute) user photo URL when possible.
+  /// If the stored photo_url is a relative path, it will be prefixed with
+  /// the API base URL so it can be loaded by network image widgets.
+  String? getNormalizedUserPhotoUrl() {
+    final raw = getUserPhotoUrl();
+    if (raw == null || raw.isEmpty) return null;
+    try {
+      return raw.startsWith('http') ? raw : _api.buildFullUrl(raw);
+    } catch (_) {
+      return raw;
+    }
   }
 
   /// Check if user is a student

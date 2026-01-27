@@ -6,6 +6,8 @@ import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'student_profile_controller.dart';
+import 'package:sapa_raudha/app/utils/url_utils.dart';
+import 'package:sapa_raudha/app/widgets/avatar.dart';
 
 class StudentProfileView extends GetView<StudentProfileController> {
   const StudentProfileView({super.key});
@@ -54,22 +56,12 @@ class StudentProfileView extends GetView<StudentProfileController> {
                 color: Theme.of(context).cardColor,
                 child: Column(
                   children: [
-                    CircleAvatar(
+                    Avatar(
+                      photoUrl: student.photoUrl,
+                      name: student.name,
                       radius: 60,
                       backgroundColor: AppColors.primary,
-                      // Jika ada foto siswa, tampilkan, jika tidak, inisial
-                      backgroundImage: student.photoUrl != null
-                          ? NetworkImage(student.photoUrl!)
-                          : null,
-                      child: (student.photoUrl == null)
-                          ? Text(
-                              student.name.substring(0, 1).toUpperCase(),
-                              style: textTheme.displaySmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
-                              ),
-                            )
-                          : null,
+                      textColor: Colors.white,
                     ),
                     const SizedBox(height: 16),
                     Text(

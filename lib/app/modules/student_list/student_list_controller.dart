@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class StudentListController extends GetxController {
@@ -15,10 +16,13 @@ class StudentListController extends GetxController {
   final RxString selectedGroup = 'A,B'.obs; // default to show both A and B
   late final StudentService _studentService;
 
+  late final ApiClient _api;
+
   @override
   void onInit() {
     super.onInit();
     _studentService = Get.find<StudentService>();
+    _api = Get.find<ApiClient>();
     fetchStudents();
     // Listener untuk search
     searchController.addListener(() {
@@ -34,6 +38,22 @@ class StudentListController extends GetxController {
       final studentsData = await _studentService.getStudents(group: usedGroup);
 
       final students = studentsData.map((data) {
+        // Normalize photo URL when possible so Avatar gets an absolute URL
+        final rawPhoto =
+            data['photo_url'] as String? ??
+            data['avatar'] as String? ??
+            data['photo'] as String?;
+        String? normalizedPhoto;
+        try {
+          if (rawPhoto != null && rawPhoto.isNotEmpty) {
+            normalizedPhoto = rawPhoto.startsWith('http')
+                ? rawPhoto
+                : _api.buildFullUrl(rawPhoto);
+          }
+        } catch (e) {
+          normalizedPhoto = rawPhoto;
+        }
+
         return Student(
           id: data['id'].toString(),
           name: data['name'] ?? '',
@@ -57,7 +77,7 @@ class StudentListController extends GetxController {
           fatherPhone: data['father_phone'],
           motherPhone: data['mother_phone'],
           guardianPhone: data['guardian_phone'],
-          photoUrl: data['photo_url'],
+          photoUrl: normalizedPhoto,
         );
       }).toList();
 

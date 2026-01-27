@@ -52,14 +52,22 @@ void main() async {
   await initializeDateFormatting('id_ID', null);
   await GetStorage.init();
 
+  // Decide initial route based on whether auth token is present in storage
+  final storage = GetStorage();
+  final token = storage.read<String>('auth_token');
+  final initialRoute = (token != null && token.isNotEmpty)
+      ? Routes.home
+      : Routes.login;
+
   // NOTE: delay service registrations until after the framework is fully
   // initialized to avoid platform-channel messages arriving before
   // framework listeners are registered (causes lifecycle warnings on web).
-  runApp(const MainApp());
+  runApp(MainApp(initialRoute: initialRoute));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final String initialRoute;
+  const MainApp({super.key, this.initialRoute = Routes.login});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +77,7 @@ class MainApp extends StatelessWidget {
       // the framework has registered channel listeners.
       initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.login,
+      initialRoute: initialRoute,
       getPages: AppPages.routes,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

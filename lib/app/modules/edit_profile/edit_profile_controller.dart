@@ -57,12 +57,40 @@ class EditProfileController extends GetxController {
         selectedImage.value!.path,
       );
 
-      final serverPhotoUrl = response['photo_url'] as String;
-      final fullUrl = '${_api.baseUrl}$serverPhotoUrl';
+      // Server may return different keys for the uploaded file URL (photo_url, photo, url, avatar)
+      final dynamic rawPhoto =
+          response['photo_url'] ??
+          response['photo'] ??
+          response['url'] ??
+          response['avatar'];
+      if (rawPhoto == null) {
+        throw Exception('Server response tidak mengandung URL foto');
+      }
 
-      // Update profile locally
-      profileController.profile['photo_url'] = fullUrl;
-      await _storage.save('profile', profileController.profile);
+      final serverPhotoUrl = rawPhoto.toString();
+
+      // Persist the updated user profile under the same key used by ProfileService ('user')
+      final Map<String, dynamic> updated = Map<String, dynamic>.from(
+        profileController.profile,
+      );
+
+      // Update top-level fields to be defensive for consumers of different response shapes
+      updated['photo_url'] =
+          serverPhotoUrl; // store raw path; normalization happens when reading
+      updated['avatar'] = serverPhotoUrl;
+
+      // If a nested userable exists, update its photo_url as well so UI that reads nested values sees it
+      final userable = updated['userable'] as Map<String, dynamic>?;
+      if (userable != null) {
+        userable['photo_url'] = serverPhotoUrl;
+        userable['avatar'] = serverPhotoUrl;
+        updated['userable'] = userable;
+      }
+
+      await _storage.save('user', updated);
+
+      // Update in-memory reactive profile so UI updates immediately
+      profileController.profile.assignAll(updated);
       profileController.profile.refresh();
 
       Get.back();

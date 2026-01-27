@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'profile_controller.dart';
+import 'package:sapa_raudha/app/utils/url_utils.dart';
+import 'package:sapa_raudha/app/widgets/avatar.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
@@ -38,19 +40,13 @@ class ProfileView extends GetView<ProfileController> {
           return Center(
             child: Column(
               children: [
-                CircleAvatar(
+                // Avatar with fallback initials and error handling
+                Avatar(
+                  photoUrl: photoUrl,
+                  name: controller.userName,
                   radius: 60,
                   backgroundColor: AppColors.primary,
-                  backgroundImage: photoUrl != null && photoUrl.isNotEmpty
-                      ? NetworkImage(photoUrl)
-                      : null,
-                  child: (photoUrl == null || photoUrl.isEmpty)
-                      ? const Icon(
-                          Icons.person_outline,
-                          size: 60,
-                          color: Colors.white,
-                        )
-                      : null,
+                  textColor: Colors.white,
                 ),
                 const SizedBox(height: 16),
                 Text(

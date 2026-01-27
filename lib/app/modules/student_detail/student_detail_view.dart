@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:sapa_raudha/app/modules/student_detail/student_detail_controller.dart';
+import 'package:sapa_raudha/app/utils/url_utils.dart';
+import 'package:sapa_raudha/app/widgets/avatar.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 
 class StudentDetailView extends GetView<StudentDetailController> {
@@ -58,21 +60,12 @@ class StudentDetailView extends GetView<StudentDetailController> {
                   color: Theme.of(context).cardColor,
                   child: Column(
                     children: [
-                      CircleAvatar(
+                      Avatar(
+                        photoUrl: student.photoUrl,
+                        name: student.name,
                         radius: 60,
                         backgroundColor: AppColors.primary,
-                        backgroundImage: (student.photoUrl != null)
-                            ? NetworkImage(student.photoUrl!)
-                            : null,
-                        child: (student.photoUrl == null)
-                            ? Text(
-                                student.name.substring(0, 1).toUpperCase(),
-                                style: textTheme.displaySmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primary,
-                                ),
-                              )
-                            : null,
+                        textColor: Colors.white,
                       ),
                       const SizedBox(height: 16),
                       Text(

@@ -197,4 +197,45 @@ class ApiClient extends GetxService {
       return body;
     }
   }
+
+  /// Build a full absolute URL from a possibly-relative path returned by the API.
+  /// If [rawPath] is already an absolute URL (starts with http/https), it will
+  /// be returned unchanged. Otherwise it is prefixed with `baseUrl`.
+  String buildFullUrl(String rawPath) {
+    if (rawPath.startsWith('http')) return rawPath;
+    var base = baseUrl;
+
+    // If the returned path points to public storage (e.g. storage, uploads, files, photos)
+    // and the API base URL includes '/api', prefer using the site root instead of
+    // the API prefix so the resulting URL points to the correct public path.
+    final normalizedPath = rawPath.startsWith('/') ? rawPath : '/$rawPath';
+
+    // Detect public storage-like paths which are served under /storage or /public
+    final isPublicResource =
+        normalizedPath.startsWith('/storage') ||
+        normalizedPath.startsWith('/uploads') ||
+        normalizedPath.startsWith('/files') ||
+        normalizedPath.startsWith('/photos') ||
+        // Also handle raw paths like 'photos/...'
+        normalizedPath.startsWith('/photos');
+
+    if (isPublicResource && base.endsWith('/api')) {
+      base = base.substring(0, base.length - 4); // remove trailing '/api'
+    }
+
+    // Special-case: some APIs return paths like 'photos/..' (without leading slash)
+    // and the public file-serving path on the site is under '/storage/photos/...'
+    if (!normalizedPath.startsWith('/storage') &&
+        (normalizedPath.contains('/photos') ||
+            normalizedPath.startsWith('/photos'))) {
+      final photosPath = normalizedPath.startsWith('/photos')
+          ? '/storage$normalizedPath'
+          : '/storage/$rawPath'.replaceAll('//', '/');
+      if (base.endsWith('/')) base = base.substring(0, base.length - 1);
+      return '$base$photosPath';
+    }
+
+    if (base.endsWith('/')) base = base.substring(0, base.length - 1);
+    return '$base$normalizedPath';
+  }
 }

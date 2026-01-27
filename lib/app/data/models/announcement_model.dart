@@ -1,7 +1,10 @@
 // lib/app/data/models/announcement_model.dart
 import 'package:intl/intl.dart';
+import 'package:sapa_raudha/app/utils/url_utils.dart';
 
 class Announcement {
+  /// Return an absolute URL for the `imageUrl` when possible.
+  String? get normalizedImageUrl => UrlUtils.normalizeUrl(imageUrl);
   final String id;
   final String title;
   final String content;
@@ -37,6 +40,29 @@ class Announcement {
   String get createdBy => author;
 
   factory Announcement.fromJson(Map<String, dynamic> json) {
+    // Normalize image_url (may be a relative path) using UrlUtils
+    final rawImage = json['image_url'] as String?;
+    final normalizedImage = UrlUtils.normalizeUrl(rawImage);
+
+    // Normalize attachment URLs (file_url / url) when possible so views can
+    // rely on absolute URLs.
+    final attachments = json['attachments'] is List
+        ? List<Map<String, dynamic>>.from(json['attachments'])
+              .map((att) {
+                final fileUrl = (att['file_url'] ?? att['url']) as String?;
+                if (fileUrl != null && fileUrl.isNotEmpty) {
+                  final normalized = UrlUtils.normalizeUrl(fileUrl);
+                  if (normalized != null) {
+                    att['file_url'] = normalized;
+                    att['url'] = normalized;
+                  }
+                }
+                return att;
+              })
+              .toList()
+              .cast<Map<String, dynamic>>()
+        : <Map<String, dynamic>>[];
+
     return Announcement(
       id: json['id']?.toString() ?? '',
       title: json['title'] ?? '',
@@ -50,13 +76,11 @@ class Announcement {
           ? json['author']['name'] ?? ''
           : json['author'] ?? json['created_by'] ?? '',
       attachmentName: json['attachment_name'] ?? json['attachment'],
-      attachments: json['attachments'] is List
-          ? List<Map<String, dynamic>>.from(json['attachments'])
-          : [],
+      attachments: attachments,
       isRead: json['is_read'] == 1 || json['is_read'] == true,
       isPinned: json['is_pinned'] == 1 || json['is_pinned'] == true,
       category: json['category'],
-      imageUrl: json['image_url'],
+      imageUrl: normalizedImage,
     );
   }
 

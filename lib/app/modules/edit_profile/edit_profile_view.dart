@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'edit_profile_controller.dart';
+import 'package:sapa_raudha/app/utils/url_utils.dart';
+import 'package:sapa_raudha/app/widgets/avatar.dart';
 
 class EditProfileView extends GetView<EditProfileController> {
   const EditProfileView({super.key});
@@ -28,21 +30,13 @@ class EditProfileView extends GetView<EditProfileController> {
                     final photoUrl = controller.photoUrl.value;
                     final selectedImage = controller.selectedImage.value;
 
-                    return CircleAvatar(
+                    return Avatar(
+                      localFilePath: selectedImage?.path,
+                      photoUrl: photoUrl,
+                      name: controller.profileController.userName,
                       radius: 80,
                       backgroundColor: AppColors.primary,
-                      backgroundImage: selectedImage != null
-                          ? FileImage(File(selectedImage.path))
-                          : (photoUrl.isNotEmpty
-                                ? NetworkImage(photoUrl) as ImageProvider
-                                : null),
-                      child: (selectedImage == null && photoUrl.isEmpty)
-                          ? const Icon(
-                              Icons.person_outline,
-                              size: 80,
-                              color: Colors.white,
-                            )
-                          : null,
+                      textColor: Colors.white,
                     );
                   }),
                   Positioned(

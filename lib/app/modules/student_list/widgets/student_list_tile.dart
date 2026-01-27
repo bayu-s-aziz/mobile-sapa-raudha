@@ -1,7 +1,9 @@
 // lib/app/modules/student_list/widgets/student_list_tile.dart
 import 'package:flutter/material.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
+import 'package:sapa_raudha/app/utils/url_utils.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
+import 'package:sapa_raudha/app/widgets/avatar.dart';
 
 class StudentListTile extends StatelessWidget {
   final Student student;
@@ -51,20 +53,12 @@ class StudentListTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: ListTile(
         onTap: onTap,
-        leading: CircleAvatar(
+        leading: Avatar(
+          photoUrl: student.photoUrl,
+          name: student.name,
+          radius: 20,
           backgroundColor: AppColors.primary,
-          backgroundImage: (student.photoUrl != null)
-              ? NetworkImage(student.photoUrl!)
-              : null,
-          child: (student.photoUrl == null)
-              ? Text(
-                  student.name.substring(0, 1).toUpperCase(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
-                  ),
-                )
-              : null,
+          textColor: Colors.white,
         ),
         title: Text(
           student.name,

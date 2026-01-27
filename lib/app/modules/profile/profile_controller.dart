@@ -72,14 +72,35 @@ class ProfileController extends GetxController {
 
   String get userRole => (profile['role'] as String?) ?? '-';
   String get userEmail => (profile['email'] as String?) ?? '-';
-  String? get userPhotoUrl => profile['photo_url'] as String?;
+  String? get userPhotoUrl =>
+      Get.find<ProfileService>().getNormalizedUserPhotoUrl() ??
+      profile['photo_url'] as String?;
   String? get userPhone => profile['phone'] as String?;
 
   // Additional getters for parents
   String get studentName {
-    final name = (profile['student_name'] as String?) ?? '-';
+    // Try several possible locations for student name to support parents and students
+    final nameTop = (profile['student_name'] as String?)?.trim();
+    if (nameTop != null && nameTop.isNotEmpty) return nameTop;
 
-    return name;
+    // Check nested student in profile (common for parent userable)
+    final userable = profile['userable'] as Map<String, dynamic>?;
+    final nestedStudent = userable != null
+        ? (userable['student'] as Map<String, dynamic>?)
+        : null;
+    final nestedName = nestedStudent != null
+        ? (nestedStudent['name'] as String?)
+        : null;
+    if (nestedName != null && nestedName.isNotEmpty) return nestedName;
+
+    // Check alternative keys
+    final alt = (profile['anak'] != null && profile['anak'] is Map)
+        ? (profile['anak']['name'] as String?)
+        : null;
+    if (alt != null && alt.isNotEmpty) return alt;
+
+    // Fallback to empty placeholder
+    return '-';
   }
 
   String get studentClass {

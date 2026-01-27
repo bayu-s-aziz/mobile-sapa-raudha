@@ -5,6 +5,7 @@ import 'package:sapa_raudha/app/utils/app_colors.dart'; // Sesuaikan impor
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:sapa_raudha/app/modules/announcement_detail/announcement_detail_controller.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
+import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 // --- MODIFIKASI BAGIAN INI ---
@@ -135,12 +136,22 @@ class AnnouncementDetailView extends StatelessWidget {
                         attachment['file_name'] ??
                         attachment['name'] ??
                         'Lampiran';
-                    final fileUrl = attachment['file_url'] ?? attachment['url'];
+                    final rawUrl = attachment['file_url'] ?? attachment['url'];
+
+                    String? fileUrl;
+                    if (rawUrl != null &&
+                        rawUrl is String &&
+                        rawUrl.isNotEmpty) {
+                      fileUrl = Get.find<ApiClient>().buildFullUrl(rawUrl);
+                    } else {
+                      fileUrl = null;
+                    }
+
                     final isImage = _isImage(fileName);
 
                     return GestureDetector(
                       onTap: fileUrl != null
-                          ? () => controller.openAttachment(fileUrl)
+                          ? () => controller.openAttachment(fileUrl!)
                           : null,
                       child: Container(
                         decoration: BoxDecoration(

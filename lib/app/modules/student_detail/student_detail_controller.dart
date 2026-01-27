@@ -6,6 +6,7 @@ import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
+import 'package:sapa_raudha/app/data/services/api_client.dart';
 import '../home/home_controller.dart';
 import '../student_list/student_list_controller.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
@@ -20,11 +21,15 @@ class StudentDetailController extends GetxController {
   final Rxn<Map<String, dynamic>> todayAttendance = Rxn<Map<String, dynamic>>();
   final DateFormat _dateFormatter = DateFormat('yyyy-MM-dd');
 
+  late final ApiClient _api;
+
   @override
   void onInit() {
     super.onInit();
     _studentService = Get.find<StudentService>();
     _attendanceService = Get.find<AttendanceService>();
+    _api = Get.find<ApiClient>();
+
     // Ambil data Student yang dikirim sebagai argumen
     if (Get.arguments != null && Get.arguments is Student) {
       student.value = Get.arguments as Student;
@@ -126,7 +131,42 @@ class StudentDetailController extends GetxController {
                     current.motherPhone)
                 as String?
           : (data['mother_phone'] as String?) ?? current.motherPhone,
-      photoUrl: (data['photo_url'] as String?) ?? current.photoUrl,
+      photoUrl: () {
+        final raw =
+            data['photo_url'] as String? ??
+            data['avatar'] as String? ??
+            data['photo'] as String?;
+        if (raw != null && raw.isNotEmpty) {
+          try {
+            final normalized = raw.startsWith('http')
+                ? raw
+                : _api.buildFullUrl(raw);
+
+            return normalized;
+          } catch (e) {
+            return raw;
+          }
+        }
+        // Also try nested parent.student.photo_url fallback
+        try {
+          final parent = data['parent'] as Map<String, dynamic>?;
+          final nested = parent != null
+              ? (parent['student'] as Map<String, dynamic>?)
+              : null;
+          final nestedRaw = nested != null
+              ? (nested['photo_url'] as String?)
+              : null;
+          if (nestedRaw != null && nestedRaw.isNotEmpty) {
+            final normalized = nestedRaw.startsWith('http')
+                ? nestedRaw
+                : _api.buildFullUrl(nestedRaw);
+
+            return normalized;
+          }
+        } catch (_) {}
+
+        return current.photoUrl;
+      }(),
       dailyStatus: current.dailyStatus,
       nisn: (data['nisn'] as String?) ?? current.nisn,
       nis: (data['nis'] as String?) ?? current.nis,
