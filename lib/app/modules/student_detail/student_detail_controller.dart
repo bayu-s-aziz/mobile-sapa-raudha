@@ -49,13 +49,19 @@ class StudentDetailController extends GetxController {
   }
 
   Future<void> _fetchTodayAttendance() async {
-    if (student.value?.nisn == null) return;
+    final idStr = student.value?.id;
+    if (idStr == null) return;
+
+    final studentId = int.tryParse(idStr);
+    if (studentId == null) return;
 
     isLoadingAttendance.value = true;
     try {
       final today = _dateFormatter.format(DateTime.now());
+
+      // Use a precise attendance endpoint for a single day if possible
       final records = await _attendanceService.getStudentHistory(
-        student.value!.nisn!,
+        studentId,
         startDate: today,
         endDate: today,
         limit: 1,
@@ -77,8 +83,49 @@ class StudentDetailController extends GetxController {
     return Student(
       id: (data['id'] ?? current.id).toString(),
       name: (data['name'] as String?) ?? current.name,
-      studentClass: (data['class_name'] as String?) ?? current.studentClass,
-      parentName: current.parentName,
+      studentClass: data['kelas'] is Map<String, dynamic>
+          ? data['kelas']['name'] ?? current.studentClass
+          : (data['class_name'] as String?) ?? current.studentClass,
+      parentName: data['parent'] is Map<String, dynamic>
+          ? () {
+              final parent = data['parent'] as Map<String, dynamic>;
+
+              // Prefer parent's associated user name if present
+              if (parent['user'] is Map<String, dynamic>) {
+                final user = parent['user'] as Map<String, dynamic>;
+                return (user['name'] ?? user['nama'] ?? current.parentName)
+                    as String;
+              }
+
+              // Fallback to father/mother/guardian names on parent model
+              return (parent['father_name'] ??
+                      parent['mother_name'] ??
+                      parent['guardian_name'] ??
+                      current.parentName)
+                  as String;
+            }()
+          : current.parentName,
+      // Parent contact fallback (prefer parent.user -> parent model -> top-level fields)
+      fatherPhone: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['father_phone'] ??
+                    data['parent']['fatherPhone'] ??
+                    (data['parent']['user'] is Map
+                        ? data['parent']['user']['phone']
+                        : null) ??
+                    data['father_phone'] ??
+                    current.fatherPhone)
+                as String?
+          : (data['father_phone'] as String?) ?? current.fatherPhone,
+      motherPhone: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['mother_phone'] ??
+                    data['parent']['motherPhone'] ??
+                    (data['parent']['user'] is Map
+                        ? data['parent']['user']['phone']
+                        : null) ??
+                    data['mother_phone'] ??
+                    current.motherPhone)
+                as String?
+          : (data['mother_phone'] as String?) ?? current.motherPhone,
       photoUrl: (data['photo_url'] as String?) ?? current.photoUrl,
       dailyStatus: current.dailyStatus,
       nisn: (data['nisn'] as String?) ?? current.nisn,
@@ -88,15 +135,55 @@ class StudentDetailController extends GetxController {
       birthDate: current.birthDate,
       religion: (data['religion'] as String?) ?? current.religion,
       address: (data['address'] as String?) ?? current.address,
-      fatherName: data['father_name'] as String? ?? current.fatherName,
-      motherName: data['mother_name'] as String? ?? current.motherName,
-      fatherJob: data['father_job'] as String? ?? current.fatherJob,
-      motherJob: data['mother_job'] as String? ?? current.motherJob,
-      guardianName: data['guardian_name'] as String? ?? current.guardianName,
-      guardianJob: data['guardian_job'] as String? ?? current.guardianJob,
-      fatherPhone: data['father_phone'] as String? ?? current.fatherPhone,
-      motherPhone: data['mother_phone'] as String? ?? current.motherPhone,
-      guardianPhone: data['guardian_phone'] as String? ?? current.guardianPhone,
+      fatherName: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['father_name'] ??
+                    data['parent']['fatherName'] ??
+                    data['father_name'] ??
+                    current.fatherName)
+                as String?
+          : (data['father_name'] as String?) ?? current.fatherName,
+      motherName: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['mother_name'] ??
+                    data['parent']['motherName'] ??
+                    data['mother_name'] ??
+                    current.motherName)
+                as String?
+          : (data['mother_name'] as String?) ?? current.motherName,
+      fatherJob: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['father_job'] ??
+                    data['parent']['fatherJob'] ??
+                    data['father_job'] ??
+                    current.fatherJob)
+                as String?
+          : (data['father_job'] as String?) ?? current.fatherJob,
+      motherJob: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['mother_job'] ??
+                    data['parent']['motherJob'] ??
+                    data['mother_job'] ??
+                    current.motherJob)
+                as String?
+          : (data['mother_job'] as String?) ?? current.motherJob,
+      guardianName: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['guardian_name'] ??
+                    data['parent']['guardianName'] ??
+                    data['guardian_name'] ??
+                    current.guardianName)
+                as String?
+          : (data['guardian_name'] as String?) ?? current.guardianName,
+      guardianJob: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['guardian_job'] ??
+                    data['parent']['guardianJob'] ??
+                    data['guardian_job'] ??
+                    current.guardianJob)
+                as String?
+          : (data['guardian_job'] as String?) ?? current.guardianJob,
+      guardianPhone: data['parent'] is Map<String, dynamic>
+          ? (data['parent']['guardian_phone'] ??
+                    data['parent']['guardianPhone'] ??
+                    data['guardian_phone'] ??
+                    current.guardianPhone)
+                as String?
+          : (data['guardian_phone'] as String?) ?? current.guardianPhone,
     );
   }
 

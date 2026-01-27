@@ -91,7 +91,12 @@ class AttendanceHistoryView extends GetView<AttendanceHistoryController> {
                       shape: BoxShape.circle,
                     ),
                     todayTextStyle: TextStyle(
-                      color: AppColors.primaryText.withAlpha(0xCC),
+                      color: const Color.fromARGB(
+                        255,
+                        76,
+                        161,
+                        114,
+                      ).withAlpha(0xCC),
                     ),
                     // Marker untuk hari yang dipilih
                     selectedDecoration: const BoxDecoration(
@@ -109,6 +114,10 @@ class AttendanceHistoryView extends GetView<AttendanceHistoryController> {
 
                       // Ambil status absensi
                       String status = events.first.status.toLowerCase();
+
+                      // Jangan tampilkan marker untuk hari 'hadir'
+                      if (status == 'hadir') return null;
+
                       Color markerColor;
 
                       if (status == 'sakit') {
@@ -225,7 +234,11 @@ class AttendanceHistoryView extends GetView<AttendanceHistoryController> {
     } else if (status.toLowerCase() == 'izin') {
       statusColor = Colors.blue.shade600;
       statusIcon = Icons.mail_outline;
+    } else if (status.toLowerCase() == 'hadir') {
+      statusColor = Colors.green.shade600;
+      statusIcon = Icons.check_circle_outline;
     } else {
+      // 'alpa' or unknown
       statusColor = AppColors.error;
       statusIcon = Icons.block_outlined;
     }

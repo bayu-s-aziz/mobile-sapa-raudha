@@ -11,6 +11,7 @@ class LeaveRequest {
   final String id;
   final String studentName;
   final String parentName;
+  final String className;
   final String leaveType; // "Sakit" atau "Izin"
   final DateTimeRange dateRange;
   final String reason;
@@ -20,6 +21,7 @@ class LeaveRequest {
     required this.id,
     required this.studentName,
     required this.parentName,
+    required this.className,
     required this.leaveType,
     required this.dateRange,
     required this.reason,
@@ -32,6 +34,7 @@ class LeaveRequest {
       id: id,
       studentName: studentName,
       parentName: parentName,
+      className: className,
       leaveType: leaveType,
       dateRange: dateRange,
       reason: reason,

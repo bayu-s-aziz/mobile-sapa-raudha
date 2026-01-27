@@ -5,12 +5,17 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:sapa_raudha/app/modules/student_detail/student_detail_controller.dart';
+import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 
 class StudentDetailView extends GetView<StudentDetailController> {
   const StudentDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.isRegistered<HomeController>()
+        ? Get.find<HomeController>()
+        : null;
+    final isGuru = homeController?.userRole.value == 'guru';
     return Scaffold(
       body: FloatingPage(
         title: 'Detail Siswa',
@@ -78,11 +83,22 @@ class StudentDetailView extends GetView<StudentDetailController> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 4),
-                      Text(
-                        'Kelas: ${student.studentClass}',
-                        style: textTheme.bodyLarge?.copyWith(
-                          color: AppColors.secondaryText,
-                        ),
+                      Column(
+                        children: [
+                          Text(
+                            ' ${student.studentClass} ',
+                            style: textTheme.bodyLarge?.copyWith(
+                              color: AppColors.secondaryText,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            '${student.nis ?? '-'} | ${student.nisn ?? '-'}',
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: AppColors.secondaryText,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -129,12 +145,13 @@ class StudentDetailView extends GetView<StudentDetailController> {
                       trailing: const Icon(Icons.chevron_right),
                       onTap: controller.goToStudentAttendanceHistory,
                     ),
-                    ListTile(
-                      leading: const Icon(Icons.message_outlined),
-                      title: const Text('Hubungi Orang Tua (WA)'),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: controller.callParent,
-                    ),
+                    if (isGuru == true)
+                      ListTile(
+                        leading: const Icon(Icons.message_outlined),
+                        title: const Text('Hubungi Orang Tua (WA)'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: controller.callParent,
+                      ),
                   ],
                 ),
               ],

@@ -85,6 +85,19 @@ class LoginController extends GetxController {
           if (role.isNotEmpty) {
             await storage.save('role', role);
           }
+
+          // Simpan NISN anak untuk orang tua dari response login
+          if (role == 'orangtua') {
+            final nisn =
+                (resp['user']?['userable']?['student']?['nisn'] as String?) ??
+                (resp['nisn'] as String?) ??
+                (resp['student_nisn'] as String?);
+            if (nisn != null && nisn.isNotEmpty) {
+              await storage.save('nisn', nisn);
+            } else {
+              // NISN not present in login response
+            }
+          }
         } catch (_) {}
 
         // Redirect to Home with role argument

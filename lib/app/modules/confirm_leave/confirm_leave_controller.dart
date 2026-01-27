@@ -24,11 +24,79 @@ class ConfirmLeaveController extends GetxController {
       final data = await _leaveService.getLeaveRequests();
       final mapped = data.map((item) {
         final start = DateTime.parse(item['request_date']);
+
+        // Try nested student relation first
+        String studentName = '-';
+        String parentName = '-';
+        String className = '-';
+
+        final student = item['student'];
+        if (student is Map) {
+          studentName =
+              (student['name'] ??
+                      student['nama'] ??
+                      student['full_name'] ??
+                      '-')
+                  ?.toString() ??
+              '-';
+          final kelas = student['kelas'];
+          if (kelas is Map) {
+            className =
+                (kelas['name'] ?? kelas['nama'] ?? kelas['class_name'] ?? '-')
+                    ?.toString() ??
+                '-';
+          } else {
+            className =
+                (student['class_name'] ?? student['kelas_name'] ?? '-')
+                    ?.toString() ??
+                '-';
+          }
+
+          final parent = student['parent'];
+          if (parent is Map) {
+            final user = parent['user'];
+            if (user is Map) {
+              parentName =
+                  (user['name'] ?? user['nama'] ?? '-')?.toString() ?? '-';
+            } else {
+              parentName =
+                  (parent['name'] ??
+                          parent['father_name'] ??
+                          parent['mother_name'] ??
+                          '-')
+                      ?.toString() ??
+                  '-';
+            }
+          }
+        } else {
+          // Fallback to flattened keys
+          studentName =
+              (item['student_name'] ?? item['nama_anak'] ?? '-')?.toString() ??
+              '-';
+          parentName =
+              (item['parent_name'] ?? item['orang_tua'] ?? '-')?.toString() ??
+              '-';
+          className =
+              (item['class_name'] ?? item['kelas_name'] ?? '-')?.toString() ??
+              '-';
+        }
+
+        // Determine leave type (best-effort)
+        final reasonText = (item['reason'] ?? '')?.toString() ?? '';
+        final leaveType =
+            (item['leave_type'] ??
+                    (reasonText.toLowerCase().contains('sakit')
+                        ? 'Sakit'
+                        : 'Izin'))
+                ?.toString() ??
+            'Izin';
+
         return LeaveRequest(
           id: item['id'].toString(),
-          studentName: item['student_name'] ?? '',
-          parentName: item['parent_name'] ?? '',
-          leaveType: item['status'] == 'sakit' ? 'Sakit' : 'Izin',
+          studentName: studentName,
+          parentName: parentName,
+          className: className,
+          leaveType: leaveType,
           dateRange: DateTimeRange(start: start, end: start),
           reason: item['reason'] ?? '',
           status: _mapStatus(item['status'] as String?),

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
+import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
@@ -8,6 +10,8 @@ class LeaveListController extends GetxController {
   final RxBool isLoading = false.obs;
 
   late final LeaveService _leaveService = Get.find<LeaveService>();
+  late final StudentService _studentService = Get.find<StudentService>();
+  late final ProfileService _profileService = Get.find<ProfileService>();
 
   @override
   void onInit() {
@@ -18,6 +22,20 @@ class LeaveListController extends GetxController {
   Future<void> fetchLeaves() async {
     isLoading(true);
     try {
+      // If the current user is a parent, fetch leaves for their child
+      if (_profileService.isParent()) {
+        final nisn = _profileService.getStoredNisn();
+        if (nisn != null) {
+          final student = await _studentService.getStudentByNisn(nisn);
+          if (student != null && student['id'] != null) {
+            final data = await _leaveService.getByStudent(student['id']);
+            leaves.assignAll(data);
+            return;
+          }
+        }
+        // fallback to general list if student not resolved
+      }
+
       final data = await _leaveService.getLeaveRequests();
       leaves.assignAll(data);
     } catch (e) {

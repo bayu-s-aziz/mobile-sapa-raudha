@@ -12,6 +12,7 @@ class StudentListController extends GetxController {
   final RxList<Student> filteredStudents = <Student>[].obs;
 
   final TextEditingController searchController = TextEditingController();
+  final RxString selectedGroup = 'A,B'.obs; // default to show both A and B
   late final StudentService _studentService;
 
   @override
@@ -25,10 +26,12 @@ class StudentListController extends GetxController {
     });
   }
 
-  Future<void> fetchStudents() async {
+  Future<void> fetchStudents({String? group}) async {
     isLoading(true);
     try {
-      final studentsData = await _studentService.getStudents();
+      // If group not provided, use selectedGroup default (which may be 'A,B')
+      final usedGroup = group ?? selectedGroup.value;
+      final studentsData = await _studentService.getStudents(group: usedGroup);
 
       final students = studentsData.map((data) {
         return Student(
@@ -65,6 +68,13 @@ class StudentListController extends GetxController {
     } finally {
       isLoading(false);
     }
+  }
+
+  void setGroupFilter(String group) async {
+    selectedGroup.value = group;
+    // 'all' means no group filter server-side
+    final usedGroup = group == 'all' ? null : group;
+    await fetchStudents(group: usedGroup);
   }
 
   StudentDailyStatus _parseStatus(String? status) {

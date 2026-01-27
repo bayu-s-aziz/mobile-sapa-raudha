@@ -5,6 +5,7 @@ import 'package:sapa_raudha/app/utils/app_colors.dart'; // Sesuaikan impor
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:sapa_raudha/app/modules/announcement_detail/announcement_detail_controller.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 // --- MODIFIKASI BAGIAN INI ---
 class AnnouncementDetailView extends StatelessWidget {
@@ -12,6 +13,35 @@ class AnnouncementDetailView extends StatelessWidget {
   final String announcementId;
 
   const AnnouncementDetailView({super.key, required this.announcementId});
+
+  // Helper untuk mendeteksi apakah file adalah gambar
+  bool _isImage(String fileName) {
+    final ext = fileName.split('.').last.toLowerCase();
+    return ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].contains(ext);
+  }
+
+  // Helper untuk mendapatkan icon berdasarkan tipe file
+  IconData _getFileIcon(String fileName) {
+    final ext = fileName.split('.').last.toLowerCase();
+    switch (ext) {
+      case 'pdf':
+        return Icons.picture_as_pdf;
+      case 'doc':
+      case 'docx':
+        return Icons.description;
+      case 'xls':
+      case 'xlsx':
+        return Icons.table_chart;
+      case 'ppt':
+      case 'pptx':
+        return Icons.slideshow;
+      case 'zip':
+      case 'rar':
+        return Icons.archive;
+      default:
+        return Icons.insert_drive_file;
+    }
+  }
   // --- AKHIR MODIFIKASI ---
 
   @override
@@ -79,6 +109,97 @@ class AnnouncementDetailView extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
+              if (announcement.attachments.isNotEmpty) ...[
+                const SizedBox(height: 20),
+                Text(
+                  'Lampiran:',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryText,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 1,
+                  ),
+                  itemCount: announcement.attachments.length,
+                  itemBuilder: (context, index) {
+                    final attachment = announcement.attachments[index];
+                    final fileName =
+                        attachment['file_name'] ??
+                        attachment['name'] ??
+                        'Lampiran';
+                    final fileUrl = attachment['file_url'] ?? attachment['url'];
+                    final isImage = _isImage(fileName);
+
+                    return GestureDetector(
+                      onTap: fileUrl != null
+                          ? () => controller.openAttachment(fileUrl)
+                          : null,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: AppColors.alternate.withAlpha(
+                              (0.3 * 255).round(),
+                            ),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (isImage && fileUrl != null)
+                              Expanded(
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(7),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: fileUrl,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                    errorWidget: (context, url, error) => Icon(
+                                      Icons.broken_image,
+                                      color: AppColors.secondaryText,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            else
+                              Icon(
+                                _getFileIcon(fileName),
+                                size: 32,
+                                color: AppColors.primary,
+                              ),
+                            const SizedBox(height: 4),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                              ),
+                              child: Text(
+                                fileName,
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: AppColors.primaryText),
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ],
           );
         }),

@@ -5,6 +5,7 @@ import 'package:sapa_raudha/app/data/models/announcement_model.dart';
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AnnouncementDetailController extends GetxController {
   // --- TAMBAHKAN CONSTRUCTOR INI ---
@@ -90,5 +91,13 @@ class AnnouncementDetailController extends GetxController {
     }
   }
 
-  // --- AKHIR TAMBAHAN ---
+  // --- TAMBAH: Method untuk membuka lampiran ---
+  void openAttachment(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      SnackbarHelper.showError('Tidak dapat membuka lampiran');
+    }
+  }
 }

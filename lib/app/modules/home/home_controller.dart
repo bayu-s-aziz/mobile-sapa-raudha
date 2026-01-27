@@ -91,31 +91,33 @@ class HomeController extends GetxController {
   }
 
   void _applyProfile(Map<String, dynamic> profile) {
-    // Set display name; for parents, server may not provide 'name'
-    String displayName = (profile['name'] as String?) ?? '';
-    if (displayName.isEmpty && userRole.value == 'orangtua') {
-      // Try to derive from parent fields returned by /profile
-      final father = profile['father_name'] as String?;
-      final mother = profile['mother_name'] as String?;
-      final guardian = profile['guardian_name'] as String?;
-      displayName = father?.isNotEmpty == true
-          ? father!
-          : (mother?.isNotEmpty == true
-                ? mother!
-                : (guardian?.isNotEmpty == true ? guardian! : 'Orang Tua'));
-    }
-    userName.value = displayName.isNotEmpty ? displayName : 'Pengguna';
+    // Set display name using profile service
+    final displayName = _profileService.getUserName() ?? 'Pengguna';
+    userName.value = displayName;
 
     if (userRole.value == 'orangtua') {
       childName.value =
           (profile['student_name'] as String?) ??
           (profile['anak'] as String?) ??
+          (profile['userable']?['student']?['name'] as String?) ??
           '';
       childClass.value =
           (profile['class_name'] as String?) ??
           (profile['kelas'] as String?) ??
+          (profile['userable']?['student']?['kelas']?['name'] as String?) ??
           '';
-      _storage.save('nisn', profile['nisn']);
+
+      // Simpan NISN anak ke storage dengan multiple fallback
+      final nisn =
+          (profile['nisn'] as String?) ??
+          (profile['student_nisn'] as String?) ??
+          (profile['userable']?['student']?['nisn'] as String?) ??
+          (profile['anak']?['nisn'] as String?);
+      if (nisn != null && nisn.isNotEmpty) {
+        _storage.save('nisn', nisn);
+      } else {
+        // NISN anak tidak ditemukan di profile
+      }
       _updateChildStatus();
     }
   }
@@ -180,7 +182,9 @@ class HomeController extends GetxController {
     if (userRole.value != 'orangtua') return;
     final nisn =
         _profileService.getStoredNisn() ?? _storage.read<String>('nisn');
-    if (nisn == null || nisn.isEmpty) return;
+    if (nisn == null || nisn.isEmpty) {
+      return;
+    }
 
     try {
       final today = _dateFormatter.format(DateTime.now());

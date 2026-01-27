@@ -17,6 +17,7 @@ class StudentService extends GetxService {
     int? classId,
     String? gender,
     String? search,
+    String? group,
     int perPage = 15,
     int page = 1,
   }) async {
@@ -24,6 +25,9 @@ class StudentService extends GetxService {
     if (classId != null) params['class_id'] = classId.toString();
     if (gender != null) params['gender'] = gender;
     if (search != null) params['search'] = search;
+    if (group != null) {
+      params['group'] = group; // Comma-separated groups like 'A,B'
+    }
     params['per_page'] = perPage.toString();
     params['page'] = page.toString();
 

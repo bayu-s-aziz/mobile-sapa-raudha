@@ -24,7 +24,13 @@ class AttendanceService extends GetxService {
   }) async {
     final query = <String, String>{};
     if (studentId != null) query['student_id'] = studentId.toString();
-    if (date != null) query['date'] = date;
+
+    // Map single date to start_date & end_date so backend filtering works correctly
+    if (date != null) {
+      query['start_date'] = date;
+      query['end_date'] = date;
+    }
+
     if (status != null) query['status'] = status;
     query['per_page'] = perPage.toString();
     query['page'] = page.toString();
@@ -80,7 +86,7 @@ class AttendanceService extends GetxService {
   }
 
   /// Get student attendance report
-  Future<Map<String, dynamic>> getStudentReport({
+  Future<dynamic> getStudentReport({
     required dynamic studentId,
     String? startDate,
     String? endDate,
@@ -176,6 +182,40 @@ class AttendanceService extends GetxService {
     String? endDate,
     int? limit,
   }) async {
+    // If a single day range is requested, use the attendance index endpoint
+    // which supports date filtering and returns paginated results.
+    if (startDate != null && endDate != null && startDate == endDate) {
+      try {
+        final id = studentId is int
+            ? studentId
+            : int.tryParse(studentId?.toString() ?? '');
+        if (id == null) return [];
+
+        final res = await getAttendance(
+          studentId: id,
+          date: startDate,
+          perPage: 1,
+        );
+        final items =
+            res['data'] ??
+            res['attendance'] ??
+            res['attendance_records'] ??
+            res['items'];
+        if (items is List) {
+          final list = items
+              .map((e) => Map<String, dynamic>.from(e as Map))
+              .toList();
+          if (limit != null && list.length > limit) {
+            return list.sublist(0, limit);
+          }
+          return list;
+        }
+        return [];
+      } catch (e) {
+        return [];
+      }
+    }
+
     final res = await getStudentReport(
       studentId: studentId is int
           ? studentId
@@ -184,15 +224,31 @@ class AttendanceService extends GetxService {
       endDate: endDate,
     );
 
-    final items = res['data'] ?? res;
-    if (items is List) {
-      final list = items
-          .map((e) => Map<String, dynamic>.from(e as Map))
-          .toList();
-      if (limit != null && list.length > limit) return list.sublist(0, limit);
-      return list;
+    // Normalize response: prefer 'attendance_records', then 'data', and handle raw list
+    dynamic items;
+    if (res is Map) {
+      if (res.containsKey('attendance_records') &&
+          res['attendance_records'] is List) {
+        items = res['attendance_records'];
+      } else if (res.containsKey('data') && res['data'] is List) {
+        items = res['data'];
+      } else {
+        // No list available in response
+        items = null;
+      }
+    } else if (res is List) {
+      items = res;
+    } else {
+      items = null;
     }
-    return [];
+
+    if (items == null) return [];
+
+    final list = (items as List)
+        .map((e) => Map<String, dynamic>.from(e as Map))
+        .toList();
+    if (limit != null && list.length > limit) return list.sublist(0, limit);
+    return list;
   }
 
   /// Scan attendance via code (controller expects positional param)

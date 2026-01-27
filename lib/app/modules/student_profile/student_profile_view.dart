@@ -81,7 +81,7 @@ class StudentProfileView extends GetView<StudentProfileController> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Kelas: ${student.studentClass}',
+                      ' ${student.studentClass} ',
                       style: textTheme.bodyLarge?.copyWith(
                         color: AppColors.secondaryText,
                       ),
@@ -103,6 +103,11 @@ class StudentProfileView extends GetView<StudentProfileController> {
                   ),
                   child: Column(
                     children: [
+                      _buildInfoTile(
+                        icon: Icons.badge_outlined,
+                        label: 'NIS',
+                        value: student.nis ?? '-',
+                      ),
                       _buildInfoTile(
                         icon: Icons.badge_outlined,
                         label: 'NISN',

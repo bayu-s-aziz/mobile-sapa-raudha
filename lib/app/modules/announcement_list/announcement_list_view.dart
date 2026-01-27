@@ -92,14 +92,37 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          announcement.formattedDate,
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(
+                        Row(
+                          children: [
+                            Text(
+                              announcement.formattedDate,
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: AppColors.secondaryText.withAlpha(
+                                      (0.6 * 255).round(),
+                                    ),
+                                  ),
+                            ),
+                            if (announcement.attachments.isNotEmpty) ...[
+                              const SizedBox(width: 8),
+                              Icon(
+                                Icons.attach_file,
+                                size: 14,
                                 color: AppColors.secondaryText.withAlpha(
                                   (0.6 * 255).round(),
                                 ),
                               ),
+                              Text(
+                                '${announcement.attachments.length}',
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(
+                                      color: AppColors.secondaryText.withAlpha(
+                                        (0.6 * 255).round(),
+                                      ),
+                                    ),
+                              ),
+                            ],
+                          ],
                         ),
                       ],
                     ),

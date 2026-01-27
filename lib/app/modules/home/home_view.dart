@@ -20,12 +20,13 @@ class _DashboardCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
-  final int? badgeCount = null;
+  final int? badgeCount;
 
   const _DashboardCard({
     required this.icon,
     required this.title,
     required this.onTap,
+    this.badgeCount,
   });
 
   @override
@@ -505,10 +506,15 @@ class HomeView extends GetView<HomeController> {
           title: "Buat Pengumuman",
           onTap: controller.goToCreateAnnouncement,
         ),
-        _DashboardCard(
-          icon: Icons.checklist_rtl_outlined,
-          title: "Konfirmasi Izin",
-          onTap: controller.goToConfirmLeave,
+        Obx(
+          () => _DashboardCard(
+            icon: Icons.checklist_rtl_outlined,
+            title: "Konfirmasi Izin",
+            onTap: controller.goToConfirmLeave,
+            badgeCount: controller.pendingLeaveCount.value > 0
+                ? controller.pendingLeaveCount.value
+                : null,
+          ),
         ),
         _DashboardCard(
           icon: Icons.group_outlined,

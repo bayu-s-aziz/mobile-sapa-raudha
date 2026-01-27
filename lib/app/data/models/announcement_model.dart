@@ -8,6 +8,7 @@ class Announcement {
   final DateTime timestamp;
   final String author;
   final String? attachmentName;
+  final List<Map<String, dynamic>> attachments;
   final bool isRead;
   final bool isPinned;
   final String? category;
@@ -20,6 +21,7 @@ class Announcement {
     required this.timestamp,
     required this.author,
     this.attachmentName,
+    this.attachments = const [],
     this.isRead = false,
     this.isPinned = false,
     this.category,
@@ -44,8 +46,13 @@ class Announcement {
           : json['created_at'] != null
           ? DateTime.parse(json['created_at'])
           : DateTime.now(),
-      author: json['author'] ?? json['created_by'] ?? '',
+      author: json['author'] is Map<String, dynamic>
+          ? json['author']['name'] ?? ''
+          : json['author'] ?? json['created_by'] ?? '',
       attachmentName: json['attachment_name'] ?? json['attachment'],
+      attachments: json['attachments'] is List
+          ? List<Map<String, dynamic>>.from(json['attachments'])
+          : [],
       isRead: json['is_read'] == 1 || json['is_read'] == true,
       isPinned: json['is_pinned'] == 1 || json['is_pinned'] == true,
       category: json['category'],
@@ -63,6 +70,7 @@ class Announcement {
       'author': author,
       'created_by': author,
       'attachment_name': attachmentName,
+      'attachments': attachments,
       'is_read': isRead ? 1 : 0,
       'is_pinned': isPinned ? 1 : 0,
       'category': category,
@@ -77,6 +85,7 @@ class Announcement {
     DateTime? timestamp,
     String? author,
     String? attachmentName,
+    List<Map<String, dynamic>>? attachments,
     bool? isRead,
     bool? isPinned,
     String? category,
@@ -89,6 +98,7 @@ class Announcement {
       timestamp: timestamp ?? this.timestamp,
       author: author ?? this.author,
       attachmentName: attachmentName ?? this.attachmentName,
+      attachments: attachments ?? this.attachments,
       isRead: isRead ?? this.isRead,
       isPinned: isPinned ?? this.isPinned,
       category: category ?? this.category,

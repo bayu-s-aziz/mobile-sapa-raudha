@@ -36,9 +36,6 @@ class AnnouncementListController extends GetxController {
   }
 
   void goToDetail(String announcementId) {
-    if (kDebugMode) {
-      print('DEBUG: Navigating to announcement with ID: $announcementId');
-    }
     if (Get.isRegistered<HomeController>()) {
       _homeController.goToAnnouncementDetail(announcementId);
     }

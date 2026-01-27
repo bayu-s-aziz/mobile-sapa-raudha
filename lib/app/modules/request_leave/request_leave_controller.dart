@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
+import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/modules/leave_list/leave_list_controller.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
@@ -24,6 +25,7 @@ class RequestLeaveController extends GetxController {
 
   late final LeaveService _leaveService;
   late final LocalStorageService _storage;
+  late final ProfileService _profileService = Get.find<ProfileService>();
   String? _studentNisn;
 
   @override
@@ -31,8 +33,15 @@ class RequestLeaveController extends GetxController {
     super.onInit();
     _leaveService = Get.find<LeaveService>();
     _storage = Get.find<LocalStorageService>();
+
+    // Prefer ProfileService stored NISN, then storage 'nisn', then legacy profile key
     final profile = _storage.read<Map<String, dynamic>>('profile');
-    _studentNisn = profile?['nisn'] as String?;
+    _studentNisn =
+        _profileService.getStoredNisn() ??
+        _storage.read<String>('nisn') ??
+        profile?['nisn'] as String?;
+
+    // NISN resolved (if available) on init
   }
 
   @override
@@ -76,6 +85,58 @@ class RequestLeaveController extends GetxController {
     final requestDate = startDateController.text.trim();
     final reason = reasonController.text.trim();
 
+    // Show confirmation dialog
+    final confirmed = await Get.dialog<bool>(
+      AlertDialog(
+        title: const Text('Konfirmasi Pengajuan Izin'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Ajukan izin untuk tanggal: $requestDate'),
+            const SizedBox(height: 8),
+            Text('Alasan: ${reason.isNotEmpty ? reason : '-'}'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: const Text('Batal'),
+            onPressed: () => Get.back(result: false),
+          ),
+          TextButton(
+            child: const Text('Kirim'),
+            onPressed: () => Get.back(result: true),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
+    // Close the request page immediately (so parent returns to Izin list)
+    try {
+      Get.back(); // close RequestLeaveView
+    } catch (_) {}
+
+    // Proceed with actual submission in background
+    await _performSubmit(requestDate: requestDate, reason: reason);
+
+    // After submission, refresh leave list and ensure Izin tab is active
+    final home = Get.isRegistered<HomeController>()
+        ? Get.find<HomeController>()
+        : null;
+    final leaveList = Get.isRegistered<LeaveListController>()
+        ? Get.find<LeaveListController>()
+        : null;
+
+    home?.changeTabIndex(2);
+    await leaveList?.fetchLeaves();
+  }
+
+  Future<bool> _performSubmit({
+    required String requestDate,
+    required String reason,
+  }) async {
     try {
       await _leaveService.submitLeave(
         studentNisn: _studentNisn!,
@@ -93,19 +154,10 @@ class RequestLeaveController extends GetxController {
       leaveType.value = '';
       formKey.currentState?.reset();
 
-      // Kembalikan ke daftar izin dan segarkan datanya
-      final home = Get.isRegistered<HomeController>()
-          ? Get.find<HomeController>()
-          : null;
-      final leaveList = Get.isRegistered<LeaveListController>()
-          ? Get.find<LeaveListController>()
-          : null;
-
-      home?.changeTabIndex(2); // Tab Izin untuk orang tua
-      await leaveList?.fetchLeaves();
-      Get.back();
+      return true;
     } catch (e) {
       SnackbarHelper.showError('Pengajuan izin gagal: $e');
+      return false;
     }
   }
 }

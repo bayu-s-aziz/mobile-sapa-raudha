@@ -28,9 +28,6 @@ class ProfileController extends GetxController {
     final homeProfile = _profileService.getStoredProfile();
     if (homeProfile != null && homeProfile.isNotEmpty) {
       profile.value = homeProfile;
-      if (kDebugMode) {
-        print('DEBUG Profile: Synced from home=$homeProfile');
-      }
     }
   }
 
@@ -58,20 +55,12 @@ class ProfileController extends GetxController {
   String get userName {
     // For parents, derive name from father/mother/guardian fields
     final role = (profile['role'] as String?)?.toLowerCase() ?? '';
-    if (kDebugMode) {
-      print(
-        'DEBUG userName: role=$role, profile_keys=${profile.keys.toList()}',
-      );
-    }
+
     if (role == 'orangtua') {
       final father = profile['father_name'] as String?;
       final mother = profile['mother_name'] as String?;
       final guardian = profile['guardian_name'] as String?;
-      if (kDebugMode) {
-        print(
-          'DEBUG userName parent: father=$father, mother=$mother, guardian=$guardian',
-        );
-      }
+
       return father?.isNotEmpty == true
           ? father!
           : (mother?.isNotEmpty == true
@@ -89,17 +78,13 @@ class ProfileController extends GetxController {
   // Additional getters for parents
   String get studentName {
     final name = (profile['student_name'] as String?) ?? '-';
-    if (kDebugMode) {
-      print('DEBUG studentName: $name');
-    }
+
     return name;
   }
 
   String get studentClass {
     final kls = (profile['class_name'] as String?) ?? '-';
-    if (kDebugMode) {
-      print('DEBUG studentClass: $kls');
-    }
+
     return kls;
   }
 

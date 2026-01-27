@@ -33,16 +33,20 @@ class AttendanceHistoryController extends GetxController {
     super.onInit();
     _attendanceService = Get.find<AttendanceService>();
     _storage = Get.find<LocalStorageService>();
-    _studentNisn = _attendanceService.getStoredChildNisn();
+    _studentNisn =
+        _attendanceService.getStoredChildNisn() ??
+        _storage.read<String>('nisn');
     fetchAbsenceData();
   }
 
   Future<void> fetchAbsenceData() async {
     isLoading.value = true;
     try {
-      final nisn = _studentNisn ?? _storage.read<String>('nisn');
-      if (nisn == null) {
-        throw Exception('NISN tidak ditemukan');
+      final nisn = _studentNisn;
+      if (nisn == null || nisn.isEmpty) {
+        throw Exception(
+          'NISN anak tidak tersedia. Pastikan profil anak sudah dimuat.',
+        );
       }
       final data = await _attendanceService.getStudentHistory(nisn);
       final map = <DateTime, List<AttendanceModel>>{};
@@ -63,7 +67,7 @@ class AttendanceHistoryController extends GetxController {
       }
       absenceEvents.value = map;
     } catch (e) {
-      SnackbarHelper.showError('Gagal memuat riwayat absensi: $e');
+      SnackbarHelper.showError('Gagal memuat riwayat kehadiran: $e');
     } finally {
       isLoading.value = false;
     }

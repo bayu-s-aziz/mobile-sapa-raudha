@@ -46,6 +46,27 @@ class StudentListView extends GetView<StudentListController> {
                 ),
               ),
             ),
+            // Filter Kelompok (Dropdown)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Obx(
+                () => Align(
+                  alignment: Alignment.centerRight,
+                  child: DropdownButton<String>(
+                    value: controller.selectedGroup.value,
+                    items: const [
+                      DropdownMenuItem(value: 'A,B', child: Text('Semua')),
+                      DropdownMenuItem(value: 'A', child: Text('A')),
+                      DropdownMenuItem(value: 'B', child: Text('B')),
+                    ],
+                    onChanged: (val) {
+                      if (val != null) controller.setGroupFilter(val);
+                    },
+                  ),
+                ),
+              ),
+            ),
+
             // Daftar Siswa
             Expanded(
               child: Obx(() {

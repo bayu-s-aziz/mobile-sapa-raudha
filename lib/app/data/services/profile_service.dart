@@ -29,6 +29,16 @@ class ProfileService extends GetxService {
   /// Fetch profile from API and cache it
   Future<Map<String, dynamic>> fetchProfile() async {
     try {
+      // If no auth token in storage, skip calling /user to avoid 401 noise
+      final token = _storage.read<String>('auth_token');
+      if (token == null || token.isEmpty) {
+        developer.log(
+          '[PROFILE] No auth token present - skipping profile fetch',
+          name: 'ProfileService',
+        );
+        return {};
+      }
+
       final res = await _api.get('/user');
 
       if (res['success'] == true && res['data'] != null) {
@@ -48,6 +58,16 @@ class ProfileService extends GetxService {
         error: e,
         stackTrace: st,
       );
+
+      // Suppress unauthenticated errors (401) during app init to avoid noisy snackbars
+      if (e is ApiException && e.statusCode == 401) {
+        developer.log(
+          '[PROFILE] Unauthenticated - returning empty profile',
+          name: 'ProfileService',
+        );
+        return {};
+      }
+
       rethrow;
     }
   }
@@ -61,9 +81,28 @@ class ProfileService extends GetxService {
     return null;
   }
 
-  /// Get current user name
+  /// Get current user name with fallback to userable
   String? getUserName() {
-    return getStoredUserField('name') as String?;
+    final user = getStoredUser();
+    if (user != null) {
+      // Prioritas: name dari user, lalu dari userable
+      final name = user['name'] as String?;
+      if (name != null && name.isNotEmpty) return name;
+
+      final userable = user['userable'] as Map<String, dynamic>?;
+      if (userable != null) {
+        // Untuk Guru: name
+        if (userable.containsKey('name')) return userable['name'];
+        // Untuk Orang Tua: father_name, mother_name, guardian_name
+        final father = userable['father_name'] as String?;
+        final mother = userable['mother_name'] as String?;
+        final guardian = userable['guardian_name'] as String?;
+        return father?.isNotEmpty == true
+            ? father
+            : (mother?.isNotEmpty == true ? mother : guardian);
+      }
+    }
+    return null;
   }
 
   /// Get current user email
@@ -74,6 +113,15 @@ class ProfileService extends GetxService {
   /// Get user type (App\Models\Siswa, App\Models\Guru, etc)
   String? getUserType() {
     return getStoredUserField('userable_type') as String?;
+  }
+
+  /// Get user role
+  String? getUserRole() {
+    final user = getStoredUser();
+    final userableType = user?['userable_type'] as String?;
+    if (userableType?.contains('Guru') == true) return 'guru';
+    if (userableType?.contains('Parent') == true) return 'orangtua';
+    return null;
   }
 
   /// Get user's related ID (e.g., siswa_id, guru_id, parent_id)
@@ -118,16 +166,30 @@ class ProfileService extends GetxService {
   }
 
   String? getStoredRole() {
-    return getUserType();
+    return getUserRole();
   }
 
   String? getStoredNisn() {
     final user = getStoredUser();
     if (user == null) return null;
+
+    // Untuk siswa: langsung dari user
     if (user['nisn'] != null) return user['nisn'].toString();
-    if (user['student'] is Map && user['student']['nisn'] != null) {
-      return user['student']['nisn'].toString();
+
+    // Untuk orang tua: dari relasi student di userable
+    final userable = user['userable'] as Map<String, dynamic>?;
+    if (userable != null) {
+      final student = userable['student'] as Map<String, dynamic>?;
+      if (student != null && student['nisn'] != null) {
+        return student['nisn'].toString();
+      }
     }
+
+    // Fallback tambahan: cek field lain di user
+    if (user['student_nisn'] != null) return user['student_nisn'].toString();
+    if (user['nisn_anak'] != null) return user['nisn_anak'].toString();
+    if (user['anak']?['nisn'] != null) return user['anak']['nisn'].toString();
+
     return null;
   }
 

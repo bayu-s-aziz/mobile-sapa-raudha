@@ -83,20 +83,28 @@ class LeaveRequestCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  request.studentName,
-                  style: textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${request.studentName} • ${request.className}',
+                        style: textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Orang Tua: ${request.parentName}',
+                        style: textTheme.bodySmall?.copyWith(
+                          color: AppColors.secondaryText,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 _buildStatusChip(),
               ],
-            ),
-            Text(
-              'Wali: ${request.parentName}',
-              style: textTheme.bodySmall?.copyWith(
-                color: AppColors.secondaryText,
-              ),
             ),
             const Divider(height: 20),
             _buildInfoRow(

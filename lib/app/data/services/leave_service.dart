@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
+import 'package:sapa_raudha/app/data/services/profile_service.dart';
 
 class LeaveService extends GetxService {
   late final ApiClient _api;
@@ -93,7 +94,9 @@ class LeaveService extends GetxService {
     final res = await _api.get(
       '/leave-requests/student/${studentId.toString()}',
     );
-    final items = res['data'] ?? res;
+
+    // API returns { student: ..., leave_requests: [...] }
+    final items = res['leave_requests'] ?? res['data'] ?? res['items'] ?? res;
     if (items is List) {
       return items.map((e) => Map<String, dynamic>.from(e as Map)).toList();
     }
@@ -117,8 +120,21 @@ class LeaveService extends GetxService {
   }
 
   /// Approve leave request
-  Future<Map<String, dynamic>> approve(dynamic id) async {
-    final res = await _api.post('/leave-requests/${id.toString()}/approve', {});
+  Future<Map<String, dynamic>> approve(dynamic id, {int? reviewerId}) async {
+    // Try to resolve reviewer from profile if not provided
+    final resolvedReviewerId =
+        reviewerId ??
+        (Get.isRegistered<ProfileService>()
+            ? Get.find<ProfileService>().getUserableId()
+            : null);
+    final payload = <String, dynamic>{
+      if (resolvedReviewerId != null) 'reviewed_by': resolvedReviewerId,
+    };
+
+    final res = await _api.post(
+      '/leave-requests/${id.toString()}/approve',
+      payload,
+    );
     return res;
   }
 
@@ -126,9 +142,17 @@ class LeaveService extends GetxService {
   Future<Map<String, dynamic>> reject(
     dynamic id, {
     String? rejectionReason,
+    int? reviewerId,
   }) async {
+    final resolvedReviewerId =
+        reviewerId ??
+        (Get.isRegistered<ProfileService>()
+            ? Get.find<ProfileService>().getUserableId()
+            : null);
+
     final res = await _api.post('/leave-requests/${id.toString()}/reject', {
-      if (rejectionReason != null) 'rejection_reason': rejectionReason,
+      if (rejectionReason != null) 'review_notes': rejectionReason,
+      if (resolvedReviewerId != null) 'reviewed_by': resolvedReviewerId,
     });
     return res;
   }

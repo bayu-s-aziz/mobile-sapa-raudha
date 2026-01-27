@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class StudentProfileController extends GetxController {
@@ -12,6 +13,7 @@ class StudentProfileController extends GetxController {
 
   late final ProfileService _profileService = Get.find<ProfileService>();
   late final StudentService _studentService = Get.find<StudentService>();
+  late final LocalStorageService _storage = Get.find<LocalStorageService>();
 
   @override
   void onInit() {
@@ -29,14 +31,23 @@ class StudentProfileController extends GetxController {
         profile = await _profileService.fetchProfile();
       }
 
-      final nisn = profile['nisn'] as String?;
-      if (nisn == null) {
-        throw Exception('NISN tidak ditemukan.');
+      // Coba ambil NISN dengan multiple fallback
+      String? nisn = profile['nisn'] as String?;
+      if (nisn == null || nisn.isEmpty) {
+        nisn = _profileService.getStoredNisn();
+      }
+      if (nisn == null || nisn.isEmpty) {
+        nisn = _storage.read<String>('nisn');
+      }
+      if (nisn == null || nisn.isEmpty) {
+        throw Exception(
+          'NISN anak tidak ditemukan. Pastikan data anak sudah terdaftar.',
+        );
       }
 
       final detail = await _studentService.getStudentByNisn(nisn);
       if (detail == null) {
-        throw Exception('Data siswa tidak ditemukan.');
+        throw Exception('Data siswa tidak ditemukan untuk NISN: $nisn.');
       }
 
       student.value = _mapToStudent(detail, profile);
@@ -52,18 +63,28 @@ class StudentProfileController extends GetxController {
     Map<String, dynamic> data,
     Map<String, dynamic> profile,
   ) {
+    final parent = data['parent'] as Map<String, dynamic>?;
+    final parentUser = parent != null && parent['user'] is Map<String, dynamic>
+        ? parent['user'] as Map<String, dynamic>
+        : null;
+
     return Student(
       id: data['id'].toString(),
       name: (data['name'] as String?) ?? '-',
       studentClass:
           (data['class_name'] as String?) ??
+          ((data['kelas'] != null && data['kelas'] is Map)
+              ? (data['kelas']['name'] as String?)
+              : null) ??
           (profile['class_name'] as String?) ??
           (profile['kelas'] as String?) ??
           '-',
       parentName:
+          (parent?['father_name'] as String?) ??
+          (parent?['mother_name'] as String?) ??
+          (parentUser?['name'] as String?) ??
           (profile['father_name'] as String?) ??
           (profile['mother_name'] as String?) ??
-          (profile['name'] as String?) ??
           '-',
       photoUrl: data['photo_url'] as String?,
       dailyStatus: StudentDailyStatus.belumHadir,
@@ -75,18 +96,34 @@ class StudentProfileController extends GetxController {
       religion: data['religion'] as String?,
       address: data['address'] as String?,
       fatherName:
+          (parent?['father_name'] as String?) ??
           (profile['father_name'] as String?) ??
           (data['father_name'] as String?),
       motherName:
+          (parent?['mother_name'] as String?) ??
           (profile['mother_name'] as String?) ??
           (data['mother_name'] as String?),
-      fatherJob: profile['father_job'] as String?,
-      motherJob: profile['mother_job'] as String?,
-      guardianName: profile['guardian_name'] as String?,
-      guardianJob: profile['guardian_job'] as String?,
-      fatherPhone: data['father_phone'] as String?,
-      motherPhone: data['mother_phone'] as String?,
-      guardianPhone: data['guardian_phone'] as String?,
+      fatherJob:
+          (parent?['father_job'] as String?) ??
+          (profile['father_job'] as String?),
+      motherJob:
+          (parent?['mother_job'] as String?) ??
+          (profile['mother_job'] as String?),
+      guardianName:
+          (parent?['guardian_name'] as String?) ??
+          (profile['guardian_name'] as String?),
+      guardianJob:
+          (parent?['guardian_job'] as String?) ??
+          (profile['guardian_job'] as String?),
+      fatherPhone:
+          (parent?['father_phone'] as String?) ??
+          (data['father_phone'] as String?),
+      motherPhone:
+          (parent?['mother_phone'] as String?) ??
+          (data['mother_phone'] as String?),
+      guardianPhone:
+          (parent?['guardian_phone'] as String?) ??
+          (data['guardian_phone'] as String?),
     );
   }
 
