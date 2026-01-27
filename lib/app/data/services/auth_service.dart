@@ -31,7 +31,7 @@ class AuthService extends GetxService {
         throw ArgumentError('email is required');
       }
 
-      final res = await _api.post('/login', {
+      final res = await _api.post('/auth/login', {
         'email': payloadEmail,
         'password': password,
         'device_name': 'flutter-app',
@@ -124,7 +124,7 @@ class AuthService extends GetxService {
   /// Logout dan hapus token
   Future<void> logout() async {
     try {
-      await _api.post('/logout', {});
+      await _api.post('/auth/logout', {});
       await _storage.remove('auth_token');
       await _storage.remove('user');
       developer.log('[AUTH] Logout successful', name: 'AuthService');
