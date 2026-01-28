@@ -260,4 +260,21 @@ class ProfileService extends GetxService {
       rethrow;
     }
   }
+
+  /// Update user profile fields. The server is expected to accept
+  /// partial profile updates via PUT /profile or similar.
+  Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> body) async {
+    try {
+      final res = await _api.put('/profile', body);
+      // If server returns updated user object, update cache
+      if (res.isNotEmpty) {
+        final updated = Map<String, dynamic>.from(res);
+        await _storage.save('user', updated);
+        return updated;
+      }
+      return {};
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

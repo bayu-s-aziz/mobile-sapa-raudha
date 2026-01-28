@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sapa_raudha/app/modules/profile/profile_controller.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
+import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class EditProfileController extends GetxController {
@@ -16,10 +17,23 @@ class EditProfileController extends GetxController {
   final RxString photoUrl = ''.obs;
   final Rxn<XFile> selectedImage = Rxn<XFile>();
 
+  // Phone editing
+  final phoneController = TextEditingController();
+  final RxBool isSavingPhone = false.obs;
+
   @override
   void onInit() {
     super.onInit();
     photoUrl.value = profileController.userPhotoUrl ?? '';
+
+    // Initialize phone controller with current value if available
+    phoneController.text = profileController.userPhone ?? '';
+  }
+
+  @override
+  void onClose() {
+    phoneController.dispose();
+    super.onClose();
   }
 
   Future<void> selectImage() async {
@@ -99,6 +113,45 @@ class EditProfileController extends GetxController {
       SnackbarHelper.showError('Gagal menyimpan foto: $e');
     } finally {
       isLoading(false);
+    }
+  }
+
+  /// Save top-level phone number (for parent users)
+  Future<void> savePhone() async {
+    final phone = phoneController.text.trim();
+    if (phone.isEmpty) {
+      SnackbarHelper.showInfo('Nomor telepon tidak boleh kosong.');
+      return;
+    }
+
+    isSavingPhone(true);
+    try {
+      // Call ProfileService to update profile
+      final updated = await Get.find<ProfileService>().updateProfile({
+        'phone': phone,
+      });
+
+      // Merge with cached profile defensively
+      final Map<String, dynamic> merged = Map<String, dynamic>.from(
+        profileController.profile,
+      );
+      if (updated.isNotEmpty) {
+        merged.addAll(updated);
+      } else {
+        merged['phone'] = phone;
+      }
+
+      // Persist and update in-memory profile
+      await _storage.save('user', merged);
+      profileController.profile.assignAll(merged);
+      profileController.profile.refresh();
+
+      SnackbarHelper.showSuccess('Nomor telepon berhasil diperbarui.');
+      Get.back();
+    } catch (e) {
+      SnackbarHelper.showError('Gagal menyimpan nomor telepon: $e');
+    } finally {
+      isSavingPhone(false);
     }
   }
 }
