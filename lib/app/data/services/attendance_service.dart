@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
+import 'dart:developer' as developer;
 
 class AttendanceService extends GetxService {
   late final ApiClient _api;
@@ -260,7 +261,10 @@ class AttendanceService extends GetxService {
     bool confirmCheckout = false,
   }) async {
     // Log the incoming code for debugging
-    developer.log('scanAttendance called with code: $code', name: 'AttendanceService');
+    developer.log(
+      'scanAttendance called with code: $code',
+      name: 'AttendanceService',
+    );
 
     // Include a fallback 'nis' field for servers that expect 'nis' instead of 'code'
     final payload = {
@@ -274,7 +278,12 @@ class AttendanceService extends GetxService {
       developer.log('scanAttendance response: $res', name: 'AttendanceService');
       return res;
     } catch (e, st) {
-      developer.log('scanAttendance error: $e', name: 'AttendanceService', error: e, stackTrace: st);
+      developer.log(
+        'scanAttendance error: $e',
+        name: 'AttendanceService',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
