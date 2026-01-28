@@ -6,6 +6,7 @@ import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:sapa_raudha/app/data/services/api_client.dart';
 import '../home/home_controller.dart';
 
 import 'announcement_list_controller.dart';
@@ -35,6 +36,25 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
       default:
         return Icons.insert_drive_file;
     }
+  }
+
+  // Helper untuk mengekstrak ekstensi dari fileName atau URL
+  String _getExtension(String? fileName, String? url) {
+    String? candidate;
+    if (fileName != null && fileName.contains('.')) {
+      candidate = fileName.split('.').last;
+    } else if (url != null && url.isNotEmpty) {
+      try {
+        final uri = Uri.parse(url);
+        final last = uri.pathSegments.isNotEmpty ? uri.pathSegments.last : '';
+        if (last.contains('.')) candidate = last.split('.').last;
+      } catch (_) {}
+    }
+    return (candidate ?? '').toLowerCase();
+  }
+
+  bool _isImageExt(String ext) {
+    return ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].contains(ext);
   }
 
   @override
@@ -141,25 +161,20 @@ class AnnouncementListView extends GetView<AnnouncementListController> {
                                   const SizedBox(width: 8),
                               itemBuilder: (context, i) {
                                 final att = announcement.attachments[i];
-                                final fileName =
-                                    att['file_name'] ??
-                                    att['name'] ??
-                                    att['file_url'] ??
-                                    att['url'] ??
-                                    'Lampiran';
-                                final fileUrl =
+                                final rawUrl =
                                     (att['file_url'] ?? att['url']) as String?;
-                                final ext = fileName.contains('.')
-                                    ? fileName.split('.').last.toLowerCase()
-                                    : '';
-                                final isImage = [
-                                  'jpg',
-                                  'jpeg',
-                                  'png',
-                                  'gif',
-                                  'bmp',
-                                  'webp',
-                                ].contains(ext);
+                                final fileUrl =
+                                    rawUrl != null && rawUrl.isNotEmpty
+                                    ? Get.find<ApiClient>().buildFullUrl(rawUrl)
+                                    : null;
+                                final fileName =
+                                    (att['file_name'] ??
+                                            att['name'] ??
+                                            rawUrl ??
+                                            'Lampiran')
+                                        as String;
+                                final ext = _getExtension(fileName, rawUrl);
+                                final isImage = _isImageExt(ext);
 
                                 return GestureDetector(
                                   onTap: fileUrl != null

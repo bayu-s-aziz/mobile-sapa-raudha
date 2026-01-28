@@ -15,15 +15,29 @@ class AnnouncementDetailView extends StatelessWidget {
 
   const AnnouncementDetailView({super.key, required this.announcementId});
 
-  // Helper untuk mendeteksi apakah file adalah gambar
-  bool _isImage(String fileName) {
-    final ext = fileName.split('.').last.toLowerCase();
+  // Dapatkan ekstensi dari nama file atau dari URL jika nama tidak memiliki ekstensi
+  String _getExtension(String? fileName, String? url) {
+    String? candidate;
+    if (fileName != null && fileName.contains('.')) {
+      candidate = fileName.split('.').last;
+    } else if (url != null && url.isNotEmpty) {
+      try {
+        final uri = Uri.parse(url);
+        final last = uri.pathSegments.isNotEmpty ? uri.pathSegments.last : '';
+        if (last.contains('.')) candidate = last.split('.').last;
+      } catch (_) {}
+    }
+    return (candidate ?? '').toLowerCase();
+  }
+
+  bool _isImage(String fileName, String? url) {
+    final ext = _getExtension(fileName, url);
     return ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].contains(ext);
   }
 
   // Helper untuk mendapatkan icon berdasarkan tipe file
-  IconData _getFileIcon(String fileName) {
-    final ext = fileName.split('.').last.toLowerCase();
+  IconData _getFileIcon(String fileName, [String? url]) {
+    final ext = _getExtension(fileName, url);
     switch (ext) {
       case 'pdf':
         return Icons.picture_as_pdf;
@@ -132,26 +146,22 @@ class AnnouncementDetailView extends StatelessWidget {
                   itemCount: announcement.attachments.length,
                   itemBuilder: (context, index) {
                     final attachment = announcement.attachments[index];
-                    final fileName =
-                        attachment['file_name'] ??
-                        attachment['name'] ??
-                        'Lampiran';
                     final rawUrl = attachment['file_url'] ?? attachment['url'];
-
-                    String? fileUrl;
-                    if (rawUrl != null &&
-                        rawUrl is String &&
-                        rawUrl.isNotEmpty) {
-                      fileUrl = Get.find<ApiClient>().buildFullUrl(rawUrl);
-                    } else {
-                      fileUrl = null;
-                    }
-
-                    final isImage = _isImage(fileName);
+                    final fileUrl =
+                        rawUrl != null && rawUrl is String && rawUrl.isNotEmpty
+                        ? Get.find<ApiClient>().buildFullUrl(rawUrl)
+                        : null;
+                    final fileName =
+                        (attachment['file_name'] ??
+                                attachment['name'] ??
+                                rawUrl ??
+                                'Lampiran')
+                            .toString();
+                    final isImage = _isImage(fileName, rawUrl);
 
                     return GestureDetector(
                       onTap: fileUrl != null
-                          ? () => controller.openAttachment(fileUrl!)
+                          ? () => controller.openAttachment(fileUrl)
                           : null,
                       child: Container(
                         decoration: BoxDecoration(
@@ -186,8 +196,8 @@ class AnnouncementDetailView extends StatelessWidget {
                               )
                             else
                               Icon(
-                                _getFileIcon(fileName),
-                                size: 32,
+                                _getFileIcon(fileName, rawUrl),
+                                size: 48,
                                 color: AppColors.primary,
                               ),
                             const SizedBox(height: 4),
