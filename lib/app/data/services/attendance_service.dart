@@ -284,50 +284,33 @@ class AttendanceService extends GetxService {
         error: e,
         stackTrace: st,
       );
-      // If server rejects POST (405), try GET fallback using query params
+      // If server rejects POST (405), try PUT fallback first (server supports PUT)
       if (e.statusCode == 405) {
         try {
-          developer.log(
-            'Attempting GET fallback /attendance/scan?code=$code',
-            name: 'AttendanceService',
-          );
-          final resGet = await _api.get(
-            '/attendance/scan?code=${Uri.encodeQueryComponent(code.toString())}',
-          );
-          developer.log(
-            'scanAttendance GET fallback response: $resGet',
-            name: 'AttendanceService',
-          );
-          return resGet;
-        } catch (e2, st2) {
-          developer.log(
-            'GET fallback failed: $e2',
-            name: 'AttendanceService',
-            error: e2,
-            stackTrace: st2,
-          );
+          developer.log('Attempting PUT fallback /attendance/scan', name: 'AttendanceService');
+          final resPut = await _api.put('/attendance/scan', payload);
+          developer.log('scanAttendance PUT fallback response: $resPut', name: 'AttendanceService');
+          return resPut;
+        } catch (ePut, stPut) {
+          developer.log('PUT fallback failed: $ePut', name: 'AttendanceService', error: ePut, stackTrace: stPut);
+          // If PUT also fails, try GET fallbacks as a last resort
           try {
-            developer.log(
-              'Attempting GET fallback /attendance/scan?nis=$code',
-              name: 'AttendanceService',
-            );
-            final resGet2 = await _api.get(
-              '/attendance/scan?nis=${Uri.encodeQueryComponent(code.toString())}',
-            );
-            developer.log(
-              'scanAttendance GET fallback(2) response: $resGet2',
-              name: 'AttendanceService',
-            );
-            return resGet2;
-          } catch (e3, st3) {
-            developer.log(
-              'GET fallback(2) failed: $e3',
-              name: 'AttendanceService',
-              error: e3,
-              stackTrace: st3,
-            );
-            // Rethrow the original ApiException to preserve context
-            throw e;
+            developer.log('Attempting GET fallback /attendance/scan?code=$code', name: 'AttendanceService');
+            final resGet = await _api.get('/attendance/scan?code=${Uri.encodeQueryComponent(code.toString())}');
+            developer.log('scanAttendance GET fallback response: $resGet', name: 'AttendanceService');
+            return resGet;
+          } catch (e2, st2) {
+            developer.log('GET fallback failed: $e2', name: 'AttendanceService', error: e2, stackTrace: st2);
+            try {
+              developer.log('Attempting GET fallback /attendance/scan?nis=$code', name: 'AttendanceService');
+              final resGet2 = await _api.get('/attendance/scan?nis=${Uri.encodeQueryComponent(code.toString())}');
+              developer.log('scanAttendance GET fallback(2) response: $resGet2', name: 'AttendanceService');
+              return resGet2;
+            } catch (e3, st3) {
+              developer.log('GET fallback(2) failed: $e3', name: 'AttendanceService', error: e3, stackTrace: st3);
+              // Rethrow the original ApiException to preserve context
+              throw e;
+            }
           }
         }
       }
