@@ -255,8 +255,10 @@ class AttendanceService extends GetxService {
   /// Scan attendance via code (controller expects positional param)
   /// If [confirmCheckout] is true, include a confirmation flag to indicate
   /// the second-scan checkout should be processed.
-  Future<Map<String, dynamic>> scanAttendance(dynamic code,
-      {bool confirmCheckout = false}) async {
+  Future<Map<String, dynamic>> scanAttendance(
+    dynamic code, {
+    bool confirmCheckout = false,
+  }) async {
     final payload = {
       'code': code,
       if (confirmCheckout) 'confirm_checkout': true,
