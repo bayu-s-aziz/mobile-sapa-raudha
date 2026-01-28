@@ -5,6 +5,8 @@ import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
+import 'dart:developer' as developer;
+import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'dart:io' show Platform;
 
 class ScanPresenceController extends GetxController {
@@ -132,6 +134,7 @@ class ScanPresenceController extends GetxController {
   Future<void> _submitAttendance(String nis) async {
     try {
       final res = await _attendanceService.scanAttendance(nis);
+      developer.log('Scan response: $res', name: 'ScanPresence');
 
       // If server indicates a checkout confirmation is required, prompt user
       if (_needsCheckoutConfirmation(res)) {
@@ -176,8 +179,25 @@ class ScanPresenceController extends GetxController {
         // Normal check-in result
         _showPresenceConfirmation(res['student']?['name'] ?? nis);
       }
-    } catch (e) {
-      SnackbarHelper.showError("Tidak dapat merekam presensi: $e");
+    } catch (e, st) {
+      if (e is ApiException) {
+        final msg = e.message;
+        SnackbarHelper.showError(msg);
+        developer.log(
+          'Scan ApiException: ${e.body}',
+          name: 'ScanPresence',
+          error: e,
+          stackTrace: st,
+        );
+      } else {
+        SnackbarHelper.showError('Tidak dapat merekam presensi: $e');
+        developer.log(
+          'Scan unexpected error',
+          name: 'ScanPresence',
+          error: e,
+          stackTrace: st,
+        );
+      }
     } finally {
       // Clear scanned data and allow scanning again
       Future.delayed(const Duration(seconds: 1), () {
