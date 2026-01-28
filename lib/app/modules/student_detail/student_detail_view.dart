@@ -152,6 +152,63 @@ class StudentDetailView extends GetView<StudentDetailController> {
           );
         }),
       ),
+      bottomNavigationBar: isGuru == true
+          ? Obx(
+              () => Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(
+                    context,
+                  ).bottomNavigationBarTheme.backgroundColor,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(24),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.alternate.withAlpha((0.5 * 255).round()),
+                      blurRadius: 10,
+                      offset: const Offset(0, -2),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.bottom,
+                  left: 16,
+                  right: 16,
+                ),
+                child: BottomNavigationBar(
+                  currentIndex: homeController?.selectedIndex.value ?? 0,
+                  onTap: (index) {
+                    homeController?.changeTabIndex(index);
+                    Get.back();
+                  },
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.dashboard_outlined),
+                      activeIcon: Icon(Icons.dashboard),
+                      label: 'Dashboard',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.campaign_outlined),
+                      activeIcon: Icon(Icons.campaign),
+                      label: 'Pengumuman',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.group_outlined),
+                      activeIcon: Icon(Icons.group),
+                      label: 'Data Siswa',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.person_outline),
+                      activeIcon: Icon(Icons.person),
+                      label: 'Profil',
+                    ),
+                  ],
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                ),
+              ),
+            )
+          : null,
     );
   }
 
