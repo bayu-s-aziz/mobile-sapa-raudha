@@ -259,11 +259,23 @@ class AttendanceService extends GetxService {
     dynamic code, {
     bool confirmCheckout = false,
   }) async {
+    // Log the incoming code for debugging
+    developer.log('scanAttendance called with code: $code', name: 'AttendanceService');
+
+    // Include a fallback 'nis' field for servers that expect 'nis' instead of 'code'
     final payload = {
       'code': code,
+      'nis': code,
       if (confirmCheckout) 'confirm_checkout': true,
     };
-    final res = await _api.post('/attendance/scan', payload, needsAuth: true);
-    return res;
+
+    try {
+      final res = await _api.post('/attendance/scan', payload, needsAuth: true);
+      developer.log('scanAttendance response: $res', name: 'AttendanceService');
+      return res;
+    } catch (e, st) {
+      developer.log('scanAttendance error: $e', name: 'AttendanceService', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 }
