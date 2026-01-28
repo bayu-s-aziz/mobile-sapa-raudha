@@ -110,7 +110,7 @@ class AttendanceService extends GetxService {
   Future<Map<String, dynamic>> createAttendance(
     Map<String, dynamic> data,
   ) async {
-    final res = await _api.post('/attendance', data);
+    final res = await _api.post('/attendance', data, needsAuth: true);
     return res;
   }
 
@@ -124,7 +124,7 @@ class AttendanceService extends GetxService {
       'class_id': classId,
       'date': date,
       'records': records,
-    });
+    }, needsAuth: true);
     return res;
   }
 
@@ -253,7 +253,9 @@ class AttendanceService extends GetxService {
 
   /// Scan attendance via code (controller expects positional param)
   Future<Map<String, dynamic>> scanAttendance(dynamic code) async {
-    final res = await _api.post('/attendance/scan', {'code': code});
+    final res = await _api.post('/attendance/scan', {
+      'code': code,
+    }, needsAuth: true);
     return res;
   }
 }

@@ -15,6 +15,7 @@ import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:sapa_raudha/app/data/services/auth_service.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
+import 'package:sapa_raudha/app/data/services/attendance_state_manager.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/class_service.dart';
@@ -235,6 +236,7 @@ class AppBinding extends Bindings {
     Get.put(ClassService());
     Get.put(TeacherService());
     Get.put(AttendanceService());
+    Get.put(AttendanceStateManager()); // Shared attendance state manager
     Get.put(LeaveService());
     Get.put(AnnouncementService());
   }

@@ -7,6 +7,7 @@ import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
+import 'package:sapa_raudha/app/data/services/attendance_state_manager.dart';
 import '../home/home_controller.dart';
 import '../student_list/student_list_controller.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
@@ -16,6 +17,7 @@ class StudentDetailController extends GetxController {
   final Rx<Student?> student = Rx<Student?>(null);
   late final StudentService _studentService;
   late final AttendanceService _attendanceService;
+  late final AttendanceStateManager _attendanceStateManager;
 
   final RxBool isLoadingAttendance = false.obs;
   final Rxn<Map<String, dynamic>> todayAttendance = Rxn<Map<String, dynamic>>();
@@ -29,6 +31,7 @@ class StudentDetailController extends GetxController {
     _studentService = Get.find<StudentService>();
     _attendanceService = Get.find<AttendanceService>();
     _api = Get.find<ApiClient>();
+    _attendanceStateManager = Get.find<AttendanceStateManager>();
 
     // Ambil data Student yang dikirim sebagai argumen
     if (Get.arguments != null && Get.arguments is Student) {
@@ -62,21 +65,15 @@ class StudentDetailController extends GetxController {
 
     isLoadingAttendance.value = true;
     try {
-      final today = _dateFormatter.format(DateTime.now());
+      // Try to get from shared state manager first
+      var attendance = _attendanceStateManager.getTodayAttendance(studentId);
 
-      // Use a precise attendance endpoint for a single day if possible
-      final records = await _attendanceService.getStudentHistory(
+      // If not cached, fetch from API
+      attendance ??= await _attendanceStateManager.fetchTodayAttendance(
         studentId,
-        startDate: today,
-        endDate: today,
-        limit: 1,
       );
 
-      if (records.isNotEmpty) {
-        todayAttendance.value = records.first;
-      } else {
-        todayAttendance.value = null;
-      }
+      todayAttendance.value = attendance;
     } catch (e) {
       SnackbarHelper.showError('Gagal memuat status kehadiran: $e');
     } finally {
@@ -377,19 +374,40 @@ class StudentDetailController extends GetxController {
                     'Status kehadiran berhasil ditambahkan',
                   );
                 } else {
-                  // Update existing attendance record
+                  // Update existing attendance record if we have an id; otherwise create
                   final attendanceId = todayAttendance.value!['id'];
-                  await _attendanceService.updateAttendance(attendanceId, {
-                    'status': selectedStatus.value,
-                    'notes': notesController.text.trim(),
-                  });
-                  SnackbarHelper.showSuccess(
-                    'Status kehadiran berhasil diubah',
-                  );
+                  if (attendanceId == null) {
+                    // Fallback: no id available, create instead
+                    await _attendanceService.createAttendance({
+                      'student_id': studentId,
+                      'date': today,
+                      'status': selectedStatus.value,
+                      'notes': notesController.text.trim(),
+                    });
+                    SnackbarHelper.showSuccess(
+                      'Status kehadiran berhasil ditambahkan',
+                    );
+                  } else {
+                    await _attendanceService.updateAttendance(attendanceId, {
+                      'status': selectedStatus.value,
+                      'notes': notesController.text.trim(),
+                    });
+                    SnackbarHelper.showSuccess(
+                      'Status kehadiran berhasil diubah',
+                    );
+                  }
                 }
 
-                // Refresh attendance data
+                // Refresh attendance data and sync to state manager
                 await _fetchTodayAttendance();
+
+                // Sync to state manager
+                if (todayAttendance.value != null) {
+                  await _attendanceStateManager.updateAttendance(
+                    studentId,
+                    todayAttendance.value!,
+                  );
+                }
 
                 // Update home controller if registered
                 if (Get.isRegistered<HomeController>()) {
