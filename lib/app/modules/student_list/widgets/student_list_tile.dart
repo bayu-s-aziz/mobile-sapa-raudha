@@ -41,7 +41,7 @@ class StudentListTile extends StatelessWidget {
       case StudentDailyStatus.alpa:
         return 'Alpa';
       case StudentDailyStatus.belumHadir:
-        return 'Blm Hadir';
+        return 'Belum Hadir';
     }
   }
 

@@ -5,6 +5,7 @@ import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
+import 'package:sapa_raudha/app/data/services/attendance_state_manager.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
 class StudentListController extends GetxController {
@@ -17,12 +18,89 @@ class StudentListController extends GetxController {
   late final StudentService _studentService;
 
   late final ApiClient _api;
+  late final AttendanceStateManager _attendanceStateManager;
+
+  /// Compute the effective daily status for a student.
+  /// If a cached attendance record exists for today, use it.
+  /// Otherwise, if current time in GMT+7 is after 00:01, return belumHadir.
+  StudentDailyStatus _computeDailyStatus(int studentId, String? serverStatus) {
+    final attendance = _attendanceStateManager.getTodayAttendance(studentId);
+    if (attendance != null && attendance['status'] is String) {
+      final s = (attendance['status'] as String).toLowerCase();
+      switch (s) {
+        case 'hadir':
+          return StudentDailyStatus.hadir;
+        case 'sakit':
+          return StudentDailyStatus.sakit;
+        case 'izin':
+          return StudentDailyStatus.izin;
+        case 'alpa':
+        case 'alpha':
+          return StudentDailyStatus.alpa;
+        default:
+          return StudentDailyStatus.belumHadir;
+      }
+    }
+
+    // No attendance record cached for today. Determine if we are past 00:01 GMT+7
+    final nowGmt7 = DateTime.now().toUtc().add(const Duration(hours: 7));
+    final isAfterCutoff =
+        nowGmt7.hour > 0 || (nowGmt7.hour == 0 && nowGmt7.minute >= 1);
+
+    if (isAfterCutoff) {
+      return StudentDailyStatus.belumHadir;
+    }
+
+    // Otherwise fallback to server-provided status
+    return _parseStatus(serverStatus);
+  }
+
+  void _recomputeStudentStatuses() {
+    final updated = allStudents.map((s) {
+      final idInt = int.tryParse(s.id) ?? 0;
+      final computed = _computeDailyStatus(idInt, null);
+      return Student(
+        id: s.id,
+        name: s.name,
+        studentClass: s.studentClass,
+        parentName: s.parentName,
+        dailyStatus: computed,
+        nisn: s.nisn,
+        nis: s.nis,
+        gender: s.gender,
+        birthPlace: s.birthPlace,
+        birthDate: s.birthDate,
+        religion: s.religion,
+        address: s.address,
+        fatherName: s.fatherName,
+        motherName: s.motherName,
+        fatherJob: s.fatherJob,
+        motherJob: s.motherJob,
+        guardianName: s.guardianName,
+        fatherPhone: s.fatherPhone,
+        motherPhone: s.motherPhone,
+        guardianPhone: s.guardianPhone,
+        photoUrl: s.photoUrl,
+      );
+    }).toList();
+
+    allStudents.assignAll(updated);
+    // Reapply current filter
+    filterStudents(searchController.text);
+  }
 
   @override
   void onInit() {
     super.onInit();
     _studentService = Get.find<StudentService>();
     _api = Get.find<ApiClient>();
+    _attendanceStateManager = Get.find<AttendanceStateManager>();
+
+    // Recompute statuses whenever today's attendance map changes
+    ever(_attendanceStateManager.todayAttendanceMap, (_) {
+      _recomputeStudentStatuses();
+    });
+
     fetchStudents();
     // Listener untuk search
     searchController.addListener(() {
@@ -54,12 +132,21 @@ class StudentListController extends GetxController {
           normalizedPhoto = rawPhoto;
         }
 
+        final idRaw = data['id'];
+        final idInt = idRaw is int
+            ? idRaw
+            : int.tryParse(idRaw?.toString() ?? '') ?? 0;
+        final computedStatus = _computeDailyStatus(
+          idInt,
+          data['daily_status'] as String?,
+        );
+
         return Student(
           id: data['id'].toString(),
           name: data['name'] ?? '',
           studentClass: data['class_name'] ?? 'Belum ada kelas',
           parentName: data['father_name'] ?? data['mother_name'] ?? 'N/A',
-          dailyStatus: _parseStatus(data['daily_status']),
+          dailyStatus: computedStatus,
           nisn: data['nisn'] ?? '',
           nis: data['nis'],
           gender: data['gender'] == 'L' ? 'Laki-laki' : 'Perempuan',
