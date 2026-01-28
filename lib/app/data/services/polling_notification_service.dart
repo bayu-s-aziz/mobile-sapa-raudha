@@ -84,7 +84,13 @@ Future<void> _showNotification(
     iOS: iosDetails,
   );
 
-  await plugin.show(notificationId, title, body, details, payload: payload);
+  await plugin.show(
+    id: notificationId,
+    title: title,
+    body: body,
+    notificationDetails: details,
+    payload: payload,
+  );
 }
 
 class PollingNotificationService extends GetxService {
@@ -126,7 +132,7 @@ class PollingNotificationService extends GetxService {
     );
 
     await _localNotifications.initialize(
-      settings,
+      settings: settings,
       onDidReceiveNotificationResponse: _onNotificationTapped,
     );
 

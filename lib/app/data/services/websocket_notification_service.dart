@@ -61,7 +61,7 @@ class WebSocketNotificationService extends GetxService {
     );
 
     await _localNotifications.initialize(
-      settings,
+      settings: settings,
       onDidReceiveNotificationResponse: _onNotificationTapped,
     );
 
@@ -267,7 +267,13 @@ class WebSocketNotificationService extends GetxService {
       iOS: iosDetails,
     );
 
-    await _localNotifications.show(id, title, body, details, payload: payload);
+    await _localNotifications.show(
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: details,
+      payload: payload,
+    );
   }
 
   void _onNotificationTapped(NotificationResponse response) {
