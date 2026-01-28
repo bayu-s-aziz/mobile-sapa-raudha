@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'dart:developer' as developer;
+import 'package:intl/intl.dart';
 
 class AttendanceService extends GetxService {
   late final ApiClient _api;
@@ -284,30 +285,156 @@ class AttendanceService extends GetxService {
         error: e,
         stackTrace: st,
       );
-      // If server rejects POST (405), try PUT fallback first (server supports PUT)
+      // If server rejects POST (405), fall back to an implementation using the
+      // attendance index/create endpoints. This server seems to expect
+      // POST /attendance (create), GET /students (search) and PUT /attendance/{id}
+      // (update). We'll implement a safe fallback:
+      // 1) Look up student by NIS using /students?search=nis
+      // 2) If not found -> rethrow with a helpful message
+      // 3) Check today's attendance via /attendance?student_id=&start_date=&end_date=
+      // 4) If no attendance -> createAttendance (status: 'hadir')
+      // 5) If attendance exists and no check_out -> return a response with
+      //    'confirm_checkout' => controller will prompt user; if controller calls
+      //    again with confirmCheckout == true we'll perform the update
       if (e.statusCode == 405) {
         try {
-          developer.log('Attempting PUT fallback /attendance/scan', name: 'AttendanceService');
-          final resPut = await _api.put('/attendance/scan', payload);
-          developer.log('scanAttendance PUT fallback response: $resPut', name: 'AttendanceService');
-          return resPut;
-        } catch (ePut, stPut) {
-          developer.log('PUT fallback failed: $ePut', name: 'AttendanceService', error: ePut, stackTrace: stPut);
-          // If PUT also fails, try GET fallbacks as a last resort
+          developer.log(
+            'Falling back to student search + attendance create/update',
+            name: 'AttendanceService',
+          );
+
+          // 1) Search student by NIS using the students index
+          final searchRes = await _api.get(
+            '/students?search=${Uri.encodeQueryComponent(code.toString())}',
+          );
+          final items = searchRes['data'] ?? searchRes;
+          Map<String, dynamic>? student;
+          if (items is List) {
+            // Find exact match by 'nis' if possible
+            for (final item in items) {
+              final m = item as Map<String, dynamic>;
+              if (m['nis']?.toString() == code.toString() ||
+                  m['nisn']?.toString() == code.toString()) {
+                student = m;
+                break;
+              }
+            }
+            // Fallback: take first item if exact match not found but list has something
+            if (student == null && items.isNotEmpty) {
+              student = (items.first as Map<String, dynamic>);
+            }
+          } else if (items is Map) {
+            student = Map<String, dynamic>.from(items);
+          }
+
+          if (student == null) {
+            throw ApiException(404, 'Siswa tidak ditemukan untuk kode $code');
+          }
+
+          final studentId = student['id'];
+          if (studentId == null) {
+            throw ApiException(
+              400,
+              'Tidak dapat menentukan ID siswa untuk $code',
+            );
+          }
+
+          // Today's date in server expected format
+          final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
+          final String today = dateFormatter.format(DateTime.now());
+
+          // 3) Check existing attendance for today
+          final attRes = await getAttendance(studentId: studentId, date: today);
+          final attItems =
+              attRes['data'] ?? attRes['attendance'] ?? attRes['items'] ?? [];
+          Map<String, dynamic>? todayRecord;
+          if (attItems is List && attItems.isNotEmpty) {
+            todayRecord = Map<String, dynamic>.from(attItems.first as Map);
+          }
+
+          // 4) If no attendance record -> create one (include check_in timestamp)
+          final timeFormatter = DateFormat('HH:mm:ss');
+          final nowTime = timeFormatter.format(DateTime.now());
+          if (todayRecord == null) {
+            final createRes = await createAttendance({
+              'student_id': studentId,
+              'date': today,
+              'status': 'hadir',
+              'check_in': nowTime,
+            });
+            return createRes;
+          }
+
+          // 5) Attendance exists. If confirmCheckout flag present, perform checkout update
+          if (confirmCheckout) {
+            final attendanceId = todayRecord['id'];
+            if (attendanceId == null) {
+              throw ApiException(400, 'Record presensi tidak memiliki ID');
+            }
+            final timeFormatter = DateFormat('HH:mm:ss');
+            final nowTime = timeFormatter.format(DateTime.now());
+            final updateRes = await updateAttendance(attendanceId, {
+              'check_out': nowTime,
+            });
+            return updateRes;
+          }
+
+          // If we reach here, attendance exists and checkout not confirmed yet
+          // Return an object that signals the controller to ask for confirmation
+          final response = {
+            'confirm_checkout': true,
+            'student': student,
+            'attendance': todayRecord,
+          };
+          return response;
+        } catch (fallbackError, fallbackSt) {
+          developer.log(
+            'Fallback attempt failed: $fallbackError',
+            name: 'AttendanceService',
+            error: fallbackError,
+            stackTrace: fallbackSt,
+          );
+          // As a last resort, keep trying the previous GET fallbacks for /attendance/scan
           try {
-            developer.log('Attempting GET fallback /attendance/scan?code=$code', name: 'AttendanceService');
-            final resGet = await _api.get('/attendance/scan?code=${Uri.encodeQueryComponent(code.toString())}');
-            developer.log('scanAttendance GET fallback response: $resGet', name: 'AttendanceService');
+            developer.log(
+              'Attempting GET fallback /attendance/scan?code=$code',
+              name: 'AttendanceService',
+            );
+            final resGet = await _api.get(
+              '/attendance/scan?code=${Uri.encodeQueryComponent(code.toString())}',
+            );
+            developer.log(
+              'scanAttendance GET fallback response: $resGet',
+              name: 'AttendanceService',
+            );
             return resGet;
           } catch (e2, st2) {
-            developer.log('GET fallback failed: $e2', name: 'AttendanceService', error: e2, stackTrace: st2);
+            developer.log(
+              'GET fallback failed: $e2',
+              name: 'AttendanceService',
+              error: e2,
+              stackTrace: st2,
+            );
             try {
-              developer.log('Attempting GET fallback /attendance/scan?nis=$code', name: 'AttendanceService');
-              final resGet2 = await _api.get('/attendance/scan?nis=${Uri.encodeQueryComponent(code.toString())}');
-              developer.log('scanAttendance GET fallback(2) response: $resGet2', name: 'AttendanceService');
+              developer.log(
+                'Attempting GET fallback /attendance/scan?nis=$code',
+                name: 'AttendanceService',
+              );
+              final resGet2 = await _api.get(
+                '/attendance/scan?nis=${Uri.encodeQueryComponent(code.toString())}',
+              );
+              developer.log(
+                'scanAttendance GET fallback(2) response: $resGet2',
+                name: 'AttendanceService',
+              );
               return resGet2;
             } catch (e3, st3) {
-              developer.log('GET fallback(2) failed: $e3', name: 'AttendanceService', error: e3, stackTrace: st3);
+              developer.log(
+                'GET fallback(2) failed: $e3',
+                name: 'AttendanceService',
+                error: e3,
+                stackTrace: st3,
+              );
               // Rethrow the original ApiException to preserve context
               throw e;
             }

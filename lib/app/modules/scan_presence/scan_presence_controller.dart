@@ -176,8 +176,29 @@ class ScanPresenceController extends GetxController {
           // User cancelled - do nothing
         }
       } else {
-        // Normal check-in result
-        _showPresenceConfirmation(res['student']?['name'] ?? nis);
+        // Normal check-in result: try to extract check_in time from various response shapes
+        String? checkIn;
+        try {
+          checkIn =
+              res['check_in']?.toString() ??
+              (res['data'] is Map
+                  ? res['data']['check_in']?.toString()
+                  : null) ??
+              (res['attendance'] is Map
+                  ? res['attendance']['check_in']?.toString()
+                  : null);
+        } catch (_) {
+          checkIn = null;
+        }
+
+        final name = res['student']?['name'] ?? nis;
+        if (checkIn != null && checkIn.isNotEmpty) {
+          SnackbarHelper.showSuccess(
+            'Presensi masuk untuk $name berhasil disimpan pada $checkIn.',
+          );
+        } else {
+          _showPresenceConfirmation(name);
+        }
       }
     } catch (e, st) {
       if (e is ApiException) {
