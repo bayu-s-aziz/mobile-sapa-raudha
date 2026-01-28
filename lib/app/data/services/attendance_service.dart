@@ -277,9 +277,64 @@ class AttendanceService extends GetxService {
       final res = await _api.post('/attendance/scan', payload, needsAuth: true);
       developer.log('scanAttendance response: $res', name: 'AttendanceService');
       return res;
+    } on ApiException catch (e, st) {
+      developer.log(
+        'scanAttendance ApiException: ${e.statusCode} - ${e.message}',
+        name: 'AttendanceService',
+        error: e,
+        stackTrace: st,
+      );
+      // If server rejects POST (405), try GET fallback using query params
+      if (e.statusCode == 405) {
+        try {
+          developer.log(
+            'Attempting GET fallback /attendance/scan?code=$code',
+            name: 'AttendanceService',
+          );
+          final resGet = await _api.get(
+            '/attendance/scan?code=${Uri.encodeQueryComponent(code.toString())}',
+          );
+          developer.log(
+            'scanAttendance GET fallback response: $resGet',
+            name: 'AttendanceService',
+          );
+          return resGet;
+        } catch (e2, st2) {
+          developer.log(
+            'GET fallback failed: $e2',
+            name: 'AttendanceService',
+            error: e2,
+            stackTrace: st2,
+          );
+          try {
+            developer.log(
+              'Attempting GET fallback /attendance/scan?nis=$code',
+              name: 'AttendanceService',
+            );
+            final resGet2 = await _api.get(
+              '/attendance/scan?nis=${Uri.encodeQueryComponent(code.toString())}',
+            );
+            developer.log(
+              'scanAttendance GET fallback(2) response: $resGet2',
+              name: 'AttendanceService',
+            );
+            return resGet2;
+          } catch (e3, st3) {
+            developer.log(
+              'GET fallback(2) failed: $e3',
+              name: 'AttendanceService',
+              error: e3,
+              stackTrace: st3,
+            );
+            // Rethrow the original ApiException to preserve context
+            throw e;
+          }
+        }
+      }
+      rethrow;
     } catch (e, st) {
       developer.log(
-        'scanAttendance error: $e',
+        'scanAttendance unexpected error: $e',
         name: 'AttendanceService',
         error: e,
         stackTrace: st,
