@@ -3,14 +3,17 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:sapa_raudha/app/data/models/announcement_model.dart';
+import 'package:sapa_raudha/app/data/services/profile_service.dart';
 
 class AnnouncementService extends GetxService {
   late final ApiClient _api;
+  late final ProfileService _profile;
 
   @override
   void onInit() {
     super.onInit();
     _api = Get.find<ApiClient>();
+    _profile = Get.find<ProfileService>();
   }
 
   /// Get all announcements with optional filtering
@@ -63,26 +66,41 @@ class AnnouncementService extends GetxService {
     required String content,
     int? classId,
     File? attachment,
+    int? authorId,
+    String targetAudience = 'all',
   }) async {
+    // Default authorId to the authenticated user's `userable_id` when not provided
+    final effectiveAuthorId = authorId ?? _profile.getUserableId();
+
     if (attachment != null) {
+      final fields = <String, String>{
+        'title': title,
+        'content': content,
+        'target_audience': targetAudience,
+      };
+      if (classId != null) fields['class_id'] = classId.toString();
+      if (effectiveAuthorId != null) {
+        fields['author_id'] = effectiveAuthorId.toString();
+      }
+
       final res = await _api.postMultipart(
         '/announcements',
-        {
-          'title': title,
-          'content': content,
-          if (classId != null) 'class_id': classId.toString(),
-        },
+        fields,
         'attachment',
         attachment.path,
       );
       return res;
     }
 
-    final res = await _api.post('/announcements', {
+    final body = <String, dynamic>{
       'title': title,
       'content': content,
+      'target_audience': targetAudience,
       if (classId != null) 'class_id': classId,
-    });
+      if (effectiveAuthorId != null) 'author_id': effectiveAuthorId,
+    };
+
+    final res = await _api.post('/announcements', body);
     return res;
   }
 
@@ -160,12 +178,16 @@ class AnnouncementService extends GetxService {
     required String content,
     int? classId,
     File? attachment,
+    int? authorId,
+    String targetAudience = 'all',
   }) async {
     return create(
       title: title,
       content: content,
       classId: classId,
       attachment: attachment,
+      authorId: authorId,
+      targetAudience: targetAudience,
     );
   }
 }

@@ -3,6 +3,8 @@ import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'local_storage_service.dart';
+import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
+import 'package:sapa_raudha/app/routes/app_pages.dart';
 
 class ApiException implements Exception {
   final int statusCode;
@@ -24,12 +26,71 @@ class ApiClient extends GetxService {
   final String baseUrl;
   ApiClient({required this.baseUrl});
 
-  late final LocalStorageService _storage;
+  LocalStorageService? _storage;
 
   @override
   void onInit() {
     super.onInit();
-    _storage = Get.find<LocalStorageService>();
+    if (Get.isRegistered<LocalStorageService>()) {
+      _storage = Get.find<LocalStorageService>();
+    } else {
+      _storage = null;
+      developer.log(
+        '[API] LocalStorageService not registered yet',
+        name: 'ApiClient',
+      );
+    }
+  }
+
+  LocalStorageService? get _storageInstance {
+    if (Get.isRegistered<LocalStorageService>()) {
+      return Get.find<LocalStorageService>();
+    }
+    return _storage;
+  }
+
+  bool _handlingUnauthorized = false;
+
+  /// Centralized handler for unauthorized (401) responses.
+  /// This clears stored auth data and navigates the user back to login.
+  /// Idempoten: subsequent calls while handling are ignored to avoid
+  /// repeated snackbars/navigation when many requests fail at once.
+  Future<void> handleUnauthorized({String? reason}) async {
+    if (_handlingUnauthorized) {
+      developer.log(
+        '[API] handleUnauthorized already in progress',
+        name: 'ApiClient',
+      );
+      return;
+    }
+    _handlingUnauthorized = true;
+
+    developer.log(
+      '[API] Handling unauthorized: ${reason ?? 'unknown'}',
+      name: 'ApiClient',
+    );
+
+    try {
+      final storage = _storageInstance;
+      await storage?.remove('auth_token');
+      await storage?.remove('user');
+      developer.log('[API] Cleared auth storage', name: 'ApiClient');
+    } catch (_) {}
+
+    // Show user-friendly message and redirect to login (only if context available)
+    try {
+      if (Get.context != null) {
+        SnackbarHelper.showError('Sesi berakhir. Silakan login kembali.');
+      }
+    } catch (_) {}
+
+    try {
+      if (Get.context != null) {
+        Get.offAllNamed(Routes.login);
+      }
+    } catch (_) {}
+
+    _handlingUnauthorized = false;
   }
 
   Future<Map<String, String>> _getHeaders({bool needsAuth = false}) async {
@@ -39,7 +100,8 @@ class ApiClient extends GetxService {
       'X-Requested-With': 'XMLHttpRequest',
     };
     if (needsAuth) {
-      final token = _storage.read<String>('auth_token');
+      final storage = _storageInstance;
+      final token = storage?.read<String>('auth_token');
       developer.log('[API] Token from storage: $token', name: 'ApiClient');
       if (token != null) {
         headers['Authorization'] = 'Bearer $token';
@@ -57,6 +119,12 @@ class ApiClient extends GetxService {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return jsonDecode(res.body) as Map<String, dynamic>;
     }
+
+    // Centralized unauthorized handling
+    if (res.statusCode == 401) {
+      await handleUnauthorized();
+    }
+
     final parsed = _parseBody(res.body);
     throw ApiException(res.statusCode, parsed);
   }
@@ -68,6 +136,11 @@ class ApiClient extends GetxService {
       final decoded = jsonDecode(res.body);
       return decoded is List ? decoded : [];
     }
+
+    if (res.statusCode == 401) {
+      await handleUnauthorized();
+    }
+
     final parsed = _parseBody(res.body);
     throw ApiException(res.statusCode, parsed);
   }
@@ -96,6 +169,11 @@ class ApiClient extends GetxService {
       if (res.statusCode >= 200 && res.statusCode < 300) {
         return jsonDecode(res.body) as Map<String, dynamic>;
       }
+
+      if (res.statusCode == 401) {
+        await handleUnauthorized();
+      }
+
       final parsed = _parseBody(res.body);
       throw ApiException(res.statusCode, parsed);
     } catch (e, st) {
@@ -122,6 +200,11 @@ class ApiClient extends GetxService {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return jsonDecode(res.body) as Map<String, dynamic>;
     }
+
+    if (res.statusCode == 401) {
+      await handleUnauthorized();
+    }
+
     final parsed = _parseBody(res.body);
     throw ApiException(res.statusCode, parsed);
   }
@@ -132,6 +215,11 @@ class ApiClient extends GetxService {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return jsonDecode(res.body) as Map<String, dynamic>;
     }
+
+    if (res.statusCode == 401) {
+      await handleUnauthorized();
+    }
+
     final parsed = _parseBody(res.body);
     throw ApiException(res.statusCode, parsed);
   }
@@ -143,7 +231,7 @@ class ApiClient extends GetxService {
     String fileField,
     String filePath,
   ) async {
-    final token = _storage.read<String>('auth_token');
+    final token = _storageInstance?.read<String>('auth_token');
     final request = http.MultipartRequest('POST', Uri.parse('$baseUrl$path'));
 
     if (token != null) {
@@ -160,6 +248,11 @@ class ApiClient extends GetxService {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return jsonDecode(response.body) as Map<String, dynamic>;
     }
+
+    if (response.statusCode == 401) {
+      await handleUnauthorized();
+    }
+
     final parsed = _parseBody(response.body);
     throw ApiException(response.statusCode, parsed);
   }
@@ -170,7 +263,7 @@ class ApiClient extends GetxService {
     String fileField,
     String filePath,
   ) async {
-    final token = _storage.read<String>('auth_token');
+    final token = _storageInstance?.read<String>('auth_token');
     final request = http.MultipartRequest('PUT', Uri.parse('$baseUrl$path'));
 
     if (token != null) {
@@ -186,6 +279,11 @@ class ApiClient extends GetxService {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return jsonDecode(response.body) as Map<String, dynamic>;
     }
+
+    if (response.statusCode == 401) {
+      await handleUnauthorized();
+    }
+
     final parsed = _parseBody(response.body);
     throw ApiException(response.statusCode, parsed);
   }

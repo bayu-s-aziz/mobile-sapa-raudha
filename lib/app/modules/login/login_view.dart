@@ -49,13 +49,34 @@ class LoginView extends GetView<LoginController> {
   }
 
   Widget _buildLoginButton() {
-    return Obx(
-      () => controller.isLoading.value
-          ? const Center(child: CircularProgressIndicator())
-          : ElevatedButton(
-              onPressed: controller.isLoading.value ? null : controller.login,
-              child: const Text('MASUK'),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Obx(
+          () => controller.isLoading.value
+              ? const Center(child: CircularProgressIndicator())
+              : ElevatedButton(
+                  onPressed: controller.isLoading.value
+                      ? null
+                      : controller.login,
+                  child: const Text('MASUK'),
+                ),
+        ),
+        const SizedBox(height: 12),
+        Obx(
+          () => Row(
+            children: [
+              Checkbox(
+                value: controller.rememberMe.value,
+                onChanged: (v) => controller.rememberMe.value = v ?? false,
+              ),
+              const Expanded(
+                child: Text('Ingat saya (tetap masuk pada perangkat ini)'),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

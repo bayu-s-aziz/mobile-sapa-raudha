@@ -72,6 +72,12 @@ class ProfileService extends GetxService {
     }
   }
 
+  /// Validate stored token by attempting to fetch `/user` without suppressing
+  /// 401. Caller should handle ApiException and take appropriate action.
+  Future<void> validateToken() async {
+    await _api.get('/user');
+  }
+
   /// Get current user ID from cached profile
   int? getUserId() {
     final user = getStoredUser();

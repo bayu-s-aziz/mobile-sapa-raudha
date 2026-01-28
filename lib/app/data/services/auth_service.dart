@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'dart:developer' as developer;
 import 'local_storage_service.dart';
 import 'api_client.dart';
+import 'secure_storage_service.dart';
 
 class AuthService extends GetxService {
   late final ApiClient _api;
@@ -18,6 +19,7 @@ class AuthService extends GetxService {
     String? identifier,
     String? email,
     required String password,
+    bool remember = false,
   }) async {
     developer.log(
       '[AUTH] Attempting login with identifier: ${identifier ?? email}',
@@ -53,7 +55,13 @@ class AuthService extends GetxService {
       }
 
       if (token != null) {
-        await _storage.save('auth_token', token);
+        // Save token to secure storage when user asked to be remembered
+        if (remember && Get.isRegistered<SecureStorageService>()) {
+          final secure = Get.find<SecureStorageService>();
+          await secure.save('auth_token', token);
+        } else {
+          await _storage.save('auth_token', token);
+        }
       }
       if (user != null) {
         await _storage.save('user', user);
@@ -127,6 +135,11 @@ class AuthService extends GetxService {
       await _api.post('/auth/logout', {});
       await _storage.remove('auth_token');
       await _storage.remove('user');
+      // Also clear secure storage token (if present)
+      if (Get.isRegistered<SecureStorageService>()) {
+        final secure = Get.find<SecureStorageService>();
+        await secure.remove('auth_token');
+      }
       developer.log('[AUTH] Logout successful', name: 'AuthService');
     } catch (e, st) {
       developer.log(
@@ -138,6 +151,10 @@ class AuthService extends GetxService {
       // Clear local storage even if API call fails
       await _storage.remove('auth_token');
       await _storage.remove('user');
+      if (Get.isRegistered<SecureStorageService>()) {
+        final secure = Get.find<SecureStorageService>();
+        await secure.remove('auth_token');
+      }
       rethrow;
     }
   }

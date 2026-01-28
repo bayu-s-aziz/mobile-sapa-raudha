@@ -253,6 +253,28 @@ class AttendanceService extends GetxService {
     return list;
   }
 
+  /// Find a student by NIS (search endpoint).
+  /// Returns a student map if found, or null.
+  Future<Map<String, dynamic>?> findStudentByNis(String nis) async {
+    final searchRes = await _api.get(
+      '/students?search=${Uri.encodeQueryComponent(nis)}',
+    );
+    final items = searchRes['data'] ?? searchRes;
+    if (items is List && items.isNotEmpty) {
+      for (final item in items) {
+        final m = item as Map<String, dynamic>;
+        if (m['nis']?.toString() == nis || m['nisn']?.toString() == nis) {
+          return m;
+        }
+      }
+      // fallback to first
+      return Map<String, dynamic>.from(items.first as Map);
+    } else if (items is Map) {
+      return Map<String, dynamic>.from(items);
+    }
+    return null;
+  }
+
   /// Scan attendance via code (controller expects positional param)
   /// Scan attendance via code (controller expects positional param)
   /// If [confirmCheckout] is true, include a confirmation flag to indicate

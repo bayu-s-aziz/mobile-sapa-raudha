@@ -4,6 +4,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:developer' as developer;
 import 'package:sapa_raudha/app/data/services/api_client.dart';
@@ -103,8 +104,12 @@ class ScanPresenceController extends GetxController {
     ).firstMatch(trimmed);
     if (nisMatch != null) return nisMatch.group(1);
 
-    // Fallback: first digit seq with length >=4
-    final digits = RegExp(r'\d{4,}').firstMatch(trimmed);
+    // Fallback: prefer a 6-digit NIS (exactly 6 digits), else accept 4-8 digits as secondary fallback
+    final nisExact = RegExp(r'\b(\d{6})\b').firstMatch(trimmed);
+    if (nisExact != null) return nisExact.group(1);
+
+    // Secondary fallback: common school IDs that might be shorter/longer
+    final digits = RegExp(r'\d{4,8}').firstMatch(trimmed);
     if (digits != null) return digits.group(0);
 
     return null;
@@ -131,8 +136,57 @@ class ScanPresenceController extends GetxController {
     return false;
   }
 
+  /// Shows a confirmation dialog before performing check-in. Overridable for tests.
+  @protected
+  Future<bool?> showCheckInConfirmation(String title, String content) {
+    return Get.dialog<bool>(
+      AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(result: false),
+            child: const Text('Batal'),
+          ),
+          ElevatedButton(
+            onPressed: () => Get.back(result: true),
+            child: const Text('Konfirmasi'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Haptic feedback hook — can be overridden in tests.
+  @protected
+  Future<void> vibrate() async {
+    try {
+      await HapticFeedback.mediumImpact();
+    } catch (_) {}
+  }
+
   Future<void> _submitAttendance(String nis) async {
     try {
+      // Lookup student info before submitting so we can show confirmation
+      Map<String, dynamic>? student;
+      try {
+        student = await _attendanceService.findStudentByNis(nis);
+      } catch (_) {
+        student = null;
+      }
+
+      final studentName = student?['name']?.toString() ?? nis;
+
+      final confirmed = await showCheckInConfirmation(
+        'Konfirmasi Hadir',
+        'Apakah Anda yakin akan mencatat hadir untuk $studentName (NIS: $nis)?',
+      );
+
+      if (confirmed != true) {
+        SnackbarHelper.showInfo('Presensi dibatalkan.');
+        return;
+      }
+
       final res = await _attendanceService.scanAttendance(nis);
       developer.log('Scan response: $res', name: 'ScanPresence');
 
@@ -169,6 +223,9 @@ class ScanPresenceController extends GetxController {
             SnackbarHelper.showSuccess(
               'Presensi pulang untuk $name berhasil disimpan.',
             );
+            try {
+              vibrate();
+            } catch (_) {}
           } catch (e) {
             SnackbarHelper.showError('Gagal mencatat pulang: $e');
           }
@@ -196,6 +253,10 @@ class ScanPresenceController extends GetxController {
           SnackbarHelper.showSuccess(
             'Presensi masuk untuk $name berhasil disimpan pada $checkIn.',
           );
+          // Haptic feedback for success
+          try {
+            vibrate();
+          } catch (_) {}
         } else {
           _showPresenceConfirmation(name);
         }

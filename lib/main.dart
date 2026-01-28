@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 // [MODERNISASI] Mengaktifkan GoogleFonts untuk tipografi yang lebih baik
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:sapa_raudha/app/data/services/secure_storage_service.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/utils/app_colors.dart';
 import 'app/data/services/announcement_service.dart';
@@ -20,9 +21,11 @@ import 'package:sapa_raudha/app/data/services/leave_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/class_service.dart';
 import 'package:sapa_raudha/app/data/services/teacher_service.dart';
+import 'package:sapa_raudha/app/data/services/app_lifecycle_service.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
 import 'package:window_manager/window_manager.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,9 +56,18 @@ void main() async {
   await initializeDateFormatting('id_ID', null);
   await GetStorage.init();
 
-  // Decide initial route based on whether auth token is present in storage
+  // Decide initial route based on whether auth token is present in either
+  // secure storage (remember me) or the normal storage.
+  String? token;
+  try {
+    // Try secure storage first (user may have chosen "Remember me")
+    final fs = const FlutterSecureStorage();
+    token = await fs.read(key: 'auth_token');
+  } catch (_) {}
+
   final storage = GetStorage();
-  final token = storage.read<String>('auth_token');
+  token ??= storage.read<String>('auth_token');
+
   final initialRoute = (token != null && token.isNotEmpty)
       ? Routes.home
       : Routes.login;
@@ -239,5 +251,9 @@ class AppBinding extends Bindings {
     Get.put(AttendanceStateManager()); // Shared attendance state manager
     Get.put(LeaveService());
     Get.put(AnnouncementService());
+    // Secure storage registration (for remember-me functionality)
+    Get.put(SecureStorageService());
+    // Observe app lifecycle to validate token when app resumes
+    Get.put(AppLifecycleService());
   }
 }

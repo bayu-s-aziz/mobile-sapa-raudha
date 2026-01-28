@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'dart:io';
 import 'package:sapa_raudha/app/data/services/announcement_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
+import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/modules/announcement_list/announcement_list_controller.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:file_picker/file_picker.dart'; // <-- IMPOR FILE PICKER
@@ -76,6 +77,8 @@ class CreateAnnouncementController extends GetxController {
             title: titleController.text.trim(),
             content: contentController.text.trim(),
             attachment: attachmentPath != null ? File(attachmentPath) : null,
+            authorId: Get.find<ProfileService>().getUserableId(),
+            targetAudience: 'all',
           )
           .then((_) {
             Get.back();

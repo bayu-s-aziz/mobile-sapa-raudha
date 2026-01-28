@@ -13,6 +13,7 @@ class LoginController extends GetxController {
 
   final RxBool isLoading = false.obs;
   final RxBool isPasswordHidden = true.obs;
+  final RxBool rememberMe = false.obs;
   // No role selection; backend determines role by identifier
 
   Future<void> login() async {
@@ -36,10 +37,12 @@ class LoginController extends GetxController {
           ? await auth.login(
               email: identifierInput,
               password: passwordController.text,
+              remember: rememberMe.value,
             )
           : await auth.login(
               identifier: identifierInput,
               password: passwordController.text,
+              remember: rememberMe.value,
             );
 
       // If Fortify returned two_factor (session-based flow)
