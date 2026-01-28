@@ -8,7 +8,6 @@ import 'package:sapa_raudha/app/widgets/floating_page.dart';
 import 'edit_profile_controller.dart';
 import 'package:sapa_raudha/app/utils/url_utils.dart';
 import 'package:sapa_raudha/app/widgets/avatar.dart';
-import 'package:sapa_raudha/app/data/services/profile_service.dart';
 
 class EditProfileView extends GetView<EditProfileController> {
   const EditProfileView({super.key});
@@ -77,59 +76,6 @@ class EditProfileView extends GetView<EditProfileController> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-
-            // Jika role orangtua, tampilkan field nomor telepon
-            if (Get.find<ProfileService>().getStoredRole() == 'orangtua')
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Nomor Handphone',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      controller: controller.phoneController,
-                      keyboardType: TextInputType.phone,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Masukkan nomor handphone',
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Obx(
-                      () => ElevatedButton.icon(
-                        onPressed: controller.isSavingPhone.value
-                            ? null
-                            : controller.savePhone,
-                        icon: controller.isSavingPhone.value
-                            ? Container(
-                                width: 20,
-                                height: 20,
-                                padding: const EdgeInsets.all(2.0),
-                                child: const CircularProgressIndicator(
-                                  color: Colors.white,
-                                  strokeWidth: 2,
-                                ),
-                              )
-                            : const Icon(Icons.save_outlined),
-                        label: Text(
-                          controller.isSavingPhone.value
-                              ? 'MENYIMPAN...'
-                              : 'SIMPAN NOMOR',
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                  ],
-                ),
-              ),
-
             const SizedBox(height: 40),
 
             // Tombol Simpan
