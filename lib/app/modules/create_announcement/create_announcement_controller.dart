@@ -38,7 +38,7 @@ class CreateAnnouncementController extends GetxController {
   // Method untuk memilih file
   Future<void> pickAttachment() async {
     try {
-      FilePickerResult? result = await FilePicker.pickFiles(
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom, // Izinkan tipe kustom
         allowedExtensions: [
           'jpg',
