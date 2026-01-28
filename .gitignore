@@ -32,6 +32,7 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+commandlinetools-linux-11076708_latest.zip
 
 # Symbolication related
 app.*.symbols
