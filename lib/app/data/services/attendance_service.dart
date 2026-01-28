@@ -252,10 +252,16 @@ class AttendanceService extends GetxService {
   }
 
   /// Scan attendance via code (controller expects positional param)
-  Future<Map<String, dynamic>> scanAttendance(dynamic code) async {
-    final res = await _api.post('/attendance/scan', {
+  /// Scan attendance via code (controller expects positional param)
+  /// If [confirmCheckout] is true, include a confirmation flag to indicate
+  /// the second-scan checkout should be processed.
+  Future<Map<String, dynamic>> scanAttendance(dynamic code,
+      {bool confirmCheckout = false}) async {
+    final payload = {
       'code': code,
-    }, needsAuth: true);
+      if (confirmCheckout) 'confirm_checkout': true,
+    };
+    final res = await _api.post('/attendance/scan', payload, needsAuth: true);
     return res;
   }
 }
