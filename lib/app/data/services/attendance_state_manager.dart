@@ -82,6 +82,53 @@ class AttendanceStateManager extends GetxService {
     return entry;
   }
 
+  /// Fetch and cache today's attendance for ALL students
+  /// This will populate `todayAttendanceMap` with student_id -> attendance record
+  Future<void> fetchAllTodayAttendance() async {
+    _checkAndResetIfNeeded();
+
+    try {
+      final today = _dateFormatter.format(DateTime.now());
+      // Request a large per_page so backend returns all records (no pagination)
+      final res = await _attendanceService.getAttendance(
+        date: today,
+        perPage: 9999,
+      );
+
+      List<Map<String, dynamic>> items = [];
+      final dataField = (res is Map) ? res['data'] : res;
+      if (dataField is List) {
+        items = dataField
+            .where((e) => e != null)
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList();
+      } else {
+        // No list returned; leave items empty
+      }
+
+      // Clear current map and repopulate
+      todayAttendanceMap.clear();
+      for (final item in items) {
+        try {
+          final sidRaw =
+              item['student_id'] ?? item['studentId'] ?? item['student']?['id'];
+          final sid = sidRaw is int
+              ? sidRaw
+              : int.tryParse(sidRaw?.toString() ?? '');
+          if (sid == null) continue;
+          todayAttendanceMap[sid] = item;
+        } catch (_) {
+          // ignore malformed items
+        }
+      }
+      // Notify observers
+      todayAttendanceMap.refresh();
+      lastLoadedDate.value = _dateFormatter.format(DateTime.now());
+    } catch (_) {
+      // ignore network errors for now
+    }
+  }
+
   /// Fetch and cache today's attendance for a specific student
   Future<Map<String, dynamic>?> fetchTodayAttendance(int studentId) async {
     _checkAndResetIfNeeded();

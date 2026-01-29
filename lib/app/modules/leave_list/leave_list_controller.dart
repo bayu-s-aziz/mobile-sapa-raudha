@@ -4,6 +4,8 @@ import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/routes/app_pages.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
+import '../request_leave/request_leave_view.dart';
+import '../home/home_controller.dart';
 
 class LeaveListController extends GetxController {
   final RxList<Map<String, dynamic>> leaves = <Map<String, dynamic>>[].obs;
@@ -46,6 +48,18 @@ class LeaveListController extends GetxController {
   }
 
   void goToCreateLeave() {
+    if (Get.isRegistered<HomeController>()) {
+      final home = Get.find<HomeController>();
+      try {
+        // Render RequestLeave as an action view inside Home for consistent behavior
+        home.currentActionView.value = const RequestLeaveView();
+        return;
+      } catch (_) {
+        // Fallthrough to route navigation if something goes wrong
+      }
+    }
+
+    // Fallback: open as a full route
     Get.toNamed(Routes.requestLeave);
   }
 

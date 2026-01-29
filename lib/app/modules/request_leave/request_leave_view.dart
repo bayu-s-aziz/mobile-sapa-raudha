@@ -28,7 +28,14 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: FloatingPage(
           title: 'Ajukan Izin',
-          onBack: Get.back,
+          onBack: () {
+            if (Get.isRegistered<HomeController>() &&
+                Get.find<HomeController>().currentActionView.value != null) {
+              Get.find<HomeController>().clearActionView();
+            } else {
+              Get.back();
+            }
+          },
           child: Form(
             key: controller.formKey,
             child: Column(

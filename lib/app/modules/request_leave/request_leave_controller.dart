@@ -122,26 +122,41 @@ class RequestLeaveController extends GetxController {
     );
     if (!success) return;
 
-    // Close the request page if it's open via route, otherwise clear action view
+    // Ensure the Izin tab is active and refresh list, then close the request page.
     try {
+      final home = Get.isRegistered<HomeController>()
+          ? Get.find<HomeController>()
+          : null;
+      final leaveList = Get.isRegistered<LeaveListController>()
+          ? Get.find<LeaveListController>()
+          : null;
+
+      // Give dialog/animations a moment to finish
+      await Future.delayed(const Duration(milliseconds: 150));
+
+      // If this page was opened as a separate route, pop it to reveal Home
       if (Get.currentRoute == Routes.requestLeave) {
         Get.back();
-      } else if (Get.isRegistered<HomeController>()) {
-        Get.find<HomeController>().clearActionView();
+        // Small delay to allow navigation animations to settle
+        await Future.delayed(const Duration(milliseconds: 120));
+      } else {
+        // If it was rendered as an action view inside Home, clear it explicitly
+        if (home?.currentActionView.value != null) {
+          home?.clearActionView();
+          // Give a short moment for the UI to update
+          await Future.delayed(const Duration(milliseconds: 80));
+        }
       }
-    } catch (_) {}
 
-    final home = Get.isRegistered<HomeController>()
-        ? Get.find<HomeController>()
-        : null;
-    final leaveList = Get.isRegistered<LeaveListController>()
-        ? Get.find<LeaveListController>()
-        : null;
-
-    // Ensure the Izin tab is active and refresh list
-    try {
+      // Ensure the Izin tab is active so user lands there
       home?.changeTabIndex(2);
-      await leaveList?.fetchLeaves();
+
+      // Refresh list to show newly submitted izin
+      if (leaveList != null) {
+        await leaveList.fetchLeaves();
+      } else if (Get.isRegistered<LeaveListController>()) {
+        await Get.find<LeaveListController>().fetchLeaves();
+      }
     } catch (_) {}
   }
 

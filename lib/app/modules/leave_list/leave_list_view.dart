@@ -149,20 +149,26 @@ class LeaveListView extends GetView<LeaveListController> {
                                   children: [
                                     TextButton.icon(
                                       onPressed: () async {
-                                        final confirmed =
-                                            await Get.defaultDialog<bool>(
-                                              title: 'Konfirmasi',
-                                              middleText:
-                                                  'Yakin ingin membatalkan izin ini?',
-                                              textConfirm: 'Ya',
-                                              textCancel: 'Batal',
-                                              onConfirm: () {
-                                                Get.back(result: true);
-                                              },
-                                              onCancel: () {
-                                                Get.back(result: false);
-                                              },
-                                            );
+                                        final confirmed = await Get.dialog<bool>(
+                                          AlertDialog(
+                                            title: const Text('Konfirmasi'),
+                                            content: const Text(
+                                              'Yakin ingin membatalkan izin ini?',
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () =>
+                                                    Get.back(result: false),
+                                                child: const Text('Batal'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () =>
+                                                    Get.back(result: true),
+                                                child: const Text('Ya'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
                                         if (confirmed == true) {
                                           controller.deleteLeave(leave['id']);
                                         }

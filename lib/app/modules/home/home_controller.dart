@@ -13,6 +13,8 @@ import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
+import 'package:sapa_raudha/app/data/services/attendance_state_manager.dart';
+import '../student_list/student_list_controller.dart';
 
 // --- TAMBAHKAN IMPOR UNTUK ACTION VIEWS ---
 import '../create_announcement/create_announcement_view.dart';
@@ -237,6 +239,25 @@ class HomeController extends GetxController {
     }
 
     if (selectedIndex.value == index) return;
+
+    // Prepare tab change: for student list, make sure attendance & students are reloaded
+    _prepareTabChange(index);
+  }
+
+  // Helper to prepare the tab change and perform async reloads
+  void _prepareTabChange(int index) async {
+    try {
+      if (index == 2 && userRole.value == 'guru') {
+        if (Get.isRegistered<AttendanceStateManager>()) {
+          await Get.find<AttendanceStateManager>().fetchAllTodayAttendance();
+        }
+        if (Get.isRegistered<StudentListController>()) {
+          await Get.find<StudentListController>().fetchStudents();
+        }
+      }
+    } catch (_) {}
+
+    // Finally set the selected index so the view becomes visible
     selectedIndex.value = index;
   }
 

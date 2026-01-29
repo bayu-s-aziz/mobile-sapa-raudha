@@ -113,7 +113,11 @@ class StudentListController extends GetxController {
     try {
       // If group not provided, use selectedGroup default (which may be 'A,B')
       final usedGroup = group ?? selectedGroup.value;
-      final studentsData = await _studentService.getStudents(group: usedGroup);
+      // Request all students in a single page (no pagination)
+      final studentsData = await _studentService.getStudents(
+        group: usedGroup,
+        perPage: 9999,
+      );
 
       final students = studentsData.map((data) {
         // Normalize photo URL when possible so Avatar gets an absolute URL
