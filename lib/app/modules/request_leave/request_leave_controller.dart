@@ -10,6 +10,7 @@ import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/modules/leave_list/leave_list_controller.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
+import 'package:sapa_raudha/app/routes/app_pages.dart';
 
 class RequestLeaveController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -121,9 +122,13 @@ class RequestLeaveController extends GetxController {
     );
     if (!success) return;
 
-    // Close the request page and refresh leave list
+    // Close the request page if it's open via route, otherwise clear action view
     try {
-      Get.back(); // close RequestLeaveView
+      if (Get.currentRoute == Routes.requestLeave) {
+        Get.back();
+      } else if (Get.isRegistered<HomeController>()) {
+        Get.find<HomeController>().clearActionView();
+      }
     } catch (_) {}
 
     final home = Get.isRegistered<HomeController>()
@@ -133,8 +138,11 @@ class RequestLeaveController extends GetxController {
         ? Get.find<LeaveListController>()
         : null;
 
-    home?.changeTabIndex(2);
-    await leaveList?.fetchLeaves();
+    // Ensure the Izin tab is active and refresh list
+    try {
+      home?.changeTabIndex(2);
+      await leaveList?.fetchLeaves();
+    } catch (_) {}
   }
 
   Future<bool> _performSubmit({

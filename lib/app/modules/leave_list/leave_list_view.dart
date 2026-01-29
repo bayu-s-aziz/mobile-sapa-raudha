@@ -142,6 +142,45 @@ class LeaveListView extends GetView<LeaveListController> {
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
+                              if (status.toLowerCase() == 'pending') ...[
+                                const SizedBox(height: 12),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    TextButton.icon(
+                                      onPressed: () async {
+                                        final confirmed =
+                                            await Get.defaultDialog<bool>(
+                                              title: 'Konfirmasi',
+                                              middleText:
+                                                  'Yakin ingin membatalkan izin ini?',
+                                              textConfirm: 'Ya',
+                                              textCancel: 'Batal',
+                                              onConfirm: () {
+                                                Get.back(result: true);
+                                              },
+                                              onCancel: () {
+                                                Get.back(result: false);
+                                              },
+                                            );
+                                        if (confirmed == true) {
+                                          controller.deleteLeave(leave['id']);
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                      label: Text(
+                                        'Hapus',
+                                        style: textTheme.labelLarge?.copyWith(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ],
                           ),
                         ),

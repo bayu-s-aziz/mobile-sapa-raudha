@@ -49,6 +49,16 @@ class LeaveListController extends GetxController {
     Get.toNamed(Routes.requestLeave);
   }
 
+  Future<void> deleteLeave(dynamic id) async {
+    try {
+      await _leaveService.delete(id);
+      SnackbarHelper.showSuccess('Izin berhasil dibatalkan');
+      await fetchLeaves();
+    } catch (e) {
+      SnackbarHelper.showError('Gagal membatalkan izin: $e');
+    }
+  }
+
   String getStatusLabel(String status) {
     switch (status.toLowerCase()) {
       case 'pending':
