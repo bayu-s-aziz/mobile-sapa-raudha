@@ -51,7 +51,7 @@ class ScanPresenceController extends GetxController {
       final String? code = barcodes.first.rawValue;
 
       if (code != null && code.isNotEmpty) {
-        final nis = _extractNis(code);
+        final nis = extractNis(code);
         if (nis == null) {
           SnackbarHelper.showError('QR tidak berisi NIS yang valid.');
           // briefly show the scanned code then reset
@@ -87,7 +87,7 @@ class ScanPresenceController extends GetxController {
   /// - JSON like {"nis": "12345"}
   /// - plain 'NIS:12345' or 'nis=12345'
   /// - plain digits (takes first sequence of digits of length >= 4)
-  String? _extractNis(String raw) {
+  String? extractNis(String raw) {
     final trimmed = raw.trim();
     // Try parse JSON
     try {
@@ -164,6 +164,10 @@ class ScanPresenceController extends GetxController {
       await HapticFeedback.mediumImpact();
     } catch (_) {}
   }
+
+  @visibleForTesting
+  Future<void> submitAttendanceForTest(String nis) async =>
+      _submitAttendance(nis);
 
   Future<void> _submitAttendance(String nis) async {
     try {
