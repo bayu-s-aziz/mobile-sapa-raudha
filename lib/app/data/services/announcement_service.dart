@@ -100,7 +100,7 @@ class AnnouncementService extends GetxService {
       if (effectiveAuthorId != null) 'author_id': effectiveAuthorId,
     };
 
-    final res = await _api.post('/announcements', body);
+    final res = await _api.post('/announcements', body, needsAuth: true);
     return res;
   }
 

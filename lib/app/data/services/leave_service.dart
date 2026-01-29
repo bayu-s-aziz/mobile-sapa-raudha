@@ -40,7 +40,7 @@ class LeaveService extends GetxService {
       return res;
     }
 
-    final res = await _api.post('/leave-requests', payload);
+    final res = await _api.post('/leave-requests', payload, needsAuth: true);
     return res;
   }
 
@@ -134,6 +134,7 @@ class LeaveService extends GetxService {
     final res = await _api.post(
       '/leave-requests/${id.toString()}/approve',
       payload,
+      needsAuth: true,
     );
     return res;
   }
@@ -153,13 +154,15 @@ class LeaveService extends GetxService {
     final res = await _api.post('/leave-requests/${id.toString()}/reject', {
       if (rejectionReason != null) 'review_notes': rejectionReason,
       if (resolvedReviewerId != null) 'reviewed_by': resolvedReviewerId,
-    });
+    }, needsAuth: true);
     return res;
   }
 
   /// Bulk approve leave requests
   Future<Map<String, dynamic>> bulkApprove(List<dynamic> ids) async {
-    final res = await _api.post('/leave-requests/bulk-approve', {'ids': ids});
+    final res = await _api.post('/leave-requests/bulk-approve', {
+      'ids': ids,
+    }, needsAuth: true);
     return res;
   }
 
@@ -171,7 +174,7 @@ class LeaveService extends GetxService {
     final res = await _api.post('/leave-requests/bulk-reject', {
       'ids': ids,
       if (rejectionReason != null) 'rejection_reason': rejectionReason,
-    });
+    }, needsAuth: true);
     return res;
   }
 

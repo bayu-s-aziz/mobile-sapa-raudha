@@ -55,7 +55,7 @@ class AppLifecycleService extends GetxService with WidgetsBindingObserver {
         }
       }
 
-      if (token == null || (token is String && token.isEmpty)) {
+      if (token == null || (token.isEmpty)) {
         developer.log(
           '[Lifecycle] No auth token present - skipping validation',
           name: 'AppLifecycleService',

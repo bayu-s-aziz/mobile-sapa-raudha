@@ -3,16 +3,57 @@ import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'dart:developer' as developer;
 import 'package:intl/intl.dart';
+import 'attendance_state_manager.dart';
 
 class AttendanceService extends GetxService {
   late final ApiClient _api;
   late final LocalStorageService _storage;
+  AttendanceStateManager? _attendanceStateManager;
 
   @override
   void onInit() {
     super.onInit();
     _api = Get.find<ApiClient>();
     _storage = Get.find<LocalStorageService>();
+    // optional: AttendanceStateManager may not be registered in unit tests
+    if (Get.isRegistered<AttendanceStateManager>()) {
+      _attendanceStateManager = Get.find<AttendanceStateManager>();
+    }
+  }
+
+  void _maybeSyncAttendance(Map<String, dynamic> res) {
+    try {
+      final mgr = _attendanceStateManager;
+      if (mgr == null) return;
+
+      Map<String, dynamic>? record;
+      dynamic studentIdRaw;
+
+      if (res['data'] is Map) {
+        record = Map<String, dynamic>.from(res['data'] as Map);
+        studentIdRaw = record['student_id'] ?? record['studentId'];
+      } else if (res['attendance'] is Map) {
+        record = Map<String, dynamic>.from(res['attendance'] as Map);
+        studentIdRaw = record['student_id'] ?? record['studentId'];
+      } else if (res['student'] is Map && res['attendance'] is Map) {
+        final student = res['student'] as Map;
+        studentIdRaw = student['id'];
+        record = Map<String, dynamic>.from(res['attendance'] as Map);
+      } else if (res['student'] is Map && res['data'] is Map) {
+        final student = res['student'] as Map;
+        studentIdRaw = student['id'];
+        record = Map<String, dynamic>.from(res['data'] as Map);
+      }
+
+      if (studentIdRaw == null || record == null || record.isEmpty) return;
+
+      final sid = studentIdRaw is int
+          ? studentIdRaw
+          : int.tryParse(studentIdRaw.toString());
+      if (sid == null) return;
+
+      mgr.updateAttendance(sid, record);
+    } catch (_) {}
   }
 
   /// Get attendance records with optional filtering
@@ -299,6 +340,13 @@ class AttendanceService extends GetxService {
     try {
       final res = await _api.post('/attendance/scan', payload, needsAuth: true);
       developer.log('scanAttendance response: $res', name: 'AttendanceService');
+
+      // Sync successful scan/create/update result to shared state manager so
+      // student list / detail views update in real time
+      try {
+        _maybeSyncAttendance(res);
+      } catch (_) {}
+
       return res;
     } on ApiException catch (e, st) {
       developer.log(
@@ -378,13 +426,60 @@ class AttendanceService extends GetxService {
           final timeFormatter = DateFormat('HH:mm:ss');
           final nowTime = timeFormatter.format(DateTime.now());
           if (todayRecord == null) {
-            final createRes = await createAttendance({
-              'student_id': studentId,
-              'date': today,
-              'status': 'hadir',
-              'check_in': nowTime,
-            });
-            return createRes;
+            // Try create attendance; if server rejects check_in format (422), retry
+            final List<String> alternateTimes = [
+              DateFormat('HH:mm').format(DateTime.now()),
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+            ];
+
+            try {
+              final createRes = await createAttendance({
+                'student_id': studentId,
+                'date': today,
+                'status': 'hadir',
+                'check_in': nowTime,
+              });
+              return createRes;
+            } on ApiException catch (e) {
+              // If validation error for check_in, try alternate formats
+              final body = e.body;
+              final hasCheckInError =
+                  body is Map &&
+                  (body['check_in'] != null ||
+                      (body.values.any(
+                        (v) => v.toString().toLowerCase().contains('check in'),
+                      )));
+              if (e.statusCode == 422 && hasCheckInError) {
+                developer.log(
+                  'createAttendance failed validation for check_in, trying alternate formats',
+                  name: 'AttendanceService',
+                );
+                for (final alt in alternateTimes) {
+                  try {
+                    final createRes2 = await createAttendance({
+                      'student_id': studentId,
+                      'date': today,
+                      'status': 'hadir',
+                      'check_in': alt,
+                    });
+                    developer.log(
+                      'createAttendance succeeded with alternate check_in: $alt',
+                      name: 'AttendanceService',
+                    );
+                    return createRes2;
+                  } catch (e2) {
+                    developer.log(
+                      'Alternate check_in $alt failed: $e2',
+                      name: 'AttendanceService',
+                    );
+                    continue;
+                  }
+                }
+              }
+
+              // Re-throw original exception if we couldn't recover
+              rethrow;
+            }
           }
 
           // 5) Attendance exists. If confirmCheckout flag present, perform checkout update
@@ -398,17 +493,21 @@ class AttendanceService extends GetxService {
             final updateRes = await updateAttendance(attendanceId, {
               'check_out': nowTime,
             });
+
+            try {
+              _maybeSyncAttendance(updateRes);
+            } catch (_) {}
+
             return updateRes;
           }
 
-          // If we reach here, attendance exists and checkout not confirmed yet
-          // Return an object that signals the controller to ask for confirmation
-          final response = {
+          // If we reach here, attendance exists but confirmCheckout was not passed;
+          // signal to the caller that checkout confirmation is required.
+          return {
             'confirm_checkout': true,
             'student': student,
             'attendance': todayRecord,
           };
-          return response;
         } catch (fallbackError, fallbackSt) {
           developer.log(
             'Fallback attempt failed: $fallbackError',

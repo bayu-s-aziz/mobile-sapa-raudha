@@ -329,7 +329,7 @@ class ApiClient extends GetxService {
       }
     }
 
-    final sendMultipartRequest = (String? authToken) async {
+    Future<http.Response> sendMultipartRequest(String? authToken) async {
       final req = http.MultipartRequest('POST', Uri.parse('$baseUrl$path'));
       if (authToken != null && authToken.isNotEmpty) {
         req.headers['Authorization'] = 'Bearer $authToken';
@@ -339,7 +339,7 @@ class ApiClient extends GetxService {
       req.files.add(await http.MultipartFile.fromPath(fileField, filePath));
       final streamed = await req.send();
       return await http.Response.fromStream(streamed);
-    };
+    }
 
     final response = await sendMultipartRequest(token);
 

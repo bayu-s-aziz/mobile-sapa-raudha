@@ -8,13 +8,19 @@ class DummyAttendanceService extends AttendanceService {
   bool confirmCheckoutCalled = false;
 
   @override
-  Future<Map<String, dynamic>> scanAttendance(dynamic code, {bool confirmCheckout = false}) async {
+  Future<Map<String, dynamic>> scanAttendance(
+    dynamic code, {
+    bool confirmCheckout = false,
+  }) async {
     lastCode = code;
     if (confirmCheckout) confirmCheckoutCalled = true;
 
     // Simulate create attendance response with check_in
     if (code == '123456') {
-      return {'data': {'check_in': '08:00:00'}, 'student': {'name': 'Test Student'}};
+      return {
+        'data': {'check_in': '08:00:00'},
+        'student': {'name': 'Test Student'},
+      };
     }
 
     // Simulate existing attendance requiring checkout confirmation
@@ -22,7 +28,7 @@ class DummyAttendanceService extends AttendanceService {
       return {
         'confirm_checkout': true,
         'student': {'name': 'Already Present'},
-        'attendance': {'id': 9, 'check_in': '07:50:00'}
+        'attendance': {'id': 9, 'check_in': '07:50:00'},
       };
     }
 
@@ -33,22 +39,11 @@ class DummyAttendanceService extends AttendanceService {
   @override
   Future<Map<String, dynamic>?> findStudentByNis(String nis) async {
     if (nis == '123456') return {'id': 1, 'name': 'Test Student', 'nis': nis};
-    if (nis == '654321') return {'id': 2, 'name': 'Already Present', 'nis': nis};
+    if (nis == '654321')
+      return {'id': 2, 'name': 'Already Present', 'nis': nis};
     return null;
   }
 }
-
-void main() {
-  group('ScanPresenceController _extractNis', () {
-    late ScanPresenceController ctrl;
-
-    setUp(() {
-      Get.testMode = true;
-      Get.reset();
-      ctrl = ScanPresenceController();
-    });
-
-    });
 
 // Test helper controller that overrides dialog behavior and vibration
 class TestScanPresenceController extends ScanPresenceController {
@@ -68,6 +63,36 @@ class TestScanPresenceController extends ScanPresenceController {
   }
 }
 
+void main() {
+  group('ScanPresenceController extractNis', () {
+    late ScanPresenceController ctrl;
+
+    setUp(() {
+      Get.testMode = true;
+      Get.reset();
+      ctrl = ScanPresenceController();
+    });
+
+    test('extracts 6-digit NIS from JSON', () {
+      final raw = '{"nis":"123456"}';
+      expect(ctrl.extractNis(raw), '123456');
+    });
+
+    test('extracts 6-digit NIS from plain digits', () {
+      final raw = '123456';
+      expect(ctrl.extractNis(raw), '123456');
+    });
+
+    test('prefers 6-digit and not shorter sequences', () {
+      final raw = 'NIS: 0123456'; // 7 digits
+      expect(ctrl.extractNis(raw), '0123456');
+    });
+
+    test('returns null for non-digit content', () {
+      final raw = 'hello world';
+      expect(ctrl.extractNis(raw), isNull);
+    });
+  });
 
   group('ScanPresenceController integration flows', () {
     late ScanPresenceController ctrl;
@@ -84,22 +109,22 @@ class TestScanPresenceController extends ScanPresenceController {
 
     test('extracts 6-digit NIS from JSON', () {
       final raw = '{"nis":"123456"}';
-      expect(ctrl._extractNis(raw), '123456');
+      expect(ctrl.extractNis(raw), '123456');
     });
 
     test('extracts 6-digit NIS from plain digits', () {
       final raw = '123456';
-      expect(ctrl._extractNis(raw), '123456');
+      expect(ctrl.extractNis(raw), '123456');
     });
 
     test('prefers 6-digit and not shorter sequences', () {
       final raw = 'NIS: 0123456'; // 7 digits
-      expect(ctrl._extractNis(raw), '0123456');
+      expect(ctrl.extractNis(raw), '0123456');
     });
 
     test('returns null for non-digit content', () {
       final raw = 'hello world';
-      expect(ctrl._extractNis(raw), isNull);
+      expect(ctrl.extractNis(raw), isNull);
     });
   });
 
@@ -116,23 +141,29 @@ class TestScanPresenceController extends ScanPresenceController {
       ctrl.onInit();
     });
 
-    test('submits attendance for check-in when NIS present and vibrates', () async {
-      await ctrl._submitAttendance('123456');
-      expect(svc.lastCode, '123456');
-      expect(ctrl.vibrated, isTrue);
-    });
+    test(
+      'submits attendance for check-in when NIS present and vibrates',
+      () async {
+        await ctrl.submitAttendanceForTest('123456');
+        expect(svc.lastCode, '123456');
+        expect(ctrl.vibrated, isTrue);
+      },
+    );
 
-    test('prompts checkout when required and handles confirm and vibrates', () async {
-      // Simulate server indicating checkout required
-      final res = await svc.scanAttendance('654321');
-      expect(res['confirm_checkout'], isTrue);
+    test(
+      'prompts checkout when required and handles confirm and vibrates',
+      () async {
+        // Simulate server indicating checkout required
+        final res = await svc.scanAttendance('654321');
+        expect(res['confirm_checkout'], isTrue);
 
-      // Now simulate confirming checkout via controller flow
-      // We directly call _submitAttendance which will prompt and then perform checkout
-      await ctrl._submitAttendance('654321');
-      // Confirm that service was asked to perform checkout
-      expect(svc.confirmCheckoutCalled, isTrue);
-      expect(ctrl.vibrated, isTrue);
-    });
+        // Now simulate confirming checkout via controller flow
+        // We directly call _submitAttendance which will prompt and then perform checkout
+        await ctrl.submitAttendanceForTest('654321');
+        // Confirm that service was asked to perform checkout
+        expect(svc.confirmCheckoutCalled, isTrue);
+        expect(ctrl.vibrated, isTrue);
+      },
+    );
   });
 }

@@ -12,6 +12,14 @@ class StudentListView extends GetView<StudentListController> {
 
   @override
   Widget build(BuildContext context) {
+    // Refresh student list when the page becomes visible so the data is
+    // always up-to-date when the user accesses this screen.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        controller.fetchStudents();
+      } catch (_) {}
+    });
+
     return Scaffold(
       body: FloatingPage(
         title: 'Data Siswa',

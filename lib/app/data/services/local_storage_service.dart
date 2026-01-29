@@ -6,7 +6,13 @@ import 'package:get_storage/get_storage.dart';
 /// A thin wrapper around GetStorage providing simple read/save/remove helpers.
 /// This keeps app-wide storage consistent and easily testable.
 class LocalStorageService extends GetxService {
-  final GetStorage _box = GetStorage();
+  late final GetStorage _box;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _box = GetStorage();
+  }
 
   /// Save any primitive or Map/List value by key.
   /// Maps/Lists are stored as JSON strings to ensure type safety on read.

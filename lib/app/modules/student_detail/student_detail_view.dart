@@ -14,6 +14,16 @@ class StudentDetailView extends GetView<StudentDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    // Ensure we refresh attendance when the page is shown (e.g., after
+    // navigating back to this route). Using a post-frame callback avoids
+    // calling during build and triggers once per rebuild when the page
+    // becomes visible.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        controller.refreshTodayAttendance();
+      } catch (_) {}
+    });
+
     final homeController = Get.isRegistered<HomeController>()
         ? Get.find<HomeController>()
         : null;

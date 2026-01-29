@@ -113,15 +113,19 @@ class RequestLeaveController extends GetxController {
 
     if (confirmed != true) return;
 
-    // Close the request page immediately (so parent returns to Izin list)
+    // Perform submission and close the page only on success so user sees
+    // validation errors if something goes wrong.
+    final success = await _performSubmit(
+      requestDate: requestDate,
+      reason: reason,
+    );
+    if (!success) return;
+
+    // Close the request page and refresh leave list
     try {
       Get.back(); // close RequestLeaveView
     } catch (_) {}
 
-    // Proceed with actual submission in background
-    await _performSubmit(requestDate: requestDate, reason: reason);
-
-    // After submission, refresh leave list and ensure Izin tab is active
     final home = Get.isRegistered<HomeController>()
         ? Get.find<HomeController>()
         : null;

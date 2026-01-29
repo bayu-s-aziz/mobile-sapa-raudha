@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:developer' as developer;
+import 'package:intl/intl.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'dart:io' show Platform;
 
@@ -78,9 +79,7 @@ class ScanPresenceController extends GetxController {
   }
 
   void _showPresenceConfirmation(String studentInfo) {
-    SnackbarHelper.showSuccess(
-      "Presensi masuk untuk: $studentInfo berhasil disimpan.",
-    );
+    SnackbarHelper.showSuccess('Kehadiran siswa berhasil disimpan');
   }
 
   /// Try to extract NIS from QR content. Supports:
@@ -181,6 +180,65 @@ class ScanPresenceController extends GetxController {
 
       final studentName = student?['name']?.toString() ?? nis;
 
+      // Check if today's attendance already exists for this student; if so, skip
+      // the 'Konfirmasi Hadir' and go straight to checkout confirmation.
+      bool hasTodayAttendance = false;
+      try {
+        final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
+        final String today = dateFormatter.format(DateTime.now());
+        final attRes = await _attendanceService.getAttendance(
+          studentId: student?['id'],
+          date: today,
+        );
+        final attItems =
+            attRes['data'] ?? attRes['attendance'] ?? attRes['items'] ?? [];
+        if (attItems is List && attItems.isNotEmpty) {
+          hasTodayAttendance = true;
+        }
+      } catch (_) {
+        hasTodayAttendance = false;
+      }
+
+      if (hasTodayAttendance) {
+        // Directly prompt for checkout
+        final confirmed = await Get.dialog<bool>(
+          AlertDialog(
+            title: const Text('Konfirmasi Pulang'),
+            content: Text(
+              'Siswa $studentName telah melakukan presensi masuk. Konfirmasi untuk mencatat pulang?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Get.back(result: false),
+                child: const Text('Batal'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.back(result: true),
+                child: const Text('Konfirmasi Pulang'),
+              ),
+            ],
+          ),
+        );
+
+        if (confirmed == true) {
+          try {
+            await _attendanceService.scanAttendance(nis, confirmCheckout: true);
+            SnackbarHelper.showSuccess('Kepulangan Siswa berhasil disimpan');
+            try {
+              vibrate();
+            } catch (_) {}
+          } catch (e) {
+            SnackbarHelper.showError('Gagal mencatat pulang: $e');
+          }
+        } else {
+          // User cancelled - do nothing
+        }
+
+        // Done with checkout flow
+        return;
+      }
+
+      // No attendance yet - confirm check-in
       final confirmed = await showCheckInConfirmation(
         'Konfirmasi Hadir',
         'Apakah Anda yakin akan mencatat hadir untuk $studentName (NIS: $nis)?',
@@ -215,18 +273,11 @@ class ScanPresenceController extends GetxController {
             ],
           ),
         );
-
         if (confirmed == true) {
           try {
             // Send confirm flag to the scan endpoint
-            final checkoutRes = await _attendanceService.scanAttendance(
-              nis,
-              confirmCheckout: true,
-            );
-            final name = checkoutRes['student']?['name'] ?? nis;
-            SnackbarHelper.showSuccess(
-              'Presensi pulang untuk $name berhasil disimpan.',
-            );
+            await _attendanceService.scanAttendance(nis, confirmCheckout: true);
+            SnackbarHelper.showSuccess('Kepulangan Siswa berhasil disimpan');
             try {
               vibrate();
             } catch (_) {}
@@ -254,9 +305,7 @@ class ScanPresenceController extends GetxController {
 
         final name = res['student']?['name'] ?? nis;
         if (checkIn != null && checkIn.isNotEmpty) {
-          SnackbarHelper.showSuccess(
-            'Presensi masuk untuk $name berhasil disimpan pada $checkIn.',
-          );
+          SnackbarHelper.showSuccess('Kehadiran siswa berhasil disimpan');
           // Haptic feedback for success
           try {
             vibrate();

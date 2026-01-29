@@ -67,37 +67,40 @@ class CreateAnnouncementController extends GetxController {
     pickedFile.value = null; // Hapus file
   }
 
-  void submitAnnouncement() {
-    if (formKey.currentState?.validate() ?? false) {
-      isLoading(true);
-      final attachmentPath = pickedFile.value?.path;
+  Future<void> submitAnnouncement() async {
+    if (!(formKey.currentState?.validate() ?? false)) return;
+    isLoading(true);
+    final attachmentPath = pickedFile.value?.path;
 
-      _announcementService
-          .addAnnouncement(
-            title: titleController.text.trim(),
-            content: contentController.text.trim(),
-            attachment: attachmentPath != null ? File(attachmentPath) : null,
-            authorId: Get.find<ProfileService>().getUserableId(),
-            targetAudience: 'all',
-          )
-          .then((_) {
-            Get.back();
-            SnackbarHelper.showSuccess('Pengumuman berhasil dipublikasikan.');
+    try {
+      await _announcementService.addAnnouncement(
+        title: titleController.text.trim(),
+        content: contentController.text.trim(),
+        attachment: attachmentPath != null ? File(attachmentPath) : null,
+        authorId: Get.find<ProfileService>().getUserableId(),
+        targetAudience: 'all',
+      );
 
-            _homeController.refreshAnnouncements();
+      // Close the create page on success
+      // Close create-announcement and switch to announcements tab so the
+      // user sees the updated list.
+      try {
+        _homeController.changeTabIndex(1);
+      } catch (_) {}
 
-            if (Get.isRegistered<AnnouncementListController>() &&
-                Get.currentRoute == Routes.announcementList) {
-              final listController = Get.find<AnnouncementListController>();
-              listController.fetchAnnouncements();
-            }
-          })
-          .catchError((e) {
-            SnackbarHelper.showError('Terjadi kesalahan: $e');
-          })
-          .whenComplete(() {
-            isLoading(false);
-          });
+      SnackbarHelper.showSuccess('Pengumuman berhasil dipublikasikan.');
+
+      _homeController.refreshAnnouncements();
+
+      if (Get.isRegistered<AnnouncementListController>() &&
+          Get.currentRoute == Routes.announcementList) {
+        final listController = Get.find<AnnouncementListController>();
+        listController.fetchAnnouncements();
+      }
+    } catch (e) {
+      SnackbarHelper.showError('Terjadi kesalahan: $e');
+    } finally {
+      isLoading(false);
     }
   }
 

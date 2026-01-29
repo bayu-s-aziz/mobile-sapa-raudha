@@ -81,6 +81,10 @@ class StudentDetailController extends GetxController {
     }
   }
 
+  /// Public method to force refresh today's attendance. Call this whenever
+  /// the page is shown to ensure the UI displays the latest data.
+  Future<void> refreshTodayAttendance() async => await _fetchTodayAttendance();
+
   Student _mapToStudent(Map<String, dynamic> data, Student current) {
     return Student(
       id: (data['id'] ?? current.id).toString(),
@@ -398,15 +402,20 @@ class StudentDetailController extends GetxController {
                   }
                 }
 
-                // Refresh attendance data and sync to state manager
-                await _fetchTodayAttendance();
+                // Force refresh attendance data from server (do not rely on cached value)
+                final refreshed = await _attendanceStateManager
+                    .fetchTodayAttendance(studentId);
+                todayAttendance.value = refreshed;
 
-                // Sync to state manager
-                if (todayAttendance.value != null) {
+                // Sync to state manager using freshest data
+                if (refreshed != null) {
                   await _attendanceStateManager.updateAttendance(
                     studentId,
-                    todayAttendance.value!,
+                    refreshed,
                   );
+                } else {
+                  // If server returned no record, ensure cache is cleared
+                  await _attendanceStateManager.updateAttendance(studentId, {});
                 }
 
                 // Update home controller if registered
