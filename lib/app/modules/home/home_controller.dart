@@ -58,6 +58,12 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   final RxBool isLoadingStats = false.obs;
   final RxInt pendingLeaveCount = 0.obs;
   final RxMap<String, int> attendanceStats = <String, int>{}.obs;
+  // Last raw response from getStatsToday (for debug)
+  final Rxn<Map<String, dynamic>> lastStatsResponse =
+      Rxn<Map<String, dynamic>>();
+  final RxString statsError = ''.obs;
+  // Cached profile preview for debugging class id resolution
+  final Rxn<Map<String, dynamic>> profilePreview = Rxn<Map<String, dynamic>>();
   final RxInt unreadAnnouncementCount = 0.obs;
 
   final DateFormat _dateFormatter = DateFormat('yyyy-MM-dd');
@@ -73,6 +79,10 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         _profileService.getStoredRole() ?? _storage.read<String>('role');
     final roleArg = Get.arguments as String?;
     userRole.value = storedRole ?? roleArg ?? 'default';
+    developer.log(
+      'HomeController.onInit: role resolved => ${userRole.value}',
+      name: 'HomeController',
+    );
 
     _hydrateFromCache();
     fetchRecentAnnouncements();
@@ -86,6 +96,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     final cachedProfile = _profileService.getStoredProfile();
     if (cachedProfile != null) {
       _applyProfile(cachedProfile);
+      profilePreview.value = Map<String, dynamic>.from(cachedProfile);
     }
   }
 
@@ -94,6 +105,21 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     try {
       final profile = await _profileService.fetchProfile();
       _applyProfile(profile);
+      // Cache profile for debugging
+      profilePreview.value = Map<String, dynamic>.from(profile);
+
+      // Pastikan role diperbarui berdasarkan data profil yang baru saja diambil.
+      final roleFromProfile = _profileService.getUserRole();
+      if (roleFromProfile != null && roleFromProfile.isNotEmpty) {
+        userRole.value = roleFromProfile;
+      }
+
+      // Setelah role ditetapkan, muat statistik jika ini akun guru
+      if (userRole.value == 'guru' || userRole.value == 'teacher') {
+        await fetchAttendanceStats();
+        await fetchPendingLeaveCount();
+      }
+
       fetchChildTodayStatus();
     } catch (e) {
       SnackbarHelper.showError('Gagal memuat profil: $e');
@@ -163,18 +189,175 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   }
 
   Future<void> fetchAttendanceStats() async {
-    if (userRole.value != 'guru') return;
+    // Terima juga legacy role 'teacher' jika ada pada token/stored role
+    if (userRole.value != 'guru' && userRole.value != 'teacher') {
+      developer.log(
+        'fetchAttendanceStats skipped due to role=${userRole.value}',
+        name: 'HomeController',
+      );
+      return;
+    }
+
     isLoadingStats(true);
+    developer.log(
+      'fetchAttendanceStats: starting for role=${userRole.value}',
+      name: 'HomeController',
+    );
     try {
-      final res = await _attendanceService.getStatsToday();
+      // Try to resolve classId from profile or storage so we request class-specific stats
+      int? resolveClassId() {
+        try {
+          final profile =
+              profilePreview.value ?? _profileService.getStoredProfile();
+          if (profile != null) {
+            int? findInMap(Map m) {
+              final keys = [
+                'class_id',
+                'kelas_id',
+                'class',
+                'kelas',
+                'classId',
+                'kelasId',
+                'room_id',
+                'homeroom_id',
+              ];
+              for (final k in keys) {
+                if (m.containsKey(k)) {
+                  final v = m[k];
+                  if (v is int) return v;
+                  if (v is String) {
+                    final parsed = int.tryParse(v);
+                    if (parsed != null) return parsed;
+                  }
+                  if (v is Map) {
+                    final id = v['id'] ?? v['class_id'] ?? v['kelas_id'];
+                    if (id is int) return id;
+                    if (id is String) {
+                      final p = int.tryParse(id);
+                      if (p != null) return p;
+                    }
+                  }
+                }
+              }
+
+              for (final e in m.entries) {
+                final val = e.value;
+                if (val is Map) {
+                  final found = findInMap(Map<String, dynamic>.from(val));
+                  if (found != null) return found;
+                }
+              }
+
+              return null;
+            }
+
+            final found = findInMap(Map<String, dynamic>.from(profile));
+            if (found != null) return found;
+          }
+        } catch (_) {}
+
+        // Fallback: check storage key 'class_id'
+        try {
+          final stored =
+              _storage.read<String>('class_id') ??
+              _storage.read<int>('class_id');
+          if (stored is int) return stored;
+          if (stored is String) return int.tryParse(stored);
+        } catch (_) {}
+
+        return null;
+      }
+
+      final classId = resolveClassId();
+      developer.log(
+        'fetchAttendanceStats: resolved classId=$classId',
+        name: 'HomeController',
+      );
+
+      final res = await _attendanceService.getStatsToday(classId: classId);
+      developer.log(
+        'fetchAttendanceStats: api response=$res',
+        name: 'HomeController',
+      );
+
+      // Save raw response for debugging (UI & tests can display it)
+      lastStatsResponse.value = Map<String, dynamic>.from(res);
+      statsError.value = '';
+
+      // Normalize response safely in case backend shape differs
+      int parseInt(dynamic v) {
+        if (v == null) return 0;
+        if (v is int) return v;
+        if (v is num) return v.toInt();
+        if (v is String) return int.tryParse(v) ?? 0;
+        return 0;
+      }
+
+      final total = parseInt(
+        res['total_records'] ?? res['total_students'] ?? res['total'],
+      );
+
+      // Support both nested 'today' and flat responses like { present: 122, present_percentage: ... }
+      final today = res['today'] is Map<String, dynamic>
+          ? Map<String, dynamic>.from(res['today'] as Map)
+          : <String, dynamic>{};
+
+      int present = parseInt(
+        today['present'] ?? res['present'] ?? res['present_count'],
+      );
+      final sick = parseInt(today['sick'] ?? res['sick'] ?? res['sick_count']);
+      final permit = parseInt(
+        today['permit'] ?? res['permit'] ?? res['permit_count'],
+      );
+      final absent = parseInt(
+        today['absent'] ?? res['absent'] ?? res['absent_count'],
+      );
+
+      // If present not provided but percentage exists, approximate present from percentage
+      if (present == 0 &&
+          (res['present_percentage'] is num ||
+              res['present_percentage'] is String) &&
+          total > 0) {
+        final p = res['present_percentage'];
+        final perc = p is num
+            ? p.toDouble()
+            : double.tryParse(p.toString()) ?? 0.0;
+        present = ((perc / 100.0) * total).round();
+      }
+
+      // 'done' dihitung sebagai jumlah siswa yang sudah melakukan presensi (hadir, sakit, izin)
+      final done = present + sick + permit;
+      final donePercent = total == 0 ? 0 : ((done * 100) / total).round();
+
+      developer.log(
+        'fetchAttendanceStats: derived total=$total present=$present sick=$sick permit=$permit absent=$absent done=$done donePercent=$donePercent',
+        name: 'HomeController',
+      );
+
       attendanceStats.assignAll({
-        'total': res['total_students'] as int? ?? 0,
-        'present': res['today']?['present'] as int? ?? 0,
-        'sick': res['today']?['sick'] as int? ?? 0,
-        'permit': res['today']?['permit'] as int? ?? 0,
-        'absent': res['today']?['absent'] as int? ?? 0,
+        'total': total,
+        'present': present,
+        'sick': sick,
+        'permit': permit,
+        'absent': absent,
+        'done': done,
+        'done_percent': donePercent,
       });
-    } catch (e) {
+
+      // Update raw response in case parsing changed values
+      try {
+        lastStatsResponse.value = Map<String, dynamic>.from(res);
+      } catch (_) {
+        lastStatsResponse.value = {'raw': res};
+      }
+      statsError.value = '';
+    } catch (e, st) {
+      developer.log(
+        'fetchAttendanceStats error: $e\n$st',
+        name: 'HomeController',
+      );
+      statsError.value = e.toString();
+      lastStatsResponse.value = null;
       SnackbarHelper.showError('Gagal memuat statistik presensi: $e');
     } finally {
       isLoadingStats(false);

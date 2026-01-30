@@ -103,8 +103,12 @@ class AttendanceService extends GetxService {
         .map((e) => '${e.key}=${e.value}')
         .join('&');
 
-    final res = await _api.get(
-      '/attendance/statistics${queryString.isNotEmpty ? '?$queryString' : ''}',
+    final path =
+        '/attendance/statistics${queryString.isNotEmpty ? '?$queryString' : ''}';
+    final res = await _api.get(path);
+    developer.log(
+      'AttendanceService.getStatistics request=$path response=$res',
+      name: 'AttendanceService',
     );
     return res;
   }

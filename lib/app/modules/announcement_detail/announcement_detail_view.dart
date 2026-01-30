@@ -7,6 +7,7 @@ import 'package:sapa_raudha/app/modules/announcement_detail/announcement_detail_
 import 'package:sapa_raudha/app/modules/home/home_controller.dart';
 import 'package:sapa_raudha/app/data/services/api_client.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // --- MODIFIKASI BAGIAN INI ---
 class AnnouncementDetailView extends StatelessWidget {
@@ -146,7 +147,7 @@ class AnnouncementDetailView extends StatelessWidget {
                   itemCount: announcement.attachments.length,
                   itemBuilder: (context, index) {
                     final attachment = announcement.attachments[index];
-                    final rawUrl = attachment['file_url'] ?? attachment['url'];
+                    final rawUrl = attachment['file_url'] ?? attachment['url'] ?? attachment['path'] ?? attachment['file_path'] ?? attachment['filename'];
                     final fileUrl =
                         rawUrl != null && rawUrl is String && rawUrl.isNotEmpty
                         ? Get.find<ApiClient>().buildFullUrl(rawUrl)
@@ -154,14 +155,117 @@ class AnnouncementDetailView extends StatelessWidget {
                     final fileName =
                         (attachment['file_name'] ??
                                 attachment['name'] ??
+                                attachment['filename'] ??
+                                attachment['title'] ??
                                 rawUrl ??
                                 'Lampiran')
                             .toString();
                     final isImage = _isImage(fileName, rawUrl);
 
+                    final hasUrl = fileUrl != null;
                     return GestureDetector(
-                      onTap: fileUrl != null
-                          ? () => controller.openAttachment(fileUrl)
+                      onTap: hasUrl
+                          ? () {
+                              final url = fileUrl as String;
+                              if (isImage) {
+                                // Show full screen image preview with pinch/zoom
+                                showDialog(
+                                  context: context,
+                                  builder: (ctx) => Dialog(
+                                    insetPadding: EdgeInsets.zero,
+                                    backgroundColor: Colors.transparent,
+                                    child: GestureDetector(
+                                      onTap: () => Navigator.of(ctx).pop(),
+                                      child: InteractiveViewer(
+                                        child: CachedNetworkImage(
+                                          imageUrl: url,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                          errorWidget: (context, url, error) =>
+                                              Center(
+                                                child: Icon(
+                                                  Icons.broken_image,
+                                                  color:
+                                                      AppColors.secondaryText,
+                                                ),
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                // Non-image: show action sheet with open/download option
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (ctx) {
+                                    return SafeArea(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              fileName,
+                                              style: Theme.of(
+                                                context,
+                                              ).textTheme.titleMedium,
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              url,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.copyWith(
+                                                    color:
+                                                        AppColors.secondaryText,
+                                                  ),
+                                            ),
+                                            const SizedBox(height: 12),
+                                            Row(
+                                              children: [
+                                                ElevatedButton.icon(
+                                                  icon: const Icon(
+                                                    Icons.open_in_new,
+                                                  ),
+                                                  label: const Text('Buka'),
+                                                  onPressed: () {
+                                                    Navigator.of(ctx).pop();
+                                                    controller.openAttachment(
+                                                      url,
+                                                    );
+                                                  },
+                                                ),
+                                                const SizedBox(width: 12),
+                                                ElevatedButton.icon(
+                                                  icon: const Icon(
+                                                    Icons.download,
+                                                  ),
+                                                  label: const Text('Unduh'),
+                                                  onPressed: () async {
+                                                    // Open externally (browser will usually download)
+                                                    Navigator.of(ctx).pop();
+                                                    controller.openAttachment(
+                                                      url,
+                                                    );
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            }
                           : null,
                       child: Container(
                         decoration: BoxDecoration(
