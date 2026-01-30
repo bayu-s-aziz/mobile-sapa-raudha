@@ -147,7 +147,7 @@ class AnnouncementDetailView extends StatelessWidget {
                   itemCount: announcement.attachments.length,
                   itemBuilder: (context, index) {
                     final attachment = announcement.attachments[index];
-                    final rawUrl = attachment['file_url'] ?? attachment['url'] ?? attachment['path'] ?? attachment['file_path'] ?? attachment['filename'];
+                    final rawUrl = attachment['file_url'] ?? attachment['url'];
                     final fileUrl =
                         rawUrl != null && rawUrl is String && rawUrl.isNotEmpty
                         ? Get.find<ApiClient>().buildFullUrl(rawUrl)
@@ -155,8 +155,6 @@ class AnnouncementDetailView extends StatelessWidget {
                     final fileName =
                         (attachment['file_name'] ??
                                 attachment['name'] ??
-                                attachment['filename'] ??
-                                attachment['title'] ??
                                 rawUrl ??
                                 'Lampiran')
                             .toString();

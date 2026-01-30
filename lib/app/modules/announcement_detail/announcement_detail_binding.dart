@@ -1,6 +1,7 @@
 // lib/app/modules/announcement_detail/announcement_detail_binding.dart
 import 'package:get/get.dart';
 import 'announcement_detail_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AnnouncementDetailBinding extends Bindings {
   @override
