@@ -104,7 +104,37 @@ class StudentProfileView extends GetView<StudentProfileController> {
                         icon: Icons.badge_outlined,
                         label: 'NISN',
                         value: student.nisn ?? '-',
-                      ),
+                      ), // Status Kehadiran Hari Ini
+                      Obx(() {
+                        final att = controller.todayAttendance.value;
+                        String statusLabel = 'Belum absen';
+                        if (att != null && att['status'] != null) {
+                          final s = (att['status'] as String).toLowerCase();
+                          switch (s) {
+                            case 'hadir':
+                              statusLabel = 'Hadir';
+                              break;
+                            case 'sakit':
+                              statusLabel = 'Sakit';
+                              break;
+                            case 'izin':
+                              statusLabel = 'Izin';
+                              break;
+                            case 'alpa':
+                            case 'alpha':
+                              statusLabel = 'Alpa';
+                              break;
+                            default:
+                              statusLabel = 'Belum absen';
+                          }
+                        }
+
+                        return _buildInfoTile(
+                          icon: Icons.event_available_outlined,
+                          label: 'Status Kehadiran (Hari ini)',
+                          value: statusLabel,
+                        );
+                      }),
                       _buildInfoTile(
                         icon: Icons.person_outline,
                         label: 'Jenis Kelamin',

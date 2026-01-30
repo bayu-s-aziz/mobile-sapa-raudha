@@ -39,8 +39,9 @@ class DummyAttendanceService extends AttendanceService {
   @override
   Future<Map<String, dynamic>?> findStudentByNis(String nis) async {
     if (nis == '123456') return {'id': 1, 'name': 'Test Student', 'nis': nis};
-    if (nis == '654321')
+    if (nis == '654321') {
       return {'id': 2, 'name': 'Already Present', 'nis': nis};
+    }
     return null;
   }
 }

@@ -68,6 +68,13 @@ class LeaveListController extends GetxController {
       await _leaveService.delete(id);
       SnackbarHelper.showSuccess('Izin berhasil dibatalkan');
       await fetchLeaves();
+
+      // Setelah menghapus pengajuan izin, sinkronkan status anak di dashboard
+      if (Get.isRegistered<HomeController>()) {
+        try {
+          Get.find<HomeController>().fetchChildTodayStatus();
+        } catch (_) {}
+      }
     } catch (e) {
       SnackbarHelper.showError('Gagal membatalkan izin: $e');
     }

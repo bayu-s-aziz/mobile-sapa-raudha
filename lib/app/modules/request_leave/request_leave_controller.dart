@@ -157,6 +157,12 @@ class RequestLeaveController extends GetxController {
       } else if (Get.isRegistered<LeaveListController>()) {
         await Get.find<LeaveListController>().fetchLeaves();
       }
+
+      // Sinkronisasi status kehadiran anak di dashboard orang tua
+      // (berfungsi jika HomeController terdaftar di konteks saat ini)
+      try {
+        home?.fetchChildTodayStatus();
+      } catch (_) {}
     } catch (_) {}
   }
 

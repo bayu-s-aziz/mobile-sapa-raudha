@@ -1,10 +1,7 @@
-// [MODERNISASI & FIX] lib/main.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-// [MODERNISASI] Mengaktifkan GoogleFonts untuk tipografi yang lebih baik
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:sapa_raudha/app/data/services/secure_storage_service.dart';
@@ -29,13 +26,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Set window size untuk desktop (Linux, Windows, macOS) agar menyerupai smartphone portrait
-  // Hanya di platform desktop, tidak di web
   if (!kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
     await windowManager.ensureInitialized();
 
-    const windowSize = Size(400, 800); // Ukuran smartphone portrait (DEFAULT)
+    const windowSize = Size(400, 800);
     const windowOptions = WindowOptions(
       size: windowSize,
       minimumSize: Size(360, 640),
@@ -56,11 +50,8 @@ void main() async {
   await initializeDateFormatting('id_ID', null);
   await GetStorage.init();
 
-  // Decide initial route based on whether auth token is present in either
-  // secure storage (remember me) or the normal storage.
   String? token;
   try {
-    // Try secure storage first (user may have chosen "Remember me")
     final fs = const FlutterSecureStorage();
     token = await fs.read(key: 'auth_token');
   } catch (_) {}
@@ -71,10 +62,6 @@ void main() async {
   final initialRoute = (token != null && token.isNotEmpty)
       ? Routes.home
       : Routes.login;
-
-  // NOTE: delay service registrations until after the framework is fully
-  // initialized to avoid platform-channel messages arriving before
-  // framework listeners are registered (causes lifecycle warnings on web).
   runApp(MainApp(initialRoute: initialRoute));
 }
 
@@ -86,8 +73,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: "SAPA Raudha",
-      // Register services via an initial binding so they are created after
-      // the framework has registered channel listeners.
       initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
@@ -97,40 +82,27 @@ class MainApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('id', 'ID'), // Indonesian
-        Locale('en', 'US'), // English
-      ],
+      supportedLocales: const [Locale('id', 'ID'), Locale('en', 'US')],
       locale: const Locale('id', 'ID'),
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
           brightness: Brightness.light,
-          // [FIX] Menghapus properti 'background' yang deprecated
-          // background: AppColors.primaryBackground, // <-- BARIS INI DIHAPUS
-          surface: AppColors
-              .secondaryBackground, // Ini untuk permukaan komponen seperti Card
+          surface: AppColors.secondaryBackground,
         ),
-
-        // [MODERNISASI] Menggunakan GoogleFonts 'Inter' untuk tampilan bersih
         textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)
             .copyWith(
               bodyLarge: GoogleFonts.inter(color: AppColors.primaryText),
               bodyMedium: GoogleFonts.inter(color: AppColors.secondaryText),
-              titleLarge: GoogleFonts.inter(
-                fontWeight: FontWeight.w600,
-              ), // Sedikit lebih tebal
+              titleLarge: GoogleFonts.inter(fontWeight: FontWeight.w600),
             ),
-
-        // [MODERNISASI] AppBar dibuat "ringan" tanpa bayangan dan menyatu dengan background
         appBarTheme: AppBarTheme(
-          backgroundColor:
-              AppColors.primaryBackground, // Menyatu dengan scaffold
-          foregroundColor: AppColors.primaryText, // Teks menjadi gelap
-          elevation: 0, // Tanpa bayangan
+          backgroundColor: AppColors.primaryBackground,
+          foregroundColor: AppColors.primaryText,
+          elevation: 0,
           centerTitle: true,
-          surfaceTintColor: Colors.transparent, // Hapus tint Material 3
+          surfaceTintColor: Colors.transparent,
           titleTextStyle: GoogleFonts.inter(
             color: AppColors.primaryText,
             fontSize: 18,
@@ -138,13 +110,12 @@ class MainApp extends StatelessWidget {
           ),
         ),
 
-        // [MODERNISASI] Tombol dibuat berbentuk "pill" (rounded penuh)
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30), // Radius penuh
+              borderRadius: BorderRadius.circular(30),
             ),
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             textStyle: GoogleFonts.inter(
@@ -152,25 +123,23 @@ class MainApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
               letterSpacing: 0.5,
             ),
-            elevation: 1, // Bayangan halus
+            elevation: 1,
           ),
         ),
 
-        // [MODERNISASI] Input field dibuat lebih lembut dengan radius lebih besar
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: AppColors.secondaryBackground, // Tetap putih
+          fillColor: AppColors.secondaryBackground,
           contentPadding: const EdgeInsets.symmetric(
             vertical: 16.0,
             horizontal: 16.0,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16), // Radius lebih besar
-            borderSide: BorderSide.none, // Hilangkan border default
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            // Border sangat halus
             borderSide: BorderSide(color: AppColors.alternate, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
@@ -185,7 +154,6 @@ class MainApp extends StatelessWidget {
           suffixIconColor: AppColors.secondaryText,
         ),
 
-        // [MODERNISASI] Card dibuat tanpa bayangan, border halus, dan radius besar
         cardTheme: CardThemeData(
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -200,10 +168,8 @@ class MainApp extends StatelessWidget {
           margin: EdgeInsets.zero,
         ),
 
-        // [MODERNISASI] BottomNavBar dibuat "floating"
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor:
-              AppColors.secondaryBackground, // Latar belakang putih
+          backgroundColor: AppColors.secondaryBackground,
           selectedItemColor: AppColors.primary,
           unselectedItemColor: AppColors.secondaryText.withAlpha(
             (0.7 * 255).round(),
@@ -214,12 +180,10 @@ class MainApp extends StatelessWidget {
           ),
           unselectedLabelStyle: GoogleFonts.inter(fontSize: 12),
           type: BottomNavigationBarType.fixed,
-          elevation: 5, // Perlu sedikit bayangan agar "mengambang"
+          elevation: 5,
         ),
 
-        // [MODERNISASI] Latar belakang utama diatur di sini
-        scaffoldBackgroundColor:
-            AppColors.primaryBackground, // Latar belakang hangat
+        scaffoldBackgroundColor: AppColors.primaryBackground,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     );
@@ -229,7 +193,6 @@ class MainApp extends StatelessWidget {
 class AppBinding extends Bindings {
   @override
   void dependencies() {
-    // Local storage and API client registration
     Get.put(LocalStorageService());
 
     Get.put(
@@ -240,20 +203,16 @@ class AppBinding extends Bindings {
         ),
       ),
     );
-
-    // Core services
     Get.put(AuthService());
     Get.put(ProfileService());
     Get.put(StudentService());
     Get.put(ClassService());
     Get.put(TeacherService());
     Get.put(AttendanceService());
-    Get.put(AttendanceStateManager()); // Shared attendance state manager
+    Get.put(AttendanceStateManager());
     Get.put(LeaveService());
     Get.put(AnnouncementService());
-    // Secure storage registration (for remember-me functionality)
     Get.put(SecureStorageService());
-    // Observe app lifecycle to validate token when app resumes
     Get.put(AppLifecycleService());
   }
 }

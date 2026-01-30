@@ -13,7 +13,9 @@ import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_service.dart';
 import 'package:sapa_raudha/app/data/services/leave_service.dart';
+import 'package:sapa_raudha/app/data/services/student_service.dart';
 import 'package:sapa_raudha/app/data/services/attendance_state_manager.dart';
+import 'dart:developer' as developer;
 import '../student_list/student_list_controller.dart';
 
 // --- TAMBAHKAN IMPOR UNTUK ACTION VIEWS ---
@@ -25,13 +27,14 @@ import '../announcement_detail/announcement_detail_view.dart';
 import '../notification_list/notification_list_view.dart';
 // --- AKHIR TAMBAHAN ---
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with WidgetsBindingObserver {
   final RxString userRole = ''.obs;
   final RxString userName = ''.obs;
   final RxString childStatus = ''.obs;
   final RxString childName = ''.obs;
   final RxString childClass = ''.obs;
-  final RxString childTodayStatus = ''.obs;
+  // Default status anak di dashboard orang tua
+  final RxString childTodayStatus = 'Belum absen'.obs;
 
   final RxInt selectedIndex = 0.obs;
 
@@ -43,6 +46,9 @@ class HomeController extends GetxController {
   late final ProfileService _profileService = Get.find<ProfileService>();
   late final AttendanceService _attendanceService =
       Get.find<AttendanceService>();
+  late final AttendanceStateManager _attendanceStateManager =
+      Get.find<AttendanceStateManager>();
+  late final StudentService _studentService = Get.find<StudentService>();
   late final LeaveService _leaveService = Get.find<LeaveService>();
   late final LocalStorageService _storage = Get.find<LocalStorageService>();
 
@@ -59,6 +65,10 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    // Register lifecycle observer to refresh data when app resumes
+    WidgetsBinding.instance.addObserver(this);
+
     final storedRole =
         _profileService.getStoredRole() ?? _storage.read<String>('role');
     final roleArg = Get.arguments as String?;
@@ -126,7 +136,8 @@ class HomeController extends GetxController {
 
   void _updateChildStatus({String? statusLabel}) {
     if (childName.value.isEmpty) return;
-    final status = statusLabel ?? childTodayStatus.value;
+    final raw = statusLabel ?? childTodayStatus.value;
+    final status = (raw.isNotEmpty) ? raw : 'Belum absen';
     final classText = childClass.value.isNotEmpty
         ? ' - ${childClass.value}'
         : '';
@@ -182,16 +193,133 @@ class HomeController extends GetxController {
 
   Future<void> fetchChildTodayStatus() async {
     if (userRole.value != 'orangtua') return;
+    // Try to determine student ID from cached profile first (safer than relying on NISN)
+    final profile = _profileService.getStoredProfile();
+    int? studentId;
+    if (profile != null) {
+      final student = profile['userable'] is Map
+          ? profile['userable']['student']
+          : null;
+      if (student is Map && student['id'] != null) {
+        final id = student['id'];
+        studentId = id is int ? id : int.tryParse(id?.toString() ?? '');
+      }
+      studentId ??= profile['student_id'] is int
+          ? profile['student_id'] as int
+          : (profile['student_id'] is String
+                ? int.tryParse(profile['student_id'])
+                : null);
+      studentId ??= profile['anak'] is Map && profile['anak']['id'] != null
+          ? (profile['anak']['id'] is int
+                ? profile['anak']['id'] as int
+                : int.tryParse(profile['anak']['id'].toString()))
+          : null;
+    }
+
+    // Fallback: if no studentId, try stored NISN
     final nisn =
         _profileService.getStoredNisn() ?? _storage.read<String>('nisn');
-    if (nisn == null || nisn.isEmpty) {
+    if (studentId == null && (nisn == null || nisn.isEmpty)) {
       return;
     }
 
     try {
       final today = _dateFormatter.format(DateTime.now());
+
+      // Cek cache lokal dulu (AttendanceStateManager) karena student id adalah kunci yang reliable
+      if (studentId != null) {
+        // Coba ambil dari cache terlebih dahulu
+        var localAttendance = _attendanceStateManager.getTodayAttendance(
+          studentId,
+        );
+        developer.log(
+          'HomeController: localAttendance (before fetch) for studentId=$studentId => $localAttendance',
+          name: 'HomeController',
+        );
+        if (localAttendance == null) {
+          // Jika belum ada di cache, fetch dari API untuk student ini dan cache
+          try {
+            localAttendance = await _attendanceStateManager
+                .fetchTodayAttendance(studentId);
+            developer.log(
+              'HomeController: fetched attendance for studentId=$studentId => $localAttendance',
+              name: 'HomeController',
+            );
+          } catch (e) {
+            developer.log(
+              'HomeController: error fetching attendance for studentId=$studentId: $e',
+              name: 'HomeController',
+            );
+            localAttendance = null;
+          }
+        }
+        if (localAttendance != null) {
+          final label = _humanStatus(localAttendance['status']);
+          childTodayStatus.value = label;
+          _updateChildStatus(statusLabel: label);
+          return;
+        }
+      } else if (nisn != null && nisn.isNotEmpty) {
+        // Coba resolve studentId dari NISN agar bisa cek cache
+        try {
+          final student = await _studentService.getStudentByNisn(nisn);
+          developer.log(
+            'HomeController: resolved student from nisn=$nisn => $student',
+            name: 'HomeController',
+          );
+          if (student != null && student['id'] != null) {
+            final sid = student['id'] is int
+                ? student['id'] as int
+                : int.tryParse(student['id'].toString());
+            if (sid != null) {
+              var localAttendance = _attendanceStateManager.getTodayAttendance(
+                sid,
+              );
+              developer.log(
+                'HomeController: localAttendance (by sid) for sid=$sid => $localAttendance',
+                name: 'HomeController',
+              );
+              if (localAttendance == null) {
+                try {
+                  localAttendance = await _attendanceStateManager
+                      .fetchTodayAttendance(sid);
+                  developer.log(
+                    'HomeController: fetched attendance for sid=$sid => $localAttendance',
+                    name: 'HomeController',
+                  );
+                } catch (e) {
+                  developer.log(
+                    'HomeController: error fetching attendance for sid=$sid: $e',
+                    name: 'HomeController',
+                  );
+                  localAttendance = null;
+                }
+              }
+
+              if (localAttendance != null) {
+                final label = _humanStatus(localAttendance['status']);
+                childTodayStatus.value = label;
+                _updateChildStatus(statusLabel: label);
+                return;
+              }
+            }
+          } else {
+            developer.log(
+              'HomeController: no student found for nisn=$nisn',
+              name: 'HomeController',
+            );
+          }
+        } catch (e) {
+          developer.log(
+            'HomeController: error resolving student by nisn=$nisn: $e',
+            name: 'HomeController',
+          );
+        }
+      }
+
+      // Jika tidak ada di cache, lakukan panggilan API spesifik ke service
       final records = await _attendanceService.getStudentHistory(
-        nisn,
+        studentId ?? nisn,
         startDate: today,
         endDate: today,
         limit: 1,
@@ -201,10 +329,91 @@ class HomeController extends GetxController {
         final label = _humanStatus(records.first['status']);
         childTodayStatus.value = label;
         _updateChildStatus(statusLabel: label);
-      } else {
-        childTodayStatus.value = 'Belum absen';
-        _updateChildStatus(statusLabel: 'Belum absen');
+        return;
       }
+
+      // Tidak ada record presensi hari ini — periksa pengajuan izin yang mencakup hari ini
+      try {
+        // Gunakan studentId yang telah difetch dari profile jika ada
+        int? sid = studentId;
+        if (sid == null && nisn != null && nisn.isNotEmpty) {
+          final student = await _studentService.getStudentByNisn(nisn);
+          if (student != null && student['id'] != null) {
+            sid = student['id'] is int
+                ? student['id'] as int
+                : int.tryParse(student['id'].toString());
+          }
+        }
+
+        if (sid != null) {
+          final leaves = await _leaveService.getByStudent(sid);
+          if (leaves.isNotEmpty) {
+            for (final item in leaves) {
+              final startRaw =
+                  item['start_date'] ?? item['request_date'] ?? item['date'];
+              final endRaw =
+                  item['end_date'] ?? item['request_date'] ?? item['date'];
+
+              DateTime? s;
+              DateTime? e;
+              try {
+                s = startRaw != null
+                    ? DateTime.parse(startRaw.toString())
+                    : null;
+              } catch (_) {
+                s = null;
+              }
+              try {
+                e = endRaw != null ? DateTime.parse(endRaw.toString()) : null;
+              } catch (_) {
+                e = null;
+              }
+
+              final todayDt = DateTime.parse(today);
+              final coversToday =
+                  (s != null &&
+                      e != null &&
+                      !todayDt.isBefore(s) &&
+                      !todayDt.isAfter(e)) ||
+                  (s != null &&
+                      e == null &&
+                      s.year == todayDt.year &&
+                      s.month == todayDt.month &&
+                      s.day == todayDt.day) ||
+                  (s == null &&
+                      e == null &&
+                      (item['request_date']?.toString() == today));
+
+              if (!coversToday) continue;
+
+              final status = (item['status'] ?? '').toString().toLowerCase();
+              String label;
+              if (status == 'approved') {
+                final ltype = (item['leave_type'] ?? item['type'] ?? '')
+                    .toString()
+                    .toLowerCase();
+                final reason = (item['reason'] ?? '').toString().toLowerCase();
+                if (ltype.contains('sakit') || reason.contains('sakit')) {
+                  label = 'Sakit';
+                } else {
+                  label = 'Izin';
+                }
+              } else if (status == 'pending') {
+                label = 'Izin (Menunggu)';
+              } else {
+                continue; // rejected or other
+              }
+
+              childTodayStatus.value = label;
+              _updateChildStatus(statusLabel: label);
+              return;
+            }
+          }
+        }
+      } catch (_) {}
+
+      childTodayStatus.value = 'Belum absen';
+      _updateChildStatus(statusLabel: 'Belum absen');
     } catch (e) {
       SnackbarHelper.showError('Gagal memuat status ananda: $e');
     }
@@ -265,6 +474,20 @@ class HomeController extends GetxController {
   void clearActionView() {
     currentActionView.value = null;
     // Get.arguments = null; // <-- HAPUS BARIS INI (PENYEBAB ERROR)
+  }
+
+  @override
+  void onClose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.onClose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && userRole.value == 'orangtua') {
+      // Saat aplikasi kembali ke foreground, sinkronkan status anak hari ini
+      fetchChildTodayStatus();
+    }
   }
   // --- AKHIR MODIFIKASI ---
 

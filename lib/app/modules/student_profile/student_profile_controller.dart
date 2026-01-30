@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sapa_raudha/app/data/models/student_model.dart';
 import 'package:sapa_raudha/app/data/services/profile_service.dart';
 import 'package:sapa_raudha/app/data/services/student_service.dart';
+import 'package:sapa_raudha/app/data/services/attendance_state_manager.dart';
 import 'package:sapa_raudha/app/data/services/local_storage_service.dart';
 import 'package:sapa_raudha/app/utils/snackbar_helper.dart';
 
@@ -13,6 +14,9 @@ class StudentProfileController extends GetxController {
 
   late final ProfileService _profileService = Get.find<ProfileService>();
   late final StudentService _studentService = Get.find<StudentService>();
+  late final AttendanceStateManager _attendanceStateManager =
+      Get.find<AttendanceStateManager>();
+  final Rxn<Map<String, dynamic>> todayAttendance = Rxn<Map<String, dynamic>>();
   late final LocalStorageService _storage = Get.find<LocalStorageService>();
 
   @override
@@ -51,6 +55,19 @@ class StudentProfileController extends GetxController {
       }
 
       student.value = _mapToStudent(detail, profile);
+
+      // Setelah detail student didapat, fetch today's attendance untuk ditampilkan
+      final id = int.tryParse(student.value!.id);
+      if (id != null) {
+        try {
+          final attendance = await _attendanceStateManager.fetchTodayAttendance(
+            id,
+          );
+          todayAttendance.value = attendance;
+        } catch (_) {
+          todayAttendance.value = null;
+        }
+      }
     } catch (e) {
       errorMessage.value = e.toString();
       SnackbarHelper.showError('Gagal memuat profil ananda: $e');

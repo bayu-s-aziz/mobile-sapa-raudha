@@ -19,7 +19,12 @@ class RequestLeaveView extends GetView<RequestLeaveController> {
         : null;
 
     return Scaffold(
-      bottomNavigationBar: homeController != null
+      // Tampilkan BottomNav hanya jika view ini tidak dirender sebagai "action view"
+      // di dalam Home (untuk menghindari nested bottom nav)
+      bottomNavigationBar:
+          homeController != null &&
+              (homeController.currentActionView.value == null ||
+                  homeController.currentActionView.value is! RequestLeaveView)
           ? _BottomNav(homeController: homeController)
           : null,
       // Body di-wrap dengan GestureDetector untuk menutup keyboard
@@ -333,9 +338,16 @@ class _BottomNav extends StatelessWidget {
         child: BottomNavigationBar(
           currentIndex: homeController.selectedIndex.value,
           onTap: (index) {
+            // Jika view ini dirender sebagai action view di dalam Home, maka
+            // HomeController.changeTabIndex akan membersihkan action view.
+            // Namun jika view ini dibuka sebagai route penuh (full page),
+            // kita perlu mem-popping route agar kembali ke Home.
+            final wasNested =
+                homeController.currentActionView.value is RequestLeaveView;
             homeController.changeTabIndex(index);
-            Get.back();
+            if (!wasNested) Get.back();
           },
+
           items: homeController.userRole.value == 'guru'
               ? _buildGuruNavItems()
               : _buildParentNavItems(),

@@ -152,6 +152,14 @@ class ConfirmLeaveController extends GetxController {
           // Segarkan badge pending dan daftar dari sumber API
           Get.find<HomeController>().fetchPendingLeaveCount();
           fetchLeaveRequests();
+
+          // Jika ada HomeController, minta sinkronisasi status anak hari ini.
+          if (Get.isRegistered<HomeController>()) {
+            try {
+              Get.find<HomeController>().fetchChildTodayStatus();
+            } catch (_) {}
+          }
+
           SnackbarHelper.showSuccess(
             'Pengajuan izin ${request.studentName} telah di-${newStatus == LeaveStatus.approved ? 'setujui' : 'tolak'}.',
           );
