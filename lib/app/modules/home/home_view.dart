@@ -253,9 +253,12 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               _buildWelcomeHeader(context),
                               const SizedBox(height: 16),
-                              controller.userRole.value == 'guru'
-                                  ? const SizedBox.shrink()
-                                  : _buildChildTodayCard(context),
+                              // Untuk guru, tampilkan kartu statistik singkat di antara header dan menu
+                              Obx(
+                                () => controller.userRole.value == 'guru'
+                                    ? _buildTeacherStatsCard(context)
+                                    : _buildChildTodayCard(context),
+                              ),
                               const SizedBox(height: 20),
                               controller.userRole.value == 'guru'
                                   ? _buildGuruDashboardGrid(context)
@@ -381,6 +384,102 @@ class HomeView extends GetView<HomeController> {
         label: 'Profil',
       ),
     ];
+  }
+
+  // --------------------------
+  // KARTU STATISTIK GURU
+  // --------------------------
+  Widget _buildTeacherStatsCard(BuildContext context) {
+    return Obx(() {
+      final stats = controller.attendanceStats;
+      final total = stats['total'] ?? 0;
+      final hadir = stats['present'] ?? 0;
+      final sakit = stats['sick'] ?? 0;
+      final izin = stats['permit'] ?? 0;
+      final alpa = stats['absent'] ?? 0;
+
+      final pending = controller.pendingLeaveCount.value;
+
+      Widget statColumn(String label, String value, {Color? color}) {
+        return Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                label,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: AppColors.secondaryText),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                value,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: color ?? AppColors.primaryText,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+
+      return Card(
+        margin: EdgeInsets.zero,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Statistik Hari Ini',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.refresh_outlined),
+                    tooltip: 'Segarkan',
+                    onPressed: () async {
+                      // Segarkan data statistik dan child status
+                      await controller.fetchAttendanceStats();
+                      await controller.fetchPendingLeaveCount();
+                      await controller.fetchChildTodayStatus();
+                    },
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  statColumn('Total', total.toString()),
+                  statColumn(
+                    'Hadir',
+                    hadir.toString(),
+                    color: AppColors.primary,
+                  ),
+                  statColumn('Sakit', sakit.toString(), color: AppColors.error),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  statColumn('Izin', izin.toString()),
+                  statColumn('Alpa', alpa.toString()),
+                  statColumn('Pending Izin', pending.toString()),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   Widget _buildWelcomeHeader(BuildContext context) {

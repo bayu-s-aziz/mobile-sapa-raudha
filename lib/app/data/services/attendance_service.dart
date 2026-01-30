@@ -216,7 +216,13 @@ class AttendanceService extends GetxService {
   }
 
   Future<Map<String, dynamic>> getStatsToday({int? classId}) async {
-    return getStatistics(classId: classId);
+    // Hit API dengan rentang tanggal untuk hari ini berdasarkan zona waktu GMT+7
+    // (server mengharapkan start_date & end_date di zona lokal sekolah)
+    final nowUtc = DateTime.now().toUtc();
+    final nowGmt7 = nowUtc.add(const Duration(hours: 7));
+    final today = DateFormat('yyyy-MM-dd').format(nowGmt7);
+
+    return getStatistics(classId: classId, startDate: today, endDate: today);
   }
 
   Future<List<Map<String, dynamic>>> getStudentHistory(
